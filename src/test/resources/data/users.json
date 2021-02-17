@@ -1,0 +1,70 @@
+{
+  "customer":{
+    "email":"ssmcust9@grr.la",
+    "password":"Welcome1"
+  },
+  "customerForListsTests":{
+    "email":"bffautotest@grr.la",
+    "password":"Welcome1"
+  },
+  "customerInvalidPassword":{
+    "email":"ssmcust9@grr.la",
+    "password":"invalidpassword"
+  },
+  "associate":{
+    "email":"cxmobile001@sysco.com",
+    "password":"vvUMfBr2"
+  },
+  "associate6":{
+    "email":"cxmobile006@sysco.com",
+    "password":"TDVvmk4z"
+  },
+  "multiapprover": {
+    "email": "bffautotest@grr.la",
+    "password": "Welcome1"
+  },
+  "multibuyer": {
+    "email": "romith@gmail.com",
+    "password": "Welcome1",
+    "defaultAccount": "081851",
+    "iOSDefaultAccountTitle": "SODEX LGH-SAINTS CAMPUS  IDA",
+    "AndroidDefaultAccountTitle": "CHE 12791 SALEM STA CENTRAL",
+    "accounts": [
+      {
+        "account":"017244",
+        "accountTitle": "CHE 12791 SALEM STA CENTRAL"
+      },
+      {
+        "account":"937664",
+        "accountTitle": "CRITERION WOBURN  EM"
+      },
+      {
+        "account":"001560",
+        "accountTitle": "JOHNSONS SEAFD&STK(124743)"
+      },
+      {
+        "account":"922450",
+        "accountTitle": "PHILLIPS EXE ACADEMY/DINE"
+      },
+      {
+        "account":"081851",
+        "accountTitle": "SODEX LGH-SAINTS CAMPUS  IDA"
+      }
+    ]
+  },
+  "guestCorrectZipcode1": {
+    "zipInput": "02367",
+    "opco": "056",
+    "zipAssigned": "431601"
+  },
+  "guestCorrectZipcode2": {
+    "zipInput": "21843",
+    "opco": "010",
+    "zipAssigned": "287730"
+  },
+  "guestNotAvailableZipcode1": {
+    "zipInput": "12345",
+    "opco": "056",
+    "zipAssigned": "431601"
+  }
+}
