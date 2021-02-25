@@ -3,6 +3,7 @@ package com.qe.pages.login;
 import com.qe.BaseTest;
 import com.qe.pages.common.IntercomPage;
 import com.qe.pages.common.PrivacyPage;
+import com.qe.pages.discover.CreditCardModal;
 import com.qe.pages.discover.DiscoverPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
@@ -96,16 +97,18 @@ public class LoginPage extends BaseTest {
     private MobileElement appBuildVersion;
 
     public LoginPage checkElementsPresence(){
+        waitForVisibility(emailTxtField);
+        waitForVisibility(associateLoginButton);
 //        Assert.assertTrue(shopLogo.isDisplayed());
-        //Assert.assertTrue(loginTagline.isDisplayed()); flaky in guest tests
-        //Assert.assertTrue(emailLabel.isDisplayed()); flaky in guest tests
+//        Assert.assertTrue(loginTagline.isDisplayed()); flaky in guest tests
+//        Assert.assertTrue(emailLabel.isDisplayed()); flaky in guest tests
         Assert.assertTrue(emailTxtField.isDisplayed());
-//        Assert.assertTrue(syscoAssociateLabel.isDisplayed());TODO: org.openqa.selenium.NoSuchElementException: Can't locate an element by this strategy: By.chained({By.id: Sysco Associate})
+//        Assert.assertTrue(syscoAssociateLabel.isDisplayed());
 //        Assert.assertTrue(guestTagline.isDisplayed());
         Assert.assertTrue(associateLoginButton.isDisplayed());
-//        Assert.assertTrue(rightsReservedLabel.isDisplayed());//TODO:
-//        Assert.assertTrue(privacyButton.isDisplayed()); TODO:
-//        Assert.assertTrue(helpButton.isDisplayed()); TODO:
+//        Assert.assertTrue(rightsReservedLabel.isDisplayed());
+//        Assert.assertTrue(privacyButton.isDisplayed());
+//        Assert.assertTrue(helpButton.isDisplayed());
         return this;
     }
 
@@ -163,6 +166,11 @@ public class LoginPage extends BaseTest {
     public DiscoverPage pressLoginButton() {
         click(nextAndLoginButton);
         return new DiscoverPage();
+    }
+
+    public CreditCardModal pressLoginButtonForCreditCardUser() {
+        click(nextAndLoginButton);
+        return new CreditCardModal();
     }
 
     public ForgotPasswordPage pressForgotPasswordButton() {

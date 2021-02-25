@@ -3,10 +3,7 @@ package com.qe;
 import com.aventstack.extentreports.Status;
 import com.qe.reports.ExtentReport;
 import com.qe.utils.TestUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.FindsByAndroidUIAutomator;
-import io.appium.java_client.InteractsWithApps;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.*;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -14,14 +11,13 @@ import io.appium.java_client.screenrecording.CanRecordScreen;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.logging.log4j.ThreadContext;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -52,6 +48,7 @@ public class BaseTest {
 	protected static ThreadLocal <String> deviceName = new ThreadLocal<String>();
 	private static AppiumDriverLocalService server;
 	public static JSONObject users;
+	public static JSONObject products;
 	TestUtils utils = new TestUtils();
 	
 	  public AppiumDriver getDriver() {
@@ -123,7 +120,21 @@ public class BaseTest {
 				datais.close();
 			}
 		}
-		//
+		datais = null;
+
+		try {
+			String dataFileName = "data/products.json";
+			datais = getClass().getClassLoader().getResourceAsStream(dataFileName);
+			JSONTokener tokener = new JSONTokener(datais);
+			products = new JSONObject(tokener);
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(datais != null) {
+				datais.close();
+			}
+		}
 
 		closeApp();
 		launchApp();
@@ -206,8 +217,8 @@ public class BaseTest {
 	
 	public AppiumDriverLocalService getAppiumService() {
 		HashMap<String, String> environment = new HashMap<String, String>();
-		environment.put("PATH", "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:/Users/~/Library/Android/sdk/tools:/Users/~/Library/Android/sdk/platform-tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin" + System.getenv("PATH"));
-		environment.put("ANDROID_HOME", "/Users/~/Library/Android/sdk");
+		environment.put("PATH", "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:/Users/eugenezakiev/Library/Android/sdk/tools:/Users/eugenezakiev/Library/Android/sdk/platform-tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin" + System.getenv("PATH"));
+		environment.put("ANDROID_HOME", "/Users/eugenezakiev/Library/Android/sdk");
 		return AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
 				.usingDriverExecutable(new File("/usr/local/bin/node"))
 				.withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
@@ -305,7 +316,12 @@ public class BaseTest {
 		  }
 	  }
   }
-  
+
+  public void waitForInvisibility(MobileElement e)  {
+	  WebDriverWait wait = new WebDriverWait(getDriver(), TestUtils.WAIT);
+	  wait.until(ExpectedConditions.invisibilityOf(e));
+  }
+
   public void waitForVisibility(MobileElement e) {
 	  WebDriverWait wait = new WebDriverWait(getDriver(), TestUtils.WAIT);
 	  wait.until(ExpectedConditions.visibilityOf(e));
@@ -380,24 +396,52 @@ public class BaseTest {
   public void launchApp() {
 	  ((InteractsWithApps) getDriver()).launchApp();
   }
-  
-  public MobileElement scrollToElement() {	  
+
+  public MobileElement scrollToElement(String elementLocator) {
 		return (MobileElement) ((FindsByAndroidUIAutomator) getDriver()).findElementByAndroidUIAutomator(
 				"new UiScrollable(new UiSelector()" + ".scrollable(true)).scrollIntoView("
-						+ "new UiSelector().description(\"test-Price\"));");
+						+ "new UiSelector().description(\"" + elementLocator + "\"));");
   }
   
-  public void iOSScrollToElement() {
-	  RemoteWebElement element = (RemoteWebElement)getDriver().findElement(By.name("test-ADD TO CART"));
+  public void iOSScrollToElement(By by) {
+	  RemoteWebElement element = (RemoteWebElement)getDriver().findElement(by);
 	  String elementID = element.getId();
 	  HashMap<String, String> scrollObject = new HashMap<String, String>();
 	  scrollObject.put("element", elementID);
-//	  scrollObject.put("direction", "down");
+	  //scrollObject.put("direction", "down");
 //	  scrollObject.put("predicateString", "label == 'ADD TO CART'");
 //	  scrollObject.put("name", "test-ADD TO CART");
-	  scrollObject.put("toVisible", "sdfnjksdnfkld");
+	  //scrollObject.put("toVisible", "sdfnjksdnfkld");
 	  getDriver().executeScript("mobile:scroll", scrollObject);
   }
+
+  public void iOSScrollDown(By by, String elementId) {
+	  RemoteWebElement element = (RemoteWebElement)getDriver().findElement(by);
+	  String elementID = element.getId();
+	  HashMap<String, String> scrollObject = new HashMap<String, String>();
+	  scrollObject.put("element", elementID);
+	  //scrollObject.put("direction", "down");
+//	  scrollObject.put("predicateString", "label == 'ADD TO CART'");
+	  scrollObject.put("name", elementId);
+	  //scrollObject.put("toVisible", "sdfnjksdnfkld");
+	  getDriver().executeScript("mobile:scroll", scrollObject);
+	}
+
+	public void scrollDownByCoordinates() {
+	  	TouchAction t = new TouchAction(getDriver());
+		Dimension size = getDriver().manage().window().getSize();
+
+		int startX = size.width / 2;
+		int endX = startX;
+		int startY = (int) (size.height * 0.8);
+		int endY = (int) (size.height *0.2);
+
+	  	t.press(PointOption.point(startX, startY))
+				.waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
+				.moveTo(PointOption.point(endX, endY))
+				.release()
+				.perform();
+	}
 
   @AfterTest
   public void afterTest() {

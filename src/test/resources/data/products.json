@@ -1,0 +1,48 @@
+{
+  "product-4487633-on-056-081851": {
+    "availableToUser": "romith@gmail.com",
+    "supc" : "4487633",
+    "title" : "Barley Pearled 1#",
+    "description" : "4487633 | 24/1 LB | JACK RABBIT",
+    "pricePerCs" : "$22.51 CS",
+    "category" : "Canned And Dry",
+    "text" : "A tiny dry vegetable, approx. 3/16 long. Narrow and oval shaped with a split top. Used in soups.",
+    "stockStatus" : "S",
+    "gtin" : "10070620001296",
+    "manufacturerUPC" : "3053651002",
+    "storageLocation" : "D",
+    "splitDetail" : "N",
+    "averageWeight": "24"
+  },
+  "product-0566709-on-019-693999": {
+    "availableToUser": "cc019693999@gmail.com",
+    "supc" : "0566709",
+    "title" : "Beef Ground Bulk 81%-19% Chub",
+    "description" : "0566709 | 4/5#AV | FIRE RIVER FARMS CLASSIC",
+    "category" : "Meats",
+    "pricePerCsCatchweight" : "CS (avg. 20.33LB) @ $2.589/LB",
+    "text" : "Ground from shop test",
+    "stockStatus" : "S",
+    "gtin" : "90734730297203",
+    "manufacturerUPC" : "66709",
+    "storageLocation" : "C",
+    "splitDetail" : "N",
+    "averageWeight": "20.329"
+  },
+  "product-0566709-on-056-148283": {
+    "availableToUser": "ssmcust9@grr.la",
+    "supc" : "0566709",
+    "title" : "Beef Ground Bulk 81%-19% Chub",
+    "description" : "0566709 | 4/5#AV | FIRE RIVER FARMS CLASSIC",
+    "category" : "Meats",
+    "pricePerCsCatchweight" : "CS (avg. 20.37LB) @ $2.652/LB",
+    "totalPrice1CS": "$54.01",
+    "text" : "Ground from shop test",
+    "stockStatus" : "S",
+    "gtin" : "90734730297203",
+    "manufacturerUPC" : "66709",
+    "storageLocation" : "C",
+    "splitDetail" : "N",
+    "averageWeight": "20.366"
+  }
+}

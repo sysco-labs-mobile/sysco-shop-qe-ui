@@ -22,7 +22,7 @@ public class SearchCatalogPage extends BaseTest {
     private MobileElement searchTextField;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/editText")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Shop by category\"`][1]")
+    @iOSXCUITFindBy(id = "app nav search bar text field")
     private MobileElement searchTextFieldText;
 
     @iOSXCUITFindBy(id = "app bar cancel search")
@@ -34,13 +34,11 @@ public class SearchCatalogPage extends BaseTest {
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/cart_badge")
     @iOSXCUITFindBy(id = "badge - text")
-    private MobileElement cartBadgeCount;//getValue() or getLabel()
+    private MobileElement cartBadgeCount;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/numResults")
     @iOSXCUITFindBy(id = "result count label")
-    private MobileElement resultCountLabel;//getValue()
-    //SHOWING 2906 RESULTS FOR "MEATS"
-    //SHOWING 82 RESULTS FOR "CARROT"
+    private MobileElement resultCountLabel;
 
     @AndroidFindBy(id = "Filter")
     @iOSXCUITFindBy(id = "search filter view - filter button")
@@ -51,27 +49,24 @@ public class SearchCatalogPage extends BaseTest {
     private MobileElement catalogSearchResultsTable;
 
     @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/resultView\"/android.widget.TextView[1]")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTable[`name == \"catalog search results table\"`]/XCUIElementTypeAny[1]/XCUIElementTypeOther") //unreliable accessibility id
-    private MobileElement firstProductInResultsTable;
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]")
+    private MobileElement firstProduct;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productDescription")
-    //getText() Beef Ground Bulk 81%-19% Chub
-    @iOSXCUITFindBy(id = "Beef Ground Bulk 81%-19% Chub") //unreliable accessibility id
-    private MobileElement firstProductInResultsTableTitleText;
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[1]")
+    private MobileElement firstProductTitleText;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/popupMenu")
-    @iOSXCUITFindBy(id = "dot menu button")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeButton[@name=\"dot menu button\"]")
     private MobileElement firstProductDotMenuButton;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productInfo")
-    //0566709 | 4/5#AV | FIRE RIVER FARMS CLASSIC
-    @iOSXCUITFindBy(id = "0566709 | 4/5#AV | FIRE RIVER FARMS CLASSIC")
-    private MobileElement firstProductInResultsTableDescriptionText;
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[2]")
+    private MobileElement firstProductDescriptionText;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/priceLabel")
-    //CS (avg. 20.37LB) @ $2.654/LB
     @iOSXCUITFindBy(id = "CS (avg. 20.37LB) @ $2.657/LB")
-    private MobileElement firstProductInResultsTablePrice;
+    private MobileElement firstProductCasePrice;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/cartItemCount")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name == \"case quantity text field\"`][1]")
@@ -85,25 +80,46 @@ public class SearchCatalogPage extends BaseTest {
 
 
     /** Android specific elements */
+
     @AndroidFindBy(accessibility = "Navigate up")
     private MobileElement androidNavBackButton;
 
 
     /** Guest user element */
+
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.view.ViewGroup")
     @iOSXCUITFindBy(id = "catalog search result 0-0")
     private MobileElement firstProductInResultsTableGuestPageOnly;
 
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTable[`name == \"catalog search results table\"`]/XCUIElementTypeAny[1]/XCUIElementTypeOther/XCUIElementTypeOther")
-    private MobileElement firstProductByClassChain;
-
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTable[`name == \"catalog search results table\"`]/XCUIElementTypeAny/XCUIElementTypeOther/XCUIElementTypeOther")
-    private List<MobileElement> allProductByClassChain;
-
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name == \"case quantity text field\"`]")
-    private List<MobileElement> allQuantityFields;
-
     //TODO: add Request exception price
+
+
+    public SearchCatalogPage checkElementsPresence(String expectedSearchQuery) {
+        Assert.assertTrue(navBarDrawerButton.isDisplayed());
+        Assert.assertTrue(searchTextField.isDisplayed());
+        Assert.assertTrue(searchTextFieldText.isDisplayed());
+        Assert.assertTrue(cartButton.isDisplayed());
+        //Assert.assertTrue(resultCountLabel.isDisplayed());ios flaks out
+        Assert.assertTrue(filterButton.isDisplayed());
+        Assert.assertTrue(catalogSearchResultsTable.isDisplayed());
+        Assert.assertEquals(searchTextFieldText.getText(), expectedSearchQuery);
+        return this;
+    }
+
+    public SearchCatalogPage checkElementsPresenceForFirstItemCase(String expectedTitle, String expectedDescription) {
+        Assert.assertTrue(firstProduct.isDisplayed());
+        Assert.assertTrue(firstProductTitleText.isDisplayed());
+        Assert.assertTrue(firstProductDescriptionText.isDisplayed());
+        Assert.assertTrue(firstProductDotMenuButton.isDisplayed());
+        //Assert.assertTrue(firstProductCasePrice.isDisplayed());
+        Assert.assertTrue(firstProductCaseQuantityField.isDisplayed());
+        Assert.assertTrue(firstProductCaseQuantityMinusButton.isDisplayed());
+        Assert.assertTrue(firstProductCaseQuantityPlusButton.isDisplayed());
+        Assert.assertEquals(firstProductTitleText.getText(), expectedTitle);
+        Assert.assertEquals(firstProductDescriptionText.getText(), expectedDescription);
+        //Assert.assertEquals(firstProductCasePrice.getText(), expectedCasePrice);
+        return this;
+    }
 
     public SearchCatalogPage inputCaseQuantityForFirstProduct(String quantity) {
         click(firstProductCaseQuantityField);
@@ -112,7 +128,12 @@ public class SearchCatalogPage extends BaseTest {
         return this;
     }
 
-    public SearchCatalogPage pressPlusQuantityForFirstProduct() {
+    public ProductCardPage pressOnFirstProduct() {
+        click(firstProduct);
+        return new ProductCardPage();
+    }
+
+    public SearchCatalogPage pressPlusQuantityForFirstProductCase() {
         click(firstProductCaseQuantityPlusButton);
         return this;
     }
@@ -120,17 +141,6 @@ public class SearchCatalogPage extends BaseTest {
     public OrderCartPage pressCartButton() {
         click(cartButton);
         return new OrderCartPage();
-    }
-
-    public SearchCatalogPage checkElementsPresenceForSupc0566709() {
-        if(getPlatform().equalsIgnoreCase("iOS")) {
-            Assert.assertTrue(firstProductInResultsTableTitleText.isDisplayed());
-        }
-        if(getPlatform().equalsIgnoreCase("Android")) {
-            Assert.assertTrue(firstProductInResultsTableTitleText.isDisplayed());
-            Assert.assertEquals(firstProductInResultsTableTitleText.getText(), "Beef Ground Bulk 81%-19% Chub");
-        }
-        return this;
     }
 
     public ProductCardPage pressFirstItemInListGuestPageOnly() {

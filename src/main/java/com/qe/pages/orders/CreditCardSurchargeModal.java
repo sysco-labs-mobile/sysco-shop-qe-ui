@@ -5,6 +5,7 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.testng.Assert;
 
 public class CreditCardSurchargeModal extends BaseTest {
         TestUtils utils = new TestUtils();
@@ -23,6 +24,12 @@ public class CreditCardSurchargeModal extends BaseTest {
         @iOSXCUITFindBy(id = "alert primary")
         private MobileElement okButton;
 
+        public CreditCardSurchargeModal checkElementsPresence() {
+                Assert.assertTrue(creditCardSurchargeTitle.isDisplayed());
+                Assert.assertTrue(creditCardSurchargeHeader.isDisplayed());
+                Assert.assertTrue(okButton.isDisplayed());
+                return this;
+        }
 
         public OrderCartReviewOrderPage pressOkButton() {
                 click(okButton);

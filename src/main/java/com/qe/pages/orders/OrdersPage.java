@@ -2,11 +2,16 @@ package com.qe.pages.orders;
 
 import com.qe.BaseTest;
 import com.qe.utils.TestUtils;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.util.concurrent.TimeUnit;
 
 public class OrdersPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -95,8 +100,6 @@ public class OrdersPage extends BaseTest {
     @AndroidFindBy(accessibility = "Tap to Retry")
     private MobileElement tapToRetryButton;
 
-    public OrdersPage() {
-    }
 
     private OrdersPage ifProgressBarPresentWait() throws InterruptedException {
         if(getPlatform().equalsIgnoreCase("Android")){
@@ -114,9 +117,17 @@ public class OrdersPage extends BaseTest {
         return new OrdersPage();
     }
 
-    public OrdersPage checkPageIsLoadedOrReloadWith3Attempts() throws InterruptedException {
+    public OrdersPage androidCheckPageIsLoadedOrReloadWith3Attempts() throws InterruptedException {
         for(int i = 0; i < 3; i++) {
             ifProgressBarPresentWait();
+            ifFailedReload();
+        }
+        return new OrdersPage();
+    }
+
+    public OrdersPage properAndroidCheckPageIsLoadedOrReloadWith3Attempts() {
+        for(int i = 0; i < 3; i++) {
+            waitForInvisibility(progressBar);
             ifFailedReload();
         }
         return new OrdersPage();
@@ -157,4 +168,8 @@ public class OrdersPage extends BaseTest {
         return new OrdersPage();
     }
 
+    public OrderCartPage pressCreateOrderButton() {
+        click(createOrderButton); //ios flacks out
+        return new OrderCartPage();
+    }
 }

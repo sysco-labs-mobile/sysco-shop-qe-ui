@@ -48,7 +48,7 @@ public class OrderCartTests extends BaseTest {
         if(getPlatform().equalsIgnoreCase("iOS")) {
             //precondition
             searchCatalogPage = discoverPage.inputSearch("beef ground bulk");
-            searchCatalogPage.checkElementsPresenceForSupc0566709();
+            //searchCatalogPage.checkElementsPresenceForSupc0566709();
             searchCatalogPage.inputCaseQuantityForFirstProduct("1");
 
             //test
@@ -61,8 +61,59 @@ public class OrderCartTests extends BaseTest {
             //precondition
             typeAheadPage = discoverPage.inputSearchForTypeAhead("beef ground bulk");
             searchCatalogPage = typeAheadPage.pressSearchResultFirst();
-            searchCatalogPage.checkElementsPresenceForSupc0566709();
-            searchCatalogPage.pressPlusQuantityForFirstProduct();
+            //searchCatalogPage.checkElementsPresenceForSupc0566709();
+            searchCatalogPage.pressPlusQuantityForFirstProductCase();
+
+            //test
+            orderCartPage = searchCatalogPage.pressCartButton();
+            orderCartReviewOrderPage = orderCartPage.pressProceedToCheckoutButton();
+            orderCartOrderPlacedPage = orderCartReviewOrderPage.pressSubmitOrderButton();
+            orderCartOrderPlacedPage.checkElementPresence();
+        }
+    }
+
+    @Test
+    public void orderCartPages() throws InterruptedException {
+        if(getPlatform().equalsIgnoreCase("iOS")) {
+            //precondition
+            searchCatalogPage = discoverPage.inputSearch("0566709");
+            searchCatalogPage.checkElementsPresence("0566709");
+            Thread.sleep(10000);
+            searchCatalogPage.inputCaseQuantityForFirstProduct("1");
+
+            //test
+            orderCartPage = searchCatalogPage.pressCartButton();
+            orderCartPage.checkElementsPresence("$55.36", "1 CS | 0 EA");
+            orderCartPage.checkElementsPresenceOfFirstOrderLineItem(
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("title"),
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("description"),
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("pricePerCsCatchweight"),
+                    null,
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("totalPrice1CS")
+            );
+            orderCartReviewOrderPage = orderCartPage.pressProceedToCheckoutButton();
+            orderCartReviewOrderPage.checkElementsPresence(
+                    BaseTest.users.getJSONObject("customer").getString("shippingAddress"),
+                    "1 CS | 0 EA",
+                    "1",
+                    "$55.36");
+            scrollDownByCoordinates();
+            orderCartReviewOrderPage.checkElementsPresenceOfFirstOrderLineItem(
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("title"),
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("description"),
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("pricePerCsCatchweight"),
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("totalPrice1CS"),
+                    "1 CS"
+            );
+            orderCartOrderPlacedPage = orderCartReviewOrderPage.pressSubmitOrderButton();
+            orderCartOrderPlacedPage.checkElementPresence();
+        }
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            //precondition
+            typeAheadPage = discoverPage.inputSearchForTypeAhead("beef ground bulk");
+            searchCatalogPage = typeAheadPage.pressSearchResultFirst();
+            //searchCatalogPage.checkElementsPresenceForSupc0566709();
+            searchCatalogPage.pressPlusQuantityForFirstProductCase();
 
             //test
             orderCartPage = searchCatalogPage.pressCartButton();

@@ -64,7 +64,7 @@ public class OrdersTests extends BaseTest {
             navDrawer = discoverPage.pressNavBarDrawerButton();
             ordersPage = navDrawer.pressOrdersButton();
 
-            ordersPage.checkPageIsLoadedOrReloadWith3Attempts();
+            ordersPage.properAndroidCheckPageIsLoadedOrReloadWith3Attempts();
 
             ordersPage.checkElementsPresence()
                     .pressOpenOrdersButton()

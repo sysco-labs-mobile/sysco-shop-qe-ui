@@ -57,7 +57,7 @@ public class MultibuyerTests extends BaseTest {
     public void multibuyerCannotSubmitOrder() throws InterruptedException {
         if(getPlatform().equalsIgnoreCase("iOS")) {
             searchCatalogPage = discoverPage.inputSearch("beef ground bulk");
-            searchCatalogPage.checkElementsPresenceForSupc0566709();
+            //searchCatalogPage.checkElementsPresenceForSupc0566709();
             searchCatalogPage.inputCaseQuantityForFirstProduct("1");
 
             orderCartPage = searchCatalogPage.pressCartButton();
@@ -68,8 +68,8 @@ public class MultibuyerTests extends BaseTest {
         if(getPlatform().equalsIgnoreCase("Android")) {
             typeAheadPage = discoverPage.inputSearchForTypeAhead("beef ground bulk");
             searchCatalogPage = typeAheadPage.pressSearchResultFirst();
-            searchCatalogPage.checkElementsPresenceForSupc0566709();
-            searchCatalogPage.pressPlusQuantityForFirstProduct();
+            //searchCatalogPage.checkElementsPresenceForSupc0566709();
+            searchCatalogPage.pressPlusQuantityForFirstProductCase();
 
             orderCartPage = searchCatalogPage.pressCartButton();
             orderCartReviewOrderPage = orderCartPage.pressProceedToCheckoutButton();

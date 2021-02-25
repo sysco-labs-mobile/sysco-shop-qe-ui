@@ -37,7 +37,7 @@ public class SearchCatalogTests extends BaseTest {
     public void search() throws InterruptedException {
         typeAheadPage = discoverPage.inputSearchForTypeAhead("beef ground bulk");
         SearchCatalogPage searchCatalogPage = typeAheadPage.pressSearchResultFirst();
-        searchCatalogPage.checkElementsPresenceForSupc0566709();
+        //searchCatalogPage.checkElementsPresenceForSupc0566709();
     }
 
     @Test

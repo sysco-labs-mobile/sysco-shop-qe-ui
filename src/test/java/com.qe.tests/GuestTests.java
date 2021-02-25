@@ -67,7 +67,7 @@ public class GuestTests extends BaseTest {
         zipSwitcherPage.pressStartShoppingButtonForValidZip();
         discoverPage.checkGuestElementsPresence(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));
         searchCatalogPage = discoverPage.pressMeatButton();
-        searchCatalogPage = searchCatalogPage.checkElementsPresenceForSupc0566709();
+        //searchCatalogPage = searchCatalogPage.checkElementsPresenceForSupc0566709();
         productCardPage = searchCatalogPage.pressFirstItemInListGuestPageOnly();
 
         //test
@@ -102,6 +102,7 @@ public class GuestTests extends BaseTest {
         zipSwitcherModal = discoverPage.pressZipSwitcherButton();
         zipSwitcherModal.inputZip(BaseTest.users.getJSONObject("guestCorrectZipcode2").getString("zipInput"));
         discoverPage = zipSwitcherModal.pressUpdateButtonForAvailableZip();
+        Thread.sleep(2000);
         discoverPage.checkGuestElementsPresence(BaseTest.users.getJSONObject("guestCorrectZipcode2").getString("zipInput"));
     }
 
