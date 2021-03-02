@@ -5,9 +5,6 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.apache.logging.log4j.core.config.Order;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
-import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 public class OrderCartPage extends BaseTest {

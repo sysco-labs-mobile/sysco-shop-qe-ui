@@ -6,7 +6,6 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.io.Zip;
 import org.testng.asserts.SoftAssert;
 
 public class ZipSwitcherModal extends BaseTest {

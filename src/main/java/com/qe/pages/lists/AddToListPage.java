@@ -9,8 +9,6 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
 public class AddToListPage  extends BaseTest {
     TestUtils utils = new TestUtils();
 
@@ -92,7 +90,7 @@ public class AddToListPage  extends BaseTest {
 
     public AddToListPage pressAddToList(String listName) {
         if(getPlatform().equalsIgnoreCase("iOS")) {
-            String locator = "//XCUIElementTypeStaticText[@name=\'" + listName + "\']/..";
+            String locator = "//XCUIElementTypeStaticText[@name='" + listName + "']/..";
             WebElement listButton = getDriver().findElement(new By.ByXPath(locator));
             waitForVisibility(listButton, "List button with name " + listName);
             listButton.click();

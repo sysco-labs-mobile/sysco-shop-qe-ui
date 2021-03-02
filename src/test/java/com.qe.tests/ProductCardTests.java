@@ -23,7 +23,7 @@ public class ProductCardTests extends BaseTest {
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
-    public void beforeMethod(Method m)  throws InterruptedException  {
+    public void beforeMethod(Method m) {
         utils.log().info("****** starting test:" + m.getName() + "******" + "\n");
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();

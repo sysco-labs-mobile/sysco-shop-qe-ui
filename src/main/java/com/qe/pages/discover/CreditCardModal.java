@@ -3,7 +3,6 @@ package com.qe.pages.discover;
 import com.qe.BaseTest;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 public class CreditCardModal extends BaseTest {

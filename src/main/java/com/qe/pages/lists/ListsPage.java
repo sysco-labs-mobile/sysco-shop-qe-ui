@@ -8,7 +8,6 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 public class ListsPage extends BaseTest {
@@ -88,7 +87,7 @@ public class ListsPage extends BaseTest {
         return new ListSettingsPage();
     }
 
-    public SearchCatalogPage inputSearch(String searchQuery) throws InterruptedException {
+    public SearchCatalogPage inputSearch(String searchQuery) {
         sendKeys(searchTextField, searchQuery, "Input search " + searchQuery);
         getDriver().getKeyboard().sendKeys("\n");
         return new SearchCatalogPage();
@@ -96,7 +95,7 @@ public class ListsPage extends BaseTest {
 
     public ListPage pressList(String listName) {
         if(getPlatform().equalsIgnoreCase("iOS")) {
-            String locator = "//XCUIElementTypeStaticText[@name=\'" + listName + "\']/..";
+            String locator = "//XCUIElementTypeStaticText[@name='" + listName + "']/..";
             getDriver().findElement(new By.ByXPath(locator)).click();
         }
         return new ListPage();

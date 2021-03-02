@@ -3,7 +3,6 @@ package com.qe.pages.orders;
 import com.qe.BaseTest;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 public class OrderCartFilterPage extends BaseTest {

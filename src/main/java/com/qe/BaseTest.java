@@ -178,7 +178,7 @@ public class BaseTest {
 	}
 	
 	@BeforeSuite
-	public void beforeSuite() throws Exception, Exception {
+	public void beforeSuite() throws Exception {
 		ThreadContext.put("ROUTINGKEY", "ServerLogs");
 		server = getAppiumService();
 		if(!checkIfAppiumServerIsRunnning(4723)) {
@@ -190,7 +190,7 @@ public class BaseTest {
 		}	
 	}
 	
-	public boolean checkIfAppiumServerIsRunnning(int port) throws Exception {
+	public boolean checkIfAppiumServerIsRunnning(int port) {
 	    boolean isAppiumServerRunning = false;
 	    ServerSocket socket;
 	    try {

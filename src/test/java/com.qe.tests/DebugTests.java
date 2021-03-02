@@ -5,15 +5,11 @@ import com.qe.pages.common.DiscountBulkOverlay;
 import com.qe.pages.common.DiscountOverlay;
 import com.qe.pages.common.NavDrawer;
 import com.qe.pages.discover.DiscoverPage;
-import com.qe.pages.lists.*;
 import com.qe.pages.login.LoginPage;
-import com.qe.pages.orders.*;
-import com.qe.pages.product.ProductCardPage;
 import com.qe.pages.search.SearchCatalogPage;
 import com.qe.pages.search.TypeAheadPage;
 import com.qe.utils.TestUtils;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
@@ -32,7 +28,7 @@ public class DebugTests extends BaseTest {
 
 
     @BeforeMethod
-    public void beforeMethod(Method m)  throws InterruptedException  {
+    public void beforeMethod(Method m) {
         utils.log().info("****** starting test:" + m.getName() + "******" + "\n");
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();

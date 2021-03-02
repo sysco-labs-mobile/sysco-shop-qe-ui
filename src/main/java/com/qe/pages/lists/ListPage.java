@@ -5,7 +5,6 @@ import com.qe.pages.common.ProductThreeDotPopUp;
 import com.qe.pages.lists.filter.ListFilterPage;
 import com.qe.pages.lists.par.SelectParPage;
 import com.qe.pages.orders.OrderCartPage;
-import com.qe.pages.search.SearchCatalogPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;

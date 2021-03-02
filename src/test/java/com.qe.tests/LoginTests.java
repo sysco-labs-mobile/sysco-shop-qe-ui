@@ -26,7 +26,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void customerLogin() throws InterruptedException  {
+    public void customerLogin() {
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
         loginPage = loginPage.pressNextButton();
@@ -38,7 +38,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void multibuyerLogin() throws InterruptedException  {
+    public void multibuyerLogin() {
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("multibuyer").getString("email"));
         loginPage = loginPage.pressNextButton();
@@ -64,7 +64,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test(groups = { "WebView" })
-    public void openAndCloseForgotPassword() throws InterruptedException {
+    public void openAndCloseForgotPassword() {
         loginPage.enterEmail(users.getJSONObject("customerInvalidPassword").getString("email"));
         loginPage = loginPage.pressNextButton();
         getDriver().hideKeyboard();
@@ -75,7 +75,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void openAndCloseIntercom() throws InterruptedException {
+    public void openAndCloseIntercom() {
         getDriver().hideKeyboard();
         IntercomPage intercomPage = loginPage.pressHelpButton();
         LoginPage loginPage = intercomPage.pressCloseButton();
@@ -83,7 +83,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test @Ignore
-    public void openAndClosePrivacyPage() throws InterruptedException {
+    public void openAndClosePrivacyPage() {
         getDriver().hideKeyboard();
         PrivacyPage privacyPage = loginPage.pressPrivacyButton();
         LoginPage loginPage = privacyPage.pressBackButton();
@@ -91,7 +91,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test(groups = { "WebView" }) @Ignore
-    public void associateLogin() throws InterruptedException {
+    public void associateLogin() {
         AssociateLoginPage1 associateLoginPage1 = loginPage.pressAssociateLoginButton();
         associateLoginPage1.inputEmail(BaseTest.users.getJSONObject("associate").getString("email"));
         AssociateLoginPage2 associateLoginPage2 = associateLoginPage1.pressNextButton();

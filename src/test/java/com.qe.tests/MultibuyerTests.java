@@ -28,7 +28,7 @@ public class MultibuyerTests extends BaseTest {
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
-    public void beforeMethod(Method m)  throws InterruptedException  {
+    public void beforeMethod(Method m) {
         utils.log().info("****** starting test:" + m.getName() + "******" + "\n");
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
@@ -45,7 +45,7 @@ public class MultibuyerTests extends BaseTest {
     }
 
     @Test
-    public void multibuyerAccountSelection() throws InterruptedException {
+    public void multibuyerAccountSelection() {
         accountSelectorPage = discoverPage.pressAccountSelectorButton();
         accountSelectorPage.checkElementsPresence();
         discoverPage = accountSelectorPage.pressOnFirstAccount();

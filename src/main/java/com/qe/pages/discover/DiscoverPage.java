@@ -2,14 +2,12 @@ package com.qe.pages.discover;
 
 import com.qe.BaseTest;
 import com.qe.pages.common.NavDrawer;
-import com.qe.pages.login.LoginPage;
 import com.qe.pages.search.SearchCatalogPage;
 import com.qe.pages.search.TypeAheadPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
@@ -222,7 +220,7 @@ public class DiscoverPage extends BaseTest {
         return new TypeAheadPage();
     }
 
-    public SearchCatalogPage inputSearch(String searchQuery) throws InterruptedException {
+    public SearchCatalogPage inputSearch(String searchQuery) {
         sendKeys(searchTextField, searchQuery, "Input search " + searchQuery);
         getDriver().getKeyboard().sendKeys("\n");
         return new SearchCatalogPage();

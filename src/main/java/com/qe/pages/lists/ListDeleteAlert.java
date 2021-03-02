@@ -5,7 +5,6 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 public class ListDeleteAlert extends BaseTest {

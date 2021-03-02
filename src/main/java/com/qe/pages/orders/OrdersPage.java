@@ -2,17 +2,11 @@ package com.qe.pages.orders;
 
 import com.qe.BaseTest;
 import com.qe.utils.TestUtils;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
-
-import java.util.concurrent.TimeUnit;
 
 public class OrdersPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -85,7 +79,7 @@ public class OrdersPage extends BaseTest {
 
 
     /** Loading elements */
-    String androidProgressBarId = "com.syscocorp.mss.enterprise.dev:id/ordersProgressBar";
+    final String androidProgressBarId = "com.syscocorp.mss.enterprise.dev:id/ordersProgressBar";
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/ordersProgressBar")
     private MobileElement progressBar;
@@ -93,7 +87,7 @@ public class OrdersPage extends BaseTest {
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/loadingView")
     private MobileElement loadingView;
 
-    String tapToRetryButtonId = "com.syscocorp.mss.enterprise.dev:id/couldNotLoad";
+    final String tapToRetryButtonId = "com.syscocorp.mss.enterprise.dev:id/couldNotLoad";
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/couldNotLoad")
     private MobileElement couldNotLoadOrdersTitle;

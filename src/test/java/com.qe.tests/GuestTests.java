@@ -42,7 +42,7 @@ public class GuestTests extends BaseTest {
     }
 
     @Test
-    public void loginAsGuest() throws InterruptedException {
+    public void loginAsGuest() {
         zipSwitcherPage = loginPage.pressContinueAsGuestButton();
         zipSwitcherPage.inputZip(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));
         discoverPage = zipSwitcherPage.pressStartShoppingButtonForValidZip();
@@ -50,7 +50,7 @@ public class GuestTests extends BaseTest {
     }
 
     @Test
-    public void loginAsGuestForNotAvailableZip() throws InterruptedException {
+    public void loginAsGuestForNotAvailableZip() {
         zipSwitcherPage = loginPage.pressContinueAsGuestButton();
         zipSwitcherPage = zipSwitcherPage.inputZip(BaseTest.users.getJSONObject("guestNotAvailableZipcode1").getString("zipInput"));
         zipSwitcherPage = zipSwitcherPage.pressStartShoppingButtonForNotAvailableZip();
@@ -60,7 +60,7 @@ public class GuestTests extends BaseTest {
     }
 
     @Test
-    public void navigateToLoginFromGuestProductCard() throws InterruptedException {
+    public void navigateToLoginFromGuestProductCard() {
         //precondition
         zipSwitcherPage = loginPage.pressContinueAsGuestButton();
         zipSwitcherPage.inputZip(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));
@@ -81,7 +81,7 @@ public class GuestTests extends BaseTest {
     }
 
     @Test
-    public void navigateToLoginFromZipSwitcher() throws InterruptedException {
+    public void navigateToLoginFromZipSwitcher() {
         //precondition
         zipSwitcherPage = loginPage.pressContinueAsGuestButton();
 
@@ -107,7 +107,7 @@ public class GuestTests extends BaseTest {
     }
 
     @Test @Ignore //TODO: implement optional non reset per test config through capabilities
-    public void checkZipSavedAfterAppClose() throws InterruptedException {
+    public void checkZipSavedAfterAppClose() {
         //precondition
         zipSwitcherPage = loginPage.pressContinueAsGuestButton();
         zipSwitcherPage.inputZip(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));

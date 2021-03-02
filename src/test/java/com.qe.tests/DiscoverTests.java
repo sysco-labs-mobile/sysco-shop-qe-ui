@@ -17,7 +17,7 @@ public class DiscoverTests extends BaseTest {
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
-    public void beforeMethod(Method m)  throws InterruptedException  {
+    public void beforeMethod(Method m) {
         utils.log().info("****** starting test:" + m.getName() + "******" + "\n");
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
@@ -29,7 +29,7 @@ public class DiscoverTests extends BaseTest {
     }
 
     @Test
-    public void openAndCloseNavDrawer() throws InterruptedException {
+    public void openAndCloseNavDrawer() {
         navDrawer = discoverPage.checkElementsPresence().pressNavBarDrawerButton();
         navDrawer.checkElementsPresence();
         navDrawer.pressDiscoverPageButton();

@@ -21,7 +21,7 @@ public class SearchCatalogTests extends BaseTest {
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
-    public void beforeMethod(Method m)  throws InterruptedException  {
+    public void beforeMethod(Method m) {
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
         navDrawer = new NavDrawer();

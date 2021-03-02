@@ -28,7 +28,7 @@ public class DiscountsTests extends BaseTest {
 
 
     @BeforeMethod
-    public void beforeMethod(Method m)  throws InterruptedException  {
+    public void beforeMethod(Method m) {
         utils.log().info("****** starting test:" + m.getName() + "******" + "\n");
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();

@@ -155,7 +155,7 @@ public class LoginPage extends BaseTest {
         return this;
     }
 
-    public LoginPage checkInvalidPasswordMessagePresence() throws InterruptedException{
+    public LoginPage checkInvalidPasswordMessagePresence() {
         Assert.assertTrue(invalidPasswordMessage.isDisplayed());
         return this;
     }
@@ -214,7 +214,7 @@ public class LoginPage extends BaseTest {
                 }
             } catch (NoSuchElementException noSuchElementException) {
                 utils.log().info("retry login attempt went noSuchElementException: " + i);
-            };
+            }
         }
         return new DiscoverPage();
     }

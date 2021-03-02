@@ -26,7 +26,7 @@ public class ListsTests extends BaseTest {
     AddToListPage addToListPage;
 
     @BeforeMethod
-    public void beforeMethod(Method m) throws InterruptedException {
+    public void beforeMethod(Method m) {
         utils.log().info("****** starting test:" + m.getName() + "******" + "\n");
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
@@ -45,7 +45,7 @@ public class ListsTests extends BaseTest {
     }
 
     @Test
-    public void openNavDrawer() throws InterruptedException {
+    public void openNavDrawer() {
         navDrawer = listsPage.pressNavBarDrawerButton();
         navDrawer.checkElementsPresence();
         ListsPage listsPage = navDrawer.pressListsButton();
@@ -53,7 +53,7 @@ public class ListsTests extends BaseTest {
     }
 
     @Test
-    public void openAndCloseNewListPage() throws InterruptedException {
+    public void openAndCloseNewListPage() {
         listSettingsPage = listsPage.pressCreateListButton();
         listSettingsPage = listSettingsPage.checkElementsPresence();
         listsPage = listSettingsPage.pressCloseButtonFromNewListPage();
@@ -74,7 +74,7 @@ public class ListsTests extends BaseTest {
     }
 
     @Test
-    public void createNewDefaultList() throws InterruptedException {
+    public void createNewDefaultList() {
         String newListName = "AppiumTestList " + Math.random();
         listSettingsPage = listsPage.pressCreateListButton();
         listSettingsPage.enterListName(newListName);
@@ -85,7 +85,7 @@ public class ListsTests extends BaseTest {
     }
 
     @Test
-    public void createListAndChangeSettings() throws InterruptedException {
+    public void createListAndChangeSettings() {
         String newListName = "AppiumTestList " + Math.random();
         String changedListName = "AppiumTestListChanged " + Math.random();
         listSettingsPage = listsPage.pressCreateListButton();
@@ -103,7 +103,7 @@ public class ListsTests extends BaseTest {
     }
 
     @Test
-    public void createListAndDelete() throws InterruptedException {
+    public void createListAndDelete() {
         String newListName = "AppiumTestListToDelete " + Math.random();
         listSettingsPage = listsPage.pressCreateListButton();
         listSettingsPage.enterListName(newListName);
@@ -117,7 +117,7 @@ public class ListsTests extends BaseTest {
     }
 
     @Test
-    public void createListAndDoNotDelete() throws InterruptedException {
+    public void createListAndDoNotDelete() {
         String newListName = "AppiumTestListToDelete " + Math.random();
         listSettingsPage = listsPage.pressCreateListButton();
         listSettingsPage.enterListName(newListName);

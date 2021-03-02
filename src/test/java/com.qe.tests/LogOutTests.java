@@ -28,7 +28,7 @@ public class LogOutTests extends BaseTest {
     }
 
     @Test
-    public void customerLogout() throws InterruptedException  {
+    public void customerLogout() {
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
         loginPage = loginPage.pressNextButton();
