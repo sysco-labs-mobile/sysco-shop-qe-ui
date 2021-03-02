@@ -1,6 +1,10 @@
 package com.qe.pages.search;
 
 import com.qe.BaseTest;
+import com.qe.pages.common.DiscountBulkOverlay;
+import com.qe.pages.common.DiscountOverlay;
+import com.qe.pages.common.NavDrawer;
+import com.qe.pages.lists.AddToListPage;
 import com.qe.pages.orders.OrderCartPage;
 import com.qe.pages.product.ProductCardPage;
 import com.qe.utils.TestUtils;
@@ -8,6 +12,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -44,6 +49,16 @@ public class SearchCatalogPage extends BaseTest {
     @iOSXCUITFindBy(id = "search filter view - filter button")
     private MobileElement filterButton;
 
+    /** Banner - Add to list */
+
+    @iOSXCUITFindBy(id = "app navigation controller - banner")
+    private MobileElement bannerItemAddedToList;
+
+    @iOSXCUITFindBy(id = "Item added to List(s)")
+    private MobileElement bannerItemAddedToListText;
+
+    /** Products elements */
+
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/resultView")
     @iOSXCUITFindBy(id = "catalog search results table")
     private MobileElement catalogSearchResultsTable;
@@ -60,12 +75,15 @@ public class SearchCatalogPage extends BaseTest {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeButton[@name=\"dot menu button\"]")
     private MobileElement firstProductDotMenuButton;
 
+    @iOSXCUITFindBy(id = "Add to list")
+    private MobileElement addToListButton;
+
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productInfo")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[2]")
     private MobileElement firstProductDescriptionText;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/priceLabel")
-    @iOSXCUITFindBy(id = "CS (avg. 20.37LB) @ $2.657/LB")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[3]")
     private MobileElement firstProductCasePrice;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/cartItemCount")
@@ -73,9 +91,11 @@ public class SearchCatalogPage extends BaseTest {
     private MobileElement firstProductCaseQuantityField;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addToCartMinus")
+    @iOSXCUITFindBy(id = "decrease quantity button")
     private MobileElement firstProductCaseQuantityMinusButton;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addToCartPlus")
+    @iOSXCUITFindBy(id = "increase quantity button")
     private MobileElement firstProductCaseQuantityPlusButton;
 
 
@@ -83,6 +103,21 @@ public class SearchCatalogPage extends BaseTest {
 
     @AndroidFindBy(accessibility = "Navigate up")
     private MobileElement androidNavBackButton;
+
+
+    /** Discount Pricing Elements */
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeButton[@name=\"bulk discounts button\"]")
+    private MobileElement firstProductBulkDiscountsAvailableButton;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeButton[@name=\"discounts info bubble\"]")
+    private MobileElement firstProductDiscountInfoBubble;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name=\"product strikethrough label\"]")
+    private MobileElement firstProductStrikethroughCasePrice;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name=\"product strikethrough label\"]/following-sibling::XCUIElementTypeStaticText")
+    private MobileElement firstProductBulkDiscountCasePrice;
 
 
     /** Guest user element */
@@ -93,31 +128,67 @@ public class SearchCatalogPage extends BaseTest {
 
     //TODO: add Request exception price
 
-
-    public SearchCatalogPage checkElementsPresence(String expectedSearchQuery) {
-        Assert.assertTrue(navBarDrawerButton.isDisplayed());
-        Assert.assertTrue(searchTextField.isDisplayed());
-        Assert.assertTrue(searchTextFieldText.isDisplayed());
-        Assert.assertTrue(cartButton.isDisplayed());
-        //Assert.assertTrue(resultCountLabel.isDisplayed());ios flaks out
-        Assert.assertTrue(filterButton.isDisplayed());
-        Assert.assertTrue(catalogSearchResultsTable.isDisplayed());
-        Assert.assertEquals(searchTextFieldText.getText(), expectedSearchQuery);
+    public SearchCatalogPage checkElementsPresenceForBannerItemAddedToList() {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(bannerItemAddedToList.isDisplayed(), "bannerItemAddedToList");
+        softAssert.assertTrue(bannerItemAddedToListText.isDisplayed(), "bannerItemAddedToListText");
+        softAssert.assertAll();
         return this;
     }
 
-    public SearchCatalogPage checkElementsPresenceForFirstItemCase(String expectedTitle, String expectedDescription) {
-        Assert.assertTrue(firstProduct.isDisplayed());
-        Assert.assertTrue(firstProductTitleText.isDisplayed());
-        Assert.assertTrue(firstProductDescriptionText.isDisplayed());
-        Assert.assertTrue(firstProductDotMenuButton.isDisplayed());
-        //Assert.assertTrue(firstProductCasePrice.isDisplayed());
-        Assert.assertTrue(firstProductCaseQuantityField.isDisplayed());
-        Assert.assertTrue(firstProductCaseQuantityMinusButton.isDisplayed());
-        Assert.assertTrue(firstProductCaseQuantityPlusButton.isDisplayed());
-        Assert.assertEquals(firstProductTitleText.getText(), expectedTitle);
-        Assert.assertEquals(firstProductDescriptionText.getText(), expectedDescription);
-        //Assert.assertEquals(firstProductCasePrice.getText(), expectedCasePrice);
+    public SearchCatalogPage checkElementsPresence(String expectedSearchQuery) {
+        SoftAssert softAssert = new SoftAssert();
+        waitForVisibility(navBarDrawerButton, "navBarDrawerButton");
+        softAssert.assertTrue(navBarDrawerButton.isDisplayed(), "navBarDrawerButton");
+        softAssert.assertTrue(searchTextField.isDisplayed(), "searchTextField");
+        softAssert.assertTrue(searchTextFieldText.isDisplayed(), "searchTextFieldText");
+        softAssert.assertTrue(cartButton.isDisplayed(), "cartButton");
+        //softAssert.assertTrue(resultCountLabel.isDisplayed());ios flaks out
+        softAssert.assertTrue(filterButton.isDisplayed(), "filterButton");
+        softAssert.assertTrue(catalogSearchResultsTable.isDisplayed(), "catalogSearchResultsTable");
+        softAssert.assertTrue(searchTextFieldText.getText().toLowerCase().contains(expectedSearchQuery), "searchTextFieldText");
+        softAssert.assertAll();
+        return this;
+    }
+
+    public SearchCatalogPage checkElementsPresenceForFirstItemCase(String expectedTitle, String expectedDescription, String expectedCasePrice) {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(firstProduct.isDisplayed());
+        softAssert.assertTrue(firstProductTitleText.isDisplayed());
+        softAssert.assertTrue(firstProductDescriptionText.isDisplayed());
+        softAssert.assertTrue(firstProductDotMenuButton.isDisplayed());
+        softAssert.assertTrue(firstProductCasePrice.isDisplayed());
+        softAssert.assertTrue(firstProductCaseQuantityField.isDisplayed());
+        softAssert.assertTrue(firstProductCaseQuantityMinusButton.isDisplayed());
+        softAssert.assertTrue(firstProductCaseQuantityPlusButton.isDisplayed());
+        softAssert.assertEquals(firstProductTitleText.getText(), expectedTitle);
+        softAssert.assertEquals(firstProductDescriptionText.getText(), expectedDescription);
+        softAssert.assertEquals(firstProductCasePrice.getText(), expectedCasePrice);
+        softAssert.assertAll();
+        return this;
+    }
+
+    public SearchCatalogPage checkElementsPresenceForFirstItemBulkDiscountCase(String expectedTitle,
+                                                                               String expectedDescription,
+                                                                               String expectedStrikethroughCasePrice,
+                                                                               String expectedBulkDiscountCasePrice) {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(firstProduct.isDisplayed());
+//        softAssert.assertTrue(firstProductTitleText.isDisplayed());
+//        softAssert.assertTrue(firstProductDescriptionText.isDisplayed());
+        softAssert.assertTrue(firstProductDotMenuButton.isDisplayed(), "firstProductDotMenuButton");
+        //softAssert.assertTrue(firstProductStrikethroughCasePrice.isDisplayed(), "firstProductStrikethroughCasePrice");
+        softAssert.assertTrue(firstProductBulkDiscountCasePrice.isDisplayed(), "firstProductBulkDiscountCasePrice");
+        softAssert.assertTrue(firstProductDiscountInfoBubble.isDisplayed(), "firstProductDiscountInfoBubble");
+        softAssert.assertTrue(firstProductCaseQuantityField.isDisplayed(), "firstProductCaseQuantityField");
+        softAssert.assertTrue(firstProductCaseQuantityMinusButton.isDisplayed(),"firstProductCaseQuantityMinusButton");
+        softAssert.assertTrue(firstProductCaseQuantityPlusButton.isDisplayed(), "firstProductCaseQuantityPlusButton");
+        //pricing messes up ios indexes in xpath locator
+        //softAssert.assertEquals(firstProductTitleText.getText(), expectedTitle);
+        //softAssert.assertEquals(firstProductDescriptionText.getText(), expectedDescription);
+        softAssert.assertEquals(firstProductStrikethroughCasePrice.getText(), expectedStrikethroughCasePrice);
+        softAssert.assertEquals(firstProductBulkDiscountCasePrice.getText(), expectedBulkDiscountCasePrice);
+        softAssert.assertAll();
         return this;
     }
 
@@ -143,8 +214,36 @@ public class SearchCatalogPage extends BaseTest {
         return new OrderCartPage();
     }
 
+    public SearchCatalogPage pressFirstProductDotButton() {
+        waitForVisibility(firstProductDotMenuButton, "firstProductDotMenuButton");
+        click(firstProductDotMenuButton);
+        return this;
+    }
+
+    public AddToListPage pressAddToListButton() {
+        click(addToListButton);
+        return new AddToListPage();
+    }
+
     public ProductCardPage pressFirstItemInListGuestPageOnly() {
         click(firstProductInResultsTableGuestPageOnly);
         return new ProductCardPage();
+    }
+
+    public NavDrawer pressNavBar() {
+        click(navBarDrawerButton);
+        return new NavDrawer();
+
+    }
+    /** Discounts feature methods */
+
+    public DiscountBulkOverlay pressFirstItemBulkDiscountsAvailableButton() {
+        click(firstProductBulkDiscountsAvailableButton);
+        return new DiscountBulkOverlay();
+    }
+
+    public DiscountOverlay pressFirstItemDiscountInfoBubble() {
+        click(firstProductDiscountInfoBubble);
+        return new DiscountOverlay();
     }
 }

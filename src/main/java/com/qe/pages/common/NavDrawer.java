@@ -12,6 +12,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class NavDrawer extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -117,27 +118,30 @@ public class NavDrawer extends BaseTest {
         return new LoginPage();
     }
 
-    public void checkElementsPresence() {
+    public NavDrawer checkElementsPresence() {
+        SoftAssert softAssert = new SoftAssert();
         //Assert.assertTrue(drawerLogo.isDisplayed());
         //Assert.assertTrue(shopHeader.isDisplayed());
-        Assert.assertTrue(discoverButton.isDisplayed());
+        softAssert.assertTrue(discoverButton.isDisplayed());
         //Assert.assertTrue(discoverIcon.isDisplayed());
         //Assert.assertTrue(discoverButtonText.isDisplayed());
-        Assert.assertTrue(listButton.isDisplayed());
+        softAssert.assertTrue(listButton.isDisplayed());
         //Assert.assertTrue(listsIcon.isDisplayed());
         //Assert.assertTrue(listButtonText.isDisplayed());
-        Assert.assertTrue(ordersButton.isDisplayed());
+        softAssert.assertTrue(ordersButton.isDisplayed());
         //Assert.assertTrue(ordersIcon.isDisplayed());
         //Assert.assertTrue(ordersButtonText.isDisplayed());
         //Assert.assertTrue(profileHeader.isDisplayed());
-        Assert.assertTrue(notificationsButton.isDisplayed());
+        softAssert.assertTrue(notificationsButton.isDisplayed());
         //Assert.assertTrue(notificationsIcon.isDisplayed());
         //Assert.assertTrue(notificationsButtonText.isDisplayed());
-        Assert.assertTrue(helpButton.isDisplayed());
+        softAssert.assertTrue(helpButton.isDisplayed());
         //Assert.assertTrue(helpIcon.isDisplayed());
         //Assert.assertTrue(helpButtonText.isDisplayed());
-        Assert.assertTrue(logoutButton.isDisplayed());
+        softAssert.assertTrue(logoutButton.isDisplayed());
         //Assert.assertTrue(logoutIcon.isDisplayed());
         //Assert.assertTrue(logoutText.isDisplayed());
+        softAssert.assertAll();
+        return this;
     }
 }

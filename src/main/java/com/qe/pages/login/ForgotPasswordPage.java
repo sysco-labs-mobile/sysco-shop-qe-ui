@@ -8,6 +8,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.util.Set;
 
@@ -38,8 +39,10 @@ public class ForgotPasswordPage extends BaseTest {
     private MobileElement requestPasswordResetButton;
 
     public void checkElementsPresence() {
-        Assert.assertTrue(emailInputTextField.isDisplayed());
-        Assert.assertTrue(backArrowButton.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(emailInputTextField.isDisplayed());
+        softAssert.assertTrue(backArrowButton.isDisplayed());
+        softAssert.assertAll();
     }
 
     public LoginPage pressBackArrowButton() {

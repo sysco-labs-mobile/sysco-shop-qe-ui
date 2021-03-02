@@ -6,6 +6,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class AccountSelectorPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -67,18 +68,19 @@ public class AccountSelectorPage extends BaseTest {
     private MobileElement firstItemInListAddress;
 
     public AccountSelectorPage checkElementsPresence() {
-        Assert.assertTrue(closeButton.isDisplayed());
-        Assert.assertTrue(accountSearchInputTextField.isDisplayed());
-
-        Assert.assertTrue(filterButton.isDisplayed());
-        Assert.assertTrue(accountCountLabel.isDisplayed());
-        Assert.assertTrue(firstItemInAccountList.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(closeButton.isDisplayed());
+        softAssert.assertTrue(accountSearchInputTextField.isDisplayed());
+        softAssert.assertTrue(filterButton.isDisplayed());
+        softAssert.assertTrue(accountCountLabel.isDisplayed());
+        softAssert.assertTrue(firstItemInAccountList.isDisplayed());
         if(getPlatform().equalsIgnoreCase("iOS")) {
-            Assert.assertTrue(accountSearchInputText.isDisplayed());
+            softAssert.assertTrue(accountSearchInputText.isDisplayed());
         }
         if(getPlatform().equalsIgnoreCase("Android")) {
-            Assert.assertEquals(accountSearchInputTextField.getText(),"Search by Customer ID or name");
+            softAssert.assertEquals(accountSearchInputTextField.getText(),"Search by Customer ID or name");
         }
+        softAssert.assertAll();
         return this;
     }
 

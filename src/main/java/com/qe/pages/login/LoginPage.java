@@ -10,7 +10,11 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.WithTimeout;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
+
+import java.util.Arrays;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 
@@ -96,42 +100,52 @@ public class LoginPage extends BaseTest {
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/loginVersion")
     private MobileElement appBuildVersion;
 
+    /** Errors */
+    @iOSXCUITFindBy(id = "User service error")
+    private MobileElement userServiceError;
+
+
     public LoginPage checkElementsPresence(){
-        waitForVisibility(emailTxtField);
-        waitForVisibility(associateLoginButton);
-//        Assert.assertTrue(shopLogo.isDisplayed());
-//        Assert.assertTrue(loginTagline.isDisplayed()); flaky in guest tests
-//        Assert.assertTrue(emailLabel.isDisplayed()); flaky in guest tests
-        Assert.assertTrue(emailTxtField.isDisplayed());
-//        Assert.assertTrue(syscoAssociateLabel.isDisplayed());
-//        Assert.assertTrue(guestTagline.isDisplayed());
-        Assert.assertTrue(associateLoginButton.isDisplayed());
-//        Assert.assertTrue(rightsReservedLabel.isDisplayed());
-//        Assert.assertTrue(privacyButton.isDisplayed());
-//        Assert.assertTrue(helpButton.isDisplayed());
+        waitForVisibility(emailTxtField, "emailTxtField");
+        waitForVisibility(associateLoginButton, "associateLoginButton");
+        SoftAssert softAssert = new SoftAssert();
+//        softAssert.assertTrue(shopLogo.isDisplayed());
+//        softAssert.assertTrue(loginTagline.isDisplayed()); flaky in guest tests
+//        softAssert.assertTrue(emailLabel.isDisplayed()); flaky in guest tests
+        softAssert.assertTrue(emailTxtField.isDisplayed());
+//        softAssert.assertTrue(syscoAssociateLabel.isDisplayed());
+//        softAssert.assertTrue(guestTagline.isDisplayed());
+        softAssert.assertTrue(associateLoginButton.isDisplayed());
+//        softAssert.assertTrue(rightsReservedLabel.isDisplayed());
+//        softAssert.assertTrue(privacyButton.isDisplayed());
+//        softAssert.assertTrue(helpButton.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 
     public LoginPage checkCustomerElementsPresence(){
 //        waitForVisibility(loginTagline);
-//        Assert.assertTrue(shopLogo.isDisplayed());
-//        Assert.assertTrue(loginTagline.isDisplayed()); flaky
-//        Assert.assertTrue(emailLabel.isDisplayed());
-        Assert.assertTrue(emailTxtField.isDisplayed());
-//        Assert.assertTrue(passwordLabel.isDisplayed());
-        Assert.assertTrue(passwordTxtField.isDisplayed());
-        Assert.assertTrue(forgotPasswordButton.isDisplayed());
-//        Assert.assertTrue(orLabel.isDisplayed());
-//        Assert.assertTrue(syscoAssociateLabel.isDisplayed());
-        Assert.assertTrue(associateLoginButton.isDisplayed());
-        //Assert.assertTrue(rightsReservedLabel.isDisplayed()); hidden by keyboard
-        //Assert.assertTrue(privacyButton.isDisplayed());
-        //Assert.assertTrue(helpButton.isDisplayed());
+
+        SoftAssert softAssert = new SoftAssert();
+//        softAssert.assertTrue(shopLogo.isDisplayed());
+//        softAssert.assertTrue(loginTagline.isDisplayed()); flaky
+//        softAssert.assertTrue(emailLabel.isDisplayed());
+        softAssert.assertTrue(emailTxtField.isDisplayed());
+//        softAssert.assertTrue(passwordLabel.isDisplayed());
+        softAssert.assertTrue(passwordTxtField.isDisplayed());
+        softAssert.assertTrue(forgotPasswordButton.isDisplayed());
+//        softAssert.assertTrue(orLabel.isDisplayed());
+//        softAssert.assertTrue(syscoAssociateLabel.isDisplayed());
+        softAssert.assertTrue(associateLoginButton.isDisplayed());
+        //softAssert.assertTrue(rightsReservedLabel.isDisplayed()); hidden by keyboard
+        //softAssert.assertTrue(privacyButton.isDisplayed());
+        //softAssert.assertTrue(helpButton.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 
     public LoginPage enterEmail(String email) {
-        waitForVisibility(emailTxtField);
+        waitForVisibility(emailTxtField, "emailTxtField");
         sendKeys(emailTxtField, email);
         return this;
     }
@@ -147,24 +161,61 @@ public class LoginPage extends BaseTest {
     }
 
     public LoginPage checkElementsPresenceWhenNoInternet() {
+        SoftAssert softAssert = new SoftAssert();
         if(getPlatform().equalsIgnoreCase("iOS")) {
-            Assert.assertTrue(iosErrorMessage.isDisplayed());
+            softAssert.assertTrue(iosErrorMessage.isDisplayed());
         }
         if(getPlatform().equalsIgnoreCase("Android")) {
-            Assert.assertTrue(androidErrorMessage.isDisplayed());
-            Assert.assertEquals(androidErrorMessage.getText(), "Network error. Please try again.");
+            softAssert.assertTrue(androidErrorMessage.isDisplayed());
+            softAssert.assertEquals(androidErrorMessage.getText(), "Network error. Please try again.");
         }
+        softAssert.assertAll();
         return this;
     }
 
     public LoginPage pressNextButton(){
-        waitForVisibility(nextAndLoginButton);
+        waitForVisibility(nextAndLoginButton, "nextAndLoginButton");
         click(nextAndLoginButton);
+        return new LoginPage();
+    }
+
+    public LoginPage ensurePasswordIsDisplayedOrRetryThreeTimes() {
+        for(int i = 0; i < 3; i++) {
+            if (!passwordTxtField.isDisplayed()) {
+                click(nextAndLoginButton);
+            }
+        }
         return new LoginPage();
     }
 
     public DiscoverPage pressLoginButton() {
         click(nextAndLoginButton);
+        return new DiscoverPage();
+    }
+
+    public DiscoverPage pressLoginButtonWithRetries() {
+        click(nextAndLoginButton);
+        try {
+            if (userServiceError.getId() != null) {
+                click(nextAndLoginButton);
+            }
+        } catch(NoSuchElementException noSuchElementException) {
+            utils.log().info("Retried to login but caught " + noSuchElementException.getCause() + "\n" + Arrays.toString(noSuchElementException.getStackTrace()));
+        }
+        return new DiscoverPage();
+    }
+
+    public DiscoverPage ensureLoginSuccessOrRetryThreeTimes() {
+        for(int i = 0; i < 3; i++) {
+            try {
+                if (nextAndLoginButton.isDisplayed()) {
+                    click(nextAndLoginButton);
+                    utils.log().info("retry login attempt: " + i);
+                }
+            } catch (NoSuchElementException noSuchElementException) {
+                utils.log().info("retry login attempt went noSuchElementException: " + i);
+            };
+        }
         return new DiscoverPage();
     }
 

@@ -6,6 +6,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class ListSettingsPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -109,21 +110,23 @@ public class ListSettingsPage extends BaseTest {
     private MobileElement firstParGroupButton;
 
     public ListSettingsPage checkElementsPresence() {
-        Assert.assertTrue(closeButton.isDisplayed());
-        Assert.assertTrue(createNewListHeader.isDisplayed());
-        Assert.assertTrue(saveListButton.isDisplayed());
-//        Assert.assertTrue(listNameLabel.isDisplayed());
-        Assert.assertTrue(listNameInputTextField.isDisplayed());
-        Assert.assertTrue(defaultListCheckbox.isDisplayed());
-        Assert.assertTrue(privacyHeader.isDisplayed());
-        Assert.assertTrue(publicSettingButton.isDisplayed());
-//        Assert.assertTrue(publicSettingFilledSettingButton.isDisplayed()); only ios
-//        Assert.assertTrue(publicLabel.isDisplayed());
-//        Assert.assertTrue(publicDescription.isDisplayed());
-        Assert.assertTrue(privateSettingButton.isDisplayed());
-//        Assert.assertTrue(privateSettingEmptyCircleButton.isDisplayed()); only ios
-//        Assert.assertTrue(privateLabel.isDisplayed());
-//        Assert.assertTrue(privateDescription.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(closeButton.isDisplayed());
+        softAssert.assertTrue(createNewListHeader.isDisplayed());
+        softAssert.assertTrue(saveListButton.isDisplayed());
+//        softAssert.assertTrue(listNameLabel.isDisplayed());
+        softAssert.assertTrue(listNameInputTextField.isDisplayed());
+        softAssert.assertTrue(defaultListCheckbox.isDisplayed());
+        softAssert.assertTrue(privacyHeader.isDisplayed());
+        softAssert.assertTrue(publicSettingButton.isDisplayed());
+//        softAssert.assertTrue(publicSettingFilledSettingButton.isDisplayed()); only ios
+//        softAssert.assertTrue(publicLabel.isDisplayed());
+//        softAssert.assertTrue(publicDescription.isDisplayed());
+        softAssert.assertTrue(privateSettingButton.isDisplayed());
+//        softAssert.assertTrue(privateSettingEmptyCircleButton.isDisplayed()); only ios
+//        softAssert.assertTrue(privateLabel.isDisplayed());
+//        softAssert.assertTrue(privateDescription.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 

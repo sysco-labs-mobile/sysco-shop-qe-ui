@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -127,24 +128,26 @@ public class OrdersPage extends BaseTest {
 
     public OrdersPage properAndroidCheckPageIsLoadedOrReloadWith3Attempts() {
         for(int i = 0; i < 3; i++) {
-            waitForInvisibility(progressBar);
+            waitForInvisibility(progressBar, "Progress bar");
             ifFailedReload();
         }
         return new OrdersPage();
     }
 
     public OrdersPage checkElementsPresence() {
-        Assert.assertTrue(navBarDrawerButton.isDisplayed());
-        Assert.assertTrue(searchTextField.isDisplayed());
-        Assert.assertTrue(cartButton.isDisplayed());
-        Assert.assertTrue(ordersTitle.isDisplayed());
-        Assert.assertTrue(allOrdersButton.isDisplayed());
-        Assert.assertTrue(openOrdersButton.isDisplayed());
-        Assert.assertTrue(submittedOrdersButton.isDisplayed());
-        Assert.assertTrue(cancelledOrdersButton.isDisplayed());
-//        Assert.assertTrue(createOrderButton.isDisplayed()); flacks out
-        Assert.assertTrue(ordersList.isDisplayed());
-        Assert.assertTrue(firstOrderInList.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(navBarDrawerButton.isDisplayed());
+        softAssert.assertTrue(searchTextField.isDisplayed());
+        softAssert.assertTrue(cartButton.isDisplayed());
+        softAssert.assertTrue(ordersTitle.isDisplayed());
+        softAssert.assertTrue(allOrdersButton.isDisplayed());
+        softAssert.assertTrue(openOrdersButton.isDisplayed());
+        softAssert.assertTrue(submittedOrdersButton.isDisplayed());
+        softAssert.assertTrue(cancelledOrdersButton.isDisplayed());
+//        softAssert.assertTrue(createOrderButton.isDisplayed()); flacks out
+        softAssert.assertTrue(ordersList.isDisplayed());
+        softAssert.assertTrue(firstOrderInList.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 

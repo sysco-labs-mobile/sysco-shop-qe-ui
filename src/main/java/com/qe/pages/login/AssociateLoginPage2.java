@@ -6,6 +6,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class AssociateLoginPage2 extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -25,9 +26,11 @@ public class AssociateLoginPage2 extends BaseTest {
     private MobileElement nextButton;
 
     public void checkElementsPresence() {
-        //Assert.assertTrue(backArrowButton.isDisplayed());//Can't locate an element by this strategy: By.chained({By.id: back})
-        Assert.assertTrue(syscoNetworkIdTextInput.isDisplayed());
-        Assert.assertTrue(nextButton.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        //softAssert.assertTrue(backArrowButton.isDisplayed());//Can't locate an element by this strategy: By.chained({By.id: back})
+        softAssert.assertTrue(syscoNetworkIdTextInput.isDisplayed());
+        softAssert.assertTrue(nextButton.isDisplayed());
+        softAssert.assertAll();
     }
 
     public LoginPage pressBackArrowButton() {

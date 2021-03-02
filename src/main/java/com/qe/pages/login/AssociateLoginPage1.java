@@ -6,6 +6,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class AssociateLoginPage1 extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -24,11 +25,13 @@ public class AssociateLoginPage1 extends BaseTest {
     private MobileElement nextButton;
 
     public void checkElementsPresence() {
+        SoftAssert softAssert = new SoftAssert();
         //waitForVisibility(nextButton);//org.openqa.selenium.StaleElementReferenceException: The previously found element ""Next" StaticText" is not present in the current view anymore. Make sure the application UI has the expected state.
-        //Assert.assertTrue(backArrowButton.isDisplayed());
-        Assert.assertTrue(emailFieldInput.isDisplayed());
-        Assert.assertTrue(backButton.isDisplayed());
-        Assert.assertTrue(nextButton.isDisplayed());
+        //softAssert.assertTrue(backArrowButton.isDisplayed());
+        softAssert.assertTrue(emailFieldInput.isDisplayed());
+        softAssert.assertTrue(backButton.isDisplayed());
+        softAssert.assertTrue(nextButton.isDisplayed());
+        softAssert.assertAll();
     }
 
     public LoginPage pressBackButton() {

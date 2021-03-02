@@ -5,6 +5,7 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class LogOutPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -24,9 +25,11 @@ public class LogOutPage extends BaseTest {
     private MobileElement backToLoginButton;
 
     public LogOutPage checkElementsPresence() {
-        //Assert.assertTrue(logoutHeader.isDisplayed());
-        Assert.assertTrue(logoutDescription.isDisplayed());
-        Assert.assertTrue(backToLoginButton.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        //softAssert.assertTrue(logoutHeader.isDisplayed());
+        softAssert.assertTrue(logoutDescription.isDisplayed());
+        softAssert.assertTrue(backToLoginButton.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 

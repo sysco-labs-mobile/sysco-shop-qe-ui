@@ -61,6 +61,17 @@ public class ProductCardTests extends BaseTest {
                     BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("splitDetail"),
                     BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("averageWeight")
             );
+            productCardPage
+                    .checkCaseQuantityFieldValue("Add")
+                    .pressCasePlusButton()
+                    .checkCaseQuantityFieldValue("1")
+                    .checkCartBadgeValue("1")
+                    .pressCaseMinusButton()
+                    .checkCaseQuantityFieldValue("Add")
+                    .inputCaseQuantity("3")
+                    .checkCaseQuantityFieldValue("3")
+                    .checkCartBadgeValue("3");
+
             productCardPage.pressNutritionButton();
             productCardPage.checkElementsPresenceOnNutritionTab();
         }

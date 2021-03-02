@@ -6,6 +6,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class CreditCardSurchargeModal extends BaseTest {
         TestUtils utils = new TestUtils();
@@ -25,9 +26,11 @@ public class CreditCardSurchargeModal extends BaseTest {
         private MobileElement okButton;
 
         public CreditCardSurchargeModal checkElementsPresence() {
-                Assert.assertTrue(creditCardSurchargeTitle.isDisplayed());
-                Assert.assertTrue(creditCardSurchargeHeader.isDisplayed());
-                Assert.assertTrue(okButton.isDisplayed());
+                SoftAssert softAssert = new SoftAssert();
+                softAssert.assertTrue(creditCardSurchargeTitle.isDisplayed());
+                softAssert.assertTrue(creditCardSurchargeHeader.isDisplayed());
+                softAssert.assertTrue(okButton.isDisplayed());
+                softAssert.assertAll();
                 return this;
         }
 

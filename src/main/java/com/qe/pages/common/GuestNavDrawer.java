@@ -8,6 +8,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class GuestNavDrawer extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -47,11 +48,14 @@ public class GuestNavDrawer extends BaseTest {
     private MobileElement signingIcon;
 
 
-    public void checkElementsPresence() {
-        Assert.assertTrue(shopHeader.isDisplayed());
-        Assert.assertTrue(discoverButton.isDisplayed());
-        Assert.assertTrue(profileHeader.isDisplayed());
-        Assert.assertTrue(helpButton.isDisplayed());
+    public GuestNavDrawer checkElementsPresence() {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(shopHeader.isDisplayed());
+        softAssert.assertTrue(discoverButton.isDisplayed());
+        softAssert.assertTrue(profileHeader.isDisplayed());
+        softAssert.assertTrue(helpButton.isDisplayed());
+        softAssert.assertAll();
+        return this;
     }
 
     public DiscoverPage pressDiscoverPageButton() {

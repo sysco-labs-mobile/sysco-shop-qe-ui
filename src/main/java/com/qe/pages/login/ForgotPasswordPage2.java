@@ -5,6 +5,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class ForgotPasswordPage2 extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -22,8 +23,10 @@ public class ForgotPasswordPage2 extends BaseTest {
     private MobileElement emailSentLabel;
 
     public ForgotPasswordPage2 checkElementsPresence() {
-        Assert.assertTrue(emailSentLabel.isDisplayed());
-        Assert.assertTrue(backArrowButton.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(emailSentLabel.isDisplayed());
+        softAssert.assertTrue(backArrowButton.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
     public LoginPage pressBackArrowButton() {

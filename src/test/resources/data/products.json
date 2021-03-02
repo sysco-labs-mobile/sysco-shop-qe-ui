@@ -44,5 +44,16 @@
     "storageLocation" : "C",
     "splitDetail" : "N",
     "averageWeight": "20.366"
+  },
+  "product-2388746-on-019-125609": {
+    "availableToUser": "mobilepricing@grr.la",
+    "supc" : "2388746",
+    "title" : "BEEF PATTY 80/20 ROUND FROZEN",
+    "description" : "2388746 | 120/2.67OZ | FIRE RIVER FARMS CLASSIC",
+    "category" : "Meats",
+    "strikethroughPricePerCs" : "$68.49 CS",
+    "discountBulkPrice": "$50.00 - $61.64 CS",
+    "maxPricePerCS": "$61.64 CS",
+    "newCustomerSavings": "-$6.85"
   }
 }

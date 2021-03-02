@@ -6,6 +6,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class ListDeleteAlert extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -36,12 +37,14 @@ public class ListDeleteAlert extends BaseTest {
     private MobileElement alertYesButtonText;
 
     public void checkElementsPresence() {
-        //Assert.assertTrue(deleteListTitle.isDisplayed());
-        Assert.assertTrue(deleteListDescription.isDisplayed());
-        Assert.assertTrue(alertNoButton.isDisplayed());
-//        Assert.assertTrue(alertNoButtonText.isDisplayed());
-        Assert.assertTrue(alertYesButton.isDisplayed());
-//        Assert.assertTrue(alertYesButtonText.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+//      softAssert.assertTrue(deleteListTitle.isDisplayed());
+        softAssert.assertTrue(deleteListDescription.isDisplayed());
+        softAssert.assertTrue(alertNoButton.isDisplayed());
+//      softAssert.assertTrue(alertNoButtonText.isDisplayed());
+        softAssert.assertTrue(alertYesButton.isDisplayed());
+//      softAssert.assertTrue(alertYesButtonText.isDisplayed());
+        softAssert.assertAll();
     }
 
     public ListsPage pressYes() {

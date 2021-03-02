@@ -1,10 +1,15 @@
 package com.qe.pages.lists;
 
 import com.qe.BaseTest;
+import com.qe.pages.search.SearchCatalogPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class AddToListPage  extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -33,6 +38,13 @@ public class AddToListPage  extends BaseTest {
     @iOSXCUITFindBy(id = "checkbox-0-0")
     private MobileElement list1;
 
+    @iOSXCUITFindBy(id = "checkbox-0-1")
+    private MobileElement list2;
+
+    @iOSXCUITFindBy(id = "checkbox-0-6")
+    private MobileElement list7;
+
+
     //android this contains par name
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.CheckBox")
     @iOSXCUITFindBy(id = "**/XCUIElementTypeButton[`label == \"squareUncheckedEnabled\"`][1]")
@@ -40,9 +52,6 @@ public class AddToListPage  extends BaseTest {
 
     @iOSXCUITFindBy(id ="Admin Tools Bulk List Test 1")
     private MobileElement list1Name;
-
-    @iOSXCUITFindBy(id = "checkbox-0-1")
-    private MobileElement list2;
 
     @iOSXCUITFindBy(id = "**/XCUIElementTypeButton[`label == \"squareUncheckedEnabled\"`][2]")
     private MobileElement checkbox2;
@@ -71,13 +80,23 @@ public class AddToListPage  extends BaseTest {
         return new AddToListPage();
     }
 
-    public ListPage pressSaveDoneButtonToReturnToList() {
+    public SearchCatalogPage pressSaveDoneButtonToReturnToSearch() {
         click(doneButton);
-        return new ListPage();
+        return new SearchCatalogPage();
     }
 
     public ListSettingsPage pressCreateNewListButton() {
         click(createNewListButton);
         return new ListSettingsPage();
+    }
+
+    public AddToListPage pressAddToList(String listName) {
+        if(getPlatform().equalsIgnoreCase("iOS")) {
+            String locator = "//XCUIElementTypeStaticText[@name=\'" + listName + "\']/..";
+            WebElement listButton = getDriver().findElement(new By.ByXPath(locator));
+            waitForVisibility(listButton, "List button with name " + listName);
+            listButton.click();
+        }
+        return new AddToListPage();
     }
 }

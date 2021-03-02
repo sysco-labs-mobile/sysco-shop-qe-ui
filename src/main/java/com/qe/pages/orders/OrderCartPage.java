@@ -8,6 +8,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.apache.logging.log4j.core.config.Order;
 import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class OrderCartPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -129,45 +130,50 @@ public class OrderCartPage extends BaseTest {
     private MobileElement searchQueryLabel;
 
     public OrderCartPage checkElementsPresence(String expectedTotalPrice, String expectedCsAndEaValues) {
-        Assert.assertTrue(backButton.isDisplayed());
-        Assert.assertTrue(orderDotMenuButton.isDisplayed());
-        Assert.assertTrue(navBarPriceValue.isDisplayed());
-        Assert.assertTrue(navBarCsAndEaValues.isDisplayed());
-        Assert.assertTrue(searchFilterTextInputField.isDisplayed());
-        Assert.assertTrue(filterButton.isDisplayed());
-        Assert.assertTrue(proceedToCheckoutButton.isDisplayed());
-        Assert.assertTrue(filterResultCount.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(backButton.isDisplayed());
+        softAssert.assertTrue(orderDotMenuButton.isDisplayed());
+        softAssert.assertTrue(navBarPriceValue.isDisplayed());
+        softAssert.assertTrue(navBarCsAndEaValues.isDisplayed());
+        softAssert.assertTrue(searchFilterTextInputField.isDisplayed());
+        softAssert.assertTrue(filterButton.isDisplayed());
+        softAssert.assertTrue(proceedToCheckoutButton.isDisplayed());
+        softAssert.assertTrue(filterResultCount.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 
     public OrderCartPage checkElementsPresenceOfFirstOrderLineItem(
             String expectedTitle, String expectedDescription, String expectedPricePerCS,  String expectedPricePerEA, String expectedPriceTotal) {
-        Assert.assertTrue(orderLineItem1.isDisplayed());
-        Assert.assertTrue(orderLineItem1ProductTitle.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(orderLineItem1.isDisplayed());
+        softAssert.assertTrue(orderLineItem1ProductTitle.isDisplayed());
         //Assert.assertTrue(orderLineItem1ProductDescription.isDisplayed());
         //Assert.assertTrue(orderLineItem1PricePerItem.isDisplayed());
-        Assert.assertTrue(orderLineItem1PriceTotal.isDisplayed());
-        Assert.assertTrue(orderLineItem1DotMenuButton.isDisplayed());
-        Assert.assertTrue(orderLineItem1DecreaseQuantityButton.isDisplayed());
-        Assert.assertTrue(orderLineItem1QuantityInputField.isDisplayed());
-        Assert.assertTrue(orderLineItem1IncreaseQuantityButton.isDisplayed());
-        Assert.assertEquals(orderLineItem1ProductTitle.getText(), expectedTitle);
-        Assert.assertEquals(orderLineItem1ProductDescription.getText(), expectedDescription);
+        softAssert.assertTrue(orderLineItem1PriceTotal.isDisplayed());
+        softAssert.assertTrue(orderLineItem1DotMenuButton.isDisplayed());
+        softAssert.assertTrue(orderLineItem1DecreaseQuantityButton.isDisplayed());
+        softAssert.assertTrue(orderLineItem1QuantityInputField.isDisplayed());
+        softAssert.assertTrue(orderLineItem1IncreaseQuantityButton.isDisplayed());
+        softAssert.assertEquals(orderLineItem1ProductTitle.getText(), expectedTitle);
+        softAssert.assertEquals(orderLineItem1ProductDescription.getText(), expectedDescription);
         if(expectedPricePerCS != null) {
-            Assert.assertEquals(orderLineItem1PricePerItem.getText(), expectedPricePerCS);
+            softAssert.assertEquals(orderLineItem1PricePerItem.getText(), expectedPricePerCS);
         }
         if(expectedPricePerEA != null) {
-            Assert.assertEquals(orderLineItem1PricePerItem.getText(), expectedPricePerEA);
+            softAssert.assertEquals(orderLineItem1PricePerItem.getText(), expectedPricePerEA);
         }
-        Assert.assertEquals(orderLineItem1PriceTotal.getText(), expectedPriceTotal);
-
+        softAssert.assertEquals(orderLineItem1PriceTotal.getText(), expectedPriceTotal);
+        softAssert.assertAll();
         return this;
     }
 
     public OrderCartPage checkElementsPresenceForCreditCardUser() {
-        Assert.assertTrue(prospectShopLabelContainer.isDisplayed());
-        Assert.assertTrue(prospectShopText.isDisplayed());
-        Assert.assertTrue(prospectShopCloseButton.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(prospectShopLabelContainer.isDisplayed());
+        softAssert.assertTrue(prospectShopText.isDisplayed());
+        softAssert.assertTrue(prospectShopCloseButton.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
     public OrderCartReviewOrderPage pressProceedToCheckoutButton() {

@@ -10,6 +10,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class ProductCardPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -23,6 +24,9 @@ public class ProductCardPage extends BaseTest {
 
     @iOSXCUITFindBy(id = "cart button")
     private MobileElement cartButton;
+
+    @iOSXCUITFindBy(id = "badge - text")
+    private MobileElement cartBadge;
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"product info carousel\"`]/XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeImage")
     private MobileElement firstProductImage;
@@ -135,74 +139,87 @@ public class ProductCardPage extends BaseTest {
 
 
     public ProductCardPage checkElementsPresence(String expectedTitle, String expectedDescription) {
-        Assert.assertTrue(backButton.isDisplayed());
-        Assert.assertTrue(addToListButton.isDisplayed());
-        Assert.assertTrue(cartButton.isDisplayed());
-        Assert.assertTrue(productImageScrollView.isDisplayed());
-        Assert.assertTrue(productInfoTitle.isDisplayed());
-        Assert.assertTrue(productInfoDescriptionText.isDisplayed());
-        Assert.assertTrue(itemCasePrice.isDisplayed());
-        Assert.assertTrue(decreaseCaseQuantityButton.isDisplayed());
-        Assert.assertTrue(quantityCaseInputField.isDisplayed());
-        Assert.assertTrue(increaseCaseQuantityButton.isDisplayed());
-        Assert.assertTrue(productDetailsButton.isDisplayed());
-        Assert.assertTrue(nutritionButton.isDisplayed());
-        Assert.assertEquals(productInfoTitle.getText(), expectedTitle);
-        Assert.assertEquals(productInfoDescriptionText.getText(), expectedDescription);
+        SoftAssert softAssert =new SoftAssert();
+        softAssert.assertTrue(backButton.isDisplayed());
+        softAssert.assertTrue(addToListButton.isDisplayed());
+        softAssert.assertTrue(cartButton.isDisplayed());
+        softAssert.assertTrue(productImageScrollView.isDisplayed());
+        softAssert.assertTrue(productInfoTitle.isDisplayed());
+        softAssert.assertTrue(productInfoDescriptionText.isDisplayed());
+        softAssert.assertTrue(itemCasePrice.isDisplayed());
+        softAssert.assertTrue(decreaseCaseQuantityButton.isDisplayed());
+        softAssert.assertTrue(quantityCaseInputField.isDisplayed());
+        softAssert.assertTrue(increaseCaseQuantityButton.isDisplayed());
+        softAssert.assertTrue(productDetailsButton.isDisplayed());
+        softAssert.assertTrue(nutritionButton.isDisplayed());
+        softAssert.assertEquals(productInfoTitle.getText(), expectedTitle);
+        softAssert.assertEquals(productInfoDescriptionText.getText(), expectedDescription);
+        softAssert.assertAll();
         return this;
     }
 
     public ProductCardPage checkElementsPresenceForCase(String expectedCasePrice) {
-        Assert.assertTrue(itemCasePrice.isDisplayed());
-        Assert.assertTrue(decreaseCaseQuantityButton.isDisplayed());
-        Assert.assertTrue(quantityCaseInputField.isDisplayed());
-        Assert.assertTrue(increaseCaseQuantityButton.isDisplayed());
-        Assert.assertEquals(itemCasePrice.getText(), expectedCasePrice);
+        SoftAssert softAssert =new SoftAssert();
+        softAssert.assertTrue(itemCasePrice.isDisplayed());
+        softAssert.assertTrue(decreaseCaseQuantityButton.isDisplayed());
+        softAssert.assertTrue(quantityCaseInputField.isDisplayed());
+        softAssert.assertTrue(increaseCaseQuantityButton.isDisplayed());
+        softAssert.assertEquals(itemCasePrice.getText(), expectedCasePrice);
+        softAssert.assertAll();
         return this;
     }
 
     public ProductCardPage checkElementsPresenceOnProductDetailsTab(String expectedStock, String expectedGtin,
                                                                     String expectedManufacturerUpc, String expectedStorageLocation,
                                                                     String expectedSplitDetails, String expectedAverageWeight) {
-        Assert.assertTrue(readMoreButton.isDisplayed());
-        if(getPlatform().equalsIgnoreCase("iOS")) {
-            scrollDownByCoordinates();
-        }
-        if(getPlatform().equalsIgnoreCase("Android")) {
-            //androidScrollDown();
-        }
-        Assert.assertTrue(productDetailsTable.isDisplayed());
-        Assert.assertTrue(stockStatus.isDisplayed());
-        Assert.assertTrue(stockStatusValue.isDisplayed());
-        Assert.assertTrue(gtin.isDisplayed());
-        Assert.assertTrue(gtinValue.isDisplayed());
-        Assert.assertTrue(manufacturerUpc.isDisplayed());
-        Assert.assertTrue(manufacturerUpcValue.isDisplayed());
-        Assert.assertTrue(storageLocation.isDisplayed());
-        Assert.assertTrue(storageLocationValue.isDisplayed());
-        Assert.assertTrue(splitDetails.isDisplayed());
-        Assert.assertTrue(splitDetailsValue.isDisplayed());
-        Assert.assertTrue(averageWeight.isDisplayed());
-        Assert.assertTrue(averageWeightValue.isDisplayed());
-        Assert.assertEquals(stockStatusValue.getText(), expectedStock);
-        Assert.assertEquals(gtinValue.getText(), expectedGtin);
-        Assert.assertEquals(manufacturerUpcValue.getText(), expectedManufacturerUpc);
-        Assert.assertEquals(storageLocationValue.getText(), expectedStorageLocation);
-        Assert.assertEquals(splitDetailsValue.getText(), expectedSplitDetails);
-        Assert.assertEquals(averageWeightValue.getText(), expectedAverageWeight);
+        SoftAssert softAssert =new SoftAssert();
+        softAssert.assertTrue(readMoreButton.isDisplayed());
+        softAssert.assertAll();
+        scrollDownByCoordinates();
+        softAssert.assertTrue(productDetailsTable.isDisplayed());
+        softAssert.assertTrue(stockStatus.isDisplayed());
+        softAssert.assertTrue(stockStatusValue.isDisplayed());
+        softAssert.assertTrue(gtin.isDisplayed());
+        softAssert.assertTrue(gtinValue.isDisplayed());
+        softAssert.assertTrue(manufacturerUpc.isDisplayed());
+        softAssert.assertTrue(manufacturerUpcValue.isDisplayed());
+        softAssert.assertTrue(storageLocation.isDisplayed());
+        softAssert.assertTrue(storageLocationValue.isDisplayed());
+        softAssert.assertTrue(splitDetails.isDisplayed());
+        softAssert.assertTrue(splitDetailsValue.isDisplayed());
+        softAssert.assertTrue(averageWeight.isDisplayed());
+        softAssert.assertTrue(averageWeightValue.isDisplayed());
+        softAssert.assertEquals(stockStatusValue.getText(), expectedStock);
+        softAssert.assertEquals(gtinValue.getText(), expectedGtin);
+        softAssert.assertEquals(manufacturerUpcValue.getText(), expectedManufacturerUpc);
+        softAssert.assertEquals(storageLocationValue.getText(), expectedStorageLocation);
+        softAssert.assertEquals(splitDetailsValue.getText(), expectedSplitDetails);
+        softAssert.assertEquals(averageWeightValue.getText(), expectedAverageWeight);
+        softAssert.assertAll();
+        return this;
+    }
+
+    public ProductCardPage checkCaseQuantityFieldValue(String expectedQuantity) {
+        Assert.assertEquals(quantityCaseInputField.getText(), expectedQuantity);
+        return this;
+    }
+
+    public ProductCardPage checkCartBadgeValue(String expectedCartCount) {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(cartBadge.isDisplayed());
+        softAssert.assertEquals(cartBadge.getText(), expectedCartCount);
+        softAssert.assertAll();
         return this;
     }
 
     public ProductCardPage checkElementsPresenceOnNutritionTab() {
-        Assert.assertTrue(nutritionFactsTitle.isDisplayed());
-        if(getPlatform().equalsIgnoreCase("iOS")) {
-            scrollDownByCoordinates();
-        }
-        if(getPlatform().equalsIgnoreCase("Android")) {
-            //androidScrollDown();
-        }
-        Assert.assertTrue(ingredientsListText.isDisplayed());
-        Assert.assertTrue(disclaimerText.isDisplayed());
+        SoftAssert softAssert =new SoftAssert();
+        softAssert.assertTrue(nutritionFactsTitle.isDisplayed());
+        softAssert.assertAll();
+        scrollDownByCoordinates();
+        softAssert.assertTrue(ingredientsListText.isDisplayed());
+        softAssert.assertTrue(disclaimerText.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 
@@ -222,12 +239,13 @@ public class ProductCardPage extends BaseTest {
     }
 
     public ProductCardPage pressCasePlusButton() {
-        click(decreaseCaseQuantityButton);
+        click(increaseCaseQuantityButton);
         return new ProductCardPage();
     }
 
     public ProductCardPage inputCaseQuantity(String quantity) {
         sendKeys(quantityCaseInputField, quantity, "Input quantity " + quantity);
+        getDriver().getKeyboard().sendKeys("\n");
         return new ProductCardPage();
     }
 
@@ -254,7 +272,7 @@ public class ProductCardPage extends BaseTest {
     }
 
     public LoginPage pressSignIn() {
-        waitForVisibility(guestSignInButton);
+        waitForVisibility(guestSignInButton, "guestSignInButton");
         click(guestSignInButton); // does not work on android
         return new LoginPage();
     }

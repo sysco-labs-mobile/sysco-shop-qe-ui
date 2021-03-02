@@ -4,6 +4,7 @@ import com.qe.BaseTest;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class OrderCartFilterPage extends BaseTest {
 
@@ -20,10 +21,12 @@ public class OrderCartFilterPage extends BaseTest {
     public MobileElement doneButton;
 
     public OrderCartFilterPage checkElementsPresence() {
-        Assert.assertTrue(pageHeader.isDisplayed());
-        Assert.assertTrue(noneSelector.isDisplayed());
-        Assert.assertTrue(categoriesSelector.isDisplayed());
-        Assert.assertTrue(doneButton.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(pageHeader.isDisplayed());
+        softAssert.assertTrue(noneSelector.isDisplayed());
+        softAssert.assertTrue(categoriesSelector.isDisplayed());
+        softAssert.assertTrue(doneButton.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 

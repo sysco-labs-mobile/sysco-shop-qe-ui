@@ -6,6 +6,8 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.io.Zip;
+import org.testng.asserts.SoftAssert;
 
 public class ZipSwitcherModal extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -16,7 +18,7 @@ public class ZipSwitcherModal extends BaseTest {
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/zip_entry_subtitle")
     @iOSXCUITFindBy(id = "Tell us your zipcode so we can show you accurate inventory in your area!")
-    private MobileElement zipModalDiscription;
+    private MobileElement zipModalDescription;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/zip_code_entry_field")
     @iOSXCUITFindBy(id = "zip code text input text field")
@@ -29,6 +31,16 @@ public class ZipSwitcherModal extends BaseTest {
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/update_button")
     @iOSXCUITFindBy(id = "update zip code button")
     private MobileElement updateButton;
+
+    public ZipSwitcherModal checkElementsPresence() {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(zipHeader.isDisplayed());
+        softAssert.assertTrue(zipModalDescription.isDisplayed());
+        softAssert.assertTrue(zipInputTextField.isDisplayed());
+        softAssert.assertTrue(cancelButton.isDisplayed());
+        softAssert.assertTrue(updateButton.isDisplayed());
+        return this;
+    }
 
     public ZipSwitcherModal inputZip(String inputZip) {
         sendKeys(zipInputTextField, inputZip, "Input zip " + inputZip);

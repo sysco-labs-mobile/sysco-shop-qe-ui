@@ -317,17 +317,20 @@ public class BaseTest {
 	  }
   }
 
-  public void waitForInvisibility(MobileElement e)  {
+  public void waitForInvisibility(MobileElement e, String message)  {
+	  utils.log().info("Wait for invisibility of " + message);
 	  WebDriverWait wait = new WebDriverWait(getDriver(), TestUtils.WAIT);
 	  wait.until(ExpectedConditions.invisibilityOf(e));
   }
 
-  public void waitForVisibility(MobileElement e) {
+  public void waitForVisibility(MobileElement e, String message) {
+	  utils.log().info("Wait for Visibility of " + message);
 	  WebDriverWait wait = new WebDriverWait(getDriver(), TestUtils.WAIT);
 	  wait.until(ExpectedConditions.visibilityOf(e));
   }
   
-  public void waitForVisibility(WebElement e){
+  public void waitForVisibility(WebElement e, String message){
+	  utils.log().info("Wait for Visibility of " + message);
 	  Wait<WebDriver> wait = new FluentWait<WebDriver>(getDriver())
 	  .withTimeout(Duration.ofSeconds(30))
 	  .pollingEvery(Duration.ofSeconds(5))
@@ -370,7 +373,7 @@ public class BaseTest {
 	}
 
   public String getAttribute(MobileElement e, String attribute) {
-	  waitForVisibility(e);
+	  waitForVisibility(e, "Some Attribute");
 	  return e.getAttribute(attribute);
   }
   

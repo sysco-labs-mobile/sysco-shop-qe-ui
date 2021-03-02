@@ -2,6 +2,7 @@ package com.qe.pages.discover;
 
 import com.qe.BaseTest;
 import com.qe.pages.common.NavDrawer;
+import com.qe.pages.login.LoginPage;
 import com.qe.pages.search.SearchCatalogPage;
 import com.qe.pages.search.TypeAheadPage;
 import com.qe.utils.TestUtils;
@@ -9,6 +10,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -177,32 +179,36 @@ public class DiscoverPage extends BaseTest {
 
 
     public DiscoverPage checkElementsPresence() {
-        Assert.assertTrue(navBarDrawerButton.isDisplayed());
-        Assert.assertTrue(searchTextField.isDisplayed());
-        Assert.assertTrue(searchTextFieldText.isDisplayed());
-        Assert.assertTrue(cartButton.isDisplayed());
-//        Assert.assertTrue(dashboardWelcomeLabel.isDisplayed()); android flaks out
-//        Assert.assertTrue(dashboardTaglineLabel.isDisplayed()); android flaks out
-//        Assert.assertTrue(deliverySummaryHeader.isDisplayed());
-//        Assert.assertTrue(deliveryIcon.isDisplayed());
-//        Assert.assertTrue(deliveryPlaceLabel.isDisplayed());
-//        Assert.assertTrue(deliveryStatusLabel.isDisplayed());
-//        Assert.assertTrue(deliveryTimeIcon.isDisplayed());
-//        Assert.assertTrue(estimatedDeliveryLabel.isDisplayed());
-//        Assert.assertTrue(deliveryTimeLabel.isDisplayed());
-//        Assert.assertTrue(viewDeliveryButton.isDisplayed());
-//        Assert.assertTrue(suggestionsForYouHeader.isDisplayed());
-//        Assert.assertTrue(suggestionsForYouCollection.isDisplayed());
-//        Assert.assertTrue(suggestionsForYouItem1.isDisplayed());
-//        Assert.assertTrue(shopByCategoryHeader.isDisplayed());  android flaks out
-//        Assert.assertTrue(meatsCategoryButton.isDisplayed());
-//        Assert.assertTrue(seaCategoryButton.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(navBarDrawerButton.isDisplayed());
+        softAssert.assertTrue(searchTextField.isDisplayed());
+        softAssert.assertTrue(searchTextFieldText.isDisplayed());
+        softAssert.assertTrue(cartButton.isDisplayed());
+//        softAssert.assertTrue(dashboardWelcomeLabel.isDisplayed()); android flaks out
+//        softAssert.assertTrue(dashboardTaglineLabel.isDisplayed()); android flaks out
+//        softAssert.assertTrue(deliverySummaryHeader.isDisplayed());
+//        softAssert.assertTrue(deliveryIcon.isDisplayed());
+//        softAssert.assertTrue(deliveryPlaceLabel.isDisplayed());
+//        softAssert.assertTrue(deliveryStatusLabel.isDisplayed());
+//        softAssert.assertTrue(deliveryTimeIcon.isDisplayed());
+//        softAssert.assertTrue(estimatedDeliveryLabel.isDisplayed());
+//        softAssert.assertTrue(deliveryTimeLabel.isDisplayed());
+//        softAssert.assertTrue(viewDeliveryButton.isDisplayed());
+//        softAssert.assertTrue(suggestionsForYouHeader.isDisplayed());
+//        softAssert.assertTrue(suggestionsForYouCollection.isDisplayed());
+//        softAssert.assertTrue(suggestionsForYouItem1.isDisplayed());
+//        softAssert.assertTrue(shopByCategoryHeader.isDisplayed());  android flaks out
+//        softAssert.assertTrue(meatsCategoryButton.isDisplayed());
+//        softAssert.assertTrue(seaCategoryButton.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 
     public DiscoverPage checkElementsPresenceForAccountSelector(String expectedAccount) {
-        Assert.assertTrue(accountSelectorButton.isDisplayed());
-        Assert.assertEquals(currentAccountNameLabel.getText(), expectedAccount);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(accountSelectorButton.isDisplayed());
+        softAssert.assertEquals(currentAccountNameLabel.getText(), expectedAccount);
+        softAssert.assertAll();
         return this;
     }
 
@@ -296,19 +302,20 @@ public class DiscoverPage extends BaseTest {
     /** Guest User specific action */
 
     public DiscoverPage checkGuestElementsPresence(String expectedAssignedZip) {
-
+        SoftAssert softAssert = new SoftAssert();
         if(getPlatform().equalsIgnoreCase("iOS")) {
-            Assert.assertEquals(currentZipLabel.getText(), expectedAssignedZip);
+            softAssert.assertEquals(currentZipLabel.getText(), expectedAssignedZip);
         }
         if(getPlatform().equalsIgnoreCase("Android")) {
-            Assert.assertEquals(currentZipLabel.getText(), "Delivering to " + expectedAssignedZip);
+            softAssert.assertEquals(currentZipLabel.getText(), "Delivering to " + expectedAssignedZip);
         }
-        Assert.assertTrue(navBarDrawerButton.isDisplayed());
-        Assert.assertTrue(searchTextField.isDisplayed());
-        Assert.assertTrue(searchTextFieldText.isDisplayed());
-//        Assert.assertTrue(dashboardWelcomeLabel.isDisplayed()); android flaks out
-//        Assert.assertTrue(dashboardTaglineLabel.isDisplayed()); android flaks out
-        Assert.assertTrue(shopByCategoryHeader.isDisplayed());
+        softAssert.assertTrue(navBarDrawerButton.isDisplayed());
+        softAssert.assertTrue(searchTextField.isDisplayed());
+        softAssert.assertTrue(searchTextFieldText.isDisplayed());
+//        softAssert.assertTrue(dashboardWelcomeLabel.isDisplayed()); android flaks out
+//        softAssert.assertTrue(dashboardTaglineLabel.isDisplayed()); android flaks out
+        softAssert.assertTrue(shopByCategoryHeader.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 

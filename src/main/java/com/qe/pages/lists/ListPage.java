@@ -5,11 +5,13 @@ import com.qe.pages.common.ProductThreeDotPopUp;
 import com.qe.pages.lists.filter.ListFilterPage;
 import com.qe.pages.lists.par.SelectParPage;
 import com.qe.pages.orders.OrderCartPage;
+import com.qe.pages.search.SearchCatalogPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -59,8 +61,41 @@ public class ListPage extends BaseTest {
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/appliedFilters")
     private MobileElement appliedFiltersLabel;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.view.ViewGroup/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup")
-    private MobileElement firstProductInList;
+
+    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/resultView\"/android.widget.TextView[1]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]")
+    private MobileElement firstProduct;
+
+    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productDescription")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[1]")
+    private MobileElement firstProductTitleText;
+
+    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/popupMenu")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeButton[@name=\"dot menu button\"]")
+    private MobileElement firstProductDotMenuButton;
+
+    @iOSXCUITFindBy(id = "Add to list")
+    private MobileElement addToListButton;
+
+    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productInfo")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[2]")
+    private MobileElement firstProductDescriptionText;
+
+    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/priceLabel")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[3]")
+    private MobileElement firstProductCasePrice;
+
+    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/cartItemCount")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name == \"case quantity text field\"`][1]")
+    private MobileElement firstProductCaseQuantityField;
+
+    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addToCartMinus")
+    @iOSXCUITFindBy(id = "decrease quantity button")
+    private MobileElement firstProductCaseQuantityMinusButton;
+
+    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addToCartPlus")
+    @iOSXCUITFindBy(id = "increase quantity button")
+    private MobileElement firstProductCaseQuantityPlusButton;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productImage")
     private List<MobileElement> listOfProductImages;
@@ -127,23 +162,58 @@ public class ListPage extends BaseTest {
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.view.ViewGroup/android.view.ViewGroup[2]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.LinearLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
     private MobileElement parValueOnFirstProductInList;
 
-    public void checkElementsPresence() {
-        Assert.assertTrue(backButton.isDisplayed());
-        Assert.assertTrue(listNameLabel.isDisplayed());
-        Assert.assertTrue(cartButton.isDisplayed());
-        Assert.assertTrue(listSearchInputField.isDisplayed());
-//        Assert.assertTrue(listSearchInputFieldLabel.isDisplayed());
-        Assert.assertTrue(listSettingsButton.isDisplayed());
-        Assert.assertTrue(listFilterButton.isDisplayed());
-        Assert.assertTrue(itemCountLabel.isDisplayed());
-//        Assert.assertTrue(emptyListIcon.isDisplayed());
-        Assert.assertTrue(listIsEmptyText.isDisplayed());
-        Assert.assertTrue(addItemsToYourListText.isDisplayed());
+    public ListPage checkElementsPresence() {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(backButton.isDisplayed());
+        softAssert.assertTrue(listNameLabel.isDisplayed());
+        softAssert.assertTrue(cartButton.isDisplayed());
+        softAssert.assertTrue(listSearchInputField.isDisplayed());
+//      softAssert.assertTrue(listSearchInputFieldLabel.isDisplayed());
+        softAssert.assertTrue(listSettingsButton.isDisplayed());
+        softAssert.assertTrue(listFilterButton.isDisplayed());
+        softAssert.assertTrue(itemCountLabel.isDisplayed());
+        softAssert.assertAll();
+        return this;
+    }
+
+    public ListPage checkElementsPresenceForEmptyList() {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(backButton.isDisplayed());
+        softAssert.assertTrue(listNameLabel.isDisplayed());
+        softAssert.assertTrue(cartButton.isDisplayed());
+        softAssert.assertTrue(listSearchInputField.isDisplayed());
+//      softAssert.assertTrue(listSearchInputFieldLabel.isDisplayed());
+        softAssert.assertTrue(listSettingsButton.isDisplayed());
+        softAssert.assertTrue(listFilterButton.isDisplayed());
+        softAssert.assertTrue(itemCountLabel.isDisplayed());
+//      softAssert.assertTrue(emptyListIcon.isDisplayed());
+        softAssert.assertTrue(listIsEmptyText.isDisplayed());
+        softAssert.assertTrue(addItemsToYourListText.isDisplayed());
 
         if(getPlatform().equalsIgnoreCase("Android")) {
-            Assert.assertEquals(listIsEmptyText.getText(), "List is Empty");
-            Assert.assertEquals(addItemsToYourListText.getText(), "Add items to your list");
+            softAssert.assertEquals(listIsEmptyText.getText(), "List is Empty");
+            softAssert.assertEquals(addItemsToYourListText.getText(), "Add items to your list");
         }
+        softAssert.assertAll();
+        return this;
+    }
+
+    public ListPage checkElementsPresenceForFirstItemCase(String expectedTitle, String expectedDescription, String expectedCasePrice) {
+        SoftAssert softAssert = new SoftAssert();
+        waitForVisibility(firstProductTitleText, "firstProductTitleText");
+        softAssert.assertTrue(firstProduct.isDisplayed(), "firstProduct");
+        softAssert.assertTrue(firstProductTitleText.isDisplayed(), "firstProductTitleText");
+        softAssert.assertTrue(firstProductDescriptionText.isDisplayed(), "firstProductDescriptionText");
+        softAssert.assertTrue(firstProductDotMenuButton.isDisplayed(), "firstProductDotMenuButton");
+        //softAssert.assertTrue(firstProductCasePrice.isDisplayed(), "firstProductCasePrice"); ios not visible
+        softAssert.assertTrue(firstProductCaseQuantityField.isDisplayed(), "firstProductCaseQuantityField");
+        softAssert.assertTrue(firstProductCaseQuantityMinusButton.isDisplayed(), "firstProductCaseQuantityMinusButton");
+        softAssert.assertTrue(firstProductCaseQuantityPlusButton.isDisplayed(), "firstProductCaseQuantityPlusButton");
+        softAssert.assertEquals(firstProductTitleText.getText(), expectedTitle, "firstProductTitleText equality check");
+        softAssert.assertEquals(firstProductDescriptionText.getText(), expectedDescription, "firstProductDescriptionText equality check");
+        softAssert.assertEquals(firstProductCasePrice.getText(), expectedCasePrice, "firstProductCasePrice equality check");
+        softAssert.assertAll();
+        return this;
     }
 
     public void checkDefaultListElementsPresence() {

@@ -7,6 +7,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class AssociateLoginPage3 extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -25,9 +26,11 @@ public class AssociateLoginPage3 extends BaseTest {
     private MobileElement signInButton;
 
     public AssociateLoginPage3 checkElementsPresence() {
-        Assert.assertTrue(backArrowButton.isDisplayed());
-        Assert.assertTrue(password.isDisplayed());
-        Assert.assertTrue(signInButton.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(backArrowButton.isDisplayed());
+        softAssert.assertTrue(password.isDisplayed());
+        softAssert.assertTrue(signInButton.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 

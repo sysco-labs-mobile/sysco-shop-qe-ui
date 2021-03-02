@@ -6,6 +6,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class OrderCartReviewOrderPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -167,67 +168,78 @@ public class OrderCartReviewOrderPage extends BaseTest {
 
     public OrderCartReviewOrderPage checkElementsPresence(String expectedShippingAddress, String expectedTotalQuantity,
                                                           String expectedTotalLineItems, String expectedEstimatedTotal) {
-        waitForVisibility(shippingAddressValue);
-        Assert.assertTrue(backButton.isDisplayed());
-        Assert.assertTrue(reviewOrderTitle.isDisplayed());
-        Assert.assertTrue(orderDetailsHeader.isDisplayed());
-        Assert.assertTrue(shippingAddressHeader.isDisplayed());
-        Assert.assertTrue(shippingAddressValue.isDisplayed());
-        Assert.assertTrue(orderNameTextInputField.isDisplayed());
-        Assert.assertTrue(poNumberTextInputField.isDisplayed());
-        Assert.assertTrue(shippingTypeOptionPicker.isDisplayed());
-        Assert.assertTrue(deliveryDatePicker.isDisplayed());
-        Assert.assertTrue(deliveryInstructionTextInputField.isDisplayed());
-        Assert.assertTrue(invoiceCheckbox.isDisplayed());
-        Assert.assertTrue(totalQuantityHeader.isDisplayed());
-        Assert.assertTrue(totalQuantityValue.isDisplayed());
-        Assert.assertTrue(totalLineItemsValue.isDisplayed());
-        Assert.assertTrue(estimatedTotalHeader.isDisplayed());
-        Assert.assertTrue(estimatedTotalValue.isDisplayed());
-        Assert.assertTrue(pricingInfoMessage.isDisplayed());
-        Assert.assertTrue(itemsHeader.isDisplayed());
+        waitForVisibility(shippingAddressValue, "shippingAddressValue");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(backButton.isDisplayed());
+        softAssert.assertTrue(reviewOrderTitle.isDisplayed());
+        softAssert.assertTrue(orderDetailsHeader.isDisplayed());
+        softAssert.assertTrue(shippingAddressHeader.isDisplayed());
+        softAssert.assertTrue(shippingAddressValue.isDisplayed());
+        softAssert.assertTrue(orderNameTextInputField.isDisplayed());
+        softAssert.assertTrue(poNumberTextInputField.isDisplayed());
+        softAssert.assertTrue(shippingTypeOptionPicker.isDisplayed());
+        softAssert.assertTrue(deliveryDatePicker.isDisplayed());
+        softAssert.assertTrue(deliveryInstructionTextInputField.isDisplayed());
+        softAssert.assertTrue(invoiceCheckbox.isDisplayed());
+        softAssert.assertTrue(totalQuantityHeader.isDisplayed());
+        softAssert.assertTrue(totalQuantityValue.isDisplayed());
+        softAssert.assertTrue(totalLineItemsValue.isDisplayed());
+        softAssert.assertTrue(estimatedTotalHeader.isDisplayed());
+        softAssert.assertTrue(estimatedTotalValue.isDisplayed());
+        softAssert.assertTrue(pricingInfoMessage.isDisplayed());
+        softAssert.assertTrue(itemsHeader.isDisplayed());
+        softAssert.assertAll();
         scrollDownByCoordinates();
-        Assert.assertTrue(orderLineItem1.isDisplayed());
-        Assert.assertTrue(submitOrderButton.isDisplayed());
-
-        Assert.assertEquals(shippingAddressValue.getText(), expectedShippingAddress);
-        Assert.assertEquals(totalQuantityValue.getText(), expectedTotalQuantity);
-        Assert.assertEquals(totalLineItemsValue.getText(), expectedTotalLineItems);
-        Assert.assertEquals(estimatedTotalValue.getText(), expectedEstimatedTotal);
+        softAssert.assertTrue(orderLineItem1.isDisplayed());
+        softAssert.assertTrue(submitOrderButton.isDisplayed());
+        softAssert.assertEquals(shippingAddressValue.getText(), expectedShippingAddress);
+        softAssert.assertEquals(totalQuantityValue.getText(), expectedTotalQuantity);
+        softAssert.assertEquals(totalLineItemsValue.getText(), expectedTotalLineItems);
+        softAssert.assertEquals(estimatedTotalValue.getText(), expectedEstimatedTotal);
+        softAssert.assertAll();
         return this;
     }
 
     public OrderCartReviewOrderPage checkElementsPresenceOfFirstOrderLineItem(
             String expectedTitle, String expectedDescription, String expectedPricePerCS,  String expectedPriceTotal, String expectedCaseCount) {
-        Assert.assertTrue(orderLineItem1.isDisplayed());
-        Assert.assertTrue(orderLineItem1ProductTitle.isDisplayed());
-        //Assert.assertTrue(orderLineItem1ProductDescription.isDisplayed());
-        Assert.assertTrue(orderLineItem1PricePerItem.isDisplayed());
-        Assert.assertTrue(orderLineItem1PriceTotal.isDisplayed());
-        Assert.assertTrue(orderLineItem1CaseCount.isDisplayed());
-        Assert.assertEquals(orderLineItem1ProductTitle.getText(), expectedTitle);
-        Assert.assertEquals(orderLineItem1ProductDescription.getText(), expectedDescription);
-        Assert.assertEquals(orderLineItem1PricePerItem.getText(), expectedPricePerCS);
-        Assert.assertEquals(orderLineItem1PriceTotal.getText(), expectedPriceTotal);
-        Assert.assertEquals(orderLineItem1CaseCount.getText(), expectedCaseCount);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(orderLineItem1.isDisplayed());
+        softAssert.assertTrue(orderLineItem1ProductTitle.isDisplayed());
+        //softAssert.assertTrue(orderLineItem1ProductDescription.isDisplayed());
+        softAssert.assertTrue(orderLineItem1PricePerItem.isDisplayed());
+        softAssert.assertTrue(orderLineItem1PriceTotal.isDisplayed());
+        softAssert.assertTrue(orderLineItem1CaseCount.isDisplayed());
+        softAssert.assertEquals(orderLineItem1ProductTitle.getText(), expectedTitle);
+        softAssert.assertEquals(orderLineItem1ProductDescription.getText(), expectedDescription);
+        softAssert.assertEquals(orderLineItem1PricePerItem.getText(), expectedPricePerCS);
+        softAssert.assertEquals(orderLineItem1PriceTotal.getText(), expectedPriceTotal);
+        softAssert.assertEquals(orderLineItem1CaseCount.getText(), expectedCaseCount);
+        softAssert.assertAll();
         return this;
     }
     public OrderCartReviewOrderPage checkElementsPresenceForCreditCardUser() {
-        Assert.assertTrue(creditCardSurchargeHeader.isDisplayed());
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(creditCardSurchargeHeader.isDisplayed());
         //Assert.assertTrue(creditCardSurchargeInfoBubble.isDisplayed());ios flaks out
-        Assert.assertTrue(creditCardSurchargeValue.isDisplayed());
-        Assert.assertTrue(creditCardText.isDisplayed());
-        Assert.assertTrue(proceedToPayment.isDisplayed());
+        softAssert.assertTrue(creditCardSurchargeValue.isDisplayed());
+        softAssert.assertTrue(creditCardText.isDisplayed());
+        softAssert.assertTrue(proceedToPayment.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 
     public OrderCartReviewOrderPage checkElementsPresenceForErrorMAApproval() {
+
+        SoftAssert softAssert = new SoftAssert();
         //Assert.assertTrue(errorIcon.isDisplayed());
-        Assert.assertTrue(errorMAApprovalLabel.isDisplayed());
+        softAssert.assertTrue(errorMAApprovalLabel.isDisplayed());
         if(getPlatform().equalsIgnoreCase("Android")) {
-            Assert.assertEquals(errorMAApprovalLabel.getText(), "This order requires approval. Please modify, approve and submit in Shop Web.");
-            Assert.assertFalse(submitOrderButton.isEnabled());
+            softAssert.assertEquals(errorMAApprovalLabel.getText(), "This order requires approval. Please modify, approve and submit in Shop Web.");
+            softAssert.assertFalse(submitOrderButton.isEnabled());
         }
+        softAssert.assertAll();
         return this;
     }
 

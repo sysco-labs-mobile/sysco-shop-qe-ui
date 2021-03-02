@@ -4,6 +4,7 @@ import com.qe.BaseTest;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class CreditCardModal extends BaseTest {
 
@@ -29,13 +30,15 @@ public class CreditCardModal extends BaseTest {
     public MobileElement acceptButton;
 
     public CreditCardModal checkElementsPresence() {
-        Assert.assertTrue(welcomeHeader.isDisplayed());
-        Assert.assertTrue(welcomeDescription.isDisplayed());
-        Assert.assertTrue(applyForCreditHeader.isDisplayed());
-        Assert.assertTrue(applyForCreditDescription.isDisplayed());
-        Assert.assertTrue(acknoledgementOfTaxabilityHeader.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(welcomeHeader.isDisplayed());
+        softAssert.assertTrue(welcomeDescription.isDisplayed());
+        softAssert.assertTrue(applyForCreditHeader.isDisplayed());
+        softAssert.assertTrue(applyForCreditDescription.isDisplayed());
+        softAssert.assertTrue(acknoledgementOfTaxabilityHeader.isDisplayed());
         //Assert.assertTrue(acknoledgementOfTaxabilityDescription.isDisplayed()); ios flaks out
-        Assert.assertTrue(acceptButton.isDisplayed());
+        softAssert.assertTrue(acceptButton.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 

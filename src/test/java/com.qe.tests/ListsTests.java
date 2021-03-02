@@ -5,8 +5,10 @@ import com.qe.pages.discover.DiscoverPage;
 import com.qe.pages.common.NavDrawer;
 import com.qe.pages.lists.*;
 import com.qe.pages.login.LoginPage;
+import com.qe.pages.search.SearchCatalogPage;
 import com.qe.utils.TestUtils;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
@@ -20,6 +22,8 @@ public class ListsTests extends BaseTest {
     ListSettingsPage listSettingsPage;
     ListPage listPage;
     ListDeleteAlert listDeleteAlert;
+    SearchCatalogPage searchCatalogPage;
+    AddToListPage addToListPage;
 
     @BeforeMethod
     public void beforeMethod(Method m) throws InterruptedException {
@@ -31,6 +35,8 @@ public class ListsTests extends BaseTest {
         listSettingsPage = new ListSettingsPage();
         listPage = new ListPage();
         listDeleteAlert = new ListDeleteAlert();
+        searchCatalogPage = new SearchCatalogPage();
+        addToListPage = new AddToListPage();
         loginPage.enterEmail(BaseTest.users.getJSONObject("customerForListsTests").getString("email"));
         loginPage = loginPage.pressNextButton();
         loginPage.enterPassword(BaseTest.users.getJSONObject("customerForListsTests").getString("password"));
@@ -54,14 +60,14 @@ public class ListsTests extends BaseTest {
         listsPage.checkElementsPresence();
     }
 
-    @Test
+    @Test @Ignore
     public void createNewList() throws InterruptedException {
         String newListName = "AppiumTestList " + Math.random();
         listSettingsPage = listsPage.pressCreateListButton();
         listSettingsPage.enterListName(newListName);
         listPage = listSettingsPage.pressSaveListButton();
         Thread.sleep(10000);
-        listPage.checkElementsPresence();
+        listPage.checkElementsPresenceForEmptyList();
         listPage.checkListName(newListName);
         listsPage = listPage.pressBackButton();
         listsPage.checkElementsPresence();
@@ -122,6 +128,34 @@ public class ListsTests extends BaseTest {
         listDeleteAlert.checkElementsPresence();
         listSettingsPage = listDeleteAlert.pressNo();
         listPage = listSettingsPage.pressCloseButton();
+        listPage.checkElementsPresenceForEmptyList();
+    }
+
+
+    @Test
+    public void createListAndAddToList() throws InterruptedException {
+        String newListName = "AppiumTestListToDelete " + Math.random();
+        listSettingsPage = listsPage.pressCreateListButton();
+        listSettingsPage.enterListName(newListName);
+        listPage = listSettingsPage.pressSaveListButton();
+        listPage.checkListName(newListName);
+        listsPage = listPage.pressBackButton();
+        searchCatalogPage = listsPage.inputSearch("0566709");
+        addToListPage = searchCatalogPage.pressFirstProductDotButton()
+                .pressAddToListButton();
+        addToListPage.pressAddToList(newListName);
+        searchCatalogPage = addToListPage.pressSaveDoneButtonToReturnToSearch();
+        searchCatalogPage.checkElementsPresenceForBannerItemAddedToList();
+        Thread.sleep(2500);
+        searchCatalogPage.checkElementsPresence("0566709");
+        listsPage = searchCatalogPage.pressNavBar().pressListsButton();
+        listsPage.checkElementsPresence();
+        listPage = listsPage.pressList(newListName);
         listPage.checkElementsPresence();
+        listPage.checkElementsPresenceForFirstItemCase(
+                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("title"),
+                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("description"),
+                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("pricePerCsCatchweight")
+        );
     }
 }

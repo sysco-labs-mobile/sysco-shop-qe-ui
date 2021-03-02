@@ -7,6 +7,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class ZipSwitcherPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -63,22 +64,26 @@ public class ZipSwitcherPage extends BaseTest {
     private MobileElement tryDifferentZipButton;
 
     public ZipSwitcherPage checkElementsPresence() {
-        Assert.assertTrue(header.isDisplayed());
-        Assert.assertTrue(description.isDisplayed());
-        Assert.assertTrue(zipCodeInputTextField.isDisplayed());
-        Assert.assertTrue(zipCodeInputText.isDisplayed());
-        Assert.assertTrue(startShoppingButton.isDisplayed());
-        Assert.assertTrue(signInButton.isDisplayed());
-        Assert.assertTrue(becomeACustomerButton.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(header.isDisplayed());
+        softAssert.assertTrue(description.isDisplayed());
+        softAssert.assertTrue(zipCodeInputTextField.isDisplayed());
+        softAssert.assertTrue(zipCodeInputText.isDisplayed());
+        softAssert.assertTrue(startShoppingButton.isDisplayed());
+        softAssert.assertTrue(signInButton.isDisplayed());
+        softAssert.assertTrue(becomeACustomerButton.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 
     public ZipSwitcherPage checkElementsPresenceForNotAvailableZip(String expectedZip) {
-        Assert.assertEquals(zipCodeLabel.getText(), expectedZip);
-        Assert.assertTrue(unavailableHeader.isDisplayed());
-        Assert.assertTrue(unavailableDescription.isDisplayed());
-        Assert.assertTrue(browseSyscoProductsButton.isDisplayed());
-        Assert.assertTrue(tryDifferentZipButton.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(zipCodeLabel.getText(), expectedZip);
+        softAssert.assertTrue(unavailableHeader.isDisplayed());
+        softAssert.assertTrue(unavailableDescription.isDisplayed());
+        softAssert.assertTrue(browseSyscoProductsButton.isDisplayed());
+        softAssert.assertTrue(tryDifferentZipButton.isDisplayed());
+        softAssert.assertAll();
         return this;
     }
 

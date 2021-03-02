@@ -6,6 +6,9 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
+
+import java.util.List;
 
 public class TypeAheadPage extends BaseTest {
 
@@ -38,29 +41,41 @@ public class TypeAheadPage extends BaseTest {
     @iOSXCUITFindBy(id = "POPULAR SEARCHES")
     private MobileElement popularSearchesLabel;
 
+    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/typeAheadView\"]/android.widget.TextView")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name=\"type ahead suggestions\"]/XCUIElementTypeCell")
+    private List<MobileElement> searchResults;
+
     @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/typeAheadView\"]/android.widget.TextView[1]")
-    @iOSXCUITFindBy(id = "type ahead suggestion carrot")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name=\"type ahead suggestions\"]/XCUIElementTypeCell[1]")
     private MobileElement searchResultFirst;
 
     @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/typeAheadView\"]/android.widget.TextView[2]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name=\"type ahead suggestions\"]/XCUIElementTypeCell[2]")
     private MobileElement searchResultSecond;
 
     @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/typeAheadView\"]/android.widget.TextView[3]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name=\"type ahead suggestions\"]/XCUIElementTypeCell[3]")
     private MobileElement searchResultThird;
 
     public TypeAheadPage checkElementsPresence(String expectedResult) {
-        Assert.assertTrue(searchResultFirst.isDisplayed());
-        Assert.assertTrue(navBarDrawerButton.isDisplayed());
-        Assert.assertTrue(searchTextField.isDisplayed());
-        Assert.assertTrue(clearTextButton.isDisplayed());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(searchResultFirst.isDisplayed());
+        softAssert.assertTrue(navBarDrawerButton.isDisplayed());
+        softAssert.assertTrue(searchTextField.isDisplayed());
+        softAssert.assertTrue(clearTextButton.isDisplayed());
+        softAssert.assertTrue(searchResults.size() > 1);
+        softAssert.assertTrue(searchResults
+                .stream()
+                .allMatch(searchResult -> searchResult.getText().equalsIgnoreCase(expectedResult)));
         if(getPlatform().equalsIgnoreCase("Android")) {
-            Assert.assertEquals(popularSearchesLabel.getText(), "POPULAR SEARCHES");
-            Assert.assertTrue(searchResultFirst.getText().toLowerCase().contains(expectedResult));
-            Assert.assertTrue(searchResultSecond.getText().toLowerCase().contains(expectedResult));
-            Assert.assertTrue(searchResultThird.getText().toLowerCase().contains(expectedResult));
-            Assert.assertTrue(clearTextButton.isDisplayed());
-            Assert.assertTrue(cartButton.isDisplayed());
+            softAssert.assertEquals(popularSearchesLabel.getText(), "POPULAR SEARCHES");
+//            softAssert.assertTrue(searchResultFirst.getText().toLowerCase().contains(expectedResult));
+//            softAssert.assertTrue(searchResultSecond.getText().toLowerCase().contains(expectedResult));
+//            softAssert.assertTrue(searchResultThird.getText().toLowerCase().contains(expectedResult));
+            softAssert.assertTrue(clearTextButton.isDisplayed());
+            softAssert.assertTrue(cartButton.isDisplayed());
         }
+        softAssert.assertAll();
         return this;
     }
 
