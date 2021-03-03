@@ -61,8 +61,6 @@ public class ModifyOrderCartPage extends BaseTest {
     private MobileElement increaseQuantityButton;
 
 
-    //TODO: add Exception price button
-
     public OrderCartReviewOrderPage pressProceedToCheckoutButton() {
         click(proceedToCheckoutButton);
         return new OrderCartReviewOrderPage();

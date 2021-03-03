@@ -36,6 +36,7 @@ public class ListDeleteAlert extends BaseTest {
     private MobileElement alertYesButtonText;
 
     public void checkElementsPresence() {
+        utils.log().info("Check elements presence on List Delete alert");
         SoftAssert softAssert = new SoftAssert();
 //      softAssert.assertTrue(deleteListTitle.isDisplayed());
         softAssert.assertTrue(deleteListDescription.isDisplayed());
@@ -47,12 +48,12 @@ public class ListDeleteAlert extends BaseTest {
     }
 
     public ListsPage pressYes() {
-        click(alertYesButton);
+        click(alertYesButton, "Press yes on List Delete alert");
         return new ListsPage();
     }
 
     public ListSettingsPage pressNo() {
-        click(alertNoButton);
+        click(alertNoButton, "Press no on List Delete alert");
         return new ListSettingsPage();
     }
 }

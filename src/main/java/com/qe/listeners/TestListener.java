@@ -13,17 +13,14 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TestListener implements ITestListener {
 	TestUtils utils = new TestUtils();
-	
+
 	public void onTestFailure(ITestResult result) {
 		if(result.getThrowable() != null) {
 			  StringWriter sw = new StringWriter();
@@ -31,10 +28,13 @@ public class TestListener implements ITestListener {
 			  result.getThrowable().printStackTrace(pw);
 			  utils.log().error(sw.toString());
 		}
-		
+
 		BaseTest base = new BaseTest();
 		File file = base.getDriver().getScreenshotAs(OutputType.FILE);
-		
+
+		Map <String, String> params = new HashMap<String, String>();
+		params = result.getTestContext().getCurrentXmlTest().getAllParameters();
+
 		byte[] encoded = null;
 		try {
 			encoded = Base64.encodeBase64(FileUtils.readFileToByteArray(file));
@@ -42,10 +42,7 @@ public class TestListener implements ITestListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		Map <String, String> params = new HashMap<String, String>();
-		params = result.getTestContext().getCurrentXmlTest().getAllParameters();
-		
+
 		String imagePath = "Screenshots" + File.separator + params.get("platformName") 
 		+ "_" + params.get("deviceName") + File.separator + base.getDateTime() + File.separator 
 		+ result.getTestClass().getRealClass().getSimpleName() + File.separator + result.getName() + ".png";

@@ -20,15 +20,10 @@ public class iOSOnlyLoginTests extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod(Method m) {
-        utils.log().info("******  Starting test:" + m.getName() + "    ******" + "\n");
+        utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
-    }
-
-    @AfterMethod
-    public void afterEachTest(Method m) {
-        utils.log().info("******   Ended test:" + m.getName() + "     ******" + "\n");
     }
 
     @Test(groups = { "WebView" })

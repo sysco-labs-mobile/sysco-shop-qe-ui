@@ -55,6 +55,7 @@ public class OrderCartOrderPlacedPage extends BaseTest {
     private MobileElement viewOrdersButton;
 
     public OrderCartOrderPlacedPage checkElementPresence() {
+        utils.log().info("Check elements presence on Order Placed page");
         Assert.assertTrue(orderPlacedHeader.isDisplayed());
         return this;
     }

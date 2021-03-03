@@ -128,7 +128,8 @@ public class ListPage extends BaseTest {
     private MobileElement defaultIcon;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/detailDefaultProductList")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"DEFAULT LIST\"`][1]")
+    //@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"DEFAULT LIST\"`][1]") flaks out
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeStaticText[@name=\"DEFAULT LIST\"])[1]")
     private MobileElement defaultListLabel;
 
 
@@ -162,6 +163,7 @@ public class ListPage extends BaseTest {
     private MobileElement parValueOnFirstProductInList;
 
     public ListPage checkElementsPresence() {
+        utils.log().info("Check elements presence on List page");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(backButton.isDisplayed());
         softAssert.assertTrue(listNameLabel.isDisplayed());
@@ -176,6 +178,7 @@ public class ListPage extends BaseTest {
     }
 
     public ListPage checkElementsPresenceForEmptyList() {
+        utils.log().info("Check elements presence for empty list on List page");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(backButton.isDisplayed());
         softAssert.assertTrue(listNameLabel.isDisplayed());
@@ -198,6 +201,7 @@ public class ListPage extends BaseTest {
     }
 
     public ListPage checkElementsPresenceForFirstItemCase(String expectedTitle, String expectedDescription, String expectedCasePrice) {
+        utils.log().info("Check elements presence for first case item on List page");
         SoftAssert softAssert = new SoftAssert();
         waitForVisibility(firstProductTitleText, "firstProductTitleText");
         softAssert.assertTrue(firstProduct.isDisplayed(), "firstProduct");
@@ -216,21 +220,24 @@ public class ListPage extends BaseTest {
     }
 
     public void checkDefaultListElementsPresence() {
+        utils.log().info("Check elements presence for default list on List page");
         //Assert.assertTrue(defaultIcon.isDisplayed());
-        Assert.assertTrue(defaultListLabel.isDisplayed());
+        Assert.assertTrue(defaultListLabel.isDisplayed(), "defaultListLabel");
     }
 
-    public void checkListName(String expectedListName) {
+    public void checkListName(String expectedListName) throws InterruptedException {
+        utils.log().info("Check list name to be equal to " + expectedListName + " on List page");
+        Thread.sleep(200);
         Assert.assertEquals(listNameLabel.getText(), expectedListName);
     }
 
     public ListsPage pressBackButton() {
-        click(backButton);
+        click(backButton, "Press back button on List Page");
         return new ListsPage();
     }
 
     public OrderCartPage pressCartButton() {
-        click(cartButton);
+        click(cartButton, "Press cart button on List page");
         return new OrderCartPage();
     }
 
@@ -240,22 +247,22 @@ public class ListPage extends BaseTest {
     }
 
     public ListSettingsPage pressListSettingsButton() {
-        click(listSettingsButton);
+        click(listSettingsButton, "Press Settings button on List page");
         return new ListSettingsPage();
     }
 
     public ListFilterPage pressListFilterButton() {
-        click(listFilterButton);
+        click(listFilterButton, "Press filter button on List page");
         return new ListFilterPage();
     }
 
     public ProductThreeDotPopUp pressOnFirstProductThreeDotButtons() {
-        click(listOfProductThreeDotButtons.get(0));
+        click(listOfProductThreeDotButtons.get(0), "Press on first product's three dot button on List Page");
         return new ProductThreeDotPopUp();
     }
 
     public SelectParPage pressParGroupSelector() {
-        click(parGroupSelector);
+        click(parGroupSelector, "Press par group selector on List page");
         return new SelectParPage();
     }
 }

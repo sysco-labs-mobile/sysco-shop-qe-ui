@@ -6,6 +6,8 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.testng.asserts.SoftAssert;
 
 public class OrdersPage extends BaseTest {
@@ -79,9 +81,9 @@ public class OrdersPage extends BaseTest {
 
 
     /** Loading elements */
-    final String androidProgressBarId = "com.syscocorp.mss.enterprise.dev:id/ordersProgressBar";
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/ordersProgressBar")
+    @iOSXCUITFindBy(id = "loading bar")
     private MobileElement progressBar;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/loadingView")
@@ -96,39 +98,31 @@ public class OrdersPage extends BaseTest {
     private MobileElement tapToRetryButton;
 
 
-    private OrdersPage ifProgressBarPresentWait() throws InterruptedException {
-        if(getPlatform().equalsIgnoreCase("Android")){
-            while(isElementPresent(By.id(androidProgressBarId))) {
-                Thread.sleep(10000);
-            }
-        }
-        return new OrdersPage();
-    }
-
     private OrdersPage ifFailedReload() {
-        if(isElementPresent(By.id(tapToRetryButtonId))) {
-            click(tapToRetryButton);
+        try {
+            if (tapToRetryButton.isDisplayed()) {
+                click(tapToRetryButton, "Press retry button on Orders page");
+            }
+        } catch (NoSuchElementException noSuchElementException) {
+            utils.log().info("Retry button is absent on Order Page - no retry is needed");
         }
         return new OrdersPage();
     }
 
-    public OrdersPage androidCheckPageIsLoadedOrReloadWith3Attempts() throws InterruptedException {
-        for(int i = 0; i < 3; i++) {
-            ifProgressBarPresentWait();
-            ifFailedReload();
-        }
-        return new OrdersPage();
-    }
-
-    public OrdersPage properAndroidCheckPageIsLoadedOrReloadWith3Attempts() {
-        for(int i = 0; i < 3; i++) {
+    public OrdersPage checkPageIsLoadedOrRetry() {
+        utils.log().info("Check page if reload is needed");
+        try {
             waitForInvisibility(progressBar, "Progress bar");
-            ifFailedReload();
+        } catch (TimeoutException timeoutException) {
+            utils.log().info("Progress bar is still present - increase wait time");
         }
+        ifFailedReload();
+
         return new OrdersPage();
     }
 
     public OrdersPage checkElementsPresence() {
+        utils.log().info("Check elements presence on Orders page");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(navBarDrawerButton.isDisplayed());
         softAssert.assertTrue(searchTextField.isDisplayed());
@@ -146,27 +140,27 @@ public class OrdersPage extends BaseTest {
     }
 
     public OrdersPage pressAllOrdersButton() {
-        click(allOrdersButton);
+        click(allOrdersButton, "Press All Orders tab on Orders page");
         return new OrdersPage();
     }
 
     public OrdersPage pressOpenOrdersButton() {
-        click(openOrdersButton);
+        click(openOrdersButton, "Press Open orders tab on Orders page");
         return new OrdersPage();
     }
 
     public OrdersPage pressSubmittedOrdersButton() {
-        click(submittedOrdersButton);
+        click(submittedOrdersButton, "Press Submitted orders tab on Orders page");
         return new OrdersPage();
     }
 
     public OrdersPage pressCancelledOrdersButton() {
-        click(cancelledOrdersButton);
+        click(cancelledOrdersButton, "Press Cancelled orders tab on Orders page");
         return new OrdersPage();
     }
 
     public OrderCartPage pressCreateOrderButton() {
-        click(createOrderButton); //ios flacks out
+        click(createOrderButton, "Press create order button on Orders page"); //ios flacks out
         return new OrderCartPage();
     }
 }

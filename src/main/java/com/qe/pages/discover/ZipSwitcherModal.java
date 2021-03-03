@@ -32,12 +32,13 @@ public class ZipSwitcherModal extends BaseTest {
     private MobileElement updateButton;
 
     public ZipSwitcherModal checkElementsPresence() {
+        utils.log().info("Check elements presence on Zip Switcher modal");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(zipHeader.isDisplayed());
-        softAssert.assertTrue(zipModalDescription.isDisplayed());
-        softAssert.assertTrue(zipInputTextField.isDisplayed());
-        softAssert.assertTrue(cancelButton.isDisplayed());
-        softAssert.assertTrue(updateButton.isDisplayed());
+        softAssert.assertTrue(zipHeader.isDisplayed(), "zipHeader");
+        softAssert.assertTrue(zipModalDescription.isDisplayed(), "zipModalDescription");
+        softAssert.assertTrue(zipInputTextField.isDisplayed(), "zipInputTextField");
+        softAssert.assertTrue(cancelButton.isDisplayed(), "cancelButton");
+        softAssert.assertTrue(updateButton.isDisplayed(), "updateButton");
         return this;
     }
 
@@ -47,17 +48,17 @@ public class ZipSwitcherModal extends BaseTest {
     }
 
     public DiscoverPage pressCancelButton() {
-        click(cancelButton);
+        click(cancelButton, "Press cancel button on Zip Switcher Modal");
         return new DiscoverPage();
     }
 
     public DiscoverPage pressUpdateButtonForAvailableZip() {
-        click(updateButton);
+        click(updateButton, "Press update button on Zip Switcher Modal");
         return new DiscoverPage();
     }
 
     public ZipSwitcherPage pressUpdateButtonForUnavailableZip() {
-        click(updateButton);
+        click(updateButton, "Press update button on Zip Switcher Modal for Unavailable Zip");
         return new ZipSwitcherPage();
     }
 

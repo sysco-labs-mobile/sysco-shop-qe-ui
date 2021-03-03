@@ -8,6 +8,8 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.testng.asserts.SoftAssert;
 
 public class ListsPage extends BaseTest {
@@ -39,6 +41,11 @@ public class ListsPage extends BaseTest {
     @iOSXCUITFindBy(id = "list0-0")
     private MobileElement purchaseHistoryButton;
 
+    @iOSXCUITFindBy(id = "loading bar")
+    private MobileElement progressBar;
+
+    String loadingBariOSLocatorId = "loading bar";
+
     /** Retry elements */
 
     @iOSXCUITFindBy(id = "load error view - title")
@@ -56,14 +63,36 @@ public class ListsPage extends BaseTest {
     @iOSXCUITFindBy(id = "banner action button")
     private MobileElement listsRefreshRetryButton;
 
+    private ListsPage ifFailedReload() {
+        try {
+            if (retryButton.isDisplayed()) {
+                click(retryButton, "Press retry button on Lists page");
+            }
+        } catch (NoSuchElementException noSuchElementException) {
+            utils.log().info("Retry to load Lists Page is not needed");
+        }
+        return new ListsPage();
+    }
+
+    public ListsPage checkPageIsLoadedAndIfNotReload() {
+        utils.log().info("Check if reload is needed for Lists page");
+        try {
+            waitForInvisibility(progressBar, "Progress bar");
+        } catch (TimeoutException timeoutException) {
+            utils.log().info("Progress bar is still present - increase wait time");
+        }
+        ifFailedReload();
+        return new ListsPage();
+    }
 
     public ListsPage checkElementsPresence() {
+        utils.log().info("Check elements presence on Lists page");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(navBarDrawerButton.isDisplayed());
-        softAssert.assertTrue(listsHeader.isDisplayed());
-        softAssert.assertTrue(createListButton.isDisplayed());
-        softAssert.assertTrue(purchaseHistoryText.isDisplayed());
-//        softAssert.assertTrue(purchaseHistoryButton.isDisplayed());
+        softAssert.assertTrue(navBarDrawerButton.isDisplayed(), "navBarDrawerButton");
+        softAssert.assertTrue(listsHeader.isDisplayed(), "listsHeader");
+        softAssert.assertTrue(createListButton.isDisplayed(), "createListButton");
+        softAssert.assertTrue(purchaseHistoryText.isDisplayed(), "purchaseHistoryText");
+//        softAssert.assertTrue(purchaseHistoryButton.isDisplayed(), "purchaseHistoryButton);
         softAssert.assertAll();
         return this;
     }
@@ -78,22 +107,23 @@ public class ListsPage extends BaseTest {
     }
 
     public NavDrawer pressNavBarDrawerButton() {
-        click(navBarDrawerButton);
+        click(navBarDrawerButton, "Press nav drawer button on Lists page");
         return new NavDrawer();
     }
 
     public ListSettingsPage pressCreateListButton() {
-        click(createListButton);
+        click(createListButton, "Press create list button on Lists page");
         return new ListSettingsPage();
     }
 
     public SearchCatalogPage inputSearch(String searchQuery) {
-        sendKeys(searchTextField, searchQuery, "Input search " + searchQuery);
+        sendKeys(searchTextField, searchQuery, "Input search " + searchQuery + " and hide keyboard on Lists Page");
         getDriver().getKeyboard().sendKeys("\n");
         return new SearchCatalogPage();
     }
 
     public ListPage pressList(String listName) {
+        utils.log().info("Press on list with name " + listName + " on Lists page");
         if(getPlatform().equalsIgnoreCase("iOS")) {
             String locator = "//XCUIElementTypeStaticText[@name='" + listName + "']/..";
             getDriver().findElement(new By.ByXPath(locator)).click();

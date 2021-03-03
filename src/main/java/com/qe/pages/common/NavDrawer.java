@@ -20,7 +20,6 @@ public class NavDrawer extends BaseTest {
     @iOSXCUITFindBy(id = "drawer header logo image")
     private MobileElement drawerLogo;
 
-
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"SHOP\"`]")
     private MobileElement shopHeader;
 
@@ -88,36 +87,37 @@ public class NavDrawer extends BaseTest {
     private MobileElement logoutText;
 
     public DiscoverPage pressDiscoverPageButton() {
-        click(discoverButton);
+        click(discoverButton, "Press discover button in nav drawer");
         return new DiscoverPage();
     }
 
     public ListsPage pressListsButton() {
-        click(listButton);
+        click(listButton, "Press lists button in nav drawer");
         return new ListsPage();
     }
 
     public OrdersPage pressOrdersButton() {
-        click(ordersButton);
+        click(ordersButton, "Press orders button in nav drawer");
         return new OrdersPage();
     }
 
     public NotificationsPage pressNotificationsButton() {
-        click(notificationsButton);
+        click(notificationsButton, "Press notification button in nav drawer");
         return new NotificationsPage();
     }
 
     public LogOutPage pressLogOutButtonForiOS() {
-        click(logoutButton);
+        click(logoutButton, "Press logout button in nav drawer");
         return new LogOutPage();
     }
 
     public LoginPage pressLogOutButtonForAndroid() {
-        click(logoutButton);
+        click(logoutButton, "Press logout button in nav drawer");
         return new LoginPage();
     }
 
     public NavDrawer checkElementsPresence() {
+        utils.log().info("Check elements presence in nav drawer");
         SoftAssert softAssert = new SoftAssert();
         //Assert.assertTrue(drawerLogo.isDisplayed());
         //Assert.assertTrue(shopHeader.isDisplayed());

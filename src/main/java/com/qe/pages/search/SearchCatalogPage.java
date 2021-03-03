@@ -60,7 +60,7 @@ public class SearchCatalogPage extends BaseTest {
     @iOSXCUITFindBy(id = "catalog search results table")
     private MobileElement catalogSearchResultsTable;
 
-    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/resultView\"/android.widget.TextView[1]")
+    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/resultView\"]/android.widget.TextView[1]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]")
     private MobileElement firstProduct;
 
@@ -123,8 +123,6 @@ public class SearchCatalogPage extends BaseTest {
     @iOSXCUITFindBy(id = "catalog search result 0-0")
     private MobileElement firstProductInResultsTableGuestPageOnly;
 
-    //TODO: add Request exception price
-
     public SearchCatalogPage checkElementsPresenceForBannerItemAddedToList() {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(bannerItemAddedToList.isDisplayed(), "bannerItemAddedToList");
@@ -134,6 +132,7 @@ public class SearchCatalogPage extends BaseTest {
     }
 
     public SearchCatalogPage checkElementsPresence(String expectedSearchQuery) {
+        utils.log().info("Check search page elements");
         SoftAssert softAssert = new SoftAssert();
         waitForVisibility(navBarDrawerButton, "navBarDrawerButton");
         softAssert.assertTrue(navBarDrawerButton.isDisplayed(), "navBarDrawerButton");
@@ -149,6 +148,7 @@ public class SearchCatalogPage extends BaseTest {
     }
 
     public SearchCatalogPage checkElementsPresenceForFirstItemCase(String expectedTitle, String expectedDescription, String expectedCasePrice) {
+        utils.log().info("Check search page elements for first item");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(firstProduct.isDisplayed());
         softAssert.assertTrue(firstProductTitleText.isDisplayed());
@@ -169,6 +169,7 @@ public class SearchCatalogPage extends BaseTest {
                                                                                String expectedDescription,
                                                                                String expectedStrikethroughCasePrice,
                                                                                String expectedBulkDiscountCasePrice) {
+        utils.log().info("Check search page elements for first item with bulk discounts");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(firstProduct.isDisplayed());
 //        softAssert.assertTrue(firstProductTitleText.isDisplayed());
@@ -190,57 +191,54 @@ public class SearchCatalogPage extends BaseTest {
     }
 
     public SearchCatalogPage inputCaseQuantityForFirstProduct(String quantity) {
+        waitForVisibility(firstProductCaseQuantityField, "firstProductCaseQuantityField");
         click(firstProductCaseQuantityField);
-        sendKeys(firstProductCaseQuantityField, quantity, "Input quantity " + quantity + " in first product in search results ");
+        sendKeys(firstProductCaseQuantityField, quantity, "Input quantity " + quantity + " in first item on Search page");
         getDriver().getKeyboard().sendKeys("\n");
         return this;
     }
 
     public ProductCardPage pressOnFirstProduct() {
-        click(firstProduct);
+        click(firstProduct, "Press on first item on Search page");
         return new ProductCardPage();
     }
 
     public SearchCatalogPage pressPlusQuantityForFirstProductCase() {
-        click(firstProductCaseQuantityPlusButton);
+        click(firstProductCaseQuantityPlusButton, "Press + quantity on first item on Search page");
         return this;
     }
 
     public OrderCartPage pressCartButton() {
-        click(cartButton);
+        waitForVisibility(cartBadgeCount, "cartBadgeCount", 3);
+        click(cartButton, "Press cart button on Search page");
         return new OrderCartPage();
     }
 
     public SearchCatalogPage pressFirstProductDotButton() {
         waitForVisibility(firstProductDotMenuButton, "firstProductDotMenuButton");
-        click(firstProductDotMenuButton);
+        click(firstProductDotMenuButton, "Press on three dot button in first item on Search page");
         return this;
     }
 
     public AddToListPage pressAddToListButton() {
-        click(addToListButton);
+        click(addToListButton, "Press add to list button on Search page");
         return new AddToListPage();
     }
 
-    public ProductCardPage pressFirstItemInListGuestPageOnly() {
-        click(firstProductInResultsTableGuestPageOnly);
-        return new ProductCardPage();
-    }
-
     public NavDrawer pressNavBar() {
-        click(navBarDrawerButton);
+        click(navBarDrawerButton, "Press on nav drawer button on Search page");
         return new NavDrawer();
 
     }
     /** Discounts feature methods */
 
     public DiscountBulkOverlay pressFirstItemBulkDiscountsAvailableButton() {
-        click(firstProductBulkDiscountsAvailableButton);
+        click(firstProductBulkDiscountsAvailableButton, "Press on first product's bulk discount button on Search page");
         return new DiscountBulkOverlay();
     }
 
     public DiscountOverlay pressFirstItemDiscountInfoBubble() {
-        click(firstProductDiscountInfoBubble);
+        click(firstProductDiscountInfoBubble, "Press on first product's discount info buble on Search page");
         return new DiscountOverlay();
     }
 }

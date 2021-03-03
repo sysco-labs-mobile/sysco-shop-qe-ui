@@ -177,6 +177,7 @@ public class DiscoverPage extends BaseTest {
 
 
     public DiscoverPage checkElementsPresence() {
+        utils.log().info("Check elements presence");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(navBarDrawerButton.isDisplayed());
         softAssert.assertTrue(searchTextField.isDisplayed());
@@ -203,15 +204,16 @@ public class DiscoverPage extends BaseTest {
     }
 
     public DiscoverPage checkElementsPresenceForAccountSelector(String expectedAccount) {
+        utils.log().info("Check elements presence for Account selector");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(accountSelectorButton.isDisplayed());
-        softAssert.assertEquals(currentAccountNameLabel.getText(), expectedAccount);
+        softAssert.assertTrue(accountSelectorButton.isDisplayed(), "accountSelectorButton");
+        softAssert.assertEquals(currentAccountNameLabel.getText(), expectedAccount, "currentAccountNameLabel.getText() equals " + expectedAccount);
         softAssert.assertAll();
         return this;
     }
 
     public NavDrawer pressNavBarDrawerButton() {
-        click(navBarDrawerButton);
+        click(navBarDrawerButton, "Press nav drawer button");
         return new NavDrawer();
     }
 
@@ -228,17 +230,17 @@ public class DiscoverPage extends BaseTest {
 
     public TypeAheadPage inputSearchForTypeAhead(String searchQuery) throws InterruptedException {
         sendKeys(searchTextField, searchQuery, "Input search " + searchQuery);
-        Thread.sleep(10000);
+        Thread.sleep(12000);
         return new TypeAheadPage();
     }
 
     public AccountSelectorPage pressAccountSelectorButton() {
-        click(accountSelectorButton);
+        click(accountSelectorButton, "press accountSelectorButton");
         return new AccountSelectorPage();
     }
 
     public SearchCatalogPage pressMeatButton() {
-        click(meatsCategoryButton);
+        click(meatsCategoryButton, "press meatsCategoryButton");
         return new SearchCatalogPage();
     }
 
@@ -300,6 +302,7 @@ public class DiscoverPage extends BaseTest {
     /** Guest User specific action */
 
     public DiscoverPage checkGuestElementsPresence(String expectedAssignedZip) {
+        utils.log().info("Check Guest Elements Presence");
         SoftAssert softAssert = new SoftAssert();
         if(getPlatform().equalsIgnoreCase("iOS")) {
             softAssert.assertEquals(currentZipLabel.getText(), expectedAssignedZip);
@@ -318,7 +321,7 @@ public class DiscoverPage extends BaseTest {
     }
 
     public ZipSwitcherModal pressZipSwitcherButton() {
-        click(zipCodeSwitcherButton);
+        click(zipCodeSwitcherButton, "Press zipCodeSwitcherButton");
         return new ZipSwitcherModal();
     }
 

@@ -31,6 +31,7 @@ public class DiscountOverlay extends BaseTest {
     private MobileElement newCustomerSavingsValue;
 
     public DiscountOverlay checkElementsPresence(String expectedPrice, String expectedNewCustomerSavings) {
+        utils.log().info("Check elements presence on Discount overlay modal");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(closeButton.isDisplayed());
         softAssert.assertTrue(priceHeader.isDisplayed());
@@ -44,7 +45,7 @@ public class DiscountOverlay extends BaseTest {
     }
 
     public SearchCatalogPage pressCloseButtonToReturnToSearchPage() {
-        click(closeButton);
+        click(closeButton, "Press ok on Discount overlay modal");
         return new SearchCatalogPage();
     }
 }

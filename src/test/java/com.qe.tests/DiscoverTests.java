@@ -18,7 +18,7 @@ public class DiscoverTests extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod(Method m) {
-        utils.log().info("****** starting test:" + m.getName() + "******" + "\n");
+        utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
         navDrawer = new NavDrawer();

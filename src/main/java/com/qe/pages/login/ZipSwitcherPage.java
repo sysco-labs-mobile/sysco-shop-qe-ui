@@ -63,6 +63,7 @@ public class ZipSwitcherPage extends BaseTest {
     private MobileElement tryDifferentZipButton;
 
     public ZipSwitcherPage checkElementsPresence() {
+        utils.log().info("Check elements presence on Zip Switcher Page");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(header.isDisplayed());
         softAssert.assertTrue(description.isDisplayed());
@@ -76,6 +77,7 @@ public class ZipSwitcherPage extends BaseTest {
     }
 
     public ZipSwitcherPage checkElementsPresenceForNotAvailableZip(String expectedZip) {
+        utils.log().info("Check elements presence on Not Available Zip Switcher Page");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(zipCodeLabel.getText(), expectedZip);
         softAssert.assertTrue(unavailableHeader.isDisplayed());
@@ -93,17 +95,18 @@ public class ZipSwitcherPage extends BaseTest {
     }
 
     public ZipSwitcherPage pressStartShoppingButtonForNotAvailableZip() {
-        click(startShoppingButton);
+        click(startShoppingButton, "Press start shopping button on Zip Switcher Page expecting not available zip");
         return new ZipSwitcherPage();
     }
 
     public DiscoverPage pressStartShoppingButtonForValidZip() {
-        click(startShoppingButton);
+        click(startShoppingButton, "Press start shopping button on Zip Switcher Page expecting available zip");
+        waitForInvisibility(startShoppingButton, "startShoppingButton", 15);
         return new DiscoverPage();
     }
 
     public LoginPage pressSignInButton() {
-        click(signInButton);
+        click(signInButton, "Press sign in button on Zip Switcher Page");
         return new LoginPage();
     }
 
@@ -115,12 +118,12 @@ public class ZipSwitcherPage extends BaseTest {
     /** Unavailable zip actions */
 
     public ZipSwitcherPage pressTryDifferentZipButton() {
-        click(tryDifferentZipButton);
+        click(tryDifferentZipButton, "Press try different zip button on Zip Switcher page");
         return new ZipSwitcherPage();
     }
 
     public DiscoverPage pressBrowseSyscoProductsButton() {
-        click(browseSyscoProductsButton);
+        click(browseSyscoProductsButton, "Press browse sysco products button");
         return new DiscoverPage();
     }
 }

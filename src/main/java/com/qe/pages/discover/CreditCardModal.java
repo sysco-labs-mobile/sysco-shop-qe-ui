@@ -1,11 +1,13 @@
 package com.qe.pages.discover;
 
 import com.qe.BaseTest;
+import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.asserts.SoftAssert;
 
 public class CreditCardModal extends BaseTest {
+    TestUtils utils = new TestUtils();
 
     @iOSXCUITFindBy(id = "Welcome to Sysco Shop!")
     public MobileElement welcomeHeader;
@@ -29,6 +31,7 @@ public class CreditCardModal extends BaseTest {
     public MobileElement acceptButton;
 
     public CreditCardModal checkElementsPresence() {
+        utils.log().info("Check elements presence in Credit Card Welcome modal");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(welcomeHeader.isDisplayed());
         softAssert.assertTrue(welcomeDescription.isDisplayed());
@@ -42,6 +45,7 @@ public class CreditCardModal extends BaseTest {
     }
 
     public DiscoverPage pressAcceptButton() {
+        utils.log().info("Press Accept button in Credit Card Welcome Modal");
         click(acceptButton);
         return new DiscoverPage();
     }

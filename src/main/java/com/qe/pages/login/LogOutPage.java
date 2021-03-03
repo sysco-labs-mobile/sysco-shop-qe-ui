@@ -24,6 +24,7 @@ public class LogOutPage extends BaseTest {
     private MobileElement backToLoginButton;
 
     public LogOutPage checkElementsPresence() {
+        utils.log().info("Check elements presence for log out page");
         SoftAssert softAssert = new SoftAssert();
         //softAssert.assertTrue(logoutHeader.isDisplayed());
         softAssert.assertTrue(logoutDescription.isDisplayed());
@@ -33,7 +34,7 @@ public class LogOutPage extends BaseTest {
     }
 
     public LoginPage pressBackToLoginButton() {
-        click(backToLoginButton);
+        click(backToLoginButton, "Press back to login button on Log out page");
         return new LoginPage();
     }
 

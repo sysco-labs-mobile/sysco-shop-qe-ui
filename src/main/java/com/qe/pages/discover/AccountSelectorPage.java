@@ -67,14 +67,15 @@ public class AccountSelectorPage extends BaseTest {
     private MobileElement firstItemInListAddress;
 
     public AccountSelectorPage checkElementsPresence() {
+        utils.log().info("Check elements presence on Account Selector page");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(closeButton.isDisplayed());
-        softAssert.assertTrue(accountSearchInputTextField.isDisplayed());
-        softAssert.assertTrue(filterButton.isDisplayed());
-        softAssert.assertTrue(accountCountLabel.isDisplayed());
-        softAssert.assertTrue(firstItemInAccountList.isDisplayed());
+        softAssert.assertTrue(closeButton.isDisplayed(), "closeButton");
+        softAssert.assertTrue(accountSearchInputTextField.isDisplayed(), "accountSearchInputTextField");
+        softAssert.assertTrue(filterButton.isDisplayed(), "filterButton");
+        softAssert.assertTrue(accountCountLabel.isDisplayed(), "accountCountLabel");
+        softAssert.assertTrue(firstItemInAccountList.isDisplayed(), "firstItemInAccountList");
         if(getPlatform().equalsIgnoreCase("iOS")) {
-            softAssert.assertTrue(accountSearchInputText.isDisplayed());
+            softAssert.assertTrue(accountSearchInputText.isDisplayed(), "firstItemInAccountList");
         }
         if(getPlatform().equalsIgnoreCase("Android")) {
             softAssert.assertEquals(accountSearchInputTextField.getText(),"Search by Customer ID or name");
@@ -84,7 +85,7 @@ public class AccountSelectorPage extends BaseTest {
     }
 
     public DiscoverPage pressOnFirstAccount() {
-        click(firstItemInAccountList);
+        click(firstItemInAccountList, "Press on first account on Account Selector page");
         return new DiscoverPage();
     }
 }

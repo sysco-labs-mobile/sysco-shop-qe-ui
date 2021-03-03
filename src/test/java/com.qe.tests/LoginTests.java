@@ -20,7 +20,7 @@ public class LoginTests extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod(Method m) {
-        utils.log().info("******  Starting test:" + m.getName() + "    ******" + "\n");
+        utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
     }
@@ -30,7 +30,6 @@ public class LoginTests extends BaseTest {
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
         loginPage = loginPage.pressNextButton();
-
         loginPage.checkCustomerElementsPresence();
         loginPage.enterPassword(BaseTest.users.getJSONObject("customer").getString("password"));
         discoverPage = loginPage.pressLoginButton();
@@ -69,7 +68,6 @@ public class LoginTests extends BaseTest {
         loginPage = loginPage.pressNextButton();
         getDriver().hideKeyboard();
         forgotPasswordPage = loginPage.pressForgotPasswordButton();
-        //forgotPasswordPage.checkElementsPresence();
         LoginPage loginPage = forgotPasswordPage.pressBackArrowButton();
         loginPage.checkElementsPresence();
     }

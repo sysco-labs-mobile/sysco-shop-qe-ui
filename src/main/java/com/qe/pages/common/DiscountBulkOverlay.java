@@ -30,18 +30,19 @@ public class DiscountBulkOverlay extends BaseTest {
     private List<MobileElement> productCasesTierPrices;
 
     public DiscountBulkOverlay checkElementsPresenceForCase(String expectedTitle, List<String> expectedTiersCases, List<String> expectedTiersPrices) {
+        utils.log().info("Check elements presence on Discount Bulk Overlay modal");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(closeButton.isDisplayed());
-        softAssert.assertTrue(productTitle.isDisplayed());
-        softAssert.assertTrue(productCasesHeader.isDisplayed());
-        softAssert.assertEquals(productTitle.getText(), expectedTitle);
-        softAssert.assertEquals(productCasesTierValues.size(), expectedTiersCases.size());
+        softAssert.assertTrue(closeButton.isDisplayed(), "closeButton");
+        softAssert.assertTrue(productTitle.isDisplayed(), "productTitle");
+        softAssert.assertTrue(productCasesHeader.isDisplayed(), "productCasesHeader");
+        softAssert.assertEquals(productTitle.getText(), expectedTitle, "productTitle equals " + expectedTitle);
+        softAssert.assertEquals(productCasesTierValues.size(), expectedTiersCases.size(), "productCasesTierValues.size() equals expectedTiersCases.size()");
         if(productCasesTierValues.size() == expectedTiersCases.size()) {
             for (int i = 0; i < productCasesTierValues.size(); i++) {
                 softAssert.assertEquals(productCasesTierValues.get(i).getText(), expectedTiersCases.get(i));
             }
         }
-        softAssert.assertEquals(productCasesTierPrices.size(), expectedTiersPrices.size());
+        softAssert.assertEquals(productCasesTierPrices.size(), expectedTiersPrices.size(), "productCasesTierPrices.size() equals expectedTiersPrices.size()");
         if(productCasesTierPrices.size() == expectedTiersPrices.size()) {
             for (int i = 0; i < productCasesTierPrices.size(); i++) {
                 softAssert.assertEquals(productCasesTierPrices.get(i).getText(), expectedTiersPrices.get(i));
@@ -52,7 +53,7 @@ public class DiscountBulkOverlay extends BaseTest {
     }
 
     public SearchCatalogPage pressCloseButtonToReturnToSearchPage() {
-        click(closeButton);
+        click(closeButton, "Press close button on Discount Bulk Overlay");
         return new SearchCatalogPage();
     }
 }

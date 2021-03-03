@@ -11,9 +11,16 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.WithTimeout;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import java.time.Duration;
 import java.util.Arrays;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
@@ -106,6 +113,7 @@ public class LoginPage extends BaseTest {
 
 
     public LoginPage checkElementsPresence(){
+        utils.log().info("Check elements presence");
         waitForVisibility(emailTxtField, "emailTxtField");
         waitForVisibility(associateLoginButton, "associateLoginButton");
         SoftAssert softAssert = new SoftAssert();
@@ -124,8 +132,7 @@ public class LoginPage extends BaseTest {
     }
 
     public LoginPage checkCustomerElementsPresence(){
-//        waitForVisibility(loginTagline);
-
+        utils.log().info("Check Customer related elements presence");
         SoftAssert softAssert = new SoftAssert();
 //        softAssert.assertTrue(shopLogo.isDisplayed());
 //        softAssert.assertTrue(loginTagline.isDisplayed()); flaky
@@ -137,16 +144,16 @@ public class LoginPage extends BaseTest {
 //        softAssert.assertTrue(orLabel.isDisplayed());
 //        softAssert.assertTrue(syscoAssociateLabel.isDisplayed());
         softAssert.assertTrue(associateLoginButton.isDisplayed());
-        //softAssert.assertTrue(rightsReservedLabel.isDisplayed()); hidden by keyboard
-        //softAssert.assertTrue(privacyButton.isDisplayed());
-        //softAssert.assertTrue(helpButton.isDisplayed());
+//        softAssert.assertTrue(rightsReservedLabel.isDisplayed()); hidden by keyboard
+//        softAssert.assertTrue(privacyButton.isDisplayed());
+//        softAssert.assertTrue(helpButton.isDisplayed());
         softAssert.assertAll();
         return this;
     }
 
     public LoginPage enterEmail(String email) {
         waitForVisibility(emailTxtField, "emailTxtField");
-        sendKeys(emailTxtField, email);
+        sendKeys(emailTxtField, email, "Enter email " + email);
         return this;
     }
 
@@ -160,97 +167,72 @@ public class LoginPage extends BaseTest {
         return this;
     }
 
-    public LoginPage checkElementsPresenceWhenNoInternet() {
-        SoftAssert softAssert = new SoftAssert();
-        if(getPlatform().equalsIgnoreCase("iOS")) {
-            softAssert.assertTrue(iosErrorMessage.isDisplayed());
-        }
-        if(getPlatform().equalsIgnoreCase("Android")) {
-            softAssert.assertTrue(androidErrorMessage.isDisplayed());
-            softAssert.assertEquals(androidErrorMessage.getText(), "Network error. Please try again.");
-        }
-        softAssert.assertAll();
-        return this;
-    }
-
     public LoginPage pressNextButton(){
+        utils.log().info("Press next button");
         waitForVisibility(nextAndLoginButton, "nextAndLoginButton");
         click(nextAndLoginButton);
-        return new LoginPage();
-    }
-
-    public LoginPage ensurePasswordIsDisplayedOrRetryThreeTimes() {
-        for(int i = 0; i < 3; i++) {
-            if (!passwordTxtField.isDisplayed()) {
+        //retry
+        try {
+            try {
+                waitForVisibility(passwordTxtField, "passwordTxtField", 2);
+            } catch (TimeoutException timeoutException) {
                 click(nextAndLoginButton);
+                utils.log().info("retry login attempt ");
             }
+        } catch (NoSuchElementException noSuchElementException) {
+            utils.log().info("retry login attempt went noSuchElementException: ");
         }
         return new LoginPage();
     }
 
     public DiscoverPage pressLoginButton() {
-        click(nextAndLoginButton);
-        return new DiscoverPage();
-    }
-
-    public DiscoverPage pressLoginButtonWithRetries() {
-        click(nextAndLoginButton);
-        try {
-            if (userServiceError.getId() != null) {
-                click(nextAndLoginButton);
-            }
-        } catch(NoSuchElementException noSuchElementException) {
-            utils.log().info("Retried to login but caught " + noSuchElementException.getCause() + "\n" + Arrays.toString(noSuchElementException.getStackTrace()));
-        }
-        return new DiscoverPage();
-    }
-
-    public DiscoverPage ensureLoginSuccessOrRetryThreeTimes() {
-        for(int i = 0; i < 3; i++) {
-            try {
-                if (nextAndLoginButton.isDisplayed()) {
-                    click(nextAndLoginButton);
-                    utils.log().info("retry login attempt: " + i);
-                }
-            } catch (NoSuchElementException noSuchElementException) {
-                utils.log().info("retry login attempt went noSuchElementException: " + i);
-            }
-        }
+        click(nextAndLoginButton, "Press login button on Login page");
         return new DiscoverPage();
     }
 
     public CreditCardModal pressLoginButtonForCreditCardUser() {
-        click(nextAndLoginButton);
+        click(nextAndLoginButton, "Press login button for Credit card user on Login page");
+        //retry
+        try {
+            waitForInvisibility(nextAndLoginButton, "loginButton", 3);
+        } catch (NoSuchElementException noSuchElementException) {
+            utils.log().info("Login retry was not needed and lead to NoSuchElementException of login button");
+        } catch (StaleElementReferenceException staleElementReferenceException) {
+            utils.log().info("Login retry was not needed and lead to StaleElementReferenceException of login button");
+        } catch (TimeoutException timeoutException) {
+            utils.log().info("Login retry is needed because loginButton is still visible");
+            click(nextAndLoginButton, "Retry login button on Login page");
+        }
+
         return new CreditCardModal();
     }
 
     public ForgotPasswordPage pressForgotPasswordButton() {
-        click(forgotPasswordButton);
+        click(forgotPasswordButton, "Press forgot password button on Login page");
         return new ForgotPasswordPage();
     }
 
     public PrivacyPage pressPrivacyButton() {
-        click(privacyButton);
+        click(privacyButton, "Press privacy button on Login page");
         return new PrivacyPage();
     }
 
     public IntercomPage pressHelpButton() {
-        click(helpButton);
+        click(helpButton, "Press help button on Login Page");
         return new IntercomPage();
     }
 
     public AssociateLoginPage1 pressAssociateLoginButton() {
-        click(associateLoginButton);
+        click(associateLoginButton, "Press Associate login button on Login page");
         return new AssociateLoginPage1();
     }
 
     public void pressBecomeCustomerButton() {
-        click(becomeCustomerButton);
-        //todo: write util method to check webpage safari open and respective object
+        click(becomeCustomerButton, "PRess become customer button on Login Page");
     }
 
     public ZipSwitcherPage pressContinueAsGuestButton() {
-        click(continueAsGuestButton);
+        click(continueAsGuestButton, "Press continue as guest button on Login Page");
         return new ZipSwitcherPage();
     }
 }

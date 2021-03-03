@@ -7,6 +7,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 public class AddToListPage  extends BaseTest {
@@ -70,30 +71,44 @@ public class AddToListPage  extends BaseTest {
     private MobileElement list4OrCreateList;
 
     public ListPage pressCloseButtonToReturnToList() {
-        click(closeButton);
+        click(closeButton, "Press close button on Add to List page to return to List page");
         return new ListPage();
     }
     public AddToListPage pressOnFirstListCheckbox() {
-        click(checkbox1);
+        click(checkbox1, "Press on first list checkbox");
         return new AddToListPage();
     }
 
     public SearchCatalogPage pressSaveDoneButtonToReturnToSearch() {
-        click(doneButton);
+        click(doneButton, "Press save/done button on Add to List page to return to Search page");
         return new SearchCatalogPage();
     }
 
     public ListSettingsPage pressCreateNewListButton() {
-        click(createNewListButton);
+        click(createNewListButton, "Press create new list button on Add to List page");
         return new ListSettingsPage();
     }
 
-    public AddToListPage pressAddToList(String listName) {
+    public AddToListPage selectListWithName(String listName) {
+        utils.log().info("Select list with name " + listName + " on Add To List page");
         if(getPlatform().equalsIgnoreCase("iOS")) {
             String locator = "//XCUIElementTypeStaticText[@name='" + listName + "']/..";
-            WebElement listButton = getDriver().findElement(new By.ByXPath(locator));
-            waitForVisibility(listButton, "List button with name " + listName);
-            listButton.click();
+            try {
+                WebElement listButton = getDriver().findElement(new By.ByXPath(locator));
+                waitForVisibility(listButton, "List button with name " + listName);
+                listButton.click();
+            } catch (NoSuchElementException noSuchElementException) {
+                try {
+                    utils.log().info("List " + locator + " Not found, scrolling down and repeating findElement");
+                    scrollDownByCoordinates();
+
+                    WebElement listButton = getDriver().findElement(new By.ByXPath(locator));
+                    waitForVisibility(listButton, "List button with name " + listName);
+                    listButton.click();
+                } catch (NoSuchElementException noSuchElementException2) {
+                    org.testng.Assert.fail("List " + locator + " Not found with scrolling");
+                }
+            }
         }
         return new AddToListPage();
     }

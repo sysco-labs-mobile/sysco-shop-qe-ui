@@ -109,6 +109,7 @@ public class ListSettingsPage extends BaseTest {
     private MobileElement firstParGroupButton;
 
     public ListSettingsPage checkElementsPresence() {
+        utils.log().info("Check elements presence on List Settings Page");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(closeButton.isDisplayed());
         softAssert.assertTrue(createNewListHeader.isDisplayed());
@@ -130,21 +131,22 @@ public class ListSettingsPage extends BaseTest {
     }
 
     public ListPage pressCloseButton() {
-        click(closeButton);
+        click(closeButton, "Press close button on List Settings page");
         return new ListPage();
     }
 
     public ListsPage pressCloseButtonFromNewListPage() {
-        click(closeButton);
+        click(closeButton,"Press close button on New List page");
         return new ListsPage();
     }
 
     public ListPage pressSaveListButton() {
-        click(saveListButton);
+        click(saveListButton, "Press save list button on List Settings page");
         return new ListPage();
     }
 
     public ListSettingsPage clearListName() {
+        utils.log().info("Clear list name from text field on List Settings page");
         listNameInputTextField.clear();
         return this;
     }
@@ -155,19 +157,19 @@ public class ListSettingsPage extends BaseTest {
     }
 
     public void pressDefaultListCheckbox() {
-        click(defaultListCheckbox);
+        click(defaultListCheckbox, "Toggle Default list checkbox on List Settings Page");
     }
 
     public void pressPublicListOption() {
-        click(publicSettingButton);
+        click(publicSettingButton, "Toggle public settings option on List Settings page");
     }
 
     public void pressPrivateListOption() {
-        click(privateSettingButton);
+        click(privateSettingButton, "Toggle private settings option on List Settings page");
     }
 
     public ListDeleteAlert pressDeleteListButton() {
-        click(deleteListButton);
+        click(deleteListButton, "Press delete list button on List Settings page");
         return new ListDeleteAlert();
     }
 }

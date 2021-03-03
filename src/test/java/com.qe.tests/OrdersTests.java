@@ -30,7 +30,7 @@ public class OrdersTests extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod(Method m) {
-        utils.log().info("****** starting test:" + m.getName() + "******" + "\n");
+        utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
         navDrawer = new NavDrawer();
@@ -64,7 +64,7 @@ public class OrdersTests extends BaseTest {
             navDrawer = discoverPage.pressNavBarDrawerButton();
             ordersPage = navDrawer.pressOrdersButton();
 
-            ordersPage.properAndroidCheckPageIsLoadedOrReloadWith3Attempts();
+            ordersPage.checkPageIsLoadedOrRetry();
 
             ordersPage.checkElementsPresence()
                     .pressOpenOrdersButton()

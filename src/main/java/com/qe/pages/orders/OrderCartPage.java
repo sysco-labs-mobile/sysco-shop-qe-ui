@@ -127,31 +127,33 @@ public class OrderCartPage extends BaseTest {
     private MobileElement searchQueryLabel;
 
     public OrderCartPage checkElementsPresence(String expectedTotalPrice, String expectedCsAndEaValues) {
+        utils.log().info("Check elements presence on Order Cart Page");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(backButton.isDisplayed());
-        softAssert.assertTrue(orderDotMenuButton.isDisplayed());
-        softAssert.assertTrue(navBarPriceValue.isDisplayed());
-        softAssert.assertTrue(navBarCsAndEaValues.isDisplayed());
-        softAssert.assertTrue(searchFilterTextInputField.isDisplayed());
-        softAssert.assertTrue(filterButton.isDisplayed());
-        softAssert.assertTrue(proceedToCheckoutButton.isDisplayed());
-        softAssert.assertTrue(filterResultCount.isDisplayed());
+        softAssert.assertTrue(backButton.isDisplayed(), "backButton");
+        softAssert.assertTrue(orderDotMenuButton.isDisplayed(), "orderDotMenuButton");
+        softAssert.assertTrue(navBarPriceValue.isDisplayed(), "navBarPriceValue");
+        softAssert.assertTrue(navBarCsAndEaValues.isDisplayed(), "navBarCsAndEaValues");
+        softAssert.assertTrue(searchFilterTextInputField.isDisplayed(), "searchFilterTextInputField");
+        softAssert.assertTrue(filterButton.isDisplayed(), "filterButton");
+        softAssert.assertTrue(proceedToCheckoutButton.isDisplayed(), "proceedToCheckoutButton");
+        softAssert.assertTrue(filterResultCount.isDisplayed(), "filterResultCount");
         softAssert.assertAll();
         return this;
     }
 
     public OrderCartPage checkElementsPresenceOfFirstOrderLineItem(
             String expectedTitle, String expectedDescription, String expectedPricePerCS,  String expectedPricePerEA, String expectedPriceTotal) {
+        utils.log().info("Check elements presence for first order item on Order Cart Page");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(orderLineItem1.isDisplayed());
-        softAssert.assertTrue(orderLineItem1ProductTitle.isDisplayed());
+        softAssert.assertTrue(orderLineItem1.isDisplayed(), "orderLineItem1");
+        softAssert.assertTrue(orderLineItem1ProductTitle.isDisplayed(), "orderLineItem1ProductTitle");
         //Assert.assertTrue(orderLineItem1ProductDescription.isDisplayed());
         //Assert.assertTrue(orderLineItem1PricePerItem.isDisplayed());
-        softAssert.assertTrue(orderLineItem1PriceTotal.isDisplayed());
-        softAssert.assertTrue(orderLineItem1DotMenuButton.isDisplayed());
-        softAssert.assertTrue(orderLineItem1DecreaseQuantityButton.isDisplayed());
-        softAssert.assertTrue(orderLineItem1QuantityInputField.isDisplayed());
-        softAssert.assertTrue(orderLineItem1IncreaseQuantityButton.isDisplayed());
+        softAssert.assertTrue(orderLineItem1PriceTotal.isDisplayed(), "orderLineItem1PriceTotal");
+        softAssert.assertTrue(orderLineItem1DotMenuButton.isDisplayed(), "orderLineItem1DotMenuButton");
+        softAssert.assertTrue(orderLineItem1DecreaseQuantityButton.isDisplayed(), "orderLineItem1DecreaseQuantityButton");
+        softAssert.assertTrue(orderLineItem1QuantityInputField.isDisplayed(), "orderLineItem1QuantityInputField");
+        softAssert.assertTrue(orderLineItem1IncreaseQuantityButton.isDisplayed(), "orderLineItem1IncreaseQuantityButton");
         softAssert.assertEquals(orderLineItem1ProductTitle.getText(), expectedTitle);
         softAssert.assertEquals(orderLineItem1ProductDescription.getText(), expectedDescription);
         if(expectedPricePerCS != null) {
@@ -166,20 +168,21 @@ public class OrderCartPage extends BaseTest {
     }
 
     public OrderCartPage checkElementsPresenceForCreditCardUser() {
+        utils.log().info("Check elements presence for Credit Card user on Order Cart Page");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(prospectShopLabelContainer.isDisplayed());
-        softAssert.assertTrue(prospectShopText.isDisplayed());
-        softAssert.assertTrue(prospectShopCloseButton.isDisplayed());
+        softAssert.assertTrue(prospectShopLabelContainer.isDisplayed(), "prospectShopLabelContainer");
+        softAssert.assertTrue(prospectShopText.isDisplayed(), "prospectShopText");
+        softAssert.assertTrue(prospectShopCloseButton.isDisplayed(), "prospectShopCloseButton");
         softAssert.assertAll();
         return this;
     }
     public OrderCartReviewOrderPage pressProceedToCheckoutButton() {
-        click(proceedToCheckoutButton);
+        click(proceedToCheckoutButton, "Press proceed to checkout button on Order Cart page");
         return new OrderCartReviewOrderPage();
     }
 
     public OrderCartPage pressProspectShopCloseButton() {
-        click(prospectShopCloseButton);
+        click(prospectShopCloseButton, "Press on close button in Credit Card user lable on Order Cart page");
         return new OrderCartPage();
     }
 
@@ -189,7 +192,7 @@ public class OrderCartPage extends BaseTest {
     }
 
     public OrderCartFilterPage pressFilterButton() {
-        click(filterButton);
+        click(filterButton, "Press filter button on Order Cart page");
         return new OrderCartFilterPage();
     }
 }

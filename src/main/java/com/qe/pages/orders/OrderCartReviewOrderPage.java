@@ -124,7 +124,7 @@ public class OrderCartReviewOrderPage extends BaseTest {
     private MobileElement submitOrderButton;
 
     @iOSXCUITFindBy(id = "proceed to checkout button")
-    private MobileElement proceedToPayment;
+    private MobileElement proceedToCheckout;
 
 
     /** Credit card elements */
@@ -134,16 +134,25 @@ public class OrderCartReviewOrderPage extends BaseTest {
     private MobileElement creditCardSurchargeHeader;
 
     @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/infoBubble")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"infobubble\"`][1]")
+    //@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"infobubble\"`][1]") flaks out
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"credit card surcharge info bubble\"][1]")
     private MobileElement creditCardSurchargeInfoBubble;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.view.ViewGroup/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.TextView[2]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Credit Card Surcharge\"]/following-sibling::XCUIElementTypeStaticText")
     private MobileElement creditCardSurchargeValue;
 
-    @iOSXCUITFindBy(id = "Credit cards will be charged the night before delivery. If your account has insufficient funds, your card will be declined.")
+    //@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"infobubble\"`][2]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"estimated total info bubble\"][1]")
+    private MobileElement estimatedTotalInfoBubble;
+
+    //@iOSXCUITFindBy(id = "Credit cards will be charged the night before delivery. If your account has insufficient funds, your card will be declined.") flaks out
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Credit cards will be charged the night before delivery. If your account has insufficient funds, your card will be declined.\"]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Items\"]/preceding-sibling::XCUIElementTypeStaticText[1]")
     private MobileElement creditCardText;
 
+    @iOSXCUITFindBy(id = "proceed to payment button")
+    private MobileElement proceedToPayment;
 
     /** Error modal elements only*/
 
@@ -169,28 +178,28 @@ public class OrderCartReviewOrderPage extends BaseTest {
                                                           String expectedTotalLineItems, String expectedEstimatedTotal) {
         waitForVisibility(shippingAddressValue, "shippingAddressValue");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(backButton.isDisplayed());
-        softAssert.assertTrue(reviewOrderTitle.isDisplayed());
-        softAssert.assertTrue(orderDetailsHeader.isDisplayed());
-        softAssert.assertTrue(shippingAddressHeader.isDisplayed());
-        softAssert.assertTrue(shippingAddressValue.isDisplayed());
-        softAssert.assertTrue(orderNameTextInputField.isDisplayed());
-        softAssert.assertTrue(poNumberTextInputField.isDisplayed());
-        softAssert.assertTrue(shippingTypeOptionPicker.isDisplayed());
-        softAssert.assertTrue(deliveryDatePicker.isDisplayed());
-        softAssert.assertTrue(deliveryInstructionTextInputField.isDisplayed());
-        softAssert.assertTrue(invoiceCheckbox.isDisplayed());
-        softAssert.assertTrue(totalQuantityHeader.isDisplayed());
-        softAssert.assertTrue(totalQuantityValue.isDisplayed());
-        softAssert.assertTrue(totalLineItemsValue.isDisplayed());
-        softAssert.assertTrue(estimatedTotalHeader.isDisplayed());
-        softAssert.assertTrue(estimatedTotalValue.isDisplayed());
-        softAssert.assertTrue(pricingInfoMessage.isDisplayed());
-        softAssert.assertTrue(itemsHeader.isDisplayed());
+        softAssert.assertTrue(backButton.isDisplayed(), "backButton");
+        softAssert.assertTrue(reviewOrderTitle.isDisplayed(), "reviewOrderTitle");
+        softAssert.assertTrue(orderDetailsHeader.isDisplayed(), "orderDetailsHeader");
+        softAssert.assertTrue(shippingAddressHeader.isDisplayed(), "shippingAddressHeader");
+        softAssert.assertTrue(shippingAddressValue.isDisplayed(), "shippingAddressValue");
+        softAssert.assertTrue(orderNameTextInputField.isDisplayed(), "orderNameTextInputField");
+        softAssert.assertTrue(poNumberTextInputField.isDisplayed(), "poNumberTextInputField");
+        softAssert.assertTrue(shippingTypeOptionPicker.isDisplayed(), "shippingTypeOptionPicker");
+        softAssert.assertTrue(deliveryDatePicker.isDisplayed(), "deliveryDatePicker");
+        softAssert.assertTrue(deliveryInstructionTextInputField.isDisplayed(), "deliveryInstructionTextInputField");
+        softAssert.assertTrue(invoiceCheckbox.isDisplayed(), "invoiceCheckbox");
+        softAssert.assertTrue(totalQuantityHeader.isDisplayed(), "totalQuantityHeader");
+        softAssert.assertTrue(totalQuantityValue.isDisplayed(), "totalQuantityValue");
+        softAssert.assertTrue(totalLineItemsValue.isDisplayed(), "totalLineItemsValue");
+        softAssert.assertTrue(estimatedTotalHeader.isDisplayed(), "estimatedTotalHeader");
+        softAssert.assertTrue(estimatedTotalValue.isDisplayed(), "estimatedTotalValue");
+        softAssert.assertTrue(pricingInfoMessage.isDisplayed(), "pricingInfoMessage");
+        softAssert.assertTrue(itemsHeader.isDisplayed(), "itemsHeader");
         softAssert.assertAll();
         scrollDownByCoordinates();
-        softAssert.assertTrue(orderLineItem1.isDisplayed());
-        softAssert.assertTrue(submitOrderButton.isDisplayed());
+        softAssert.assertTrue(orderLineItem1.isDisplayed(),"orderLineItem1");
+        softAssert.assertTrue(submitOrderButton.isDisplayed(), "submitOrderButton");
         softAssert.assertEquals(shippingAddressValue.getText(), expectedShippingAddress);
         softAssert.assertEquals(totalQuantityValue.getText(), expectedTotalQuantity);
         softAssert.assertEquals(totalLineItemsValue.getText(), expectedTotalLineItems);
@@ -203,12 +212,12 @@ public class OrderCartReviewOrderPage extends BaseTest {
             String expectedTitle, String expectedDescription, String expectedPricePerCS,  String expectedPriceTotal, String expectedCaseCount) {
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(orderLineItem1.isDisplayed());
-        softAssert.assertTrue(orderLineItem1ProductTitle.isDisplayed());
+        softAssert.assertTrue(orderLineItem1.isDisplayed(), "orderLineItem1");
+        softAssert.assertTrue(orderLineItem1ProductTitle.isDisplayed(), "orderLineItem1ProductTitle");
         //softAssert.assertTrue(orderLineItem1ProductDescription.isDisplayed());
-        softAssert.assertTrue(orderLineItem1PricePerItem.isDisplayed());
-        softAssert.assertTrue(orderLineItem1PriceTotal.isDisplayed());
-        softAssert.assertTrue(orderLineItem1CaseCount.isDisplayed());
+        softAssert.assertTrue(orderLineItem1PricePerItem.isDisplayed(), "orderLineItem1PricePerItem");
+        softAssert.assertTrue(orderLineItem1PriceTotal.isDisplayed(), "orderLineItem1PriceTotal");
+        softAssert.assertTrue(orderLineItem1CaseCount.isDisplayed(), "orderLineItem1CaseCount");
         softAssert.assertEquals(orderLineItem1ProductTitle.getText(), expectedTitle);
         softAssert.assertEquals(orderLineItem1ProductDescription.getText(), expectedDescription);
         softAssert.assertEquals(orderLineItem1PricePerItem.getText(), expectedPricePerCS);
@@ -218,19 +227,21 @@ public class OrderCartReviewOrderPage extends BaseTest {
         return this;
     }
     public OrderCartReviewOrderPage checkElementsPresenceForCreditCardUser() {
-
+        utils.log().info("Check elements presence for Credit Card user on Review Order page");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(creditCardSurchargeHeader.isDisplayed());
-        //Assert.assertTrue(creditCardSurchargeInfoBubble.isDisplayed());ios flaks out
-        softAssert.assertTrue(creditCardSurchargeValue.isDisplayed());
-        softAssert.assertTrue(creditCardText.isDisplayed());
-        softAssert.assertTrue(proceedToPayment.isDisplayed());
+        scrollDownByCoordinates();
+        softAssert.assertTrue(creditCardSurchargeHeader.isDisplayed(), "creditCardSurchargeHeader");
+        softAssert.assertTrue(creditCardSurchargeInfoBubble.isDisplayed(), "creditCardSurchargeInfoBubble"); //ios flaks out
+        softAssert.assertTrue(creditCardSurchargeValue.isDisplayed(), "creditCardSurchargeValue");
+//        softAssert.assertTrue(estimatedTotalInfoBubble.isDisplayed()); //ios flaks out
+//        softAssert.assertTrue(creditCardText.isDisplayed()); //ios flaks out
+        softAssert.assertTrue(proceedToPayment.isDisplayed(), "proceedToPayment");
         softAssert.assertAll();
         return this;
     }
 
     public OrderCartReviewOrderPage checkElementsPresenceForErrorMAApproval() {
-
+        utils.log().info("Check elements presence for Error banner - MA approval needed on Order Cart page");
         SoftAssert softAssert = new SoftAssert();
         //Assert.assertTrue(errorIcon.isDisplayed());
         softAssert.assertTrue(errorMAApprovalLabel.isDisplayed());
@@ -243,8 +254,12 @@ public class OrderCartReviewOrderPage extends BaseTest {
     }
 
     public CreditCardSurchargeModal pressCreditCardSurchargeBubble() {
-        click(creditCardSurchargeInfoBubble);
+        click(creditCardSurchargeInfoBubble, "Press on Credit card surcharge bubble for credit card user on Review Order Page");
         return new CreditCardSurchargeModal();
     }
 
+    public CreditCardPricingModal pressEstimatedTotalInfoBubble() {
+        click(estimatedTotalInfoBubble, "Press on Estimated total info bubble for credit card user on Review Order Page");
+        return new CreditCardPricingModal();
+    }
 }

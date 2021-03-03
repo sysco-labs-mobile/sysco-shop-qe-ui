@@ -78,7 +78,7 @@ public class ForgotPasswordPage extends BaseTest {
 
     public ForgotPasswordPage2 pressRequestPasswordResetButton() {
         if(getPlatform().equalsIgnoreCase("iOS")) {
-            click(requestPasswordResetButton);
+            click(requestPasswordResetButton, "Press request password reset button");
         }
         if(getPlatform().equalsIgnoreCase("Android")) {
             WebElement webRequestPasswordResetButton = getDriver().findElement(By.xpath("//*[text()='Request Password Reset']"));

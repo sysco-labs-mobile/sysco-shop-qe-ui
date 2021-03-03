@@ -10,15 +10,19 @@
         <parameter name="wdaLocalPort" value="10001" />
         <parameter name="webkitDebugProxyPort" value="11001" />
         <classes>
-            <class name="com.qe.tests.iOSOnlyLoginTests"/>
             <class name="com.qe.tests.LoginTests"/>
+            <class name="com.qe.tests.iOSOnlyLoginTests"/>
             <class name="com.qe.tests.DiscoverTests"/>
+            <class name="com.qe.tests.MultibuyerTests"/>
+            <class name="com.qe.tests.SearchCatalogTests"/>
+            <class name="com.qe.tests.ProductCardTests"/>
             <class name="com.qe.tests.GuestTests"/>
             <class name="com.qe.tests.ListsTests"/>
-            <class name="com.qe.tests.MultibuyerTests"/>
-            <class name="com.qe.tests.OrderCartTests"/>
-            <class name="com.qe.tests.SearchCatalogTests"/>
+            <class name="com.qe.tests.LogOutTests"/>
             <class name="com.qe.tests.OrdersTests"/>
+            <class name="com.qe.tests.OrderCartTests"/>
+            <class name="com.qe.tests.CreditCardTests"/>
+            <class name="com.qe.tests.DiscountsTests"/>
         </classes>
     </test>
 </suite> <!-- Suite -->

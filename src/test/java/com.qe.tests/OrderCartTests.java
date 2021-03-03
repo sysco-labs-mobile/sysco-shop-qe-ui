@@ -28,7 +28,7 @@ public class OrderCartTests extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod(Method m) {
-        utils.log().info("****** starting test:" + m.getName() + "******" + "\n");
+        utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
         navDrawer = new NavDrawer();
@@ -48,28 +48,20 @@ public class OrderCartTests extends BaseTest {
         if(getPlatform().equalsIgnoreCase("iOS")) {
             //precondition
             searchCatalogPage = discoverPage.inputSearch("beef ground bulk");
-            //searchCatalogPage.checkElementsPresenceForSupc0566709();
             searchCatalogPage.inputCaseQuantityForFirstProduct("1");
-
-            //test
-            orderCartPage = searchCatalogPage.pressCartButton();
-            orderCartReviewOrderPage = orderCartPage.pressProceedToCheckoutButton();
-            orderCartOrderPlacedPage = orderCartReviewOrderPage.pressSubmitOrderButton();
-            orderCartOrderPlacedPage.checkElementPresence();
         }
         if(getPlatform().equalsIgnoreCase("Android")) {
             //precondition
             typeAheadPage = discoverPage.inputSearchForTypeAhead("beef ground bulk");
             searchCatalogPage = typeAheadPage.pressSearchResultFirst();
-            //searchCatalogPage.checkElementsPresenceForSupc0566709();
             searchCatalogPage.pressPlusQuantityForFirstProductCase();
-
-            //test
-            orderCartPage = searchCatalogPage.pressCartButton();
-            orderCartReviewOrderPage = orderCartPage.pressProceedToCheckoutButton();
-            orderCartOrderPlacedPage = orderCartReviewOrderPage.pressSubmitOrderButton();
-            orderCartOrderPlacedPage.checkElementPresence();
         }
+
+        //test
+        orderCartPage = searchCatalogPage.pressCartButton();
+        orderCartReviewOrderPage = orderCartPage.pressProceedToCheckoutButton();
+        orderCartOrderPlacedPage = orderCartReviewOrderPage.pressSubmitOrderButton();
+        orderCartOrderPlacedPage.checkElementPresence();
     }
 
     @Test
@@ -120,6 +112,7 @@ public class OrderCartTests extends BaseTest {
             orderCartReviewOrderPage = orderCartPage.pressProceedToCheckoutButton();
             orderCartOrderPlacedPage = orderCartReviewOrderPage.pressSubmitOrderButton();
             orderCartOrderPlacedPage.checkElementPresence();
+            //TODO Android: increase coverage as on iOS, Used here pages are missing Android locators and maybe some specific android test code
         }
     }
 }

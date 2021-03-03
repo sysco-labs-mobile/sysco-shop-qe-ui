@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO Android: Used here pages are missing Android locators and maybe some specific android test code
 public class DiscountsTests extends BaseTest {
     LoginPage loginPage;
     DiscoverPage discoverPage;
@@ -26,10 +27,9 @@ public class DiscountsTests extends BaseTest {
     DiscountBulkOverlay discountBulkOverlay;
     TestUtils utils = new TestUtils();
 
-
     @BeforeMethod
     public void beforeMethod(Method m) {
-        utils.log().info("****** starting test:" + m.getName() + "******" + "\n");
+        utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
         navDrawer = new NavDrawer();
@@ -39,12 +39,10 @@ public class DiscountsTests extends BaseTest {
         discountBulkOverlay = new DiscountBulkOverlay();
         loginPage.enterEmail(BaseTest.users.getJSONObject("customerDiscounts1").getString("email"));
         loginPage = loginPage.pressNextButton();
-        loginPage.ensurePasswordIsDisplayedOrRetryThreeTimes();
         loginPage.enterPassword(BaseTest.users.getJSONObject("customerDiscounts1").getString("password"));
-        discoverPage = loginPage.pressLoginButtonWithRetries();
+        discoverPage = loginPage.pressLoginButton();
         discoverPage.pressNavBarDrawerButton().pressListsButton();
     }
-
 
     @Test
     public void itemWithBulkDiscountsOnSearchPage() throws InterruptedException {

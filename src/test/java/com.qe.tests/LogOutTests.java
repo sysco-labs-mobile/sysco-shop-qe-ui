@@ -20,7 +20,7 @@ public class LogOutTests extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod(Method m) {
-        utils.log().info("******  Starting test:" + m.getName() + "    ******" + "\n");
+        utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         navDrawer = new NavDrawer();
         logOutPage = new LogOutPage();

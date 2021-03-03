@@ -26,7 +26,7 @@ public class GuestTests extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod(Method m) {
-        utils.log().info("******  Starting test:" + m.getName() + "    ******" + "\n");
+        utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         loginPage = new LoginPage();
         zipSwitcherPage = new ZipSwitcherPage();
@@ -34,11 +34,6 @@ public class GuestTests extends BaseTest {
         discoverPage = new DiscoverPage();
         productCardPage = new ProductCardPage();
         searchCatalogPage = new SearchCatalogPage();
-    }
-
-    @AfterMethod
-    public void afterEachTest(Method m) {
-        utils.log().info("******   Ended test:" + m.getName() + "     ******" + "\n");
     }
 
     @Test
@@ -67,8 +62,7 @@ public class GuestTests extends BaseTest {
         zipSwitcherPage.pressStartShoppingButtonForValidZip();
         discoverPage.checkGuestElementsPresence(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));
         searchCatalogPage = discoverPage.pressMeatButton();
-        //searchCatalogPage = searchCatalogPage.checkElementsPresenceForSupc0566709();
-        productCardPage = searchCatalogPage.pressFirstItemInListGuestPageOnly();
+        productCardPage = searchCatalogPage.pressOnFirstProduct();
 
         //test
         if(getPlatform().equalsIgnoreCase("iOS")) {
@@ -102,7 +96,7 @@ public class GuestTests extends BaseTest {
         zipSwitcherModal = discoverPage.pressZipSwitcherButton();
         zipSwitcherModal.inputZip(BaseTest.users.getJSONObject("guestCorrectZipcode2").getString("zipInput"));
         discoverPage = zipSwitcherModal.pressUpdateButtonForAvailableZip();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         discoverPage.checkGuestElementsPresence(BaseTest.users.getJSONObject("guestCorrectZipcode2").getString("zipInput"));
     }
 

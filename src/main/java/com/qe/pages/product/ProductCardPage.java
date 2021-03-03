@@ -138,32 +138,34 @@ public class ProductCardPage extends BaseTest {
 
 
     public ProductCardPage checkElementsPresence(String expectedTitle, String expectedDescription) {
+        utils.log().info("Check elements presence on Product card page");
         SoftAssert softAssert =new SoftAssert();
-        softAssert.assertTrue(backButton.isDisplayed());
-        softAssert.assertTrue(addToListButton.isDisplayed());
-        softAssert.assertTrue(cartButton.isDisplayed());
-        softAssert.assertTrue(productImageScrollView.isDisplayed());
-        softAssert.assertTrue(productInfoTitle.isDisplayed());
-        softAssert.assertTrue(productInfoDescriptionText.isDisplayed());
-        softAssert.assertTrue(itemCasePrice.isDisplayed());
-        softAssert.assertTrue(decreaseCaseQuantityButton.isDisplayed());
-        softAssert.assertTrue(quantityCaseInputField.isDisplayed());
-        softAssert.assertTrue(increaseCaseQuantityButton.isDisplayed());
-        softAssert.assertTrue(productDetailsButton.isDisplayed());
-        softAssert.assertTrue(nutritionButton.isDisplayed());
-        softAssert.assertEquals(productInfoTitle.getText(), expectedTitle);
-        softAssert.assertEquals(productInfoDescriptionText.getText(), expectedDescription);
+        softAssert.assertTrue(backButton.isDisplayed(), "backButton");
+        softAssert.assertTrue(addToListButton.isDisplayed(), "addToListButton");
+        softAssert.assertTrue(cartButton.isDisplayed(), "cartButton");
+        softAssert.assertTrue(productImageScrollView.isDisplayed(), "productImageScrollView");
+        softAssert.assertTrue(productInfoTitle.isDisplayed(), "productInfoTitle");
+        softAssert.assertTrue(productInfoDescriptionText.isDisplayed(), "productInfoDescriptionText");
+        softAssert.assertTrue(itemCasePrice.isDisplayed(), "itemCasePrice");
+        softAssert.assertTrue(decreaseCaseQuantityButton.isDisplayed(), "decreaseCaseQuantityButton");
+        softAssert.assertTrue(quantityCaseInputField.isDisplayed(), "quantityCaseInputField");
+        softAssert.assertTrue(increaseCaseQuantityButton.isDisplayed(), "increaseCaseQuantityButton");
+        softAssert.assertTrue(productDetailsButton.isDisplayed(), "productDetailsButton");
+        softAssert.assertTrue(nutritionButton.isDisplayed(), "nutritionButton");
+        softAssert.assertEquals(productInfoTitle.getText(), expectedTitle, productInfoTitle.getText() + "productInfoTitle.getText() to equal " + expectedTitle);
+        softAssert.assertEquals(productInfoDescriptionText.getText(), expectedDescription, productInfoDescriptionText.getText() + " productInfoDescriptionText.getText() to equal expectedDescription");
         softAssert.assertAll();
         return this;
     }
 
     public ProductCardPage checkElementsPresenceForCase(String expectedCasePrice) {
+        utils.log().info("Check elements presence on Product card page for case price");
         SoftAssert softAssert =new SoftAssert();
-        softAssert.assertTrue(itemCasePrice.isDisplayed());
-        softAssert.assertTrue(decreaseCaseQuantityButton.isDisplayed());
-        softAssert.assertTrue(quantityCaseInputField.isDisplayed());
-        softAssert.assertTrue(increaseCaseQuantityButton.isDisplayed());
-        softAssert.assertEquals(itemCasePrice.getText(), expectedCasePrice);
+        softAssert.assertTrue(itemCasePrice.isDisplayed(), "itemCasePrice");
+        softAssert.assertTrue(decreaseCaseQuantityButton.isDisplayed(), "decreaseCaseQuantityButton");
+        softAssert.assertTrue(quantityCaseInputField.isDisplayed(), "quantityCaseInputField");
+        softAssert.assertTrue(increaseCaseQuantityButton.isDisplayed(), "increaseCaseQuantityButton");
+        softAssert.assertEquals(itemCasePrice.getText(), expectedCasePrice, itemCasePrice.getText() + "itemCasePrice.getText() to equal " + expectedCasePrice);
         softAssert.assertAll();
         return this;
     }
@@ -171,39 +173,42 @@ public class ProductCardPage extends BaseTest {
     public ProductCardPage checkElementsPresenceOnProductDetailsTab(String expectedStock, String expectedGtin,
                                                                     String expectedManufacturerUpc, String expectedStorageLocation,
                                                                     String expectedSplitDetails, String expectedAverageWeight) {
+        utils.log().info("Check elements presence on Product card page on Product Details tab");
         SoftAssert softAssert =new SoftAssert();
-        softAssert.assertTrue(readMoreButton.isDisplayed());
+        softAssert.assertTrue(readMoreButton.isDisplayed(), "readMoreButton");
         softAssert.assertAll();
         scrollDownByCoordinates();
-        softAssert.assertTrue(productDetailsTable.isDisplayed());
-        softAssert.assertTrue(stockStatus.isDisplayed());
-        softAssert.assertTrue(stockStatusValue.isDisplayed());
-        softAssert.assertTrue(gtin.isDisplayed());
-        softAssert.assertTrue(gtinValue.isDisplayed());
-        softAssert.assertTrue(manufacturerUpc.isDisplayed());
-        softAssert.assertTrue(manufacturerUpcValue.isDisplayed());
-        softAssert.assertTrue(storageLocation.isDisplayed());
-        softAssert.assertTrue(storageLocationValue.isDisplayed());
-        softAssert.assertTrue(splitDetails.isDisplayed());
-        softAssert.assertTrue(splitDetailsValue.isDisplayed());
-        softAssert.assertTrue(averageWeight.isDisplayed());
-        softAssert.assertTrue(averageWeightValue.isDisplayed());
-        softAssert.assertEquals(stockStatusValue.getText(), expectedStock);
-        softAssert.assertEquals(gtinValue.getText(), expectedGtin);
-        softAssert.assertEquals(manufacturerUpcValue.getText(), expectedManufacturerUpc);
-        softAssert.assertEquals(storageLocationValue.getText(), expectedStorageLocation);
-        softAssert.assertEquals(splitDetailsValue.getText(), expectedSplitDetails);
-        softAssert.assertEquals(averageWeightValue.getText(), expectedAverageWeight);
+        softAssert.assertTrue(productDetailsTable.isDisplayed(), "productDetailsTable");
+        softAssert.assertTrue(stockStatus.isDisplayed(), "stockStatus");
+        softAssert.assertTrue(stockStatusValue.isDisplayed(), "stockStatusValue");
+        softAssert.assertTrue(gtin.isDisplayed(), "gtin");
+        softAssert.assertTrue(gtinValue.isDisplayed(), "gtinValue");
+        softAssert.assertTrue(manufacturerUpc.isDisplayed(), "manufacturerUpc");
+        softAssert.assertTrue(manufacturerUpcValue.isDisplayed(), "manufacturerUpcValue");
+        softAssert.assertTrue(storageLocation.isDisplayed(), "storageLocation");
+        softAssert.assertTrue(storageLocationValue.isDisplayed(), "storageLocationValue");
+        softAssert.assertTrue(splitDetails.isDisplayed(), "splitDetails");
+        softAssert.assertTrue(splitDetailsValue.isDisplayed(), "splitDetailsValue");
+        softAssert.assertTrue(averageWeight.isDisplayed(), "averageWeight");
+        softAssert.assertTrue(averageWeightValue.isDisplayed(), "averageWeightValue");
+        softAssert.assertEquals(stockStatusValue.getText(), expectedStock, stockStatusValue.getText() + " stockStatusValue.getText() to equal " +expectedStock);
+        softAssert.assertEquals(gtinValue.getText(), expectedGtin, gtinValue.getText() + " gtinValue.getText() to equal " + expectedGtin);
+        softAssert.assertEquals(manufacturerUpcValue.getText(), expectedManufacturerUpc, manufacturerUpcValue.getText() + " manufacturerUpcValue.getText() to equal " + expectedManufacturerUpc);
+        softAssert.assertEquals(storageLocationValue.getText(), expectedStorageLocation, storageLocationValue.getText() + " storageLocationValue.getText() to equal " + storageLocationValue.getText());
+        softAssert.assertEquals(splitDetailsValue.getText(), expectedSplitDetails, splitDetailsValue.getText() + " splitDetailsValue.getText() to equal " + expectedSplitDetails);
+        softAssert.assertEquals(averageWeightValue.getText(), expectedAverageWeight, averageWeightValue.getText() + " averageWeightValue.getText() to equal " + averageWeightValue.getText());
         softAssert.assertAll();
         return this;
     }
 
     public ProductCardPage checkCaseQuantityFieldValue(String expectedQuantity) {
+        utils.log().info("Check case quantity input field on Product page to have value " + expectedQuantity);
         Assert.assertEquals(quantityCaseInputField.getText(), expectedQuantity);
         return this;
     }
 
     public ProductCardPage checkCartBadgeValue(String expectedCartCount) {
+        utils.log().info("Check cart count on Product page to have value " + expectedCartCount);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(cartBadge.isDisplayed());
         softAssert.assertEquals(cartBadge.getText(), expectedCartCount);
@@ -212,54 +217,55 @@ public class ProductCardPage extends BaseTest {
     }
 
     public ProductCardPage checkElementsPresenceOnNutritionTab() {
+        utils.log().info("Check elements presence on Nutrition tab");
         SoftAssert softAssert =new SoftAssert();
-        softAssert.assertTrue(nutritionFactsTitle.isDisplayed());
+        softAssert.assertTrue(nutritionFactsTitle.isDisplayed(), "nutritionFactsTitle");
         softAssert.assertAll();
         scrollDownByCoordinates();
-        softAssert.assertTrue(ingredientsListText.isDisplayed());
-        softAssert.assertTrue(disclaimerText.isDisplayed());
+        softAssert.assertTrue(ingredientsListText.isDisplayed(), "ingredientsListText");
+        softAssert.assertTrue(disclaimerText.isDisplayed(), "disclaimerText");
         softAssert.assertAll();
         return this;
     }
 
     public AddToListPage pressAddToListButton() {
-        click(addToListButton);
+        click(addToListButton, "Press add to list button on Product Card page");
         return new AddToListPage();
     }
 
     public OrderCartPage pressOrderCartButton() {
-        click(cartButton);
+        click(cartButton, "Press order car button on Product Card page");
         return new OrderCartPage();
     }
 
     public ProductCardPage pressCaseMinusButton() {
-        click(decreaseCaseQuantityButton);
+        click(decreaseCaseQuantityButton, "Press - button for case quantity");
         return new ProductCardPage();
     }
 
     public ProductCardPage pressCasePlusButton() {
-        click(increaseCaseQuantityButton);
+        click(increaseCaseQuantityButton, "Press + button for case quantity\"");
         return new ProductCardPage();
     }
 
     public ProductCardPage inputCaseQuantity(String quantity) {
-        sendKeys(quantityCaseInputField, quantity, "Input quantity " + quantity);
+        sendKeys(quantityCaseInputField, quantity, "Input quantity " + quantity + " and hide keyboard");
         getDriver().getKeyboard().sendKeys("\n");
         return new ProductCardPage();
     }
 
     public HandPricingPage pressCaseHandPricingButton() {
-        click(caseHandPricingButton);
+        click(caseHandPricingButton, "Press hand pricing button on Product card page");
         return new HandPricingPage();
     }
 
     public ProductCardPage pressProductDetailsButton() {
-        click(productDetailsButton);
+        click(productDetailsButton, "Press product details tab on Product card page");
         return new ProductCardPage();
     }
 
     public ProductCardPage pressNutritionButton() {
-        click(nutritionButton);
+        click(nutritionButton, "Press nutirtion tab on Product card page");
         return new ProductCardPage();
     }
 
@@ -267,12 +273,12 @@ public class ProductCardPage extends BaseTest {
     /** Guest user actions */
 
     public void pressBecomeCustomerButton() {
-        click(becomeACustomerButton);
+        click(becomeACustomerButton, "Press become customer button on Product card page");
     }
 
     public LoginPage pressSignIn() {
         waitForVisibility(guestSignInButton, "guestSignInButton");
-        click(guestSignInButton); // does not work on android
+        click(guestSignInButton, "Press sign in button on Product Card page"); // does not work on android
         return new LoginPage();
     }
 }

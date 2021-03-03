@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 
+//TODO Android: Used here pages are missing Android locators and maybe some specific android test code
 public class ProductCardTests extends BaseTest {
     LoginPage loginPage;
     DiscoverPage discoverPage;
@@ -24,7 +25,7 @@ public class ProductCardTests extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod(Method m) {
-        utils.log().info("****** starting test:" + m.getName() + "******" + "\n");
+        utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
         navDrawer = new NavDrawer();
@@ -79,11 +80,9 @@ public class ProductCardTests extends BaseTest {
             //precondition
             typeAheadPage = discoverPage.inputSearchForTypeAhead("beef ground bulk");
             searchCatalogPage = typeAheadPage.pressSearchResultFirst();
-            //searchCatalogPage.checkElementsPresenceForSupc0566709();
             searchCatalogPage.pressPlusQuantityForFirstProductCase();
 
             //test
-
         }
     }
 }
