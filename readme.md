@@ -69,3 +69,11 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 ```
+
+### Improvement plan
+Framework wide things needing improvements to resolve flakiness
+- Retries on login failure
+- Better waiting where progress element is present
+- Better waiting than Thread
+- Scrolling to element instead of by coordinates
+- Android keyboard hide in search field
