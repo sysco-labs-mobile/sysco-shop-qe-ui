@@ -14,7 +14,7 @@ import org.testng.asserts.SoftAssert;
 public class ProductCardPage extends BaseTest {
     TestUtils utils = new TestUtils();
 
-    @AndroidFindBy(id = "Navigate up")
+    @AndroidFindBy(accessibility = "Navigate up")
     @iOSXCUITFindBy(id = "Back")
     private MobileElement backButton;
 
@@ -33,7 +33,7 @@ public class ProductCardPage extends BaseTest {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"product info carousel\"`]/XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeImage")
     private MobileElement firstProductImage;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/pager")
+    @AndroidFindBy(id = "pager")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"product info carousel\"`]/XCUIElementTypeScrollView")
     private MobileElement productImageScrollView;
 
@@ -73,13 +73,13 @@ public class ProductCardPage extends BaseTest {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info case pricing\"]/XCUIElementTypeOther[2]//XCUIElementTypeButton[@name=\"increase quantity button\"]")
     private MobileElement increaseCaseQuantityButton;
 
-    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc='Product Details']")
-    //@AndroidFindBy(id = "Product Details")
+//    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc='Product Details']")
+    @AndroidFindBy(accessibility = "Product Details")
     @iOSXCUITFindBy(id = "Product Details")
     private MobileElement productDetailsButton;
 
-    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc='Nutrition']")
-   // @AndroidFindBy(id = "Nutrition")
+//    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc='Nutrition']")
+    @AndroidFindBy(accessibility = "Nutrition")
     @iOSXCUITFindBy(id = "Nutrition")
     private MobileElement nutritionButton;
 
@@ -150,6 +150,7 @@ public class ProductCardPage extends BaseTest {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info header selector\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeStaticText[1]")
     private MobileElement ingredientsListText;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text, 'Disclaimer')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info header selector\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeStaticText[2]")
     private MobileElement disclaimerText;
 
@@ -180,7 +181,7 @@ public class ProductCardPage extends BaseTest {
         softAssert.assertTrue(increaseCaseQuantityButton.isDisplayed(), "increaseCaseQuantityButton");
         softAssert.assertTrue(productDetailsButton.isDisplayed(), "productDetailsButton");
         softAssert.assertTrue(nutritionButton.isDisplayed(), "nutritionButton");
-        softAssert.assertEquals(productInfoTitle.getText(), expectedTitle, productInfoTitle.getText() + "productInfoTitle.getText() to equal " + expectedTitle);
+        softAssert.assertEquals(productInfoTitle.getText(), expectedTitle, productInfoTitle.getText() + " productInfoTitle.getText() to equal " + expectedTitle);
         softAssert.assertEquals(productInfoDescriptionText.getText(), expectedDescription, productInfoDescriptionText.getText() + " productInfoDescriptionText.getText() to equal expectedDescription");
         softAssert.assertAll();
         return this;
@@ -193,7 +194,7 @@ public class ProductCardPage extends BaseTest {
         softAssert.assertTrue(decreaseCaseQuantityButton.isDisplayed(), "decreaseCaseQuantityButton");
         softAssert.assertTrue(quantityCaseInputField.isDisplayed(), "quantityCaseInputField");
         softAssert.assertTrue(increaseCaseQuantityButton.isDisplayed(), "increaseCaseQuantityButton");
-        softAssert.assertEquals(itemCasePrice.getText(), expectedCasePrice, itemCasePrice.getText() + "itemCasePrice.getText() to equal " + expectedCasePrice);
+        softAssert.assertEquals(itemCasePrice.getText().replace("\n", ""), expectedCasePrice);
         softAssert.assertAll();
         return this;
     }
@@ -203,7 +204,6 @@ public class ProductCardPage extends BaseTest {
                                                                     String expectedSplitDetails, String expectedAverageWeight) {
         utils.log().info("Check elements presence on Product card page on Product Details tab");
         SoftAssert softAssert =new SoftAssert();
-        softAssert.assertTrue(readMoreButton.isDisplayed(), "readMoreButton");
         softAssert.assertAll();
         scrollDownByCoordinates();
         softAssert.assertTrue(productDetailsTable.isDisplayed(), "productDetailsTable");
@@ -272,7 +272,7 @@ public class ProductCardPage extends BaseTest {
     }
 
     public ProductCardPage pressCasePlusButton() {
-        click(increaseCaseQuantityButton, "Press + button for case quantity\"");
+        click(increaseCaseQuantityButton, "Press + button for case quantity");
         return new ProductCardPage();
     }
 
