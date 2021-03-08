@@ -60,7 +60,8 @@ public class SearchCatalogPage extends BaseTest {
     @iOSXCUITFindBy(id = "catalog search results table")
     private MobileElement catalogSearchResultsTable;
 
-    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/resultView\"]/android.widget.TextView[1]")
+    @AndroidFindBy(xpath = "//*[contains(@text, '0566709')]")
+    //@AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/resultView\"]/android.widget.TextView[1]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]")
     private MobileElement firstProduct;
 

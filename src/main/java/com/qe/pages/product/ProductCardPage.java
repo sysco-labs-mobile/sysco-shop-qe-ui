@@ -18,12 +18,15 @@ public class ProductCardPage extends BaseTest {
     @iOSXCUITFindBy(id = "Back")
     private MobileElement backButton;
 
+    @AndroidFindBy(id = "action_add_to_list")
     @iOSXCUITFindBy(id = "product info add to list")
     private MobileElement addToListButton;
 
+    @AndroidFindBy(id = "cart_icon")
     @iOSXCUITFindBy(id = "cart button")
     private MobileElement cartButton;
 
+    @AndroidFindBy(id = "cart_badge")
     @iOSXCUITFindBy(id = "badge - text")
     private MobileElement cartBadge;
 
@@ -42,83 +45,108 @@ public class ProductCardPage extends BaseTest {
     @iOSXCUITFindBy(id = "product info data")
     private MobileElement productInfoDescriptionText;
 
+    @AndroidFindBy(id = "lastOrdered")
     @iOSXCUITFindBy(id = "product info last ordered")
     private MobileElement lastOrderedLabel;
 
+    @AndroidFindBy(id = "itemFlag")
     @iOSXCUITFindBy(id = "product info replacement button")
     private MobileElement productInfoReplacementButton;
+
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info case pricing\"]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeButton[@name=\"pricing cost button\"]")
     private MobileElement caseHandPricingButton;
 
+    @AndroidFindBy(id = "priceLabel")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info case pricing\"]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]")
     private MobileElement itemCasePrice;
 
+    @AndroidFindBy(id = "addToCartMinus")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info case pricing\"]/XCUIElementTypeOther[2]/XCUIElementTypeButton[@name=\"decrease quantity button\"]")
     private MobileElement decreaseCaseQuantityButton;
 
+    @AndroidFindBy(id = "cartItemCount")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info case pricing\"]/XCUIElementTypeOther[2]/XCUIElementTypeTextField[@name=\"quantity text field\"]")
     private MobileElement quantityCaseInputField;
 
+    @AndroidFindBy(id = "addToCartPlus")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info case pricing\"]/XCUIElementTypeOther[2]//XCUIElementTypeButton[@name=\"increase quantity button\"]")
     private MobileElement increaseCaseQuantityButton;
 
-    @AndroidFindBy(id = "Product Details")
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc='Product Details']")
+    //@AndroidFindBy(id = "Product Details")
     @iOSXCUITFindBy(id = "Product Details")
     private MobileElement productDetailsButton;
 
-    @AndroidFindBy(id = "Nutrition")
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc='Nutrition']")
+   // @AndroidFindBy(id = "Nutrition")
     @iOSXCUITFindBy(id = "Nutrition")
     private MobileElement nutritionButton;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product details label\"]/XCUIElementTypeStaticText")
     private MobileElement text;
 
+    @AndroidFindBy(id = "showMoreShowLess")
     @iOSXCUITFindBy(id = "collapsable read button")
     private MobileElement readMoreButton;
 
+    @AndroidFindBy(id = "attributesRecycler")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"product details\"`]/XCUIElementTypeOther[2]")
     private MobileElement productDetailsTable;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Stock Status']")
     @iOSXCUITFindBy(id = "Stock Status")
     private MobileElement stockStatus;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Stock Status']//following-sibling::android.widget.TextView")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Stock Status\"]/following-sibling::XCUIElementTypeStaticText")
     private MobileElement stockStatusValue;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='GTIN']")
     @iOSXCUITFindBy(id = "GTIN")
     private MobileElement gtin;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='GTIN']/following-sibling::android.widget.TextView")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"GTIN\"]/following-sibling::XCUIElementTypeStaticText")
     private MobileElement gtinValue;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Manufacturer UPC']")
     @iOSXCUITFindBy(id = "Manufacturer UPC")
     private MobileElement manufacturerUpc;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Manufacturer UPC']/following-sibling::android.widget.TextView")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Manufacturer UPC\"]/following-sibling::XCUIElementTypeStaticText")
     private MobileElement manufacturerUpcValue;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Storage Location']")
     @iOSXCUITFindBy(id = "Storage Location")
     private MobileElement storageLocation;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Storage Location']/following-sibling::android.widget.TextView")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Storage Location\"]/following-sibling::XCUIElementTypeStaticText")
     private MobileElement storageLocationValue;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Split']")
     @iOSXCUITFindBy(id = "Split Detail")
     private MobileElement splitDetails;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Split']/following-sibling::android.widget.TextView")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Split Detail\"]/following-sibling::XCUIElementTypeStaticText")
     private MobileElement splitDetailsValue;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Average Weight']")
     @iOSXCUITFindBy(id = "Average Weight")
     private MobileElement averageWeight;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Average Weight']/following-sibling::android.widget.TextView")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Average Weight\"]/following-sibling::XCUIElementTypeStaticText")
     private MobileElement averageWeightValue;
 
+    @AndroidFindBy(xpath = "//android.view.View[@text='Nutrition Facts']")
     @iOSXCUITFindBy(id = "Nutrition Facts")
     private MobileElement nutritionFactsTitle;
 
+    @AndroidFindBy(id = "ingredientsText")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info header selector\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeStaticText[1]")
     private MobileElement ingredientsListText;
 

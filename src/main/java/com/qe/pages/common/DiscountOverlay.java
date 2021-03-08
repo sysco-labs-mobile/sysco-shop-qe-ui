@@ -4,6 +4,7 @@ import com.qe.BaseTest;
 import com.qe.pages.search.SearchCatalogPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.asserts.SoftAssert;
 
@@ -17,11 +18,13 @@ public class DiscountOverlay extends BaseTest {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Price includes:\"]/preceding-sibling::XCUIElementTypeStaticText[1]")
     private MobileElement priceHeader;
 
+    @AndroidFindBy(id = "price_includes_header")
     @iOSXCUITFindBy(id = "Price includes:")
 //    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Price includes:\"`]")
 //    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Price includes:\"]")
     private MobileElement priceIncludesHeader;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='New Customer Savings']")
     @iOSXCUITFindBy(id = "New Customer Savings")
 //    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"New Customer Savings\"`]")
 //    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"New Customer Savings\"]")
