@@ -16,7 +16,7 @@ public class CreditCardPricingModal extends BaseTest {
     @iOSXCUITFindBy(id = "Your estimated total does not include applicable taxes. Product prices may vary slightly on your final invoice due to market fluctuations and your delivery date. If you are resale/tax exempt, please complete your Sysco Credit Application through the link you received via email to provide supporting tax documentation or submit your tax documentation to your Sysco Sales representative and update your tax status on subsequent purchases.")
     private MobileElement alertDescription;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertPrimaryButton")
+    @AndroidFindBy(id = "alertPrimaryButton")
     @iOSXCUITFindBy(id = "alert primary")
     private MobileElement okButton;
 

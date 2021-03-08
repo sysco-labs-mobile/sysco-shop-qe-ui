@@ -80,9 +80,47 @@ public class ProductCardTests extends BaseTest {
             //precondition
             typeAheadPage = discoverPage.inputSearchForTypeAhead("beef ground bulk");
             searchCatalogPage = typeAheadPage.pressSearchResultFirst();
-            searchCatalogPage.pressPlusQuantityForFirstProductCase();
+            searchCatalogPage.pressOnFirstProduct();
 
-            //test
+            Thread.sleep(3000);
+            productCardPage.checkElementsPresence(
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("title"),
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("description")
+            );
+            productCardPage.checkElementsPresenceForCase(
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("pricePerCsCatchweight"));
+
+            productCardPage.checkElementsPresenceOnProductDetailsTab(
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("stockStatus"),
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("gtin"),
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("manufacturerUPC"),
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("storageLocation"),
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("splitDetail"),
+                    BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("averageWeight")
+            );
+
+            productCardPage
+                    .checkCaseQuantityFieldValue("Add")
+                    .pressCasePlusButton();
+            Thread.sleep(1000);
+
+            productCardPage
+                    .checkCaseQuantityFieldValue("1")
+                    .checkCartBadgeValue("1");
+
+            productCardPage
+                    .pressCaseMinusButton()
+                    .checkCaseQuantityFieldValue("Add");
+
+            productCardPage
+                    .pressCasePlusButton()
+                    .pressCasePlusButton()
+                    .pressCasePlusButton()
+                    .checkCartBadgeValue("3");
+
+
+            productCardPage.pressNutritionButton();
+            productCardPage.checkElementsPresenceOnNutritionTab();
         }
     }
 }
