@@ -4,11 +4,17 @@ import com.qe.BaseTest;
 import com.qe.pages.common.DiscountBulkOverlay;
 import com.qe.pages.common.DiscountOverlay;
 import com.qe.pages.common.NavDrawer;
+import com.qe.pages.discover.DiscoverPage;
 import com.qe.pages.lists.AddToListPage;
+import com.qe.pages.lists.ListsPage;
 import com.qe.pages.orders.OrderCartPage;
+import com.qe.pages.orders.OrdersPage;
 import com.qe.pages.product.ProductCardPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.asserts.SoftAssert;
@@ -16,106 +22,141 @@ import org.testng.asserts.SoftAssert;
 public class SearchCatalogPage extends BaseTest {
     TestUtils utils = new TestUtils();
 
-    @iOSXCUITFindBy(id = "app bar left button")
-    private MobileElement navBarDrawerButton;
+    @AndroidFindBy(accessibility = "Navigate up")
+    private MobileElement androidNavBackButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/searchField")
+    @iOSXCUITFindBy(id = "app bar left button")
+    private MobileElement iosNavBarDrawerButton;
+
+    @AndroidFindBy(id = "searchField")
     @iOSXCUITFindBy(id = "app nav search bar text field")
     private MobileElement searchTextField;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/editText")
+    @AndroidFindBy(id = "editText")
     @iOSXCUITFindBy(id = "app nav search bar text field")
     private MobileElement searchTextFieldText;
 
     @iOSXCUITFindBy(id = "app bar cancel search")
     private MobileElement cancelSearchButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/cart_icon")
+    @AndroidFindBy(id = "cart_icon")
     @iOSXCUITFindBy(id = "cart button")
     private MobileElement cartButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/cart_badge")
+    @AndroidFindBy(id = "cart_badge")
     @iOSXCUITFindBy(id = "badge - text")
     private MobileElement cartBadgeCount;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/numResults")
+    @AndroidFindBy(id = "loadingView")
+    private MobileElement loadingView;
+
+    @AndroidFindBy(id = "couldNotLoad")
+    private MobileElement errorLoadingHeader;
+
+    @AndroidFindBy(accessibility = "Tap to Retry")
+    private MobileElement retryButton;
+
+    @AndroidFindBy(id = "numResults")
     @iOSXCUITFindBy(id = "result count label")
     private MobileElement resultCountLabel;
 
-    @AndroidFindBy(id = "Filter")
+    @AndroidFindBy(accessibility = "Filter")
     @iOSXCUITFindBy(id = "search filter view - filter button")
     private MobileElement filterButton;
 
     /** Banner - Add to list */
 
+    @AndroidFindBy(id = "snackbar_text")
     @iOSXCUITFindBy(id = "app navigation controller - banner")
     private MobileElement bannerItemAddedToList;
 
     @iOSXCUITFindBy(id = "Item added to List(s)")
     private MobileElement bannerItemAddedToListText;
 
-    /** Products elements */
+    /** First Product's elements */
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/resultView")
+    @AndroidFindBy(id = "resultView")
     @iOSXCUITFindBy(id = "catalog search results table")
     private MobileElement catalogSearchResultsTable;
 
-    @AndroidFindBy(xpath = "//*[contains(@text, '0566709')]")
-    //@AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/resultView\"]/android.widget.TextView[1]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]")
     private MobileElement firstProduct;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productDescription")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'productDescription')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[1]")
     private MobileElement firstProductTitleText;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/popupMenu")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'popupMenu')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeButton[@name=\"dot menu button\"]")
     private MobileElement firstProductDotMenuButton;
 
+    @AndroidFindBy(id = "android:id/content")
     @iOSXCUITFindBy(id = "Add to list")
     private MobileElement addToListButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productInfo")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'productInfoContainer')]//*[contains(@resource-id, 'productInfo')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[2]")
     private MobileElement firstProductDescriptionText;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/priceLabel")
+    /** First Product's elements - for case price */
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'casePriceContainer')]//*[contains(@resource-id, 'priceLabel')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[3]")
     private MobileElement firstProductCasePrice;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/cartItemCount")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'casePriceContainer')]//*[contains(@resource-id, 'cartItemCount')]")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name == \"case quantity text field\"`][1]")
     private MobileElement firstProductCaseQuantityField;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addToCartMinus")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'casePriceContainer')]//*[contains(@resource-id, 'addToCartMinus')]")
     @iOSXCUITFindBy(id = "decrease quantity button")
     private MobileElement firstProductCaseQuantityMinusButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addToCartPlus")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'casePriceContainer')]//*[contains(@resource-id, 'addToCartPlus')]")
     @iOSXCUITFindBy(id = "increase quantity button")
     private MobileElement firstProductCaseQuantityPlusButton;
 
+    /** First Product's elements - for each price */
 
-    /** Android specific elements */
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'eachPriceContainer')]//*[contains(@resource-id, 'priceLabel')]")
+    private MobileElement firstProductEachPrice;
 
-    @AndroidFindBy(accessibility = "Navigate up")
-    private MobileElement androidNavBackButton;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'eachPriceContainer')]//*[contains(@resource-id, 'cartItemCount')]")
+    private MobileElement firstProductEachQuantityField;
 
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'eachPriceContainer')]//*[contains(@resource-id, 'addToCartMinus')]")
+    private MobileElement firstProductEachQuantityMinusButton;
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'eachPriceContainer')]//*[contains(@resource-id, 'addToCartPlus')]")
+    private MobileElement firstProductEachQuantityPlusButton;
 
     /** Discount Pricing Elements */
 
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'bulkDiscountsAvailableLayout')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeButton[@name=\"bulk discounts button\"]")
     private MobileElement firstProductBulkDiscountsAvailableButton;
 
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'casePriceContainer')]//*[contains(@resource-id, 'discountsAppliedTooltip')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeButton[@name=\"discounts info bubble\"]")
-    private MobileElement firstProductDiscountInfoBubble;
+    private MobileElement firstProductCaseDiscountInfoBubble;
 
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'casePriceContainer')]//*[contains(@resource-id, 'strikeThroughPriceLabel')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name=\"product strikethrough label\"]")
-    private MobileElement firstProductStrikethroughCasePrice;
+    private MobileElement firstProductCaseStrikethroughCasePrice;
 
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'casePriceContainer')]//*[contains(@resource-id, 'priceLabel')]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name=\"product strikethrough label\"]/following-sibling::XCUIElementTypeStaticText")
-    private MobileElement firstProductBulkDiscountCasePrice;
+    private MobileElement firstProductCaseBulkDiscountCasePrice;
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'eachPriceContainer')]//*[contains(@resource-id, 'discountsAppliedTooltip')]")
+    private MobileElement firstProductEachDiscountInfoBubble;
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'eachPriceContainer')]//*[contains(@resource-id, 'strikeThroughPriceLabel')]")
+    private MobileElement firstProductEachStrikethroughCasePrice;
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'eachPriceContainer')]//*[contains(@resource-id, 'priceLabel')]")
+    private MobileElement firstProductEachBulkDiscountCasePrice;
 
 
     /** Guest user element */
@@ -127,7 +168,12 @@ public class SearchCatalogPage extends BaseTest {
     public SearchCatalogPage checkElementsPresenceForBannerItemAddedToList() {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(bannerItemAddedToList.isDisplayed(), "bannerItemAddedToList");
-        softAssert.assertTrue(bannerItemAddedToListText.isDisplayed(), "bannerItemAddedToListText");
+        if(getPlatform().equalsIgnoreCase("iOS")) {
+            softAssert.assertTrue(bannerItemAddedToListText.isDisplayed(), "bannerItemAddedToListText");
+        }
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            softAssert.assertEquals(bannerItemAddedToList.getText(), "Item added to list(s)");
+        }
         softAssert.assertAll();
         return this;
     }
@@ -135,12 +181,18 @@ public class SearchCatalogPage extends BaseTest {
     public SearchCatalogPage checkElementsPresence(String expectedSearchQuery) {
         utils.log().info("Check search page elements");
         SoftAssert softAssert = new SoftAssert();
-        waitForVisibility(navBarDrawerButton, "navBarDrawerButton");
-        softAssert.assertTrue(navBarDrawerButton.isDisplayed(), "navBarDrawerButton");
+        if(getPlatform().equalsIgnoreCase("iOS")) {
+            waitForVisibility(iosNavBarDrawerButton, "iosNavBarDrawerButton");
+            softAssert.assertTrue(iosNavBarDrawerButton.isDisplayed(), "iosNavBarDrawerButton");
+        }
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            waitForVisibility(androidNavBackButton, "navBarDrawerButton");
+            softAssert.assertTrue(androidNavBackButton.isDisplayed(), "androidNavBackButton");
+        }
         softAssert.assertTrue(searchTextField.isDisplayed(), "searchTextField");
         softAssert.assertTrue(searchTextFieldText.isDisplayed(), "searchTextFieldText");
         softAssert.assertTrue(cartButton.isDisplayed(), "cartButton");
-        //softAssert.assertTrue(resultCountLabel.isDisplayed());ios flaks out
+//        softAssert.assertTrue(resultCountLabel.isDisplayed());//ios flaks out
         softAssert.assertTrue(filterButton.isDisplayed(), "filterButton");
         softAssert.assertTrue(catalogSearchResultsTable.isDisplayed(), "catalogSearchResultsTable");
         softAssert.assertTrue(searchTextFieldText.getText().toLowerCase().contains(expectedSearchQuery), "searchTextFieldText");
@@ -176,17 +228,19 @@ public class SearchCatalogPage extends BaseTest {
 //        softAssert.assertTrue(firstProductTitleText.isDisplayed());
 //        softAssert.assertTrue(firstProductDescriptionText.isDisplayed());
         softAssert.assertTrue(firstProductDotMenuButton.isDisplayed(), "firstProductDotMenuButton");
-        //softAssert.assertTrue(firstProductStrikethroughCasePrice.isDisplayed(), "firstProductStrikethroughCasePrice");
-        softAssert.assertTrue(firstProductBulkDiscountCasePrice.isDisplayed(), "firstProductBulkDiscountCasePrice");
-        softAssert.assertTrue(firstProductDiscountInfoBubble.isDisplayed(), "firstProductDiscountInfoBubble");
+//        softAssert.assertTrue(firstProductStrikethroughCasePrice.isDisplayed(), "firstProductStrikethroughCasePrice");
+        softAssert.assertTrue(firstProductCaseBulkDiscountCasePrice.isDisplayed(), "firstProductBulkDiscountCasePrice");
+        softAssert.assertTrue(firstProductCaseDiscountInfoBubble.isDisplayed(), "firstProductDiscountInfoBubble");
         softAssert.assertTrue(firstProductCaseQuantityField.isDisplayed(), "firstProductCaseQuantityField");
         softAssert.assertTrue(firstProductCaseQuantityMinusButton.isDisplayed(),"firstProductCaseQuantityMinusButton");
         softAssert.assertTrue(firstProductCaseQuantityPlusButton.isDisplayed(), "firstProductCaseQuantityPlusButton");
-        //pricing messes up ios indexes in xpath locator
-        //softAssert.assertEquals(firstProductTitleText.getText(), expectedTitle);
-        //softAssert.assertEquals(firstProductDescriptionText.getText(), expectedDescription);
-        softAssert.assertEquals(firstProductStrikethroughCasePrice.getText(), expectedStrikethroughCasePrice);
-        softAssert.assertEquals(firstProductBulkDiscountCasePrice.getText(), expectedBulkDiscountCasePrice);
+//      ios pricing messes up ios indexes in xpath locator
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            softAssert.assertEquals(firstProductTitleText.getText(), expectedTitle);
+            softAssert.assertEquals(firstProductDescriptionText.getText(), expectedDescription);
+        }
+        softAssert.assertEquals(firstProductCaseStrikethroughCasePrice.getText(), expectedStrikethroughCasePrice);
+        softAssert.assertEquals(firstProductCaseBulkDiscountCasePrice.getText(), expectedBulkDiscountCasePrice);
         softAssert.assertAll();
         return this;
     }
@@ -196,6 +250,10 @@ public class SearchCatalogPage extends BaseTest {
         click(firstProductCaseQuantityField);
         sendKeys(firstProductCaseQuantityField, quantity, "Input quantity " + quantity + " in first item on Search page");
         getDriver().getKeyboard().sendKeys("\n");
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            click(searchTextField);
+            ((AndroidDriver) getDriver()).pressKey(new KeyEvent(AndroidKey.ENTER));
+        }
         return this;
     }
 
@@ -226,11 +284,26 @@ public class SearchCatalogPage extends BaseTest {
         return new AddToListPage();
     }
 
-    public NavDrawer pressNavBar() {
-        click(navBarDrawerButton, "Press on nav drawer button on Search page");
+    public NavDrawer pressIosNavBarDrawerButton() {
+        click(iosNavBarDrawerButton, "Press on nav drawer button on Search page");
         return new NavDrawer();
-
     }
+
+    public DiscoverPage pressAndroidBackButtonToDiscoverPage() {
+        click(androidNavBackButton);
+        return new DiscoverPage();
+    }
+
+    public ListsPage pressAndroidBackButtonToListsPage() {
+        click(androidNavBackButton);
+        return new ListsPage();
+    }
+
+    public OrdersPage pressAndroidBackButtonToOrdersPage() {
+        click(androidNavBackButton);
+        return new OrdersPage();
+    }
+
     /** Discounts feature methods */
 
     public DiscountBulkOverlay pressFirstItemBulkDiscountsAvailableButton() {
@@ -238,8 +311,8 @@ public class SearchCatalogPage extends BaseTest {
         return new DiscountBulkOverlay();
     }
 
-    public DiscountOverlay pressFirstItemDiscountInfoBubble() {
-        click(firstProductDiscountInfoBubble, "Press on first product's discount info buble on Search page");
+    public DiscountOverlay pressFirstItemCaseDiscountInfoBubble() {
+        click(firstProductCaseDiscountInfoBubble, "Press on first product's discount info buble on Search page");
         return new DiscountOverlay();
     }
 }

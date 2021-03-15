@@ -11,54 +11,54 @@ import org.testng.asserts.SoftAssert;
 public class ZipSwitcherPage extends BaseTest {
     TestUtils utils = new TestUtils();
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/browseProductCatalogText")
+    @AndroidFindBy(id = "browseProductCatalogText")
     @iOSXCUITFindBy(id = "Browse Our Product Catalog")
     private MobileElement header;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/browseProductCatalogSubText")
+    @AndroidFindBy(id = "browseProductCatalogSubText")
     @iOSXCUITFindBy(id = "Sysco has products for all of your needs.")
     private MobileElement description;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/zipCodeField")
+    @AndroidFindBy(id = "zipCodeField")
     @iOSXCUITFindBy(id = "zip code text input text field")
     private MobileElement zipCodeInputTextField;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/zipCodeField")
+    @AndroidFindBy(id = "zipCodeField")
     @iOSXCUITFindBy(id = "Delivery Zip Code*")
     private MobileElement zipCodeInputText;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/startShopping")
+    @AndroidFindBy(id = "startShopping")
     @iOSXCUITFindBy(id = "start shopping button")
     private MobileElement startShoppingButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/signIn")
+    @AndroidFindBy(id = "signIn")
     @iOSXCUITFindBy(id = "Sign In")
     private MobileElement signInButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/becomeACustomer")
+    @AndroidFindBy(id = "becomeACustomer")
     @iOSXCUITFindBy(id = "Become A Customer")
     private MobileElement becomeACustomerButton;
 
 
     /** Unavailable zip elements */
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/currentlyNotAvailableText")
+    @AndroidFindBy(id = "currentlyNotAvailableText")
     @iOSXCUITFindBy(id = "We're Currently Not Available In:")
     private MobileElement unavailableHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/inTheMeanTimeText")
+    @AndroidFindBy(id = "inTheMeanTimeText")
     @iOSXCUITFindBy(id = "In the meantime, browse some premium Sysco products that may be available in your area soon.")
     private MobileElement unavailableDescription;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/browseSyscoProducts")
+    @AndroidFindBy(id = "browseSyscoProducts")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Browse Sysco Products\"`]")
     private MobileElement browseSyscoProductsButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/unmatchedZipCode")
+    @AndroidFindBy(id = "unmatchedZipCode")
     @iOSXCUITFindBy(id = "zip code label")
     private MobileElement zipCodeLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/tryADifferentZipCode")
+    @AndroidFindBy(id = "tryADifferentZipCode")
     @iOSXCUITFindBy(id = "Try A Different Zip Code")
     private MobileElement tryDifferentZipButton;
 
@@ -101,7 +101,7 @@ public class ZipSwitcherPage extends BaseTest {
 
     public DiscoverPage pressStartShoppingButtonForValidZip() {
         click(startShoppingButton, "Press start shopping button on Zip Switcher Page expecting available zip");
-        waitForInvisibility(startShoppingButton, "startShoppingButton", 15);
+        waitForInvisibility(startShoppingButton, "startShoppingButton", 30);
         return new DiscoverPage();
     }
 

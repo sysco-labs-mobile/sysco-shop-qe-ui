@@ -5,9 +5,7 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.testng.asserts.SoftAssert;
 
 public class OrdersPage extends BaseTest {
@@ -17,15 +15,15 @@ public class OrdersPage extends BaseTest {
     @iOSXCUITFindBy(id = "app bar left button")
     private MobileElement navBarDrawerButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/editText")
+    @AndroidFindBy(id = "editText")
     @iOSXCUITFindBy(id = "app nav search bar text field")
     private MobileElement searchTextField;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/action_cart")
+    @AndroidFindBy(id = "action_cart")
     @iOSXCUITFindBy(id = "cart button")
     private MobileElement cartButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/title")
+    @AndroidFindBy(id = "title")
     @iOSXCUITFindBy(id = "orders section header title")
     private MobileElement ordersTitle;
 
@@ -45,10 +43,10 @@ public class OrdersPage extends BaseTest {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Historical\"`][1]")
     private MobileElement cancelledOrdersButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addOrderButton")
+    @AndroidFindBy(id = "addOrderButton")
     private MobileElement createOrderButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/resultView")
+    @AndroidFindBy(id = "resultView")
     @iOSXCUITFindBy(id = "orders list")//not sure usable
     private MobileElement ordersList;
 
@@ -82,16 +80,14 @@ public class OrdersPage extends BaseTest {
 
     /** Loading elements */
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/ordersProgressBar")
+    @AndroidFindBy(id = "ordersProgressBar")
     @iOSXCUITFindBy(id = "loading bar")
     private MobileElement progressBar;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/loadingView")
+    @AndroidFindBy(id = "loadingView")
     private MobileElement loadingView;
 
-    final String tapToRetryButtonId = "com.syscocorp.mss.enterprise.dev:id/couldNotLoad";
-
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/couldNotLoad")
+    @AndroidFindBy(id = "couldNotLoad")
     private MobileElement couldNotLoadOrdersTitle;
 
     @AndroidFindBy(accessibility = "Tap to Retry")
@@ -111,11 +107,6 @@ public class OrdersPage extends BaseTest {
 
     public OrdersPage checkPageIsLoadedOrRetry() {
         utils.log().info("Check page if reload is needed");
-        try {
-            waitForInvisibility(progressBar, "Progress bar");
-        } catch (TimeoutException timeoutException) {
-            utils.log().info("Progress bar is still present - increase wait time");
-        }
         ifFailedReload();
 
         return new OrdersPage();

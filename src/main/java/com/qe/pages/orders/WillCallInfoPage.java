@@ -13,35 +13,35 @@ public class WillCallInfoPage extends BaseTest {
     @iOSXCUITFindBy(id = "will call done button")
     private MobileElement doneButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/title\n")
+    @AndroidFindBy(id = "title\n")
     @iOSXCUITFindBy(id = "Will Call Order Information")
     private MobileElement willCallOrderInfoHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/pickup_location_title")
+    @AndroidFindBy(id = "pickup_location_title")
     @iOSXCUITFindBy(id = "Pickup Location")
     private MobileElement pickUpLocationHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/pickup_location")
+    @AndroidFindBy(id = "pickup_location")
     @iOSXCUITFindBy(id = "Sysco Boston 99 Spring Street Plympton, MA 02367 US 781-422-2300")//ssmcust9@grr.la
     private MobileElement pickUplocationValue;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/ordering_hours_title")
+    @AndroidFindBy(id = "ordering_hours_title")
     @iOSXCUITFindBy(id = "Ordering Hours")
     private MobileElement orderingHoursHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/ordering_hours")
+    @AndroidFindBy(id = "ordering_hours")
     @iOSXCUITFindBy(id = "Monday - Friday 8:00am - 2:00pm Saturday 8:00am - 10:00am")//ssmcust9@grr.la
     private MobileElement orderingHoursValue;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/pickup_hours_title")
+    @AndroidFindBy(id = "pickup_hours_title")
     @iOSXCUITFindBy(id = "Pickup Hours")
     private MobileElement pickUpHoursHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/pickup_hours")
+    @AndroidFindBy(id = "pickup_hours")
     @iOSXCUITFindBy(id = "Monday - Friday 8:00am - 4:30pm Saturday 8:00am - 12:00pm")//ssmcust9@grr.la
     private MobileElement pickUpHoursValue;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/disclaimer\n")
+    @AndroidFindBy(id = "disclaimer\n")
     @iOSXCUITFindBy(id = "will call disclaimer")
     private MobileElement willCallDisclaimer;
 

@@ -26,7 +26,6 @@ public class AssociateLoginPage2 extends BaseTest {
 
     public void checkElementsPresence() {
         SoftAssert softAssert = new SoftAssert();
-        //softAssert.assertTrue(backArrowButton.isDisplayed());//Can't locate an element by this strategy: By.chained({By.id: back})
         softAssert.assertTrue(syscoNetworkIdTextInput.isDisplayed());
         softAssert.assertTrue(nextButton.isDisplayed());
         softAssert.assertAll();

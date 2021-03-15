@@ -8,22 +8,11 @@ import com.qe.pages.discover.DiscoverPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.WithTimeout;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
-
-import java.time.Duration;
-import java.util.Arrays;
-
-import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class LoginPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -32,84 +21,86 @@ public class LoginPage extends BaseTest {
     @iOSXCUITFindBy(id = "shoplogo")
     private MobileElement shopLogo;
 
-    @WithTimeout(time = 5, chronoUnit = SECONDS)
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/loginTagline")
-    @iOSXCUITFindBy(id = "Welcome back! To continue, please provide your email.") //changed in 2021.02.09
+    @AndroidFindBy(id = "loginTagline")
+    @iOSXCUITFindBy(id = "Welcome back! To continue, please provide your email.")
     private MobileElement loginTagline;
 
-    @iOSXCUITFindBy(id = "Email*") //changed in 2021.02.09
+    @iOSXCUITFindBy(id = "Email*")
     private MobileElement emailLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/usernameField")
-    @iOSXCUITFindBy(id = "Login Email Text Input") //changed in 2021.02.09
+    @AndroidFindBy(id = "usernameField")
+    @iOSXCUITFindBy(id = "Login Email Text Input")
     private MobileElement emailTxtField;
+
+    @AndroidFindBy(id = "loginProgress")
+    private MobileElement loginProgress;
 
     @iOSXCUITFindBy(id = "Password")
     private MobileElement passwordLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/passwordField")
+    @AndroidFindBy(id = "passwordField")
     @iOSXCUITFindBy(id = "Login Password Text Input")
     private MobileElement passwordTxtField;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/textinput_error")
+    @AndroidFindBy(id = "textinput_error")
     @iOSXCUITFindBy(id = "Invalid combination. Please try again.")
     private MobileElement invalidPasswordMessage;
 
     @iOSXCUITFindBy(id = "Network error. Please try again.")
     private MobileElement iosErrorMessage;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/textinput_error")
+    @AndroidFindBy(id = "textinput_error")
     private MobileElement androidErrorMessage;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/loginButton")
+    @AndroidFindBy(id = "loginButton")
     @iOSXCUITFindBy(id = "Login Button")
     private MobileElement nextAndLoginButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/forgotMyPasswordLink")
+    @AndroidFindBy(id = "forgotMyPasswordLink")
     @iOSXCUITFindBy(id = "forgot password")
     private MobileElement forgotPasswordButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/dividerOr")
+    @AndroidFindBy(id = "dividerOr")
     @iOSXCUITFindBy(id = "OR")
     private MobileElement orLabel;
 
-    @iOSXCUITFindBy(id = "Sysco Associate?") //changed in 2021.02.09
+    @iOSXCUITFindBy(id = "Sysco Associate?")
     private MobileElement syscoAssociateLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/checkUsOutText")
+    @AndroidFindBy(id = "checkUsOutText")
     @iOSXCUITFindBy(id = "Check us out and join today!")
     private MobileElement guestTagline;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/maLoginLink")
+    @AndroidFindBy(id = "maLoginLink")
     @iOSXCUITFindBy(id = "associate login here")
     private MobileElement associateLoginButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/becomeACustomerButton")
+    @AndroidFindBy(id = "becomeACustomerButton")
     @iOSXCUITFindBy(id = "become a customer button")
     private MobileElement becomeCustomerButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/continueAsGuestButton")
+    @AndroidFindBy(id = "continueAsGuestButton")
     @iOSXCUITFindBy(id = "Continue As Guest")
     private MobileElement continueAsGuestButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/typeLabel")
+    @AndroidFindBy(id = "typeLabel")
     @iOSXCUITFindBy(id = "©2019 All Rights Reserved. Sysco Corporation")
     private MobileElement rightsReservedLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/privacyLink")
+    @AndroidFindBy(id = "privacyLink")
     @iOSXCUITFindBy(id = "privacy")
     private MobileElement privacyButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/helpLink")
+    @AndroidFindBy(id = "helpLink")
     @iOSXCUITFindBy(id = "help")
     private MobileElement helpButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/loginVersion")
+    @AndroidFindBy(id = "loginVersion")
     private MobileElement appBuildVersion;
 
     /** Errors */
     @iOSXCUITFindBy(id = "User service error")
-    private MobileElement userServiceError;
+    private MobileElement iosUserServiceError;
 
 
     public LoginPage checkElementsPresence(){
@@ -121,12 +112,7 @@ public class LoginPage extends BaseTest {
 //        softAssert.assertTrue(loginTagline.isDisplayed()); flaky in guest tests
 //        softAssert.assertTrue(emailLabel.isDisplayed()); flaky in guest tests
         softAssert.assertTrue(emailTxtField.isDisplayed());
-//        softAssert.assertTrue(syscoAssociateLabel.isDisplayed());
-//        softAssert.assertTrue(guestTagline.isDisplayed());
         softAssert.assertTrue(associateLoginButton.isDisplayed());
-//        softAssert.assertTrue(rightsReservedLabel.isDisplayed());
-//        softAssert.assertTrue(privacyButton.isDisplayed());
-//        softAssert.assertTrue(helpButton.isDisplayed());
         softAssert.assertAll();
         return this;
     }
@@ -141,12 +127,8 @@ public class LoginPage extends BaseTest {
 //        softAssert.assertTrue(passwordLabel.isDisplayed());
         softAssert.assertTrue(passwordTxtField.isDisplayed());
         softAssert.assertTrue(forgotPasswordButton.isDisplayed());
-//        softAssert.assertTrue(orLabel.isDisplayed());
-//        softAssert.assertTrue(syscoAssociateLabel.isDisplayed());
         softAssert.assertTrue(associateLoginButton.isDisplayed());
 //        softAssert.assertTrue(rightsReservedLabel.isDisplayed()); hidden by keyboard
-//        softAssert.assertTrue(privacyButton.isDisplayed());
-//        softAssert.assertTrue(helpButton.isDisplayed());
         softAssert.assertAll();
         return this;
     }
@@ -185,25 +167,13 @@ public class LoginPage extends BaseTest {
         return new LoginPage();
     }
 
-    public DiscoverPage pressLoginButton() {
+    public DiscoverPage pressLoginButton() throws InterruptedException {
         click(nextAndLoginButton, "Press login button on Login page");
         return new DiscoverPage();
     }
 
     public CreditCardModal pressLoginButtonForCreditCardUser() {
         click(nextAndLoginButton, "Press login button for Credit card user on Login page");
-        //retry
-        try {
-            waitForInvisibility(nextAndLoginButton, "loginButton", 3);
-        } catch (NoSuchElementException noSuchElementException) {
-            utils.log().info("Login retry was not needed and lead to NoSuchElementException of login button");
-        } catch (StaleElementReferenceException staleElementReferenceException) {
-            utils.log().info("Login retry was not needed and lead to StaleElementReferenceException of login button");
-        } catch (TimeoutException timeoutException) {
-            utils.log().info("Login retry is needed because loginButton is still visible");
-            click(nextAndLoginButton, "Retry login button on Login page");
-        }
-
         return new CreditCardModal();
     }
 

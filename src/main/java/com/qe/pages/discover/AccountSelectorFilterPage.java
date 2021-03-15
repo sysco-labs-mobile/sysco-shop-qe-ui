@@ -17,11 +17,11 @@ public class AccountSelectorFilterPage extends BaseTest {
     @iOSXCUITFindBy(id = "Filters")
     private MobileElement filtersHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/filterReset")
+    @AndroidFindBy(id = "filterReset")
     @iOSXCUITFindBy(id = "Reset")
     private MobileElement resetButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/deliveryDayFilter")
+    @AndroidFindBy(id = "deliveryDayFilter")
     @iOSXCUITFindBy(id = "filter-0-0")
     private MobileElement deliveryDaysButton;
 
@@ -40,7 +40,7 @@ public class AccountSelectorFilterPage extends BaseTest {
     @iOSXCUITFindBy(id = "account filter show results button")
     private MobileElement filterResultsButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/seeResultsButton")
+    @AndroidFindBy(id = "seeResultsButton")
     @iOSXCUITFindBy(id = "See Results")
     private MobileElement filterResultsButtonText;
 

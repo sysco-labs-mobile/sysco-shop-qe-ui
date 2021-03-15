@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "7c760c23-5203-4ece-8866-40be619b1aa2",
+		"name": "M BFF v2 - Clean Lists",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "productLists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code !== 200 || pm.response.json().errors || !pm.response.json().data.productLists){",
+							"    // retry the same request",
+							"    postman.setNextRequest(\"productLists\");",
+							"    console.log(\"Retry\");",
+							"} else if (pm.response.code === 200 && pm.response.json().data.productLists) {",
+							"        let rawLists = pm.response.json().data.productLists;",
+							"        let myListsRaw = rawLists.filter((p) => { ",
+							"            return p.type && p.type === \"MY_LIST\";",
+							"        });",
+							"        var mylists = [];",
+							"        myListsRaw.forEach(myListsRaw => mylists.push(myListsRaw.id));",
+							"        pm.test(\" my_lists_to_delete: \" + mylists.length, function () {});",
+							"        pm.environment.set(\"my_lists_to_delete\", JSON.stringify(mylists));",
+							"        if(mylists.length === 0) {",
+							"            postman.setNextRequest(null);//next request will not be sent",
+							"        } else {",
+							"            pm.environment.set(\"count\", 0);",
+							"        }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "056|762930|bffautotest|0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query productLists {    \n    productLists {        \n        id        \n        name        \n        description        \n        type        \n        lastModifiedDate        \n        addedDate        \n        owner        \n        version        \n        isShared         \n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{mobile_bff_url_v2}}",
+					"host": [
+						"{{mobile_bff_url_v2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProductList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const code = pm.response.code;",
+							"var count = pm.environment.get(\"count\");",
+							"var iDs = JSON.parse(pm.environment.get(\"my_lists_to_delete\"));",
+							"",
+							"//verify if custom lists exist for user",
+							"if (code !== 200 || pm.response.json().errors || !pm.response.json().data.deleteProductList || pm.response.json().data.deleteProductList !== true) {",
+							"    // retry the same request",
+							"    postman.setNextRequest(\"deleteProductList\");",
+							"    console.log(\"Retry\")",
+							"} else if (code === 200 &&",
+							"    pm.response.json().data.deleteProductList &&",
+							"    pm.response.json().data.deleteProductList === true) {",
+							"    console.log(\"List is deleted\")",
+							"    console.log(\"ID to delete \" + pm.environment.get(\"id_list_to_delete\"));",
+							"    count = count + 1; //next iteration",
+							"    pm.environment.set(\"count\", count);",
+							"    pm.test(\"List is deleted\", function() {",
+							"        pm.response.to.have.status(200);",
+							"        pm.expect(pm.response.json().data.deleteProductList).to.eql(true);",
+							"    });",
+							"    console.log(\"if count \" + count + \" iDs.length \" + iDs.length);",
+							"    if (count < iDs.length) {",
+							"        console.log(\"Array item \" + count);",
+							"        postman.setNextRequest(\"deleteProductList\");",
+							"    } else {",
+							"        pm.environment.set(\"count\", 0);",
+							"        console.log(\"Finished\", count);",
+							"        postman.setNextRequest(\"productLists\"); // or next request name",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var count = pm.environment.get(\"count\");",
+							"var iDs = JSON.parse(pm.environment.get(\"my_lists_to_delete\"));",
+							"pm.environment.set(\"list_id\", iDs[count]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "056|762930|bffautotest|0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation deleteProductList($id: String!) {\n    deleteProductList(id: $id)\n}",
+						"variables": "{\n    \"id\": \"{{list_id}}\"\n  }"
+					}
+				},
+				"url": {
+					"raw": "{{mobile_bff_url_v2}}",
+					"host": [
+						"{{mobile_bff_url_v2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

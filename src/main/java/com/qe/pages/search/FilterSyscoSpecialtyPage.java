@@ -17,7 +17,6 @@ public class FilterSyscoSpecialtyPage extends BaseTest {
     @iOSXCUITFindBy(id = "")
     private MobileElement syscoSpecialtyHeader;
 
-    //european imports
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.RadioButton")
     @iOSXCUITFindBy(id = "")
     private MobileElement firstSyscoSpecialtySelector;

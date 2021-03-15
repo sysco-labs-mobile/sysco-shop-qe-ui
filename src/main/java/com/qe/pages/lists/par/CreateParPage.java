@@ -16,10 +16,10 @@ public class CreateParPage extends BaseTest {
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
     private MobileElement parPageTitle;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/saveParGroup")
+    @AndroidFindBy(id = "saveParGroup")
     private MobileElement saveButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/parGroupNameField")
+    @AndroidFindBy(id = "parGroupNameField")
     private MobileElement parGroupNameField;
 
     public CreateParPage checkElementsPresence() {

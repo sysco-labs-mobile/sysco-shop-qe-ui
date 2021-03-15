@@ -18,73 +18,85 @@ public class OrderCartPage extends BaseTest {
     @iOSXCUITFindBy(id = "app nav dot menu button")
     private MobileElement orderDotMenuButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/title")
+    @AndroidFindBy(id = "title")
     @iOSXCUITFindBy(id = "Delete Order")
     private MobileElement deleteOrderButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/title")
+    @AndroidFindBy(id = "title")
     @iOSXCUITFindBy(id = "Cancel")
     private MobileElement cancelOrderButton;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView[1]")
-    //@iOSXCUITFindBy(id = "$55.36")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeNavigationBar[`name == \"app navigation bar\"`]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'toolbar')]/android.widget.TextView[1]")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeNavigationBar[`name == 'app navigation bar'`]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]")
     private MobileElement navBarPriceValue;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView[2]")
-    //@iOSXCUITFindBy(id = "1 CS | 0 EA")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeNavigationBar[`name == \"app navigation bar\"`]/XCUIElementTypeOther/XCUIElementTypeStaticText[2]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'toolbar')]/android.widget.TextView[2]")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeNavigationBar[`name == 'app navigation bar'`]/XCUIElementTypeOther/XCUIElementTypeStaticText[2]")
     private MobileElement navBarCsAndEaValues;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/editText")
+    @AndroidFindBy(id = "editText")
     @iOSXCUITFindBy(id = "search filter view - search input")
     private MobileElement searchFilterTextInputField;
 
-    @AndroidFindBy(id = "Filter")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"filter\"`][1]")
+    @AndroidFindBy(accessibility = "Filter")
+    @AndroidFindBy(id = "groupBy")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == 'filter'`][1]")
     private MobileElement filterButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/proceedToCheckoutButton")
+    @AndroidFindBy(id = "proceedToCheckoutButton")
     @iOSXCUITFindBy(id = "proceed to checkout button")
-    private MobileElement proceedToCheckoutButton;//getEnabled()
+    private MobileElement proceedToCheckoutButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/resultCount")
-    //@iOSXCUITFindBy(id = "1 LINE ITEM")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name=\"cart list\"]/XCUIElementTypeStaticText[1]")
-    private MobileElement filterResultCount;//android 1 LINE ITEM
+    @AndroidFindBy(id = "resultCount")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name='cart list']/XCUIElementTypeStaticText[1]")
+    private MobileElement filterResultCount;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.view.ViewGroup/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]")
     @iOSXCUITFindBy(id = "orderLineItem-0-0")
     private MobileElement orderLineItem1;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productDescription")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name=\"orderLineItem-0-0\"]/XCUIElementTypeStaticText[1]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'productDescription')]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name='orderLineItem-0-0']/XCUIElementTypeStaticText[1]")
     private MobileElement orderLineItem1ProductTitle;
-    //android Beef Ground Bulk 81%-19% Chub
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productInfo")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name=\"orderLineItem-0-0\"]/XCUIElementTypeStaticText[2]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]/*[contains(@resource-id, 'productInfoContainer')]/*[contains(@resource-id, 'productInfo')]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name='orderLineItem-0-0']/XCUIElementTypeStaticText[2]")
     private MobileElement orderLineItem1ProductDescription;
-    //android 0566709 | 4/5#AV | FIRE RIVER FARMS CLASSIC
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/priceLabel")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name=\"orderLineItem-0-0\"]/XCUIElementTypeStaticText[4]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'priceLabel')]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name='orderLineItem-0-0']/XCUIElementTypeStaticText[4]")
     private MobileElement orderLineItem1PricePerItem;
-    //android CS (avg. 20.37LB) @ $2.652/LB
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/totalPriceLabel")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name=\"orderLineItem-0-0\"]/XCUIElementTypeStaticText[3]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'totalPriceLabel')]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name='orderLineItem-0-0']/XCUIElementTypeStaticText[3]")
     private MobileElement orderLineItem1PriceTotal;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/popupMenu")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name=\"orderLineItem-0-0\"]/XCUIElementTypeButton[@name=\"dot menu button\"]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'popupMenu')]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name='orderLineItem-0-0']/XCUIElementTypeButton[@name='dot menu button']")
     private MobileElement orderLineItem1DotMenuButton;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'addToCartMinus')]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name='orderLineItem-0-0']/XCUIElementTypeButton[@name='decrease quantity button']")
+    private MobileElement orderLineItem1DecreaseQuantityButton;
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'cartItemCount')]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name='orderLineItem-0-0']/XCUIElementTypeTextField[@name='case quantity text field']")
+    private MobileElement orderLineItem1QuantityInputField;
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'addToCartPlus')]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name='orderLineItem-0-0']/XCUIElementTypeButton[@name='increase quantity button']")
+    private MobileElement orderLineItem1IncreaseQuantityButton;
+
+
+    /** Order item three dot menu */
+
+//    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView")
+    @AndroidFindBy(xpath = "//*[contains(@text, 'Add to list')]")
     @iOSXCUITFindBy(id = "Add to list")
     private MobileElement addToListButton;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView")
+    //    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView")
+    @AndroidFindBy(xpath = "//*[contains(@text, 'Remove item')]")
     @iOSXCUITFindBy(id = "Remove item")
     private MobileElement removeItemButton;
 
@@ -93,38 +105,30 @@ public class OrderCartPage extends BaseTest {
     private MobileElement cancelButton;
 
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addToCartMinus")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name=\"orderLineItem-0-0\"]/XCUIElementTypeButton[@name=\"decrease quantity button\"]")
-    private MobileElement orderLineItem1DecreaseQuantityButton;
-
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/cartItemCount")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name=\"orderLineItem-0-0\"]/XCUIElementTypeTextField[@name=\"case quantity text field\"]")
-    private MobileElement orderLineItem1QuantityInputField;
-
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addToCartPlus")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name=\"orderLineItem-0-0\"]/XCUIElementTypeButton[@name=\"increase quantity button\"]")
-    private MobileElement orderLineItem1IncreaseQuantityButton;
-
-
     /** Credit Card elements */
 
+    @AndroidFindBy(id = "customerCreditBanner")
     @iOSXCUITFindBy(id = "prospect shop message")
     private MobileElement prospectShopLabelContainer;
 
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'customerCreditBanner')]/android.widget.TextView[1]")
     @iOSXCUITFindBy(id = "Fill out your Sysco Credit Application for credit terms and payment flexibility. You were emailed a link to your credit application when you registered to become a Sysco customer, and it should take 15 minutes to complete.")
     private MobileElement prospectShopText;
 
+    @AndroidFindBy(id = "customerCreditBannerClose")
     @iOSXCUITFindBy(id = "prospect shop message close")
     private MobileElement prospectShopCloseButton;
 
 
     /** Filter elements */
 
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"MEATS\"`]")
+    @AndroidFindBy(id = "categoryName")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'MEATS'`]")
     private MobileElement filterCategoryMeatLabel;
 
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name=\"cart list\"]/XCUIElementTypeStaticText[2]")
-    private MobileElement searchQueryLabel;
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name='cart list']/XCUIElementTypeStaticText[2]")
+    private MobileElement iosSearchQueryLabel;
+
 
     public OrderCartPage checkElementsPresence(String expectedTotalPrice, String expectedCsAndEaValues) {
         utils.log().info("Check elements presence on Order Cart Page");
@@ -137,6 +141,8 @@ public class OrderCartPage extends BaseTest {
         softAssert.assertTrue(filterButton.isDisplayed(), "filterButton");
         softAssert.assertTrue(proceedToCheckoutButton.isDisplayed(), "proceedToCheckoutButton");
         softAssert.assertTrue(filterResultCount.isDisplayed(), "filterResultCount");
+        softAssert.assertEquals(navBarPriceValue.getText(), expectedTotalPrice);
+        softAssert.assertTrue(navBarCsAndEaValues.getText().contains(expectedCsAndEaValues));
         softAssert.assertAll();
         return this;
     }
@@ -157,10 +163,10 @@ public class OrderCartPage extends BaseTest {
         softAssert.assertEquals(orderLineItem1ProductTitle.getText(), expectedTitle);
         softAssert.assertEquals(orderLineItem1ProductDescription.getText(), expectedDescription);
         if(expectedPricePerCS != null) {
-            softAssert.assertEquals(orderLineItem1PricePerItem.getText(), expectedPricePerCS);
+            softAssert.assertEquals(orderLineItem1PricePerItem.getText().replace("\n", ""), expectedPricePerCS);
         }
         if(expectedPricePerEA != null) {
-            softAssert.assertEquals(orderLineItem1PricePerItem.getText(), expectedPricePerEA);
+            softAssert.assertEquals(orderLineItem1PricePerItem.getText().replace("\n", ""), expectedPricePerEA);
         }
         softAssert.assertEquals(orderLineItem1PriceTotal.getText(), expectedPriceTotal);
         softAssert.assertAll();
@@ -173,6 +179,9 @@ public class OrderCartPage extends BaseTest {
         softAssert.assertTrue(prospectShopLabelContainer.isDisplayed(), "prospectShopLabelContainer");
         softAssert.assertTrue(prospectShopText.isDisplayed(), "prospectShopText");
         softAssert.assertTrue(prospectShopCloseButton.isDisplayed(), "prospectShopCloseButton");
+        if(getPlatform().equalsIgnoreCase("Android")){
+            softAssert.assertEquals(prospectShopText.getText(), "Fill out your Sysco Credit Application for credit terms and payment flexibility. You were emailed a link to your credit application when you registered to become a Sysco customer, and it should take 15 minutes to complete.");
+        }
         softAssert.assertAll();
         return this;
     }

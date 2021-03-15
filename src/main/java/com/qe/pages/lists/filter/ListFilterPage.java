@@ -18,13 +18,13 @@ public class ListFilterPage extends BaseTest {
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ImageButton")
     private MobileElement clearButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productListSortBy")
+    @AndroidFindBy(id = "productListSortBy")
     private MobileElement sortByButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productListCategory")
+    @AndroidFindBy(id = "productListCategory")
     private MobileElement syscoCategoryButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/seeResultsButton")
+    @AndroidFindBy(id = "seeResultsButton")
     private MobileElement seeResultsButton;
 
     public ListPage pressCloseButton() {

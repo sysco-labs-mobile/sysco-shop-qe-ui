@@ -13,22 +13,22 @@ public class ListDeleteAlert extends BaseTest {
     @iOSXCUITFindBy(id = "delete list alert")
     private MobileElement deleteListAlert;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertTitle")
+    @AndroidFindBy(id = "alertTitle")
     @iOSXCUITFindBy(id = "Delete ListLisshchchhchs")
     private MobileElement deleteListTitle;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertText")
+    @AndroidFindBy(id = "alertText")
     @iOSXCUITFindBy(id = "This action cannot be undone. Do you want to continue?")
     private MobileElement deleteListDescription;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertSecondaryButton")
+    @AndroidFindBy(id = "alertSecondaryButton")
     @iOSXCUITFindBy(id = "alert secondary")
     private MobileElement alertNoButton;
 
     @iOSXCUITFindBy(id = "no")
     private MobileElement alertNoButtonText;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertPrimaryButton")
+    @AndroidFindBy(id = "alertPrimaryButton")
     @iOSXCUITFindBy(id = "alert primary")
     private MobileElement alertYesButton;
 
@@ -41,9 +41,7 @@ public class ListDeleteAlert extends BaseTest {
 //      softAssert.assertTrue(deleteListTitle.isDisplayed());
         softAssert.assertTrue(deleteListDescription.isDisplayed());
         softAssert.assertTrue(alertNoButton.isDisplayed());
-//      softAssert.assertTrue(alertNoButtonText.isDisplayed());
         softAssert.assertTrue(alertYesButton.isDisplayed());
-//      softAssert.assertTrue(alertYesButtonText.isDisplayed());
         softAssert.assertAll();
     }
 

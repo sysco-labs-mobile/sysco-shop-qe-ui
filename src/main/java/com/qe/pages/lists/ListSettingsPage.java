@@ -21,26 +21,26 @@ public class ListSettingsPage extends BaseTest {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"List Settings\"`]")
     private MobileElement listSettingsHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/saveProductList")
+    @AndroidFindBy(id = "saveProductList")
     @iOSXCUITFindBy(id = "list settings save button")
     private MobileElement saveListButton;
 
     @iOSXCUITFindBy(id = "List Name")
     private MobileElement listNameLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/listNameField")
+    @AndroidFindBy(id = "listNameField")
     @iOSXCUITFindBy(id = "list name input text field")
     private MobileElement listNameInputTextField;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/setAsDefaultListCheckbox")
+    @AndroidFindBy(id = "setAsDefaultListCheckbox")
     @iOSXCUITFindBy(id = "default list checkbox")
     private MobileElement defaultListCheckbox;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productListPrivacyLabel")
+    @AndroidFindBy(id = "productListPrivacyLabel")
     @iOSXCUITFindBy(id = "Privacy")
     private MobileElement privacyHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/publicProductList")
+    @AndroidFindBy(id = "publicProductList")
     @iOSXCUITFindBy(id = "public setting")
     private MobileElement publicSettingButton;
 
@@ -56,7 +56,7 @@ public class ListSettingsPage extends BaseTest {
     @iOSXCUITFindBy(id = "All users on the account can view")
     private MobileElement publicDescription;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/privateProductList")
+    @AndroidFindBy(id = "privateProductList")
     @iOSXCUITFindBy(id = "private setting")
     private MobileElement privateSettingButton;
 
@@ -75,34 +75,34 @@ public class ListSettingsPage extends BaseTest {
     @iOSXCUITFindBy(id = "Delete list")
     private MobileElement deleteListLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/deleteListContainer")
+    @AndroidFindBy(id = "deleteListContainer")
     @iOSXCUITFindBy(id = "delete settings view delete button")
     private MobileElement deleteListButton;
 
     /** View By section */
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productListViewByLabel")
+    @AndroidFindBy(id = "productListViewByLabel")
     private MobileElement viewByHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/uncategorized")
+    @AndroidFindBy(id = "uncategorized")
     private MobileElement uncategorizedSelector;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/syscoCategories")
+    @AndroidFindBy(id = "syscoCategories")
     private MobileElement syscoCategoriesSelector;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/customCategories")
+    @AndroidFindBy(id = "customCategories")
     private MobileElement customCategoriesSelector;
 
 
     /** Par section */
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/parManagementLabel")
+    @AndroidFindBy(id = "parManagementLabel")
     private MobileElement parManagementLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/parManagementSwitch")
+    @AndroidFindBy(id = "parManagementSwitch")
     private MobileElement parManagementSwitch;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/createNewParGroupContainer")
+    @AndroidFindBy(id = "createNewParGroupContainer")
     private MobileElement createNewParGroupButton;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.LinearLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]")
@@ -120,12 +120,8 @@ public class ListSettingsPage extends BaseTest {
         softAssert.assertTrue(privacyHeader.isDisplayed());
         softAssert.assertTrue(publicSettingButton.isDisplayed());
 //        softAssert.assertTrue(publicSettingFilledSettingButton.isDisplayed()); only ios
-//        softAssert.assertTrue(publicLabel.isDisplayed());
-//        softAssert.assertTrue(publicDescription.isDisplayed());
         softAssert.assertTrue(privateSettingButton.isDisplayed());
 //        softAssert.assertTrue(privateSettingEmptyCircleButton.isDisplayed()); only ios
-//        softAssert.assertTrue(privateLabel.isDisplayed());
-//        softAssert.assertTrue(privateDescription.isDisplayed());
         softAssert.assertAll();
         return this;
     }

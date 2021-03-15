@@ -11,17 +11,16 @@ public class ParSettingsPage extends BaseTest {
     @AndroidFindBy(accessibility = "Back")
     private MobileElement backButton;
 
-    //android Par Settings
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
     private MobileElement parPageTitle;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/saveProductList")
+    @AndroidFindBy(id = "saveProductList")
     private MobileElement saveButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/parNameField")
+    @AndroidFindBy(id = "parNameField")
     private MobileElement parGroupNameField;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/deleteParGroupContainer")
+    @AndroidFindBy(id = "deleteParGroupContainer")
     private MobileElement deleteParButton;
 
     public ParSettingsPage inputParName(String inputParName) {

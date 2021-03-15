@@ -6,6 +6,9 @@ import com.qe.pages.login.LoginPage;
 import com.qe.pages.orders.OrderCartPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
@@ -37,11 +40,11 @@ public class ProductCardPage extends BaseTest {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"product info carousel\"`]/XCUIElementTypeScrollView")
     private MobileElement productImageScrollView;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/title")
+    @AndroidFindBy(id = "title")
     @iOSXCUITFindBy(id = "product info description")
     private MobileElement productInfoTitle;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/basicInfo")
+    @AndroidFindBy(id = "basicInfo")
     @iOSXCUITFindBy(id = "product info data")
     private MobileElement productInfoDescriptionText;
 
@@ -157,11 +160,11 @@ public class ProductCardPage extends BaseTest {
 
     /** Guest user elements */
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/becomeACustomer")
+    @AndroidFindBy(id = "becomeACustomer")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Become A Customer\"`]")
     private MobileElement becomeACustomerButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/signInText") //this does not work
+    @AndroidFindBy(id = "signInText") //this does not work
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"guest sign in view\"`]/XCUIElementTypeButton[2]")
     private MobileElement guestSignInButton;
 
@@ -278,7 +281,13 @@ public class ProductCardPage extends BaseTest {
 
     public ProductCardPage inputCaseQuantity(String quantity) {
         sendKeys(quantityCaseInputField, quantity, "Input quantity " + quantity + " and hide keyboard");
-        getDriver().getKeyboard().sendKeys("\n");
+        if(getPlatform().equalsIgnoreCase("iOS")) {
+            getDriver().getKeyboard().sendKeys("\n");
+        }
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            click(quantityCaseInputField);
+            ((AndroidDriver) getDriver()).pressKey(new KeyEvent(AndroidKey.ENTER));
+        }
         return new ProductCardPage();
     }
 

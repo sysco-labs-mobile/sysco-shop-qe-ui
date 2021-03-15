@@ -15,10 +15,10 @@ public class ParPage extends BaseTest {
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
     private MobileElement parNamePageTitle;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/parSettingsContainer")
+    @AndroidFindBy(id = "parSettingsContainer")
     private MobileElement parSettingsButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/editParItemsContainer")
+    @AndroidFindBy(id = "editParItemsContainer")
     private MobileElement editParItemsButton;
 
     public ListSettingsPage pressBackButton() {

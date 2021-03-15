@@ -6,6 +6,9 @@ import com.qe.pages.search.SearchCatalogPage;
 import com.qe.pages.search.TypeAheadPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.asserts.SoftAssert;
@@ -19,33 +22,34 @@ public class DiscoverPage extends BaseTest {
     @iOSXCUITFindBy(id = "app bar left button")
     private MobileElement navBarDrawerButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/editText")
+    @AndroidFindBy(id = "editText")
     @iOSXCUITFindBy(id = "app nav search bar text field")
     private MobileElement searchTextField; //getValue contains search input
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/editText")
+    @AndroidFindBy(id = "editText")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Shop by category\"`][1]")
     private MobileElement searchTextFieldText;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/action_cart")
+    @AndroidFindBy(id = "action_cart")
     @iOSXCUITFindBy(id = "cart button")
     private MobileElement cartButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/currentCustomerLayout")
+    @AndroidFindBy(id = "dashboardIndeterminateProgressBar")
+    private MobileElement androidProgressBar;
+
+    @AndroidFindBy(id = "currentCustomerLayout")
     @iOSXCUITFindBy(id = "account selector button")
     private MobileElement accountSelectorButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/currentCustomerName")
+    @AndroidFindBy(id = "currentCustomerName")
     @iOSXCUITFindBy(id = "current account name label")
     private MobileElement currentAccountNameLabel;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[3]/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView[1]", priority = 1)
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView[1]", priority = 0)
+    @AndroidFindBy(xpath = "//android.widget.ImageView[@content-desc=\"Welcome to Sysco Shop\"]/following-sibling::android.widget.LinearLayout[1]/android.widget.TextView[1]")
     @iOSXCUITFindBy(id = "dashboard welcome label")
     private MobileElement dashboardWelcomeLabel;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[3]/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView[2]", priority = 1)
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView[2]", priority = 0)
+    @AndroidFindBy(xpath = "//android.widget.ImageView[@content-desc=\"Welcome to Sysco Shop\"]/following-sibling::android.widget.LinearLayout[1]/android.widget.TextView[2]")
     @iOSXCUITFindBy(id = "dashboard tagline label")
     private MobileElement dashboardTaglineLabel;
 
@@ -83,6 +87,9 @@ public class DiscoverPage extends BaseTest {
     @iOSXCUITFindBy(id = "view delivery button")
     private MobileElement viewDeliveryButton;
 
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'deliveryLoadError')]")
+    private MobileElement viewDeliveryErrorLoading;
+
 
     /** Suggestions for you elements */
 
@@ -104,74 +111,76 @@ public class DiscoverPage extends BaseTest {
 
 
     /** Categories elements */
-
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TextView")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/preceding-sibling::android.widget.TextView[1]")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Shop by category\"`][2]")
     private MobileElement shopByCategoryHeader;
 
-    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/categoryList\"]/*")
-    private List<MobileElement> categoriesByXpath;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/*")
+    private List<MobileElement> androidCategoriesByXpath;
 
-    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/categoryList\"]/android.widget.LinearLayout[1]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryText')]/*")
+    private List<MobileElement> androidCategoriesNamesByXpath;
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[1]")
     @iOSXCUITFindBy(id = "meats")
     private MobileElement meatsCategoryButton;
 
-    @AndroidFindBy(id = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[2]")
     @iOSXCUITFindBy(id = "seafood")
     private MobileElement seaCategoryButton;
 
-    @AndroidFindBy(id = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[3]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[3]")
     @iOSXCUITFindBy(id = "poultry")
     private MobileElement poultryCategoryButton;
 
-    @AndroidFindBy(id = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[4]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[4]")
     @iOSXCUITFindBy(id = "frozen")
     private MobileElement frozenCategoryButton;
 
-
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[5]")
     @iOSXCUITFindBy(id = "canned")
     private MobileElement cannedCategoryButton;
 
-
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[6]")
     @iOSXCUITFindBy(id = "produce")
     private MobileElement produceCategoryButton;
 
-
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[7]")
     @iOSXCUITFindBy(id = "dairy")
     private MobileElement dairyCategoryButton;
 
-
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[8]")
     @iOSXCUITFindBy(id = "dispenser-beverage")
     private MobileElement dispenserCategoryButton;
 
-
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[9]")
     @iOSXCUITFindBy(id = "supplies-and-equipment")
     private MobileElement suppliesCategoryButton;
 
-
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[10]")
     @iOSXCUITFindBy(id = "paper-and-display")
     private MobileElement paperCategoryButton;
 
-
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[11]")
     @iOSXCUITFindBy(id = "chemical-and-janitorial")
     private MobileElement chemicalCategoryButton;
 
-
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'categoryList')]/android.widget.LinearLayout[12]")
     @iOSXCUITFindBy(id = "healthcare-and-hospitality")
     private MobileElement healthcareCategoryButton;
 
 
     /** Guest User specific elements */
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/zip_code_container")
+    @AndroidFindBy(id = "zip_code_container")
     @iOSXCUITFindBy(id = "current zip code button")
     private MobileElement zipCodeSwitcherButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/delivery_zip_code")
+    @AndroidFindBy(id = "delivery_zip_code")
     @iOSXCUITFindBy(id = "current zip code label")
     private MobileElement currentZipLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/become_a_customer")
+    @AndroidFindBy(id = "become_a_customer")
     @iOSXCUITFindBy(id = "become a customer button")
     private MobileElement becomeCustomerButton;
 
@@ -183,22 +192,60 @@ public class DiscoverPage extends BaseTest {
         softAssert.assertTrue(searchTextField.isDisplayed());
         softAssert.assertTrue(searchTextFieldText.isDisplayed());
         softAssert.assertTrue(cartButton.isDisplayed());
-//        softAssert.assertTrue(dashboardWelcomeLabel.isDisplayed()); android flaks out
-//        softAssert.assertTrue(dashboardTaglineLabel.isDisplayed()); android flaks out
-//        softAssert.assertTrue(deliverySummaryHeader.isDisplayed());
-//        softAssert.assertTrue(deliveryIcon.isDisplayed());
-//        softAssert.assertTrue(deliveryPlaceLabel.isDisplayed());
-//        softAssert.assertTrue(deliveryStatusLabel.isDisplayed());
-//        softAssert.assertTrue(deliveryTimeIcon.isDisplayed());
-//        softAssert.assertTrue(estimatedDeliveryLabel.isDisplayed());
-//        softAssert.assertTrue(deliveryTimeLabel.isDisplayed());
-//        softAssert.assertTrue(viewDeliveryButton.isDisplayed());
-//        softAssert.assertTrue(suggestionsForYouHeader.isDisplayed());
-//        softAssert.assertTrue(suggestionsForYouCollection.isDisplayed());
-//        softAssert.assertTrue(suggestionsForYouItem1.isDisplayed());
-//        softAssert.assertTrue(shopByCategoryHeader.isDisplayed());  android flaks out
-//        softAssert.assertTrue(meatsCategoryButton.isDisplayed());
-//        softAssert.assertTrue(seaCategoryButton.isDisplayed());
+        softAssert.assertTrue(dashboardWelcomeLabel.isDisplayed());
+        softAssert.assertTrue(dashboardTaglineLabel.isDisplayed());
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            softAssert.assertEquals(dashboardWelcomeLabel.getText(), "Welcome to Sysco Shop");
+            softAssert.assertEquals(dashboardTaglineLabel.getText(), "Keeping you on trend and stocked with fresh products and fresh ideas.");
+        }
+        softAssert.assertTrue(shopByCategoryHeader.isDisplayed());
+        softAssert.assertAll();
+        return this;
+    }
+
+
+    public DiscoverPage checkElementsPresenceForCategories() {
+        utils.log().info("Check elements presence");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(shopByCategoryHeader.isDisplayed());
+        softAssert.assertTrue(meatsCategoryButton.isDisplayed());
+        softAssert.assertTrue(seaCategoryButton.isDisplayed());
+        scrollDownByCoordinates();
+        softAssert.assertTrue(poultryCategoryButton.isDisplayed());
+        softAssert.assertTrue(frozenCategoryButton.isDisplayed());
+        softAssert.assertTrue(cannedCategoryButton.isDisplayed());
+        softAssert.assertTrue(produceCategoryButton.isDisplayed());
+        softAssert.assertTrue(dairyCategoryButton.isDisplayed());
+        softAssert.assertTrue(dispenserCategoryButton.isDisplayed());
+        softAssert.assertTrue(suppliesCategoryButton.isDisplayed());
+        softAssert.assertTrue(paperCategoryButton.isDisplayed());
+        softAssert.assertTrue(chemicalCategoryButton.isDisplayed());
+        softAssert.assertTrue(healthcareCategoryButton.isDisplayed());
+        softAssert.assertAll();
+        return this;
+    }
+
+    public DiscoverPage checkElementsPresenceForDeliveryWidget() {
+        utils.log().info("Check elements presence");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(deliverySummaryHeader.isDisplayed());
+        softAssert.assertTrue(deliveryIcon.isDisplayed());
+        softAssert.assertTrue(deliveryPlaceLabel.isDisplayed());
+        softAssert.assertTrue(deliveryStatusLabel.isDisplayed());
+        softAssert.assertTrue(deliveryTimeIcon.isDisplayed());
+        softAssert.assertTrue(estimatedDeliveryLabel.isDisplayed());
+        softAssert.assertTrue(deliveryTimeLabel.isDisplayed());
+        softAssert.assertTrue(viewDeliveryButton.isDisplayed());
+        softAssert.assertAll();
+        return this;
+    }
+
+    public DiscoverPage checkElementsPresenceForSuggestionsForYou() {
+        utils.log().info("Check elements presence");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(suggestionsForYouHeader.isDisplayed());
+        softAssert.assertTrue(suggestionsForYouCollection.isDisplayed());
+        softAssert.assertTrue(suggestionsForYouItem1.isDisplayed());
         softAssert.assertAll();
         return this;
     }
@@ -217,14 +264,13 @@ public class DiscoverPage extends BaseTest {
         return new NavDrawer();
     }
 
-    public TypeAheadPage inputTypeAhead(String typeAheadQuery) {
-        sendKeys(searchTextField, typeAheadQuery, "Input search " + typeAheadQuery);
-        return new TypeAheadPage();
-    }
-
     public SearchCatalogPage inputSearch(String searchQuery) {
         sendKeys(searchTextField, searchQuery, "Input search " + searchQuery);
         getDriver().getKeyboard().sendKeys("\n");
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            click(searchTextField);
+            ((AndroidDriver) getDriver()).pressKey(new KeyEvent(AndroidKey.ENTER));
+        }
         return new SearchCatalogPage();
     }
 
@@ -304,18 +350,20 @@ public class DiscoverPage extends BaseTest {
     public DiscoverPage checkGuestElementsPresence(String expectedAssignedZip) {
         utils.log().info("Check Guest Elements Presence");
         SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(navBarDrawerButton.isDisplayed());
+        softAssert.assertTrue(searchTextField.isDisplayed());
+        softAssert.assertTrue(searchTextFieldText.isDisplayed());
+        softAssert.assertTrue(dashboardWelcomeLabel.isDisplayed());
+        softAssert.assertTrue(dashboardTaglineLabel.isDisplayed());
+        softAssert.assertTrue(shopByCategoryHeader.isDisplayed());
         if(getPlatform().equalsIgnoreCase("iOS")) {
             softAssert.assertEquals(currentZipLabel.getText(), expectedAssignedZip);
         }
         if(getPlatform().equalsIgnoreCase("Android")) {
             softAssert.assertEquals(currentZipLabel.getText(), "Delivering to " + expectedAssignedZip);
+            softAssert.assertEquals(dashboardWelcomeLabel.getText(), "Welcome to Sysco Shop");
+            softAssert.assertEquals(dashboardTaglineLabel.getText(), "Keeping you on trend and stocked with fresh products and fresh ideas.");
         }
-        softAssert.assertTrue(navBarDrawerButton.isDisplayed());
-        softAssert.assertTrue(searchTextField.isDisplayed());
-        softAssert.assertTrue(searchTextFieldText.isDisplayed());
-//        softAssert.assertTrue(dashboardWelcomeLabel.isDisplayed()); android flaks out
-//        softAssert.assertTrue(dashboardTaglineLabel.isDisplayed()); android flaks out
-        softAssert.assertTrue(shopByCategoryHeader.isDisplayed());
         softAssert.assertAll();
         return this;
     }

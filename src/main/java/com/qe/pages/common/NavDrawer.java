@@ -23,7 +23,7 @@ public class NavDrawer extends BaseTest {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"SHOP\"`]")
     private MobileElement shopHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/nav_discover")
+    @AndroidFindBy(id = "nav_discover")
     @iOSXCUITFindBy(id = "drawer-0-0")
     private MobileElement discoverButton;
 
@@ -33,7 +33,7 @@ public class NavDrawer extends BaseTest {
     @iOSXCUITFindBy(id = "Discover")
     private MobileElement discoverButtonText;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/nav_lists")
+    @AndroidFindBy(id = "nav_lists")
     @iOSXCUITFindBy(id = "drawer-0-1")
     private MobileElement listButton;
 
@@ -43,7 +43,7 @@ public class NavDrawer extends BaseTest {
     @iOSXCUITFindBy(id = "Lists")
     private MobileElement listButtonText;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/nav_orders")
+    @AndroidFindBy(id = "nav_orders")
     @iOSXCUITFindBy(id = "drawer-0-2")
     private MobileElement ordersButton;
 
@@ -56,7 +56,7 @@ public class NavDrawer extends BaseTest {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"PROFILE\"`]")
     private MobileElement profileHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/nav_notifications")
+    @AndroidFindBy(id = "nav_notifications")
     @iOSXCUITFindBy(id = "drawer-1-0")
     private MobileElement notificationsButton;
 
@@ -66,7 +66,7 @@ public class NavDrawer extends BaseTest {
     @iOSXCUITFindBy(id = "Notifications")
     private MobileElement notificationsButtonText;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/nav_help")
+    @AndroidFindBy(id = "nav_help")
     @iOSXCUITFindBy(id = "drawer-1-1")
     private MobileElement helpButton;
 
@@ -76,7 +76,7 @@ public class NavDrawer extends BaseTest {
     @iOSXCUITFindBy(id = "Help")
     private MobileElement helpButtonText;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/nav_log_out")
+    @AndroidFindBy(id = "nav_log_out")
     @iOSXCUITFindBy(id = "drawer-1-2")
     private MobileElement logoutButton;
 
@@ -119,27 +119,12 @@ public class NavDrawer extends BaseTest {
     public NavDrawer checkElementsPresence() {
         utils.log().info("Check elements presence in nav drawer");
         SoftAssert softAssert = new SoftAssert();
-        //Assert.assertTrue(drawerLogo.isDisplayed());
-        //Assert.assertTrue(shopHeader.isDisplayed());
         softAssert.assertTrue(discoverButton.isDisplayed());
-        //Assert.assertTrue(discoverIcon.isDisplayed());
-        //Assert.assertTrue(discoverButtonText.isDisplayed());
         softAssert.assertTrue(listButton.isDisplayed());
-        //Assert.assertTrue(listsIcon.isDisplayed());
-        //Assert.assertTrue(listButtonText.isDisplayed());
         softAssert.assertTrue(ordersButton.isDisplayed());
-        //Assert.assertTrue(ordersIcon.isDisplayed());
-        //Assert.assertTrue(ordersButtonText.isDisplayed());
-        //Assert.assertTrue(profileHeader.isDisplayed());
         softAssert.assertTrue(notificationsButton.isDisplayed());
-        //Assert.assertTrue(notificationsIcon.isDisplayed());
-        //Assert.assertTrue(notificationsButtonText.isDisplayed());
         softAssert.assertTrue(helpButton.isDisplayed());
-        //Assert.assertTrue(helpIcon.isDisplayed());
-        //Assert.assertTrue(helpButtonText.isDisplayed());
         softAssert.assertTrue(logoutButton.isDisplayed());
-        //Assert.assertTrue(logoutIcon.isDisplayed());
-        //Assert.assertTrue(logoutText.isDisplayed());
         softAssert.assertAll();
         return this;
     }

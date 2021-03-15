@@ -2,28 +2,17 @@
 <suite name="Suite" parallel="tests">
     <test name="Pixel_4_API_30_1">
         <listeners>
-            <listener class-name="com.qe.listeners.TestListener" />
+            <listener class-name="com.qe.listeners.TestListener" preserve-order="true" />
         </listeners>
-        <parameter name="emulator" value="true" />
+        <parameter name="emulator" value="true" preserve-order="true" />
         <parameter name="platformName" value="Android" />
         <parameter name="udid" value="emulator-5554" />
-        <parameter name="deviceName" value="Pixel_4_API_30_1" />
+        <parameter name="deviceName" value="Pixel_4_XL_API_30" />
         <parameter name="systemPort" value="10000" />
         <parameter name="chromeDriverPort" value="11000" />
-        <classes>
-            <class name="com.qe.tests.LoginTests"/>
-            <class name="com.qe.tests.DiscoverTests"/>
-            <class name="com.qe.tests.MultibuyerTests"/>
-            <class name="com.qe.tests.SearchCatalogTests"/>
-            <!--class name="com.qe.tests.ProductCardTests"/-->
-            <class name="com.qe.tests.GuestTests"/>
-            <!--class name="com.qe.tests.ListsTests"/-->
-            <class name="com.qe.tests.LogOutTests"/>
-            <class name="com.qe.tests.OrdersTests"/>
-            <class name="com.qe.tests.OrderCartTests"/>
-            <!--class name="com.qe.tests.CreditCardTests"/>
-            <class name="com.qe.tests.DiscountsTests"/-->
-        </classes>
+        <packages>
+            <package name="com.qe.tests.smoke.*"/>
+        </packages>
     </test>
     <!--test name="Pixel_3_API_29_1">
         <listeners>
@@ -35,14 +24,8 @@
         <parameter name="deviceName" value="Pixel_3_API_29_1" />
         <parameter name="systemPort" value="10001" />
         <parameter name="chromeDriverPort" value="11001" />
-        <classes>
-            <class name="com.qe.tests.DebugTests"/>
-            <class name="com.qe.tests.LoginTests"/>
-            <class name="com.qe.tests.GuestTests"/>
-            <class name="com.qe.tests.DiscoverTests"/>
-            <class name="com.qe.tests.MultibuyerTests"/>
-            <class name="com.qe.tests.OrderCartTests"/>
-            <class name="com.qe.tests.SearchCatalogTests">
+                <classes>
+            <package name="com.qe.tests.smoke.*"/>
         </classes>
     </test-->
     <!--test name="Pixel_3a_API_30_1">
@@ -55,14 +38,8 @@
         <parameter name="deviceName" value="Pixel_3a_API_30_1" />
         <parameter name="systemPort" value="10002" />
         <parameter name="chromeDriverPort" value="11002" />
-        <classes>
-            <class name="com.qe.tests.DebugTests"/>
-            <class name="com.qe.tests.LoginTests"/>
-            <class name="com.qe.tests.GuestTests"/>
-            <class name="com.qe.tests.DiscoverTests"/>
-            <class name="com.qe.tests.MultibuyerTests"/>
-            <class name="com.qe.tests.OrderCartTests"/>
-            <class name="com.qe.tests.SearchCatalogTests">
+                <classes>
+            <package name="com.qe.tests.smoke.*"/>
         </classes>
     </test-->
     <!--test name="Pixel_4_API_30_1">
@@ -75,14 +52,8 @@
         <parameter name="deviceName" value="Pixel_4_API_30_1" />
         <parameter name="systemPort" value="10003" />
         <parameter name="chromeDriverPort" value="11003" />
-        <classes>
-            <class name="com.qe.tests.DebugTests"/>
-            <class name="com.qe.tests.LoginTests"/>
-            <class name="com.qe.tests.GuestTests"/>
-            <class name="com.qe.tests.DiscoverTests"/>
-            <class name="com.qe.tests.MultibuyerTests"/>
-            <class name="com.qe.tests.OrderCartTests"/>
-            <class name="com.qe.tests.SearchCatalogTests"/>
+                <classes>
+            <package name="com.qe.tests.smoke.*"/>
         </classes>
     </test-->
     <!--test name="Pixel_XL_API_30">
@@ -95,14 +66,8 @@
         <parameter name="deviceName" value="Pixel_XL_API_30" />
         <parameter name="systemPort" value="10004" />
         <parameter name="chromeDriverPort" value="11004" />
-        <classes>
-            <class name="com.qe.tests.DebugTests"/>
-            <class name="com.qe.tests.LoginTests"/>
-            <class name="com.qe.tests.GuestTests"/>
-            <class name="com.qe.tests.DiscoverTests"/>
-            <class name="com.qe.tests.MultibuyerTests"/>
-            <class name="com.qe.tests.OrderCartTests"/>
-            <class name="com.qe.tests.SearchCatalogTests"/>
+                <classes>
+            <package name="com.qe.tests.smoke.*"/>
         </classes>
     </test-->
-</suite> <!-- Suite -->
+</suite>

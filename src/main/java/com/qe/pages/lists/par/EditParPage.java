@@ -16,25 +16,25 @@ public class EditParPage extends BaseTest {
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
     private MobileElement editParPageTitle;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productImage")
+    @AndroidFindBy(id = "productImage")
     private List<MobileElement> productImages;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productDescription")
+    @AndroidFindBy(id = "productDescription")
     private List<MobileElement> productTitles;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/productInfo")
+    @AndroidFindBy(id = "productInfo")
     private List<MobileElement> productDescriptions;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/priceLabel")
+    @AndroidFindBy(id = "priceLabel")
     private List<MobileElement> productCasesPars;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addToCartMinus")
+    @AndroidFindBy(id = "addToCartMinus")
     private List<MobileElement> productParQuantityMinusButtons;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/cartItemCount")
+    @AndroidFindBy(id = "cartItemCount")
     private List<MobileElement> productParQuantityInputFields;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addToCartPlus")
+    @AndroidFindBy(id = "addToCartPlus")
     private List<MobileElement> productParQuantityPlusButtons;
 
     public ParPage pressBackButton() {
