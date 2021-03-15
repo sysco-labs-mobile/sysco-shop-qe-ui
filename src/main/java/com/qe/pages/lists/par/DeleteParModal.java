@@ -9,16 +9,16 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 public class DeleteParModal extends BaseTest {
     TestUtils utils = new TestUtils();
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertTitle")
+    @AndroidFindBy(id = "alertTitle")
     private MobileElement modalTitle;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertText")
+    @AndroidFindBy(id = "alertText")
     private MobileElement modalDescription;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertSecondaryButton")
+    @AndroidFindBy(id = "alertSecondaryButton")
     private MobileElement noButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertPrimaryButton")
+    @AndroidFindBy(id = "alertPrimaryButton")
     private MobileElement yesButton;
 
     public ListPage pressYesButton() {

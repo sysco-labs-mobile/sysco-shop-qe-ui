@@ -13,12 +13,11 @@ public class FilterPage extends BaseTest {
     @iOSXCUITFindBy(id = "filters close button")
     private MobileElement closeButton;
 
-    //android getText() = Filters
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Filters\"`]")
     private MobileElement filterTitle;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/filterReset")
+    @AndroidFindBy(id = "filterReset")
     @iOSXCUITFindBy(id = "filters reset button")
     private MobileElement filterResetButton;
 

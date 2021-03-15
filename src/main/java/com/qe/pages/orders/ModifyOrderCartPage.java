@@ -17,8 +17,6 @@ public class ModifyOrderCartPage extends BaseTest {
     @AndroidFindBy(xpath = "//android.widget.ImageView[@content-desc='More options']")
     private MobileElement threeDotButton;
 
-
-    //not present on android
     @iOSXCUITFindBy(id = "$32.97")
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='$32.97']")
     private MobileElement navBarPriceValue;//dev env 4487633 barley Pearled 1#

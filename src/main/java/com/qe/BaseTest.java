@@ -5,6 +5,8 @@ import com.qe.reports.ExtentReport;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.*;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.screenrecording.CanRecordScreen;
@@ -19,7 +21,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -152,14 +153,14 @@ public class BaseTest {
     public synchronized void afterMethod(ITestResult result) throws Exception {
         String media = ((CanRecordScreen) getDriver()).stopRecordingScreen();
 
-        Map<String, String> params = result.getTestContext().getCurrentXmlTest().getAllParameters();
+        Map <String, String> params = result.getTestContext().getCurrentXmlTest().getAllParameters();
         String dirPath = "videos" + File.separator + params.get("platformName") + "_" + params.get("deviceName")
                 + File.separator + getDateTime() + File.separator + result.getTestClass().getRealClass().getSimpleName();
 
         File videoDir = new File(dirPath);
 
-        synchronized (videoDir) {
-            if (!videoDir.exists()) {
+        synchronized(videoDir){
+            if(!videoDir.exists()) {
                 videoDir.mkdirs();
             }
         }
@@ -172,7 +173,7 @@ public class BaseTest {
         } catch (Exception e) {
             utils.log().error("error during video capture" + e.toString());
         } finally {
-            if (stream != null) {
+            if(stream != null) {
                 stream.close();
             }
         }
@@ -272,11 +273,11 @@ public class BaseTest {
             switch (platformName) {
                 case "Android":
                     desiredCapabilities.setCapability("automationName", props.getProperty("androidAutomationName"));
-//				desiredCapabilities.setCapability("appPackage", props.getProperty("androidAppPackage"));
-//				desiredCapabilities.setCapability("appActivity", props.getProperty("androidAppActivity"));
                     desiredCapabilities.setCapability("appWaitPackage", props.getProperty("androidAppWaitPackage"));
                     desiredCapabilities.setCapability("appWaitActivity", props.getProperty("androidAppWaitActivity"));
                     desiredCapabilities.setCapability("chromedriverExecutable", "/usr/local/bin/chromedriver");
+                    desiredCapabilities.setCapability("unicodeKeyboard", "true");
+                    desiredCapabilities.setCapability("resetKeyboard", "true");
                     if (emulator.equalsIgnoreCase("true")) {
                         desiredCapabilities.setCapability("avd", deviceName);
                         desiredCapabilities.setCapability("avdLaunchTimeout", 120000);
@@ -373,6 +374,10 @@ public class BaseTest {
         utils.log().info(msg);
         //ExtentReport.getTest().log(Status.INFO, msg);
         e.click();
+    }
+
+    public void clickAndroidBackButton(){
+        ((AndroidDriver)getDriver()).pressKey(new KeyEvent(AndroidKey.BACK));
     }
 
     public void sendKeys(MobileElement e, String txt) {

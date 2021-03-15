@@ -20,29 +20,29 @@ public class GuestNavDrawer extends BaseTest {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"SHOP\"`]")
     private MobileElement shopHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/nav_discover")
+    @AndroidFindBy(id = "nav_discover")
     @iOSXCUITFindBy(id = "drawer-0-0")
     private MobileElement discoverButton;
 
     @iOSXCUITFindBy(id = "discover")
     private MobileElement discoverIcon;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/nav_discover")
+    @AndroidFindBy(id = "nav_discover")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"PROFILE\"`]")
     private MobileElement profileHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/nav_help")
+    @AndroidFindBy(id = "nav_help")
     @iOSXCUITFindBy(id = "drawer-1-0")
     private MobileElement helpButton;
 
     @iOSXCUITFindBy(id = "help")
     private MobileElement helpIcon;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/nav_sign_in")
+    @AndroidFindBy(id = "nav_sign_in")
     @iOSXCUITFindBy(id = "drawer-1-1")
     private MobileElement signinButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/nav_discover")
+    @AndroidFindBy(id = "nav_discover")
     @iOSXCUITFindBy(id = "signin")
     private MobileElement signingIcon;
 

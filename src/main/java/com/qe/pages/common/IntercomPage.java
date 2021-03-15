@@ -10,7 +10,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 public class IntercomPage extends BaseTest {
     TestUtils utils = new TestUtils();
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/intercom_toolbar_close")
+    @AndroidFindBy(id = "intercom_toolbar_close")
     @iOSXCUITFindBy(id = "intercom close button")
     private MobileElement closeButton;
 

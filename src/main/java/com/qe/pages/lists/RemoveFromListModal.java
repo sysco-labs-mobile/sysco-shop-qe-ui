@@ -8,16 +8,16 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 public class RemoveFromListModal extends BaseTest {
     TestUtils utils = new TestUtils();
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertTitle")
+    @AndroidFindBy(id = "alertTitle")
     private MobileElement removeHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertText")
+    @AndroidFindBy(id = "alertText")
     private MobileElement removeDescription;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertPrimaryButton")
+    @AndroidFindBy(id = "alertPrimaryButton")
     private MobileElement yesButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/alertSecondaryButton")
+    @AndroidFindBy(id = "alertSecondaryButton")
     private MobileElement noButton;
 
     public ListPage pressYesButton() {

@@ -9,7 +9,6 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
-import java.util.Locale;
 
 public class TypeAheadPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -18,7 +17,7 @@ public class TypeAheadPage extends BaseTest {
     @iOSXCUITFindBy(id = "app bar left button")
     private MobileElement navBarDrawerButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/editText")
+    @AndroidFindBy(id = "editText")
     @iOSXCUITFindBy(id = "app nav search bar text field")
     private MobileElement searchTextField;
 
@@ -26,37 +25,34 @@ public class TypeAheadPage extends BaseTest {
     @iOSXCUITFindBy(id = "Clear text")
     private MobileElement clearTextButton;
 
-    //only android
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/action_cart")
-    private MobileElement cartButton;
+    @AndroidFindBy(id = "action_cart")
+    private MobileElement androidCartButton;
 
-    //only ios
     @iOSXCUITFindBy(id = "app bar cancel search")
-    private MobileElement cancelSearchButton;
+    private MobileElement iosCancelSearchButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/typeAheadView")
+    @AndroidFindBy(id = "typeAheadView")
     @iOSXCUITFindBy(id = "type ahead suggestions")
     private MobileElement typeAheadSuggestions;
 
-    //android getText() POPULAR SEARCHES
-    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/typeAheadView\"]/android.widget.FrameLayout/android.widget.TextView[1]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'typeAheadView')]/android.widget.FrameLayout/android.widget.TextView[1]")
     @iOSXCUITFindBy(id = "POPULAR SEARCHES")
     private MobileElement popularSearchesLabel;
 
-    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/typeAheadView\"]/android.widget.TextView")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name=\"type ahead suggestions\"]/XCUIElementTypeCell")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'typeAheadView')]/android.widget.TextView")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name='type ahead suggestions']/XCUIElementTypeCell")
     private List<MobileElement> searchResults;
 
-    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/typeAheadView\"]/android.widget.TextView[1]")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name=\"type ahead suggestions\"]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'typeAheadView')]/android.widget.TextView[1]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name='type ahead suggestions']/XCUIElementTypeCell[1]/XCUIElementTypeStaticText")
     private MobileElement searchResultFirst;
 
-    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/typeAheadView\"]/android.widget.TextView[2]")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name=\"type ahead suggestions\"]/XCUIElementTypeCell[2]/XCUIElementTypeStaticText")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'typeAheadView')]/android.widget.TextView[2]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name='type ahead suggestions']/XCUIElementTypeCell[2]/XCUIElementTypeStaticText")
     private MobileElement searchResultSecond;
 
-    @AndroidFindBy(xpath = "//*[@resource-id=\"com.syscocorp.mss.enterprise.dev:id/typeAheadView\"]/android.widget.TextView[3]")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name=\"type ahead suggestions\"]/XCUIElementTypeCell[3]/XCUIElementTypeStaticText")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'typeAheadView')]/android.widget.TextView[3]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name='type ahead suggestions']/XCUIElementTypeCell[3]/XCUIElementTypeStaticText")
     private MobileElement searchResultThird;
 
     public TypeAheadPage checkElementsPresence(String expectedResult) {
@@ -76,14 +72,14 @@ public class TypeAheadPage extends BaseTest {
             softAssert.assertTrue(navBarDrawerButton.isDisplayed(), "navBarDrawerButton");
             softAssert.assertEquals(popularSearchesLabel.getText(), "POPULAR SEARCHES", "popularSearchesLabel.getText() equals POPULAR SEARCHES");
             softAssert.assertTrue(clearTextButton.isDisplayed(), "clearTextButton");
-            softAssert.assertTrue(cartButton.isDisplayed(), "cartButton");
+            softAssert.assertTrue(androidCartButton.isDisplayed(), "cartButton");
         }
         softAssert.assertAll();
         return this;
     }
 
     public DiscoverPage pressCancelSearchButton() {
-        click(cancelSearchButton, "Press cancel search button");
+        click(iosCancelSearchButton, "Press cancel search button");
         return new DiscoverPage();
     }
 

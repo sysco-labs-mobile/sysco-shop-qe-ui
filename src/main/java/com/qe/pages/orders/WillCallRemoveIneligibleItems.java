@@ -12,15 +12,15 @@ public class WillCallRemoveIneligibleItems extends BaseTest {
     @iOSXCUITFindBy(id = "cancel remove items button")
     private MobileElement cancelButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/remove_ineligible_items")
+    @AndroidFindBy(id = "remove_ineligible_items")
     @iOSXCUITFindBy(id = "Remove Ineligible Items")
     private MobileElement removeIneligibleItemsHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/remove_ineligible_items_description")
+    @AndroidFindBy(id = "remove_ineligible_items_description")
     @iOSXCUITFindBy(id = "Will call orders cannot be submitted if they contain non-stock or remote items. This order contains 1 ineligible items:")
     private MobileElement removeIneligibleItemsDescription;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/ineligible_items_list")
+    @AndroidFindBy(id = "ineligible_items_list")
     @iOSXCUITFindBy(id = "ineligible items list")
     private MobileElement ineligibleItemsList;
 
@@ -52,11 +52,11 @@ public class WillCallRemoveIneligibleItems extends BaseTest {
     @iOSXCUITFindBy(id = "case quantity label")
     private MobileElement firstItemRemoteLabelCaseQuantityLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/remove_items_button")
+    @AndroidFindBy(id = "remove_items_button")
     @iOSXCUITFindBy(id = "remove items button")
     private MobileElement removeItemsButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/ship_by_ground_button")
+    @AndroidFindBy(id = "ship_by_ground_button")
     @iOSXCUITFindBy(id = "Keep Items and Ship by Ground")
     private MobileElement shipByGroundButton;
 }

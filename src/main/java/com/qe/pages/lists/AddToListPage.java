@@ -17,17 +17,18 @@ public class AddToListPage  extends BaseTest {
     @iOSXCUITFindBy(id = "add to lists close button")
     private MobileElement closeButton;
 
-    //Android Add to List
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Add to another list\"`]")
     private MobileElement addToAnotherListTitle;
 
-    //android save button
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/addProductToListDone")
+    @AndroidFindBy(id = "loadingView")
+    private MobileElement androidLoadingView;
+
+    @AndroidFindBy(id = "addProductToListDone")
     @iOSXCUITFindBy(id = "add to lists save button")
     private MobileElement doneButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/createNewProductListContainer")
+    @AndroidFindBy(id = "createNewProductListContainer")
     @iOSXCUITFindBy(id = "Create New List")
     private MobileElement createNewListButton;
 
@@ -42,7 +43,6 @@ public class AddToListPage  extends BaseTest {
 
     @iOSXCUITFindBy(id = "checkbox-0-6")
     private MobileElement list7;
-
 
     //android this contains par name
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.CheckBox")
@@ -93,21 +93,29 @@ public class AddToListPage  extends BaseTest {
         utils.log().info("Select list with name " + listName + " on Add To List page");
         if(getPlatform().equalsIgnoreCase("iOS")) {
             String locator = "//XCUIElementTypeStaticText[@name='" + listName + "']/..";
-            try {
-                WebElement listButton = getDriver().findElement(new By.ByXPath(locator));
-                waitForVisibility(listButton, "List button with name " + listName);
-                listButton.click();
-            } catch (NoSuchElementException noSuchElementException) {
-                try {
-                    utils.log().info("List " + locator + " Not found, scrolling down and repeating findElement");
-                    scrollDownByCoordinates();
+            selectListWithLocator(locator);
+        }
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            String locator = "//*[contains(@text, '" + listName + "')]";
+            selectListWithLocator(locator);
+        }
+        return new AddToListPage();
+    }
 
-                    WebElement listButton = getDriver().findElement(new By.ByXPath(locator));
-                    waitForVisibility(listButton, "List button with name " + listName);
-                    listButton.click();
-                } catch (NoSuchElementException noSuchElementException2) {
-                    org.testng.Assert.fail("List " + locator + " Not found with scrolling");
-                }
+    public AddToListPage selectListWithLocator(String locator) {
+        try {
+            WebElement listButton = getDriver().findElement(new By.ByXPath(locator));
+            waitForVisibility(listButton, "Wait for list by locator " + locator);
+            listButton.click();
+        } catch (NoSuchElementException noSuchElementException) {
+            try {
+                utils.log().info("List " + locator + " Not found, scrolling down and repeating findElement");
+                scrollDownByCoordinates();
+                WebElement listButton = getDriver().findElement(new By.ByXPath(locator));
+                waitForVisibility(listButton, "Wait for list by locator " + locator);
+                listButton.click();
+            } catch (NoSuchElementException noSuchElementException2) {
+                org.testng.Assert.fail("List " + locator + " Not found with scrolling");
             }
         }
         return new AddToListPage();

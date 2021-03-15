@@ -17,7 +17,7 @@ public class AccountSelectorFilterDeliveryDayPage extends BaseTest {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Delivery Day\"`]")
     private MobileElement deliveryDayHeader;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/filterList")
+    @AndroidFindBy(id = "filterList")
     @iOSXCUITFindBy(id = "checkbox list")
     private MobileElement checkboxList;
 
@@ -29,9 +29,7 @@ public class AccountSelectorFilterDeliveryDayPage extends BaseTest {
     private MobileElement mondayButtonText;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.CheckBox")
-    //checkable = true getText = monday
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == \"checkbox-0-0\"`]/XCUIElementTypeOther[1]/XCUIElementTypeOther")
     private MobileElement firstCheckboxInCheckboxList;
-    //check enabled = false and then true after tap
 
 }

@@ -23,27 +23,27 @@ public class OrderPage extends BaseTest {
     @iOSXCUITFindBy(id = "app nav dot menu button")
     private MobileElement threeDotButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/modifyOrder")
+    @AndroidFindBy(id = "modifyOrder")
     @iOSXCUITFindBy(id = "order details modify order")
     private MobileElement modifyButton;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/orderInvoicedSeparately")
+    @AndroidFindBy(id = "orderInvoicedSeparately")
     @iOSXCUITFindBy(id = "order details invoice separate")
     private MobileElement invoiceCheckbox;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/priceLabel")
+    @AndroidFindBy(id = "priceLabel")
     @iOSXCUITFindBy(id = "case price label")
     private MobileElement firstItemCasePriceLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/totalPriceLabel")
+    @AndroidFindBy(id = "totalPriceLabel")
     @iOSXCUITFindBy(id = "total case price label")
     private MobileElement firstItemTotalCasePriceLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/orderLineItemCountLabel")
+    @AndroidFindBy(id = "orderLineItemCountLabel")
     @iOSXCUITFindBy(id = "case quantity label")
     private MobileElement firstItemCaseQuantityLabel;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/title")
+    @AndroidFindBy(id = "title")
     @iOSXCUITFindBy(id = "Cancel Order")
     private MobileElement cancelOrderButton;
 

@@ -25,7 +25,6 @@ public class AssociateLoginPage1 extends BaseTest {
 
     public void checkElementsPresence() {
         SoftAssert softAssert = new SoftAssert();
-        //waitForVisibility(nextButton);//org.openqa.selenium.StaleElementReferenceException: The previously found element ""Next" StaticText" is not present in the current view anymore. Make sure the application UI has the expected state.
         //softAssert.assertTrue(backArrowButton.isDisplayed());
         softAssert.assertTrue(emailFieldInput.isDisplayed());
         softAssert.assertTrue(backButton.isDisplayed());

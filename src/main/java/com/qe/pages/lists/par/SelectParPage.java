@@ -18,7 +18,7 @@ public class SelectParPage extends BaseTest {
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
     private MobileElement showParGroupPageTitle;
 
-    @AndroidFindBy(id = "com.syscocorp.mss.enterprise.dev:id/createNewParGroupContainer")
+    @AndroidFindBy(id = "createNewParGroupContainer")
     private MobileElement createNewParGroupButton;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.RadioButton")
