@@ -6,8 +6,7 @@ import com.qe.pages.discover.DiscoverPage;
 import com.qe.pages.login.LogOutPage;
 import com.qe.pages.login.LoginPage;
 import com.qe.utils.TestUtils;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
@@ -21,14 +20,18 @@ public class LogOutTests extends BaseTest {
     @BeforeMethod
     public void beforeMethod(Method m) {
         utils.log().info("\n       Starting test:" + m.getName());
+
         loginPage = new LoginPage();
         navDrawer = new NavDrawer();
         logOutPage = new LogOutPage();
         discoverPage = new DiscoverPage();
     }
 
-    @Test
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void customerLogout() throws InterruptedException {
+        if (getPlatform().equalsIgnoreCase("iOS")){
+            getDriver().hideKeyboard();
+        }
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
         loginPage = loginPage.pressNextButton();
@@ -48,4 +51,5 @@ public class LogOutTests extends BaseTest {
             loginPage.checkElementsPresence();
         }
     }
+
 }

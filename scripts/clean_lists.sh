@@ -1,1 +1,1 @@
-newman run scripts/src/clean_lists.postman_collection.json -e  scripts/src/m_bff_dev.postman_environment.json --reporters cli,htmlextra --verbose --timeout-script=120000
+newman run src/clean_lists.postman_collection.json -e  src/m_bff_dev.postman_environment.json --reporters cli,htmlextra --verbose --timeout-script=120000

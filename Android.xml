@@ -24,9 +24,9 @@
         <parameter name="deviceName" value="Pixel_3_API_29_1" />
         <parameter name="systemPort" value="10001" />
         <parameter name="chromeDriverPort" value="11001" />
-                <classes>
+        <packages>
             <package name="com.qe.tests.smoke.*"/>
-        </classes>
+        </packages>
     </test-->
     <!--test name="Pixel_3a_API_30_1">
         <listeners>

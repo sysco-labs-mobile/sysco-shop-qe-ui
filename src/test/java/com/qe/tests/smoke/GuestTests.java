@@ -8,9 +8,7 @@ import com.qe.pages.login.ZipSwitcherPage;
 import com.qe.pages.product.ProductCardPage;
 import com.qe.pages.search.SearchCatalogPage;
 import com.qe.utils.TestUtils;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
@@ -26,6 +24,7 @@ public class GuestTests extends BaseTest {
     @BeforeMethod
     public void beforeMethod(Method m) {
         utils.log().info("\n       Starting test:" + m.getName());
+
         loginPage = new LoginPage();
         loginPage = new LoginPage();
         zipSwitcherPage = new ZipSwitcherPage();
@@ -35,7 +34,7 @@ public class GuestTests extends BaseTest {
         searchCatalogPage = new SearchCatalogPage();
     }
 
-    @Test
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void loginAsGuest() {
         zipSwitcherPage = loginPage.pressContinueAsGuestButton();
         zipSwitcherPage.inputZip(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));
@@ -43,7 +42,7 @@ public class GuestTests extends BaseTest {
         discoverPage.checkGuestElementsPresence(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));
     }
 
-    @Test
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void loginAsGuestForNotAvailableZip() {
         zipSwitcherPage = loginPage.pressContinueAsGuestButton();
         zipSwitcherPage = zipSwitcherPage.inputZip(BaseTest.users.getJSONObject("guestNotAvailableZipcode1").getString("zipInput"));
@@ -53,8 +52,7 @@ public class GuestTests extends BaseTest {
         discoverPage.checkGuestElementsPresence(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));
     }
 
-
-    @Test
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void navigateToLoginFromZipSwitcher() {
         //precondition
         zipSwitcherPage = loginPage.pressContinueAsGuestButton();
@@ -64,7 +62,7 @@ public class GuestTests extends BaseTest {
         loginPage.checkElementsPresence();
     }
 
-    @Test
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void loginAsGuestAndSwitchZip() throws InterruptedException {
         //precondition
         zipSwitcherPage = loginPage.pressContinueAsGuestButton();
@@ -78,20 +76,6 @@ public class GuestTests extends BaseTest {
         discoverPage = zipSwitcherModal.pressUpdateButtonForAvailableZip();
         Thread.sleep(4000);
         discoverPage.checkGuestElementsPresence(BaseTest.users.getJSONObject("guestCorrectZipcode2").getString("zipInput"));
-    }
-
-    @Test @Ignore //TODO: implement optional non reset per test config through capabilities
-    public void checkZipSavedAfterAppClose() {
-        //precondition
-        zipSwitcherPage = loginPage.pressContinueAsGuestButton();
-        zipSwitcherPage.inputZip(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));
-        discoverPage = zipSwitcherPage.pressStartShoppingButtonForValidZip();
-        discoverPage.checkGuestElementsPresence(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));
-        closeApp();
-
-        //test
-        launchApp();
-        discoverPage.checkGuestElementsPresence(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));
     }
 
 }

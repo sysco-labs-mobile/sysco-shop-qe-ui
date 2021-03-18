@@ -11,8 +11,7 @@ import com.qe.pages.search.SearchCatalogPage;
 import com.qe.pages.search.TypeAheadPage;
 import com.qe.utils.TestUtils;
 import org.json.JSONObject;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
@@ -28,8 +27,9 @@ public class MultibuyerTests extends BaseTest {
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
-    public void beforeMethod(Method m) throws InterruptedException {
+    public void beforeMethod(Method m) {
         utils.log().info("\n       Starting test:" + m.getName());
+
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
         navDrawer = new NavDrawer();
@@ -38,15 +38,15 @@ public class MultibuyerTests extends BaseTest {
         accountSelectorPage = new AccountSelectorPage();
         orderCartPage = new OrderCartPage();
         orderCartReviewOrderPage = new OrderCartReviewOrderPage();
+    }
+
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
+    public void multibuyerAccountSelection() throws InterruptedException {
         loginPage.enterEmail(BaseTest.users.getJSONObject("multibuyer").getString("email"));
         loginPage = loginPage.pressNextButton();
         loginPage.enterPassword(BaseTest.users.getJSONObject("multibuyer").getString("password"));
         discoverPage = loginPage.pressLoginButton();
         Thread.sleep(5000);
-    }
-
-    @Test
-    public void multibuyerAccountSelection() {
         accountSelectorPage = discoverPage.pressAccountSelectorButton();
         accountSelectorPage.checkElementsPresence();
         discoverPage = accountSelectorPage.pressOnFirstAccount();
@@ -54,13 +54,24 @@ public class MultibuyerTests extends BaseTest {
         discoverPage.checkElementsPresenceForAccountSelector(expectedFirstAccountInListTitle);
     }
 
-    @Test
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void multibuyerCannotSubmitOrder() throws InterruptedException {
+        loginPage.enterEmail(BaseTest.users.getJSONObject("multibuyer").getString("email"));
+        loginPage = loginPage.pressNextButton();
+        loginPage.enterPassword(BaseTest.users.getJSONObject("multibuyer").getString("password"));
+        discoverPage = loginPage.pressLoginButton();
+        Thread.sleep(5000);
         searchCatalogPage = discoverPage.inputSearch("0566709");
         searchCatalogPage.inputCaseQuantityForFirstProduct("1");
         orderCartPage = searchCatalogPage.pressCartButton();
-        orderCartReviewOrderPage = orderCartPage.pressProceedToCheckoutButton();
-        orderCartReviewOrderPage.pressSubmitOrderButton();
-        orderCartReviewOrderPage.checkElementsPresenceForErrorMAApproval();
+        if(getPlatform().equalsIgnoreCase("iOS")) {
+            orderCartPage.checkElementsPresenceForErrorMAApprovalOnIos();
+        }
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            orderCartReviewOrderPage = orderCartPage.pressProceedToCheckoutButton();
+            orderCartReviewOrderPage = orderCartReviewOrderPage.pressSubmitOrderButtonExpectingError();
+            orderCartReviewOrderPage.checkElementsPresenceForErrorMAApproval();
+        }
     }
+
 }

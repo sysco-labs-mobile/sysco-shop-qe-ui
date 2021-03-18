@@ -6,7 +6,7 @@
         </listeners>
         <parameter name="platformName" value="iOS"  preserve-order="true" />
         <parameter name="udid" value="48C09AF0-ECA1-473A-AA6A-57FDDDAA6F4C" />
-        <parameter name="deviceName" value="iPhone12Pro" />
+        <parameter name="deviceName" value="iPhone12ProMax" />
         <parameter name="wdaLocalPort" value="10001" />
         <parameter name="webkitDebugProxyPort" value="11001" />
         <packages>

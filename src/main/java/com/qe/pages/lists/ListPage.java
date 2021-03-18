@@ -265,9 +265,14 @@ public class ListPage extends BaseTest {
         return new ListPage();
     }
 
-    public ListSettingsPage pressListSettingsButton() {
+    public ListSettingsPage pressListSettingsButtonOnIos() {
         click(listSettingsButton, "Press Settings button on List page");
         return new ListSettingsPage();
+    }
+
+    public AndroidListSettingsPage pressListSettingsButtonOnAndroid() {
+        click(listSettingsButton, "Press Settings button on List page");
+        return new AndroidListSettingsPage();
     }
 
     public ListFilterPage pressListFilterButton() {

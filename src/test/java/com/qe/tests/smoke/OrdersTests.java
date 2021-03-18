@@ -11,8 +11,7 @@ import com.qe.pages.orders.OrdersPage;
 import com.qe.pages.search.SearchCatalogPage;
 import com.qe.pages.search.TypeAheadPage;
 import com.qe.utils.TestUtils;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
@@ -29,8 +28,9 @@ public class OrdersTests extends BaseTest {
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
-    public void beforeMethod(Method m) throws InterruptedException {
+    public void beforeMethod(Method m) {
         utils.log().info("\n       Starting test:" + m.getName());
+
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
         navDrawer = new NavDrawer();
@@ -40,14 +40,14 @@ public class OrdersTests extends BaseTest {
         ordersPage = new OrdersPage();
         orderCartReviewOrderPage = new OrderCartReviewOrderPage();
         orderCartOrderPlacedPage = new OrderCartOrderPlacedPage();
+    }
+
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
+    public void ordersPage() throws InterruptedException {
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
         loginPage = loginPage.pressNextButton();
         loginPage.enterPassword(BaseTest.users.getJSONObject("customer").getString("password"));
         discoverPage = loginPage.pressLoginButton();
-    }
-
-    @Test
-    public void ordersPage() {
         navDrawer = discoverPage.pressNavBarDrawerButton();
         ordersPage = navDrawer.pressOrdersButton();
         if (getPlatform().equalsIgnoreCase("Android")) {
@@ -55,10 +55,8 @@ public class OrdersTests extends BaseTest {
         }
         ordersPage.checkElementsPresence()
                 .pressOpenOrdersButton()
-                .checkElementsPresence()
                 .pressSubmittedOrdersButton()
-                .checkElementsPresence()
-                .pressCancelledOrdersButton()
-                .pressAllOrdersButton();
+                .pressCancelledOrdersButton();
     }
+
 }

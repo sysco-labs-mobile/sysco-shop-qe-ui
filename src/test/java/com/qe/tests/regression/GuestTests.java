@@ -44,7 +44,7 @@ public class GuestTests extends BaseTest {
         closeApp();
 
         //test
-        launchApp();
+
         discoverPage.checkGuestElementsPresence(BaseTest.users.getJSONObject("guestCorrectZipcode1").getString("zipInput"));
     }
 
