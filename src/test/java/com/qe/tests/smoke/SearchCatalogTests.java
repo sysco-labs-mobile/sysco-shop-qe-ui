@@ -7,8 +7,7 @@ import com.qe.pages.discover.DiscoverPage;
 import com.qe.pages.login.LoginPage;
 import com.qe.pages.search.TypeAheadPage;
 import com.qe.utils.TestUtils;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
@@ -21,30 +20,26 @@ public class SearchCatalogTests extends BaseTest {
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
-    public void beforeMethod(Method m) throws InterruptedException {
+    public void beforeMethod(Method m) {
         utils.log().info("\n       Starting test:" + m.getName());
+
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
         navDrawer = new NavDrawer();
         searchCatalogPage = new SearchCatalogPage();
         typeAheadPage = new TypeAheadPage();
+    }
+
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
+    public void search() throws InterruptedException {
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
         loginPage = loginPage.pressNextButton();
         loginPage.enterPassword(BaseTest.users.getJSONObject("customer").getString("password"));
         discoverPage = loginPage.pressLoginButton();
-    }
-
-    @Test
-    public void search() throws InterruptedException {
         typeAheadPage = discoverPage.inputSearchForTypeAhead("beef ground bulk");
         typeAheadPage.checkElementsPresence("beef");
-        SearchCatalogPage searchCatalogPage = typeAheadPage.pressSearchResultFirst();
+        searchCatalogPage = typeAheadPage.pressSearchResultFirst();
         searchCatalogPage.checkElementsPresence("beef");
     }
 
-    @Test
-    public void searchTypeAhead() throws InterruptedException {
-        typeAheadPage = discoverPage.inputSearchForTypeAhead("beef");
-        typeAheadPage.checkElementsPresence("beef");
-    }
 }

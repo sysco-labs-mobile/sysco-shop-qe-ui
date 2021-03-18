@@ -101,7 +101,6 @@ public class ZipSwitcherPage extends BaseTest {
 
     public DiscoverPage pressStartShoppingButtonForValidZip() {
         click(startShoppingButton, "Press start shopping button on Zip Switcher Page expecting available zip");
-        waitForInvisibility(startShoppingButton, "startShoppingButton", 30);
         return new DiscoverPage();
     }
 

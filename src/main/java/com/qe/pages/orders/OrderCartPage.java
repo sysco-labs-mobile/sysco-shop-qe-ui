@@ -45,6 +45,7 @@ public class OrderCartPage extends BaseTest {
 
     @AndroidFindBy(id = "proceedToCheckoutButton")
     @iOSXCUITFindBy(id = "proceed to checkout button")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"proceed to checkout button\"]")
     private MobileElement proceedToCheckoutButton;
 
     @AndroidFindBy(id = "resultCount")
@@ -87,6 +88,9 @@ public class OrderCartPage extends BaseTest {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name='orderLineItem-0-0']/XCUIElementTypeButton[@name='increase quantity button']")
     private MobileElement orderLineItem1IncreaseQuantityButton;
 
+    @AndroidFindBy(id = "snackbar_text")
+    @iOSXCUITFindBy(id = "cart error banner")
+    public MobileElement errorMAApprovalLabel;
 
     /** Order item three dot menu */
 
@@ -147,7 +151,7 @@ public class OrderCartPage extends BaseTest {
         return this;
     }
 
-    public OrderCartPage checkElementsPresenceOfFirstOrderLineItem(
+    public OrderCartPage checkElementsPresenceForFirstOrderLineItem(
             String expectedTitle, String expectedDescription, String expectedPricePerCS,  String expectedPricePerEA, String expectedPriceTotal) {
         utils.log().info("Check elements presence for first order item on Order Cart Page");
         SoftAssert softAssert = new SoftAssert();
@@ -185,9 +189,15 @@ public class OrderCartPage extends BaseTest {
         softAssert.assertAll();
         return this;
     }
+
     public OrderCartReviewOrderPage pressProceedToCheckoutButton() {
         click(proceedToCheckoutButton, "Press proceed to checkout button on Order Cart page");
         return new OrderCartReviewOrderPage();
+    }
+
+    public ForgottenItemsPage pressProceedToCheckoutButtonToOpenForgottenItems() {
+        click(proceedToCheckoutButton, "Press proceed to checkout button on Order Cart page");
+        return new ForgottenItemsPage();
     }
 
     public OrderCartPage pressProspectShopCloseButton() {
@@ -203,5 +213,13 @@ public class OrderCartPage extends BaseTest {
     public OrderCartFilterPage pressFilterButton() {
         click(filterButton, "Press filter button on Order Cart page");
         return new OrderCartFilterPage();
+    }
+
+    public OrderCartPage checkElementsPresenceForErrorMAApprovalOnIos() {
+        utils.log().info("Check elements presence for Error banner - MA approval needed on Order Cart page");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(errorMAApprovalLabel.isDisplayed());
+        softAssert.assertAll();
+        return this;
     }
 }

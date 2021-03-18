@@ -8,8 +8,7 @@ import com.qe.pages.product.ProductCardPage;
 import com.qe.pages.search.SearchCatalogPage;
 import com.qe.pages.search.TypeAheadPage;
 import com.qe.utils.TestUtils;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
@@ -23,22 +22,23 @@ public class ProductCardTests extends BaseTest {
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
-    public void beforeMethod(Method m) throws InterruptedException {
+    public void beforeMethod(Method m) {
         utils.log().info("\n       Starting test:" + m.getName());
+
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
         navDrawer = new NavDrawer();
         searchCatalogPage = new SearchCatalogPage();
         typeAheadPage = new TypeAheadPage();
         productCardPage = new ProductCardPage();
+    }
+
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
+    public void productCard() throws InterruptedException {
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
         loginPage = loginPage.pressNextButton();
         loginPage.enterPassword(BaseTest.users.getJSONObject("customer").getString("password"));
         discoverPage = loginPage.pressLoginButton();
-    }
-
-    @Test
-    public void productCard() throws InterruptedException {
         //precondition
         searchCatalogPage = discoverPage.inputSearch("0566709");
         searchCatalogPage.checkElementsPresence("0566709");
@@ -50,8 +50,6 @@ public class ProductCardTests extends BaseTest {
                 BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("title"),
                 BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("description")
         );
-        productCardPage.checkElementsPresenceForCase(
-                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("pricePerCsCatchweight"));
 
         productCardPage
                 .checkCaseQuantityFieldValue("Add")
@@ -64,15 +62,8 @@ public class ProductCardTests extends BaseTest {
                 .checkCaseQuantityFieldValue("3")
                 .checkCartBadgeValue("3");
 
-        productCardPage.checkElementsPresenceOnProductDetailsTab(
-                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("stockStatus"),
-                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("gtin"),
-                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("manufacturerUPC"),
-                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("storageLocation"),
-                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("splitDetail"),
-                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("averageWeight")
-        );
         productCardPage.pressNutritionButton();
         productCardPage.checkElementsPresenceOnNutritionTab();
     }
+
 }

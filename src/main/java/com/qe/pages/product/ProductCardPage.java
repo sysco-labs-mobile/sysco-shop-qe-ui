@@ -254,6 +254,7 @@ public class ProductCardPage extends BaseTest {
         softAssert.assertAll();
         scrollDownByCoordinates();
         softAssert.assertTrue(ingredientsListText.isDisplayed(), "ingredientsListText");
+        scrollDownByCoordinates();
         softAssert.assertTrue(disclaimerText.isDisplayed(), "disclaimerText");
         softAssert.assertAll();
         return this;

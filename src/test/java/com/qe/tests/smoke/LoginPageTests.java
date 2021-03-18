@@ -5,8 +5,7 @@ import com.qe.pages.common.IntercomPage;
 import com.qe.pages.discover.DiscoverPage;
 import com.qe.pages.login.*;
 import com.qe.utils.TestUtils;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
@@ -19,11 +18,12 @@ public class LoginPageTests extends BaseTest {
     @BeforeMethod
     public void beforeMethod(Method m) {
         utils.log().info("\n       Starting test:" + m.getName());
+
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
     }
 
-    @Test(groups = { "WebView" })
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void openAndCloseForgotPassword() {
         loginPage.enterEmail(users.getJSONObject("customerInvalidPassword").getString("email"));
         loginPage = loginPage.pressNextButton();
@@ -32,10 +32,13 @@ public class LoginPageTests extends BaseTest {
         }
         forgotPasswordPage = loginPage.pressForgotPasswordButton();
         LoginPage loginPage = forgotPasswordPage.pressBackArrowButton();
+        if (getPlatform().equalsIgnoreCase("iOS")){
+            getDriver().hideKeyboard();
+        }
         loginPage.checkElementsPresence();
     }
 
-    @Test
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void openAndCloseIntercom() {
         getDriver().hideKeyboard();
         IntercomPage intercomPage = loginPage.pressHelpButton();
@@ -43,10 +46,14 @@ public class LoginPageTests extends BaseTest {
         loginPage.checkElementsPresence();
     }
 
-    @Test(groups = { "WebView" })
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void openAndCloseAssociateLogin() {
+        if (getPlatform().equalsIgnoreCase("iOS")){
+            getDriver().hideKeyboard();
+        }
         loginPage.pressAssociateLoginButton()
                 .pressBackButton()
                 .checkElementsPresence();
     }
+
 }

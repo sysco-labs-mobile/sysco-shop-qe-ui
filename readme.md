@@ -17,28 +17,17 @@
 
 Covers some basic uses cases and elements presence
 
-- LoginTests
-- DiscoverTests
-- GuestTests
-- ListsTests
-- MultibuyerTests
-- OrderCartTests
-- SearchCatalogTests
-- OrdersTests
+### Improvement plan
+[Improvement Plan](https://syscobt.atlassian.net/wiki/spaces/~93658943/pages/2414314813/Sysco+Shop+Mobile+Appium+Framework+Improvements)
 
-Some tests became flaky already, have not pinpointed the issues yet
-
-#### Out of Scope
-- WebViews: Onboarding, MA login and Sysco Pay
-- Not yet accessible elements or use cases that are long to automate
-- Android keyboard RETURN or SEARCH can not be triggered - Search input field needs to have key Listener Event in app code 
+[Smoke Suite Decision Log](https://syscobt.atlassian.net/wiki/spaces/~93658943/pages/2414707654/Sysco+Shop+Appium+Smoke+Test+Coverage)
 
 ### Execute
-- Right click run `testng.xml` or `iOS.xml` or `Android.xml`
+- Right click run `testng.xml`, `iOS.xml`, `iOS_tablet.xml`  or `Android.xml`
 
 ### Framework Setup
 - Install dependencies `mvn install` or `mvn clean install -U -X`
-- Update Simulators and emulators references in `testng.xml` or `iOS.xml` or `Android.xml`
+- Update Simulators and emulators references in `testng.xml`, `iOS.xml`,`iOS_tablet.xml`  or `Android.xml`
 - Update Env setup properties in `src/main/java/com/qe/BaseTest.java` for method `com.qe.BaseTest.getAppiumService`
 - Update app files if new available in `src/test/resources/app`
 - Update app configs in `src/main/resources/config.properties`
@@ -70,10 +59,3 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 ```
 
-### Improvement plan
-Framework wide things needing improvements to resolve flakiness
-- Retries on login failure
-- Better waiting where progress element is present
-- Better waiting than Thread
-- Scrolling to element instead of by coordinates
-- Android keyboard hide in search field

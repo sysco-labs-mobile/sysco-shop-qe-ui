@@ -186,7 +186,7 @@ public class SearchCatalogPage extends BaseTest {
             softAssert.assertTrue(iosNavBarDrawerButton.isDisplayed(), "iosNavBarDrawerButton");
         }
         if(getPlatform().equalsIgnoreCase("Android")) {
-            waitForVisibility(androidNavBackButton, "navBarDrawerButton");
+            waitForVisibility(androidNavBackButton, "androidNavBackButton");
             softAssert.assertTrue(androidNavBackButton.isDisplayed(), "androidNavBackButton");
         }
         softAssert.assertTrue(searchTextField.isDisplayed(), "searchTextField");
@@ -302,6 +302,12 @@ public class SearchCatalogPage extends BaseTest {
     public OrdersPage pressAndroidBackButtonToOrdersPage() {
         click(androidNavBackButton);
         return new OrdersPage();
+    }
+
+    public TypeAheadPage inputSearchForTypeAhead(String searchQuery) throws InterruptedException {
+        sendKeys(searchTextField, searchQuery, "Input search " + searchQuery);
+        Thread.sleep(12000);
+        return new TypeAheadPage();
     }
 
     /** Discounts feature methods */

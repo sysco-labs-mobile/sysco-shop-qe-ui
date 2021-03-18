@@ -7,8 +7,7 @@ import com.qe.pages.lists.*;
 import com.qe.pages.login.LoginPage;
 import com.qe.pages.search.SearchCatalogPage;
 import com.qe.utils.TestUtils;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
@@ -19,33 +18,36 @@ public class ListsTests extends BaseTest {
     NavDrawer navDrawer;
     ListsPage listsPage;
     ListSettingsPage listSettingsPage;
+    AndroidListSettingsPage androidListSettingsPage;
     ListPage listPage;
     ListDeleteAlert listDeleteAlert;
     AddToListPage addToListPage;
     SearchCatalogPage searchCatalogPage;
 
     @BeforeMethod
-    public void beforeMethod(Method m) throws InterruptedException {
+    public void beforeMethod(Method m) {
         utils.log().info("\n       Starting test:" + m.getName());
+
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
         listsPage = new ListsPage();
         navDrawer = new NavDrawer();
+        androidListSettingsPage = new AndroidListSettingsPage();
         listSettingsPage = new ListSettingsPage();
         listPage = new ListPage();
         listDeleteAlert = new ListDeleteAlert();
         searchCatalogPage = new SearchCatalogPage();
         addToListPage = new AddToListPage();
+    }
+
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
+    public void createListWithProductAndDelete() throws InterruptedException {
         loginPage.enterEmail(BaseTest.users.getJSONObject("customerForListsTests").getString("email"));
         loginPage = loginPage.pressNextButton();
         loginPage.enterPassword(BaseTest.users.getJSONObject("customerForListsTests").getString("password"));
         discoverPage = loginPage.pressLoginButton();
         listsPage = discoverPage.pressNavBarDrawerButton().pressListsButton();
         listsPage.checkPageIsLoadedAndIfNotReload();
-    }
-
-    @Test
-    public void createListWithProductAndDelete() throws InterruptedException {
         String newListName = "AL " + Math.random();
         listSettingsPage = listsPage.pressCreateListButton();
         listSettingsPage.enterListName(newListName);
@@ -77,16 +79,18 @@ public class ListsTests extends BaseTest {
         listsPage.checkElementsPresence();
         listPage = listsPage.pressList(newListName);
         listPage.checkElementsPresence();
-        listPage.checkElementsPresenceForFirstItemCase(
-                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("title"),
-                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("description"),
-                BaseTest.products.getJSONObject("product-0566709-on-056-148283").getString("pricePerCsCatchweight")
-        );
-        listSettingsPage = listPage.pressListSettingsButton();
+        if(getPlatform().equalsIgnoreCase("iOS")) {
+            listSettingsPage = listPage.pressListSettingsButtonOnIos();
+        }
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            androidListSettingsPage = listPage.pressListSettingsButtonOnAndroid();
+            androidListSettingsPage.pressListSettingsButtonOnAndroid();
+        }
         listDeleteAlert = listSettingsPage.pressDeleteListButton();
         listDeleteAlert.checkElementsPresence();
         listsPage = listDeleteAlert.pressYes();
         listsPage.checkPageIsLoadedAndIfNotReload();
         listsPage.checkElementsPresence();
     }
+
 }
