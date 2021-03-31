@@ -1,7 +1,6 @@
 package com.qe.pages.search;
 
 import com.qe.BaseTest;
-import com.qe.pages.orders.OrdersPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
