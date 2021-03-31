@@ -6,15 +6,17 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.testng.asserts.SoftAssert;
+
 
 public class FilterPage extends BaseTest {
-    TestUtils utils = new TestUtils();
+   TestUtils utils = new TestUtils();
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.ImageButton")
     @iOSXCUITFindBy(id = "filters close button")
     private MobileElement closeButton;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView\n")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Filters']")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Filters\"`]")
     private MobileElement filterTitle;
 
@@ -43,36 +45,75 @@ public class FilterPage extends BaseTest {
     private MobileElement syscoSpecialtyButton;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[6]")
+    @iOSXCUITFindBy(id = "Stock Type")
+    private MobileElement stockTypeButton;
+
+    @AndroidFindBy(id = "doneButton")
     @iOSXCUITFindBy(id = "filters cta button")
     private MobileElement doneButton;
+
 
     public FilterSyscoCategoryPage pressCategoryButton() {
         click(categoryButton);
         return new FilterSyscoCategoryPage();
     }
-
-    public SearchCatalogPage pressBrandButton() {
+    
+    public FilterPage pressBrandButton() {
         click(brandButton);
-        return new SearchCatalogPage();
+        return new FilterPage();
     }
 
-    public SearchCatalogPage pressPackSizeButton() {
+    public FilterPage pressPackSizeButton() {
         click(packSizeButton);
-        return new SearchCatalogPage();
+        return new FilterPage();
     }
 
-    public SearchCatalogPage pressStorageTypeButton() {
+    public FilterPage pressStorageTypeButton() {
         click(storageTypeButton);
-        return new SearchCatalogPage();
+        return new FilterPage();
     }
 
-    public SearchCatalogPage pressSyscoSpecialtyButton() {
+    public FilterPage pressSyscoSpecialtyButton() {
         click(syscoSpecialtyButton);
-        return new SearchCatalogPage();
+        return new FilterPage();
     }
 
-    public SearchCatalogPage pressDoneButton() {
+    public FilterPage pressStockTypeButton() {
+        click(stockTypeButton);
+        return new FilterPage();
+    }
+
+    public FilterPage pressDoneButton() {
         click(doneButton);
-        return new SearchCatalogPage();
+        return new FilterPage();
+    }
+
+    public FilterPage pressResetButton() {
+        click(filterResetButton);
+        return new FilterPage();
+    }
+
+    public FilterPage pressCloseButton() {
+        click(closeButton);
+        return new FilterPage();
+    }
+
+    public FilterPage checkElementsPresenceForCatalogMenuFilters() {
+        utils.log().info("Check elements presence for catalog filter header and filter options");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(filterTitle.isDisplayed(), "Filter Title is displayed");
+        softAssert.assertTrue(closeButton.isDisplayed());
+        softAssert.assertTrue(filterResetButton.isDisplayed());
+        softAssert.assertTrue(categoryButton.isDisplayed());
+        softAssert.assertTrue(brandButton.isDisplayed());
+        softAssert.assertTrue(packSizeButton.isDisplayed());
+        softAssert.assertTrue(storageTypeButton.isDisplayed());
+        softAssert.assertTrue(syscoSpecialtyButton.isDisplayed());
+        softAssert.assertTrue(filterResetButton.isDisplayed());
+        softAssert.assertTrue(filterResetButton.isDisplayed());
+        softAssert.assertTrue(stockTypeButton.isDisplayed());
+        softAssert.assertTrue(doneButton.isDisplayed());
+        softAssert.assertAll();
+        return this;
     }
 }

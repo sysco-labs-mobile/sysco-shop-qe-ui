@@ -10,11 +10,11 @@ public class FilterStorageTypePage extends BaseTest {
     TestUtils utils = new TestUtils();
 
     @AndroidFindBy(accessibility = "Navigate up")
-    @iOSXCUITFindBy(id = "")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Filters\"]")
     private MobileElement closeButton;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.TextView")
-    @iOSXCUITFindBy(id = "")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Storage Type\"]")
     private MobileElement storageTypeHeader;
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.RadioButton")
