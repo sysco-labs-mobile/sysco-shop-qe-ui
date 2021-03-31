@@ -247,14 +247,15 @@ public class ProductCardPage extends BaseTest {
         return this;
     }
 
-    public ProductCardPage checkElementsPresenceOnNutritionTab() {
+    public ProductCardPage checkElementsPresenceOnNutritionTab() throws InterruptedException {
         utils.log().info("Check elements presence on Nutrition tab");
         SoftAssert softAssert =new SoftAssert();
         softAssert.assertTrue(nutritionFactsTitle.isDisplayed(), "nutritionFactsTitle");
         softAssert.assertAll();
         scrollDownByCoordinates();
-        softAssert.assertTrue(ingredientsListText.isDisplayed(), "ingredientsListText");
         scrollDownByCoordinates();
+        softAssert.assertTrue(ingredientsListText.isDisplayed(), "ingredientsListText");
+        Thread.sleep(2000);
         softAssert.assertTrue(disclaimerText.isDisplayed(), "disclaimerText");
         softAssert.assertAll();
         return this;

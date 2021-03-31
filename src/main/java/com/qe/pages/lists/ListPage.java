@@ -8,6 +8,8 @@ import com.qe.pages.orders.OrderCartPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.HowToUseLocators;
+import io.appium.java_client.pagefactory.LocatorGroupStrategy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -18,11 +20,15 @@ public class ListPage extends BaseTest {
     TestUtils utils = new TestUtils();
 
     @AndroidFindBy(accessibility = "Navigate up")
+    @HowToUseLocators(iOSXCUITAutomation = LocatorGroupStrategy.ALL_POSSIBLE)
     @iOSXCUITFindBy(id = "Back")
+    @iOSXCUITFindBy(id= "list details back")
     private MobileElement backButton;
 
     @AndroidFindBy(xpath = "//*[contains(@resource-id, 'toolbar')]/android.widget.TextView[1]")
+    @HowToUseLocators(iOSXCUITAutomation = LocatorGroupStrategy.ALL_POSSIBLE)
     @iOSXCUITFindBy(id = "list details - title label")
+    @iOSXCUITFindBy(id = "search filter view - title label")
     private MobileElement listNameLabel;
 
     @AndroidFindBy(id = "action_cart")
@@ -169,15 +175,24 @@ public class ListPage extends BaseTest {
 
     /** Par group elements */
 
+    @iOSXCUITFindBy(id = "par selector button")
     @AndroidFindBy(id = "parGroupSelector")
     private MobileElement parGroupSelector;
 
-    //Default android Select Par Group
+    @iOSXCUITFindBy(id = "current par name label")
     @AndroidFindBy(id = "parGroupSelection")
     private MobileElement parGroupNameLabel;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.view.ViewGroup/android.view.ViewGroup[2]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]/android.widget.LinearLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView")
-    private MobileElement parValueOnFirstProductInList;
+    @AndroidFindBy(id = "parLabel")
+    @HowToUseLocators(iOSXCUITAutomation = LocatorGroupStrategy.ALL_POSSIBLE)
+    @iOSXCUITFindBy(id = "par quantity label")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"par quantity label\"]")
+    private MobileElement firstProductCaseParValue;
+
+    @iOSXCUITFindBy(id = "par quantity label")
+    @AndroidFindBy(id = "parLabel")
+    private List<MobileElement> parlabels;
+
 
     public ListPage checkElementsPresence() {
         utils.log().info("Check elements presence on List page");
@@ -238,9 +253,32 @@ public class ListPage extends BaseTest {
         return this;
     }
 
+    public ListPage checkElementsPresenceForFirstItemCasePar(String expectedParCaseValue) {
+        utils.log().info("Check elements presence for first case item on List page");
+        SoftAssert softAssert = new SoftAssert();
+        //waitForVisibility(firstProductCaseParValue, "firstProductCaseParValue");
+        softAssert.assertTrue(firstProductCaseParValue.isDisplayed(), "firstProduct");
+        softAssert.assertEquals(firstProductCaseParValue.getText(), expectedParCaseValue, "firstProductCaseParValue equality check");
+        softAssert.assertAll();
+        return this;
+    }
+
+    public ListPage checkParSelectorIsEmpty() {
+        utils.log().info("Check elements presence for first case item on List page");
+        SoftAssert softAssert = new SoftAssert();
+        if(getPlatform().equalsIgnoreCase("iOS")) {
+            softAssert.assertEquals(parGroupNameLabel.getText(), "Show Par Group", "parGroupSelector equality check");
+        }
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            softAssert.assertTrue(parGroupNameLabel.isDisplayed(), "parGroupSelector");
+            softAssert.assertEquals(parGroupNameLabel.getText(), "Select Par Group", "parGroupSelector equality check");
+        }
+        softAssert.assertAll();
+        return this;
+    }
+
     public void checkDefaultListElementsPresence() {
         utils.log().info("Check elements presence for default list on List page");
-        //Assert.assertTrue(defaultIcon.isDisplayed());
         Assert.assertTrue(defaultListLabel.isDisplayed(), "defaultListLabel");
     }
 
@@ -265,14 +303,9 @@ public class ListPage extends BaseTest {
         return new ListPage();
     }
 
-    public ListSettingsPage pressListSettingsButtonOnIos() {
+    public ListSettingsPage pressListSettingsButton() {
         click(listSettingsButton, "Press Settings button on List page");
         return new ListSettingsPage();
-    }
-
-    public AndroidListSettingsPage pressListSettingsButtonOnAndroid() {
-        click(listSettingsButton, "Press Settings button on List page");
-        return new AndroidListSettingsPage();
     }
 
     public ListFilterPage pressListFilterButton() {

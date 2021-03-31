@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="tests">
+    <test name="Smoke_Suite_iPad_Pro_12_9_4th_gen">
+        <listeners>
+            <listener class-name="com.qe.listeners.TestListener" />
+        </listeners>
+        <parameter name="platformName" value="iOS"  preserve-order="true" />
+        <parameter name="udid" value="D688C755-0840-403B-ABFC-5A8528AD18CC" />
+        <parameter name="deviceName" value="iPad_Pro_12_9_4th_Gen" />
+        <parameter name="wdaLocalPort" value="10001" />
+        <parameter name="webkitDebugProxyPort" value="11001" />
+        <parameter name="isTablet" value="true" />
+        <packages>
+            <package name="com.qe.tests.smoke.*"/>
+        </packages>
+    </test>
+</suite>

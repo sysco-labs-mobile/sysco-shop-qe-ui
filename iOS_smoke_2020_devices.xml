@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="iOS Smoke Suite for 2020 devices" parallel="tests">
+    <test name="Smoke_Suite_iPad_Pro_12_9_4th_gen">
+        <listeners>
+            <listener class-name="com.qe.listeners.TestListener" />
+        </listeners>
+        <parameter name="platformName" value="iOS"  preserve-order="true" />
+        <parameter name="udid" value="D688C755-0840-403B-ABFC-5A8528AD18CC" />
+        <parameter name="deviceName" value="iPad_Pro_12_9_4th_Gen" />
+        <parameter name="wdaLocalPort" value="10002" />
+        <parameter name="webkitDebugProxyPort" value="11002" />
+        <parameter name="isTablet" value="true" />
+        <packages>
+            <package name="com.qe.tests.smoke.*"/>
+        </packages>
+    </test>
+    <test name="Smoke_Suite_iPhone_12">
+        <listeners>
+            <listener class-name="com.qe.listeners.TestListener" />
+        </listeners>
+        <parameter name="platformName" value="iOS"  preserve-order="true" />
+        <parameter name="udid" value="5BD8AFF1-D6FC-4081-A0C9-6F0DBFC17FFB" />
+        <parameter name="deviceName" value="iPhone_12" />
+        <parameter name="wdaLocalPort" value="10004" />
+        <parameter name="webkitDebugProxyPort" value="11004" />
+        <packages>
+            <package name="com.qe.tests.smoke.*"/>
+        </packages>
+    </test>
+    <test name="Smoke_Suite_iPhone_12_Mini">
+        <listeners>
+            <listener class-name="com.qe.listeners.TestListener" />
+        </listeners>
+        <parameter name="platformName" value="iOS"  preserve-order="true" />
+        <parameter name="udid" value="885D5CDA-6EF0-42CE-A35E-E4CE94777DCF" />
+        <parameter name="deviceName" value="iPhone_12_Mini" />
+        <parameter name="wdaLocalPort" value="10005" />
+        <parameter name="webkitDebugProxyPort" value="11005" />
+        <packages>
+            <package name="com.qe.tests.smoke.*"/>
+        </packages>
+    </test>
+    <test name="Smoke_Suite_iPhone_12_Pro">
+        <listeners>
+            <listener class-name="com.qe.listeners.TestListener" />
+        </listeners>
+        <parameter name="platformName" value="iOS"  preserve-order="true" />
+        <parameter name="udid" value="4B7C2EAD-4581-4EBF-A7A7-D81234CDE216" />
+        <parameter name="deviceName" value="iPhone_12_Pro" />
+        <parameter name="wdaLocalPort" value="10006" />
+        <parameter name="webkitDebugProxyPort" value="11006" />
+        <packages>
+            <package name="com.qe.tests.smoke.*"/>
+        </packages>
+    </test>
+    <test name="Smoke_Suite_iPhone12_Pro_Max">
+        <listeners>
+            <listener class-name="com.qe.listeners.TestListener" />
+        </listeners>
+        <parameter name="platformName" value="iOS"  preserve-order="true" />
+        <parameter name="udid" value="48C09AF0-ECA1-473A-AA6A-57FDDDAA6F4C" />
+        <parameter name="deviceName" value="iPhone_12_Pro_Max" />
+        <parameter name="wdaLocalPort" value="10007" />
+        <parameter name="webkitDebugProxyPort" value="11007" />
+        <packages>
+            <package name="com.qe.tests.smoke.*"/>
+        </packages>
+    </test>
+</suite>
