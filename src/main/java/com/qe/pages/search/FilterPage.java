@@ -1,6 +1,7 @@
 package com.qe.pages.search;
 
 import com.qe.BaseTest;
+import com.qe.pages.lists.filter.FilterSyscoCategoryPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -45,9 +46,9 @@ public class FilterPage extends BaseTest {
     @iOSXCUITFindBy(id = "filters cta button")
     private MobileElement doneButton;
 
-    public SearchCatalogPage pressCategoryButton() {
+    public FilterSyscoCategoryPage pressCategoryButton() {
         click(categoryButton);
-        return new SearchCatalogPage();
+        return new FilterSyscoCategoryPage();
     }
 
     public SearchCatalogPage pressBrandButton() {

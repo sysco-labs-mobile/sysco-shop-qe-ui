@@ -47,6 +47,7 @@ public class BaseTest {
     protected static ThreadLocal<String> platform = new ThreadLocal<String>();
     protected static ThreadLocal<String> dateTime = new ThreadLocal<String>();
     protected static ThreadLocal<String> deviceName = new ThreadLocal<String>();
+    protected static ThreadLocal<String> isIosTablet = new ThreadLocal<String>();
     private static AppiumDriverLocalService server;
     public static JSONObject users;
     public static JSONObject products;
@@ -82,6 +83,14 @@ public class BaseTest {
 
     public void setPlatform(String platform2) {
         platform.set(platform2);
+    }
+
+    public String getIosTablet() {
+        return isIosTablet.get();
+    }
+
+    public void setIosTablet(String isTablet) {
+        isIosTablet.set(isTablet);
     }
 
     public String getDateTime() {
@@ -231,14 +240,15 @@ public class BaseTest {
     }
 
     @Parameters({"emulator", "platformName", "udid", "deviceName", "systemPort",
-            "chromeDriverPort", "wdaLocalPort", "webkitDebugProxyPort"})
+            "chromeDriverPort", "wdaLocalPort", "webkitDebugProxyPort", "isTablet"})
     @BeforeTest
     public void beforeTest(@Optional("androidOnly") String emulator, String platformName, String udid, String deviceName,
                            @Optional("androidOnly") String systemPort, @Optional("androidOnly") String chromeDriverPort,
-                           @Optional("iOSOnly") String wdaLocalPort, @Optional("iOSOnly") String webkitDebugProxyPort) throws Exception {
+                           @Optional("iOSOnly") String wdaLocalPort, @Optional("iOSOnly") String webkitDebugProxyPort, @Optional("iOSOnly") String isTablet) throws Exception {
         setDateTime(utils.dateTime());
         setPlatform(platformName);
         setDeviceName(deviceName);
+        setIosTablet(isTablet);
         URL url;
         InputStream inputStream = null;
         InputStream stringsis = null;
@@ -268,6 +278,8 @@ public class BaseTest {
             desiredCapabilities.setCapability("platformName", platformName);
             desiredCapabilities.setCapability("deviceName", deviceName);
             desiredCapabilities.setCapability("udid", udid);
+            desiredCapabilities.setCapability("unicodeKeyboard", true);
+            desiredCapabilities.setCapability("resetKeyboard", true);
             url = new URL(props.getProperty("appiumURL"));
 
             switch (platformName) {
@@ -429,7 +441,7 @@ public class BaseTest {
         TouchAction t = new TouchAction(getDriver());
         Dimension size = getDriver().manage().window().getSize();
 
-        int startX = size.width / 2;
+        int startX = (int) (size.width / 1.1);
         int endX = startX;
         int startY = (int) (size.height * 0.8);
         int endY = (int) (size.height * 0.2);

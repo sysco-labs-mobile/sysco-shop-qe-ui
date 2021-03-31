@@ -4,6 +4,8 @@ import com.qe.BaseTest;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.HowToUseLocators;
+import io.appium.java_client.pagefactory.LocatorGroupStrategy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.testng.asserts.SoftAssert;
 
@@ -116,7 +118,9 @@ public class OrderCartPage extends BaseTest {
     private MobileElement prospectShopLabelContainer;
 
     @AndroidFindBy(xpath = "//*[contains(@resource-id, 'customerCreditBanner')]/android.widget.TextView[1]")
+    @HowToUseLocators(iOSXCUITAutomation = LocatorGroupStrategy.ALL_POSSIBLE)
     @iOSXCUITFindBy(id = "Fill out your Sysco Credit Application for credit terms and payment flexibility. You were emailed a link to your credit application when you registered to become a Sysco customer, and it should take 15 minutes to complete.")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[contains(@name, 'Fill out your Sysco Credit Application')]")
     private MobileElement prospectShopText;
 
     @AndroidFindBy(id = "customerCreditBannerClose")

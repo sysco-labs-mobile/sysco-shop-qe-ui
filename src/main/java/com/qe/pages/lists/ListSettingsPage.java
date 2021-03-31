@@ -1,11 +1,17 @@
 package com.qe.pages.lists;
 
 import com.qe.BaseTest;
+import com.qe.pages.lists.par.CreateParPage;
+import com.qe.pages.lists.par.ParPage;
+import com.qe.pages.lists.par.ParSettingsPage;
 import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.By;
 import org.testng.asserts.SoftAssert;
+
+import java.util.List;
 
 public class ListSettingsPage extends BaseTest {
     TestUtils utils = new TestUtils();
@@ -96,17 +102,22 @@ public class ListSettingsPage extends BaseTest {
 
     /** Par section */
 
+    @iOSXCUITFindBy(id = "Par Management")
     @AndroidFindBy(id = "parManagementLabel")
     private MobileElement parManagementLabel;
 
+    @iOSXCUITFindBy(id = "par management switch")
     @AndroidFindBy(id = "parManagementSwitch")
     private MobileElement parManagementSwitch;
 
+    @iOSXCUITFindBy(id = "Create New Par Group")
     @AndroidFindBy(id = "createNewParGroupContainer")
     private MobileElement createNewParGroupButton;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.LinearLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[1]")
-    private MobileElement firstParGroupButton;
+    @iOSXCUITFindBy(id = "par management switch")
+    @AndroidFindBy(id = "par_group_name")
+    private List<MobileElement> androidParNames;
+
 
     public ListSettingsPage checkElementsPresence() {
         utils.log().info("Check elements presence on List Settings Page");
@@ -167,5 +178,32 @@ public class ListSettingsPage extends BaseTest {
     public ListDeleteAlert pressDeleteListButton() {
         click(deleteListButton, "Press delete list button on List Settings page");
         return new ListDeleteAlert();
+    }
+
+    public ListSettingsPage toggleParManagement() {
+        click(parManagementSwitch);
+        return this;
+    }
+
+    public CreateParPage pressCreateParListButton() {
+        click(createNewParGroupButton);
+        return new CreateParPage();
+    }
+
+    public ParPage pressOnParWithName(String expectedParName) {
+        utils.log().info("Press on par with name " + expectedParName + " on List Settings page");
+        if(getPlatform().equalsIgnoreCase("iOS")) {
+            String locator = "//XCUIElementTypeStaticText[@name='" + expectedParName + "']/..";
+            getDriver().findElement(new By.ByXPath(locator)).click();
+        }
+        if(getPlatform().equalsIgnoreCase("Android")) {
+            for (MobileElement androidParName : androidParNames) {
+                if (androidParName.getText().equalsIgnoreCase(expectedParName)) {
+                    click(androidParName);
+                    break;
+                }
+            }
+        }
+        return new ParPage();
     }
 }

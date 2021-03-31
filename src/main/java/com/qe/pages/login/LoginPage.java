@@ -111,8 +111,8 @@ public class LoginPage extends BaseTest {
 //        softAssert.assertTrue(shopLogo.isDisplayed());
 //        softAssert.assertTrue(loginTagline.isDisplayed()); flaky in guest tests
 //        softAssert.assertTrue(emailLabel.isDisplayed()); flaky in guest tests
-        softAssert.assertTrue(emailTxtField.isDisplayed());
-        softAssert.assertTrue(associateLoginButton.isDisplayed());
+        softAssert.assertTrue(emailTxtField.isDisplayed(), "emailTxtField");
+        softAssert.assertTrue(associateLoginButton.isDisplayed(), "associateLoginButton");
         softAssert.assertAll();
         return this;
     }
@@ -123,24 +123,40 @@ public class LoginPage extends BaseTest {
 //        softAssert.assertTrue(shopLogo.isDisplayed());
 //        softAssert.assertTrue(loginTagline.isDisplayed()); flaky
 //        softAssert.assertTrue(emailLabel.isDisplayed());
-        softAssert.assertTrue(emailTxtField.isDisplayed());
+        softAssert.assertTrue(emailTxtField.isDisplayed(), "emailTxtField");
 //        softAssert.assertTrue(passwordLabel.isDisplayed());
-        softAssert.assertTrue(passwordTxtField.isDisplayed());
-        softAssert.assertTrue(forgotPasswordButton.isDisplayed());
-        softAssert.assertTrue(associateLoginButton.isDisplayed());
+        softAssert.assertTrue(passwordTxtField.isDisplayed(), "passwordTxtField");
+        softAssert.assertTrue(forgotPasswordButton.isDisplayed(), "forgotPasswordButton");
+        softAssert.assertTrue(associateLoginButton.isDisplayed(), "associateLoginButton");
 //        softAssert.assertTrue(rightsReservedLabel.isDisplayed()); hidden by keyboard
         softAssert.assertAll();
         return this;
     }
 
     public LoginPage enterEmail(String email) {
+        if (getPlatform().equalsIgnoreCase("iOS")){
+            utils.log().info("hiding keyboard start");
+            getDriver().hideKeyboard();
+            utils.log().info("hiding keyboard finished");
+        }
         waitForVisibility(emailTxtField, "emailTxtField");
         sendKeys(emailTxtField, email, "Enter email " + email);
+        if (getPlatform().equalsIgnoreCase("iOS")){
+            utils.log().info("hiding keyboard start");
+            getDriver().hideKeyboard();
+            utils.log().info("hiding keyboard finished");
+        }
         return this;
     }
 
     public LoginPage enterPassword(String password) {
+        if (getPlatform().equalsIgnoreCase("iOS")){
+            getDriver().hideKeyboard();
+        }
         sendKeys(passwordTxtField, password);
+        if (getPlatform().equalsIgnoreCase("iOS")){
+            getDriver().hideKeyboard();
+        }
         return this;
     }
 

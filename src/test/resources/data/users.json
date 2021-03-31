@@ -8,6 +8,10 @@
     "email":"bffautotest@grr.la",
     "password":"Welcome1"
   },
+  "customerForParTests":{
+    "email":"bffautotestpira@grr.la",
+    "password":"Welcome1"
+  },
   "customerInvalidPassword":{
     "email":"ssmcust9@grr.la",
     "password":"invalidpassword"

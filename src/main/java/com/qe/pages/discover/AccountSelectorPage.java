@@ -32,9 +32,6 @@ public class AccountSelectorPage extends BaseTest {
     @AndroidFindBy(id = "numResultsForSearch")
     @iOSXCUITFindBy(id = "account selector show results label")
     private MobileElement accountCountLabel;
-    //3 results for Monday  vs 5 total //Android: SHOWING 3 RESULTS
-    // 1 result for salem //Android: SHOWING 1 RESULT FOR "SALEM"
-    // Android: SHOWING 1 RESULT FOR "SALEM"
 
     @AndroidFindBy(id = "Cancel")
     @iOSXCUITFindBy(id = "Clear text")

@@ -29,13 +29,9 @@ public class LogOutTests extends BaseTest {
 
     @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void customerLogout() throws InterruptedException {
-        if (getPlatform().equalsIgnoreCase("iOS")){
-            getDriver().hideKeyboard();
-        }
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
         loginPage = loginPage.pressNextButton();
-        loginPage.checkCustomerElementsPresence();
         loginPage.enterPassword(BaseTest.users.getJSONObject("customer").getString("password"));
         discoverPage = loginPage.pressLoginButton();
         navDrawer = discoverPage.pressNavBarDrawerButton();
@@ -43,11 +39,12 @@ public class LogOutTests extends BaseTest {
             logOutPage = navDrawer.pressLogOutButtonForiOS();
             logOutPage.checkElementsPresence();
             loginPage = logOutPage.pressBackToLoginButton();
+            getDriver().hideKeyboard();
             loginPage.checkElementsPresence();
-
         }
         if(getPlatform().equalsIgnoreCase("Android")) {
             loginPage = navDrawer.pressLogOutButtonForAndroid();
+            getDriver().hideKeyboard();
             loginPage.checkElementsPresence();
         }
     }
