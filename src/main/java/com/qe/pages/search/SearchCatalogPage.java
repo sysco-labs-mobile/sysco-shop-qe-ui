@@ -91,6 +91,10 @@ public class SearchCatalogPage extends BaseTest {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[1]/XCUIElementTypeButton[@name=\"dot menu button\"]")
     private MobileElement firstProductDotMenuButton;
 
+    @AndroidFindBy(id = "itemFlag")
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeStaticText[@name=\"special flag label\"])[1]")
+    private MobileElement firstSpecialFlagLabel;
+
     @AndroidFindBy(id = "android:id/content")
     @iOSXCUITFindBy(id = "Add to list")
     private MobileElement addToListButton;
@@ -158,6 +162,17 @@ public class SearchCatalogPage extends BaseTest {
     @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup[1]//*[contains(@resource-id, 'eachPriceContainer')]//*[contains(@resource-id, 'priceLabel')]")
     private MobileElement firstProductEachBulkDiscountCasePrice;
 
+
+    public SearchCatalogPage pressCatalogFilter() {
+        click(filterButton);
+        return new SearchCatalogPage();
+    }
+
+    public SearchCatalogPage checkElementsPresenceForSpecialtyLabel() {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(firstSpecialFlagLabel.isDisplayed(), "Special Flag Label");
+        return this;
+    }
 
     /** Guest user element */
 
@@ -318,7 +333,10 @@ public class SearchCatalogPage extends BaseTest {
     }
 
     public DiscountOverlay pressFirstItemCaseDiscountInfoBubble() {
-        click(firstProductCaseDiscountInfoBubble, "Press on first product's discount info buble on Search page");
+        click(firstProductCaseDiscountInfoBubble, "Press on first product's discount info bubble on Search page");
         return new DiscountOverlay();
     }
+
+
+
 }
