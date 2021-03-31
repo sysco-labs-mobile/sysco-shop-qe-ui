@@ -18,7 +18,6 @@ public class ListsTests extends BaseTest {
     NavDrawer navDrawer;
     ListsPage listsPage;
     ListSettingsPage listSettingsPage;
-    AndroidListSettingsPage androidListSettingsPage;
     ListPage listPage;
     ListDeleteAlert listDeleteAlert;
     AddToListPage addToListPage;
@@ -32,9 +31,7 @@ public class ListsTests extends BaseTest {
         discoverPage = new DiscoverPage();
         listsPage = new ListsPage();
         navDrawer = new NavDrawer();
-        androidListSettingsPage = new AndroidListSettingsPage();
         listSettingsPage = new ListSettingsPage();
-        listPage = new ListPage();
         listDeleteAlert = new ListDeleteAlert();
         searchCatalogPage = new SearchCatalogPage();
         addToListPage = new AddToListPage();
@@ -48,7 +45,7 @@ public class ListsTests extends BaseTest {
         discoverPage = loginPage.pressLoginButton();
         listsPage = discoverPage.pressNavBarDrawerButton().pressListsButton();
         listsPage.checkPageIsLoadedAndIfNotReload();
-        String newListName = "AL " + Math.random();
+        String newListName = "" + Math.random();
         listSettingsPage = listsPage.pressCreateListButton();
         listSettingsPage.enterListName(newListName);
         listPage = listSettingsPage.pressSaveListButton();
@@ -79,13 +76,7 @@ public class ListsTests extends BaseTest {
         listsPage.checkElementsPresence();
         listPage = listsPage.pressList(newListName);
         listPage.checkElementsPresence();
-        if(getPlatform().equalsIgnoreCase("iOS")) {
-            listSettingsPage = listPage.pressListSettingsButtonOnIos();
-        }
-        if(getPlatform().equalsIgnoreCase("Android")) {
-            androidListSettingsPage = listPage.pressListSettingsButtonOnAndroid();
-            androidListSettingsPage.pressListSettingsButtonOnAndroid();
-        }
+        listSettingsPage = listPage.pressListSettingsButton();
         listDeleteAlert = listSettingsPage.pressDeleteListButton();
         listDeleteAlert.checkElementsPresence();
         listsPage = listDeleteAlert.pressYes();

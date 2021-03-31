@@ -188,17 +188,16 @@ public class DiscoverPage extends BaseTest {
     public DiscoverPage checkElementsPresence() {
         utils.log().info("Check elements presence");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(navBarDrawerButton.isDisplayed());
-        softAssert.assertTrue(searchTextField.isDisplayed());
-        softAssert.assertTrue(searchTextFieldText.isDisplayed());
-        softAssert.assertTrue(cartButton.isDisplayed());
-        softAssert.assertTrue(dashboardWelcomeLabel.isDisplayed());
-        softAssert.assertTrue(dashboardTaglineLabel.isDisplayed());
+        softAssert.assertTrue(navBarDrawerButton.isDisplayed(), "navBarDrawerButton");
+        softAssert.assertTrue(searchTextField.isDisplayed(), "searchTextField");
+        softAssert.assertTrue(searchTextFieldText.isDisplayed(), "searchTextFieldText");
+        softAssert.assertTrue(cartButton.isDisplayed(), "cartButton");
+        softAssert.assertTrue(dashboardWelcomeLabel.isDisplayed(), "dashboardWelcomeLabel");
+        softAssert.assertTrue(dashboardTaglineLabel.isDisplayed(), "dashboardTaglineLabel");
         if(getPlatform().equalsIgnoreCase("Android")) {
             softAssert.assertEquals(dashboardWelcomeLabel.getText(), "Welcome to Sysco Shop");
             softAssert.assertEquals(dashboardTaglineLabel.getText(), "Keeping you on trend and stocked with fresh products and fresh ideas.");
         }
-        softAssert.assertTrue(shopByCategoryHeader.isDisplayed());
         softAssert.assertAll();
         return this;
     }
@@ -207,20 +206,20 @@ public class DiscoverPage extends BaseTest {
     public DiscoverPage checkElementsPresenceForCategories() {
         utils.log().info("Check elements presence");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(shopByCategoryHeader.isDisplayed());
-        softAssert.assertTrue(meatsCategoryButton.isDisplayed());
-        softAssert.assertTrue(seaCategoryButton.isDisplayed());
+        softAssert.assertTrue(shopByCategoryHeader.isDisplayed(), "shopByCategoryHeader");
+        softAssert.assertTrue(meatsCategoryButton.isDisplayed(), "meatsCategoryButton");
+        softAssert.assertTrue(seaCategoryButton.isDisplayed(), "seaCategoryButton");
         scrollDownByCoordinates();
-        softAssert.assertTrue(poultryCategoryButton.isDisplayed());
-        softAssert.assertTrue(frozenCategoryButton.isDisplayed());
-        softAssert.assertTrue(cannedCategoryButton.isDisplayed());
-        softAssert.assertTrue(produceCategoryButton.isDisplayed());
-        softAssert.assertTrue(dairyCategoryButton.isDisplayed());
-        softAssert.assertTrue(dispenserCategoryButton.isDisplayed());
-        softAssert.assertTrue(suppliesCategoryButton.isDisplayed());
-        softAssert.assertTrue(paperCategoryButton.isDisplayed());
-        softAssert.assertTrue(chemicalCategoryButton.isDisplayed());
-        softAssert.assertTrue(healthcareCategoryButton.isDisplayed());
+        softAssert.assertTrue(poultryCategoryButton.isDisplayed(), "poultryCategoryButton");
+        softAssert.assertTrue(frozenCategoryButton.isDisplayed(), "frozenCategoryButton");
+        softAssert.assertTrue(cannedCategoryButton.isDisplayed(), "cannedCategoryButton");
+        softAssert.assertTrue(produceCategoryButton.isDisplayed(), "produceCategoryButton");
+        softAssert.assertTrue(dairyCategoryButton.isDisplayed(), "dairyCategoryButton");
+        softAssert.assertTrue(dispenserCategoryButton.isDisplayed(), "dispenserCategoryButton");
+        softAssert.assertTrue(suppliesCategoryButton.isDisplayed(), "suppliesCategoryButton");
+        softAssert.assertTrue(paperCategoryButton.isDisplayed(), "paperCategoryButton.");
+        softAssert.assertTrue(chemicalCategoryButton.isDisplayed(), "chemicalCategoryButton");
+        softAssert.assertTrue(healthcareCategoryButton.isDisplayed(), "healthcareCategoryButton");
         softAssert.assertAll();
         return this;
     }
@@ -228,14 +227,14 @@ public class DiscoverPage extends BaseTest {
     public DiscoverPage checkElementsPresenceForDeliveryWidget() {
         utils.log().info("Check elements presence");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(deliverySummaryHeader.isDisplayed());
-        softAssert.assertTrue(deliveryIcon.isDisplayed());
-        softAssert.assertTrue(deliveryPlaceLabel.isDisplayed());
-        softAssert.assertTrue(deliveryStatusLabel.isDisplayed());
-        softAssert.assertTrue(deliveryTimeIcon.isDisplayed());
-        softAssert.assertTrue(estimatedDeliveryLabel.isDisplayed());
-        softAssert.assertTrue(deliveryTimeLabel.isDisplayed());
-        softAssert.assertTrue(viewDeliveryButton.isDisplayed());
+        softAssert.assertTrue(deliverySummaryHeader.isDisplayed(), "deliverySummaryHeader");
+        softAssert.assertTrue(deliveryIcon.isDisplayed(), "deliveryIcon");
+        softAssert.assertTrue(deliveryPlaceLabel.isDisplayed(), "deliveryPlaceLabel");
+        softAssert.assertTrue(deliveryStatusLabel.isDisplayed(), "deliveryStatusLabel");
+        softAssert.assertTrue(deliveryTimeIcon.isDisplayed(), "deliveryTimeIcon");
+        softAssert.assertTrue(estimatedDeliveryLabel.isDisplayed(), "estimatedDeliveryLabel");
+        softAssert.assertTrue(deliveryTimeLabel.isDisplayed(), "deliveryTimeLabel");
+        softAssert.assertTrue(viewDeliveryButton.isDisplayed(), "viewDeliveryButton");
         softAssert.assertAll();
         return this;
     }
@@ -243,9 +242,9 @@ public class DiscoverPage extends BaseTest {
     public DiscoverPage checkElementsPresenceForSuggestionsForYou() {
         utils.log().info("Check elements presence");
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(suggestionsForYouHeader.isDisplayed());
-        softAssert.assertTrue(suggestionsForYouCollection.isDisplayed());
-        softAssert.assertTrue(suggestionsForYouItem1.isDisplayed());
+        softAssert.assertTrue(suggestionsForYouHeader.isDisplayed(), "suggestionsForYouHeader");
+        softAssert.assertTrue(suggestionsForYouCollection.isDisplayed(), "suggestionsForYouCollection");
+        softAssert.assertTrue(suggestionsForYouItem1.isDisplayed(), "suggestionsForYouItem1");
         softAssert.assertAll();
         return this;
     }

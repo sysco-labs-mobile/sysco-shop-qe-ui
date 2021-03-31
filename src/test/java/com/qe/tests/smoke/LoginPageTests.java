@@ -18,7 +18,6 @@ public class LoginPageTests extends BaseTest {
     @BeforeMethod
     public void beforeMethod(Method m) {
         utils.log().info("\n       Starting test:" + m.getName());
-
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
     }
@@ -33,6 +32,7 @@ public class LoginPageTests extends BaseTest {
         forgotPasswordPage = loginPage.pressForgotPasswordButton();
         LoginPage loginPage = forgotPasswordPage.pressBackArrowButton();
         if (getPlatform().equalsIgnoreCase("iOS")){
+            loginPage.enterEmail(users.getJSONObject("customerInvalidPassword").getString("email"));
             getDriver().hideKeyboard();
         }
         loginPage.checkElementsPresence();

@@ -10,7 +10,7 @@ import org.testng.asserts.SoftAssert;
 
 
 public class FilterPage extends BaseTest {
-    TestUtils utils = new TestUtils();
+   TestUtils utils = new TestUtils();
 
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.ImageButton")
     @iOSXCUITFindBy(id = "filters close button")
@@ -57,6 +57,7 @@ public class FilterPage extends BaseTest {
         click(categoryButton);
         return new FilterSyscoCategoryPage();
     }
+    
     public FilterPage pressBrandButton() {
         click(brandButton);
         return new FilterPage();

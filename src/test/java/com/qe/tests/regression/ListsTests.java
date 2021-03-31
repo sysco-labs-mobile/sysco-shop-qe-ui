@@ -97,7 +97,7 @@ public class ListsTests extends BaseTest {
         listSettingsPage.enterListName(newListName);
         listPage = listSettingsPage.pressSaveListButton();
         listPage.checkListName(newListName);
-        listSettingsPage = listPage.pressListSettingsButtonOnIos();
+        listSettingsPage = listPage.pressListSettingsButton();
         listSettingsPage.clearListName();
         listSettingsPage.enterListName(changedListName);
         listSettingsPage.pressPrivateListOption();
@@ -114,7 +114,7 @@ public class ListsTests extends BaseTest {
         listSettingsPage.enterListName(newListName);
         listPage = listSettingsPage.pressSaveListButton();
         listPage.checkListName(newListName);
-        listSettingsPage = listPage.pressListSettingsButtonOnIos();
+        listSettingsPage = listPage.pressListSettingsButton();
         listDeleteAlert = listSettingsPage.pressDeleteListButton();
         listDeleteAlert.checkElementsPresence();
         listsPage = listDeleteAlert.pressYes();
@@ -129,7 +129,7 @@ public class ListsTests extends BaseTest {
         listSettingsPage.enterListName(newListName);
         listPage = listSettingsPage.pressSaveListButton();
         listPage.checkListName(newListName);
-        listSettingsPage = listPage.pressListSettingsButtonOnIos();
+        listSettingsPage = listPage.pressListSettingsButton();
         listDeleteAlert = listSettingsPage.pressDeleteListButton();
         listDeleteAlert.checkElementsPresence();
         listSettingsPage = listDeleteAlert.pressNo();

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="tests">
+    <test name="Smoke_Suite_iPhone_12">
+        <listeners>
+            <listener class-name="com.qe.listeners.TestListener" />
+        </listeners>
+        <parameter name="platformName" value="iOS"  preserve-order="true" />
+        <parameter name="udid" value="5BD8AFF1-D6FC-4081-A0C9-6F0DBFC17FFB" />
+        <parameter name="deviceName" value="iPhone_12" />
+        <parameter name="wdaLocalPort" value="10001" />
+        <parameter name="webkitDebugProxyPort" value="11001" />
+        <packages>
+            <package name="com.qe.tests.smoke.*"/>
+        </packages>
+    </test>
+</suite>

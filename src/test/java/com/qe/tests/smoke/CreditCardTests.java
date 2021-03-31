@@ -61,18 +61,16 @@ public class CreditCardTests extends BaseTest {
         searchCatalogPage.inputCaseQuantityForFirstProduct("1");
         orderCartPage = searchCatalogPage.pressCartButton();
         orderCartPage.checkElementsPresenceForCreditCardUser();
-        if(getPlatform().equalsIgnoreCase("Android")) {
-            orderCartReviewOrderPage = orderCartPage.pressProceedToCheckoutButton();
-            Thread.sleep(5000);
-            scrollDownByCoordinates();
-            orderCartReviewOrderPage.checkElementsPresenceForCreditCardUser();
-            creditCardSurchargeModal = orderCartReviewOrderPage.pressCreditCardSurchargeBubble();
-            creditCardSurchargeModal.checkElementsPresence();
-            orderCartReviewOrderPage = creditCardSurchargeModal.pressOkButton();
-            creditCardPricingModal = orderCartReviewOrderPage.pressEstimatedTotalInfoBubble();
-            creditCardPricingModal.checkElementsPresence();
-            creditCardPricingModal.pressOkButton();
-        }
+        orderCartReviewOrderPage = orderCartPage.pressProceedToCheckoutButton();
+        Thread.sleep(5000);
+        scrollDownByCoordinates();
+        orderCartReviewOrderPage.checkElementsPresenceForCreditCardUser();
+        creditCardSurchargeModal = orderCartReviewOrderPage.pressCreditCardSurchargeBubble();
+        creditCardSurchargeModal.checkElementsPresence();
+        orderCartReviewOrderPage = creditCardSurchargeModal.pressOkButton();
+        creditCardPricingModal = orderCartReviewOrderPage.pressEstimatedTotalInfoBubble();
+        creditCardPricingModal.checkElementsPresence();
+        creditCardPricingModal.pressOkButton();
     }
 
 }
