@@ -2,10 +2,13 @@ package com.qe.tests.smoke;
 
 import com.qe.BaseTest;
 import com.qe.pages.common.NavDrawer;
+import com.qe.pages.search.FilterCategoryPage;
 import com.qe.pages.search.SearchCatalogPage;
 import com.qe.pages.discover.DiscoverPage;
 import com.qe.pages.login.LoginPage;
 import com.qe.pages.search.TypeAheadPage;
+import com.qe.pages.search.FilterPage;
+import com.qe.pages.search.FilterStockTypePage;
 import com.qe.utils.TestUtils;
 import org.testng.annotations.*;
 
@@ -17,6 +20,10 @@ public class SearchCatalogTests extends BaseTest {
     NavDrawer navDrawer;
     SearchCatalogPage searchCatalogPage;
     TypeAheadPage typeAheadPage;
+    FilterPage filterPage;
+    FilterCategoryPage filterCategoryPage;
+    FilterStockTypePage filterStockTypePage;
+
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
@@ -28,6 +35,9 @@ public class SearchCatalogTests extends BaseTest {
         navDrawer = new NavDrawer();
         searchCatalogPage = new SearchCatalogPage();
         typeAheadPage = new TypeAheadPage();
+        filterPage = new FilterPage();
+        filterCategoryPage = new FilterCategoryPage();
+        filterStockTypePage = new FilterStockTypePage();
     }
 
     @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
@@ -40,6 +50,21 @@ public class SearchCatalogTests extends BaseTest {
         typeAheadPage.checkElementsPresence("beef");
         searchCatalogPage = typeAheadPage.pressSearchResultFirst();
         searchCatalogPage.checkElementsPresence("beef");
+        searchCatalogPage.pressCatalogFilter();
+        filterPage.checkElementsPresenceForCatalogMenuFilters();
+        filterPage.pressCloseButton();
+        searchCatalogPage.pressCatalogFilter();
+        filterPage.pressCategoryButton();
+        filterCategoryPage.pressFirstCategorySelector();
+        filterCategoryPage.pressBack();
+        filterPage.pressDoneButton();
+        searchCatalogPage.checkElementsPresenceForSpecialtyLabel();
+        searchCatalogPage.pressCatalogFilter();
+        filterPage.pressStockTypeButton();
+        filterStockTypePage.pressStockSelector();
+        filterStockTypePage.pressBack();
+        filterPage.pressDoneButton();
     }
+
 
 }
