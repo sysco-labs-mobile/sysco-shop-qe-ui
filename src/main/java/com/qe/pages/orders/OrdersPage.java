@@ -50,11 +50,11 @@ public class OrdersPage extends BaseTest {
     @iOSXCUITFindBy(id = "orders list")//not sure usable
     private MobileElement ordersList;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.widget.LinearLayout[1]")
     @iOSXCUITFindBy(id = "order-0-0")
     private MobileElement firstOrderInList;
 
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.widget.LinearLayout[2]")
     @iOSXCUITFindBy(id = "order-0-1")
     private MobileElement secondOrderInList;
 

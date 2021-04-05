@@ -66,10 +66,8 @@ public class CreditCardTests extends BaseTest {
         scrollDownByCoordinates();
         orderCartReviewOrderPage.checkElementsPresenceForCreditCardUser();
         creditCardSurchargeModal = orderCartReviewOrderPage.pressCreditCardSurchargeBubble();
-        creditCardSurchargeModal.checkElementsPresence();
         orderCartReviewOrderPage = creditCardSurchargeModal.pressOkButton();
         creditCardPricingModal = orderCartReviewOrderPage.pressEstimatedTotalInfoBubble();
-        creditCardPricingModal.checkElementsPresence();
         creditCardPricingModal.pressOkButton();
     }
 

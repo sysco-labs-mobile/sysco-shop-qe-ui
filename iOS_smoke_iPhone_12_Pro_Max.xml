@@ -9,8 +9,8 @@
         <parameter name="deviceName" value="iPhone_12_Pro_Max" />
         <parameter name="wdaLocalPort" value="10001" />
         <parameter name="webkitDebugProxyPort" value="11001" />
-        <classes>
-            <class name="com.qe.tests.smoke.DiscoverTests"/>
-        </classes>
+        <packages>
+            <package name="com.qe.tests.smoke.*"/>
+        </packages>
     </test>
 </suite>

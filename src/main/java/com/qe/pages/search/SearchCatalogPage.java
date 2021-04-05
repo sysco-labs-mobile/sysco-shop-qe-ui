@@ -16,7 +16,10 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.HowToUseLocators;
+import io.appium.java_client.pagefactory.LocatorGroupStrategy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 public class SearchCatalogPage extends BaseTest {
@@ -61,7 +64,9 @@ public class SearchCatalogPage extends BaseTest {
     private MobileElement resultCountLabel;
 
     @AndroidFindBy(accessibility = "Filter")
+    @HowToUseLocators(iOSXCUITAutomation = LocatorGroupStrategy.ALL_POSSIBLE)
     @iOSXCUITFindBy(id = "search filter view - filter button")
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeButton[@name=\"search filter view - filter button\"])[1]")
     private MobileElement filterButton;
 
     /** Banner - Add to list */
@@ -171,6 +176,7 @@ public class SearchCatalogPage extends BaseTest {
     public SearchCatalogPage checkElementsPresenceForSpecialtyLabel() {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(firstSpecialFlagLabel.isDisplayed(), "Special Flag Label");
+        softAssert.assertAll();
         return this;
     }
 
@@ -337,6 +343,9 @@ public class SearchCatalogPage extends BaseTest {
         return new DiscountOverlay();
     }
 
-
+    public String getSearchResultsText() {
+        Assert.assertTrue(resultCountLabel.isDisplayed());
+        return resultCountLabel.getText();
+    }
 
 }

@@ -83,36 +83,35 @@ public class FilterPage extends BaseTest {
         return new FilterPage();
     }
 
-    public FilterPage pressDoneButton() {
+    public SearchCatalogPage pressDoneButton() {
         click(doneButton);
-        return new FilterPage();
+        return new SearchCatalogPage();
     }
 
-    public FilterPage pressResetButton() {
+    public SearchCatalogPage pressResetButton() {
         click(filterResetButton);
-        return new FilterPage();
+        return new SearchCatalogPage();
     }
 
-    public FilterPage pressCloseButton() {
+    public SearchCatalogPage pressCloseButton() {
         click(closeButton);
-        return new FilterPage();
+        return new SearchCatalogPage();
     }
 
     public FilterPage checkElementsPresenceForCatalogMenuFilters() {
         utils.log().info("Check elements presence for catalog filter header and filter options");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(filterTitle.isDisplayed(), "Filter Title is displayed");
-        softAssert.assertTrue(closeButton.isDisplayed());
-        softAssert.assertTrue(filterResetButton.isDisplayed());
-        softAssert.assertTrue(categoryButton.isDisplayed());
-        softAssert.assertTrue(brandButton.isDisplayed());
-        softAssert.assertTrue(packSizeButton.isDisplayed());
-        softAssert.assertTrue(storageTypeButton.isDisplayed());
-        softAssert.assertTrue(syscoSpecialtyButton.isDisplayed());
-        softAssert.assertTrue(filterResetButton.isDisplayed());
-        softAssert.assertTrue(filterResetButton.isDisplayed());
-        softAssert.assertTrue(stockTypeButton.isDisplayed());
-        softAssert.assertTrue(doneButton.isDisplayed());
+        softAssert.assertTrue(closeButton.isDisplayed(), "closeButton");
+        softAssert.assertTrue(filterResetButton.isDisplayed(), "filterResetButton");
+        softAssert.assertTrue(categoryButton.isDisplayed(), "categoryButton");
+        softAssert.assertTrue(brandButton.isDisplayed(), "brandButton");
+        softAssert.assertTrue(packSizeButton.isDisplayed(), "packSizeButton");
+        softAssert.assertTrue(storageTypeButton.isDisplayed(), "storageTypeButton");
+        softAssert.assertTrue(syscoSpecialtyButton.isDisplayed(), "syscoSpecialtyButton");
+        softAssert.assertTrue(filterResetButton.isDisplayed(), "filterResetButton");
+        softAssert.assertTrue(stockTypeButton.isDisplayed(), "stockTypeButton");
+        softAssert.assertTrue(doneButton.isDisplayed(), "doneButton");
         softAssert.assertAll();
         return this;
     }
