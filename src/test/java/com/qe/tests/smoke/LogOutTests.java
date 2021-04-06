@@ -29,7 +29,6 @@ public class LogOutTests extends BaseTest {
 
     @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void customerLogout() throws InterruptedException {
-        loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
         loginPage = loginPage.pressNextButton();
         loginPage.enterPassword(BaseTest.users.getJSONObject("customer").getString("password"));

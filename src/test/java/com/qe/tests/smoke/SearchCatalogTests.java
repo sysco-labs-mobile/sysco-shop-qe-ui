@@ -50,21 +50,6 @@ public class SearchCatalogTests extends BaseTest {
         typeAheadPage.checkElementsPresence("beef");
         searchCatalogPage = typeAheadPage.pressSearchResultFirst();
         searchCatalogPage.checkElementsPresence("beef");
-        searchCatalogPage.pressCatalogFilter();
-        filterPage.checkElementsPresenceForCatalogMenuFilters();
-        filterPage.pressCloseButton();
-        searchCatalogPage.pressCatalogFilter();
-        filterPage.pressCategoryButton();
-        filterCategoryPage.pressFirstCategorySelector();
-        filterCategoryPage.pressBack();
-        filterPage.pressDoneButton();
-        searchCatalogPage.checkElementsPresenceForSpecialtyLabel();
-        searchCatalogPage.pressCatalogFilter();
-        filterPage.pressStockTypeButton();
-        filterStockTypePage.pressStockSelector();
-        filterStockTypePage.pressBack();
-        filterPage.pressDoneButton();
     }
-
 
 }

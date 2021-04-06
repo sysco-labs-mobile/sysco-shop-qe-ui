@@ -40,6 +40,14 @@ public class ProductCardPage extends BaseTest {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"product info carousel\"`]/XCUIElementTypeScrollView")
     private MobileElement productImageScrollView;
 
+    @AndroidFindBy(id = "brand")
+    @iOSXCUITFindBy(id = "product brand button")
+    private MobileElement productBrandButton;
+
+    @AndroidFindBy(id = "brand")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name='product brand button']/XCUIElementTypeStaticText")
+    private MobileElement productBrandText;
+
     @AndroidFindBy(id = "title")
     @iOSXCUITFindBy(id = "product info description")
     private MobileElement productInfoTitle;
@@ -76,86 +84,17 @@ public class ProductCardPage extends BaseTest {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info case pricing\"]/XCUIElementTypeOther[2]//XCUIElementTypeButton[@name=\"increase quantity button\"]")
     private MobileElement increaseCaseQuantityButton;
 
-//    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc='Product Details']")
-    @AndroidFindBy(accessibility = "Product Details")
-    @iOSXCUITFindBy(id = "Product Details")
-    private MobileElement productDetailsButton;
-
-//    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc='Nutrition']")
-    @AndroidFindBy(accessibility = "Nutrition")
-    @iOSXCUITFindBy(id = "Nutrition")
-    private MobileElement nutritionButton;
-
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product details label\"]/XCUIElementTypeStaticText")
-    private MobileElement text;
-
-    @AndroidFindBy(id = "showMoreShowLess")
-    @iOSXCUITFindBy(id = "collapsable read button")
-    private MobileElement readMoreButton;
-
-    @AndroidFindBy(id = "attributesRecycler")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == \"product details\"`]/XCUIElementTypeOther[2]")
-    private MobileElement productDetailsTable;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Stock Status']")
-    @iOSXCUITFindBy(id = "Stock Status")
+    @AndroidFindBy(id = "stockStatus")
+    @iOSXCUITFindBy(id = "opco name")
     private MobileElement stockStatus;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Stock Status']//following-sibling::android.widget.TextView")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Stock Status\"]/following-sibling::XCUIElementTypeStaticText")
-    private MobileElement stockStatusValue;
+    @AndroidFindBy(id = "buttonDetails")
+    @iOSXCUITFindBy(id = "product detail section")
+    private MobileElement detailsButton;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='GTIN']")
-    @iOSXCUITFindBy(id = "GTIN")
-    private MobileElement gtin;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='GTIN']/following-sibling::android.widget.TextView")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"GTIN\"]/following-sibling::XCUIElementTypeStaticText")
-    private MobileElement gtinValue;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Manufacturer UPC']")
-    @iOSXCUITFindBy(id = "Manufacturer UPC")
-    private MobileElement manufacturerUpc;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Manufacturer UPC']/following-sibling::android.widget.TextView")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Manufacturer UPC\"]/following-sibling::XCUIElementTypeStaticText")
-    private MobileElement manufacturerUpcValue;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Storage Location']")
-    @iOSXCUITFindBy(id = "Storage Location")
-    private MobileElement storageLocation;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Storage Location']/following-sibling::android.widget.TextView")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Storage Location\"]/following-sibling::XCUIElementTypeStaticText")
-    private MobileElement storageLocationValue;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Split']")
-    @iOSXCUITFindBy(id = "Split Detail")
-    private MobileElement splitDetails;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Split']/following-sibling::android.widget.TextView")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Split Detail\"]/following-sibling::XCUIElementTypeStaticText")
-    private MobileElement splitDetailsValue;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Average Weight']")
-    @iOSXCUITFindBy(id = "Average Weight")
-    private MobileElement averageWeight;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Average Weight']/following-sibling::android.widget.TextView")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Average Weight\"]/following-sibling::XCUIElementTypeStaticText")
-    private MobileElement averageWeightValue;
-
-    @AndroidFindBy(xpath = "//android.view.View[@text='Nutrition Facts']")
-    @iOSXCUITFindBy(id = "Nutrition Facts")
-    private MobileElement nutritionFactsTitle;
-
-    @AndroidFindBy(id = "ingredientsText")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info header selector\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeStaticText[1]")
-    private MobileElement ingredientsListText;
-
-    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text, 'Disclaimer')]")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"product info header selector\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeStaticText[2]")
-    private MobileElement disclaimerText;
+    @AndroidFindBy(id = "buttonNutrition")
+    @iOSXCUITFindBy(id = "nutrition facts section")
+    private MobileElement nutritionButton;
 
 
     /** Guest user elements */
@@ -169,65 +108,55 @@ public class ProductCardPage extends BaseTest {
     private MobileElement guestSignInButton;
 
 
-    public ProductCardPage checkElementsPresence(String expectedTitle, String expectedDescription) {
+    public ProductCardPage checkElementsPresence() {
         utils.log().info("Check elements presence on Product card page");
         SoftAssert softAssert =new SoftAssert();
         softAssert.assertTrue(backButton.isDisplayed(), "backButton");
         softAssert.assertTrue(addToListButton.isDisplayed(), "addToListButton");
         softAssert.assertTrue(cartButton.isDisplayed(), "cartButton");
         softAssert.assertTrue(productImageScrollView.isDisplayed(), "productImageScrollView");
+        softAssert.assertTrue(productBrandButton.isDisplayed(), "productBrandButton");
+        softAssert.assertTrue(productBrandText.isDisplayed(), "productBrandText");
         softAssert.assertTrue(productInfoTitle.isDisplayed(), "productInfoTitle");
         softAssert.assertTrue(productInfoDescriptionText.isDisplayed(), "productInfoDescriptionText");
         softAssert.assertTrue(itemCasePrice.isDisplayed(), "itemCasePrice");
         softAssert.assertTrue(decreaseCaseQuantityButton.isDisplayed(), "decreaseCaseQuantityButton");
         softAssert.assertTrue(quantityCaseInputField.isDisplayed(), "quantityCaseInputField");
         softAssert.assertTrue(increaseCaseQuantityButton.isDisplayed(), "increaseCaseQuantityButton");
-        softAssert.assertTrue(productDetailsButton.isDisplayed(), "productDetailsButton");
+        scrollDownByCoordinates();
+        softAssert.assertTrue(detailsButton.isDisplayed(), "productDetailsButton");
         softAssert.assertTrue(nutritionButton.isDisplayed(), "nutritionButton");
-        softAssert.assertEquals(productInfoTitle.getText(), expectedTitle, productInfoTitle.getText() + " productInfoTitle.getText() to equal " + expectedTitle);
-        softAssert.assertEquals(productInfoDescriptionText.getText(), expectedDescription, productInfoDescriptionText.getText() + " productInfoDescriptionText.getText() to equal expectedDescription");
         softAssert.assertAll();
         return this;
     }
 
-    public ProductCardPage checkElementsPresenceForCase(String expectedCasePrice) {
+    public ProductCardPage checkElementsPresence(String expectedBrand, String expectedTitle, String expectedDescription) {
+        checkElementsPresence();
+        utils.log().info("Check elements data equality on Product card page");
+        SoftAssert softAssert =new SoftAssert();
+        softAssert.assertEquals(productBrandText.getText(), expectedBrand, " productBrandText.getText() to equal " + expectedBrand);
+        softAssert.assertEquals(productInfoTitle.getText(), expectedTitle, " productInfoTitle.getText() to equal " + expectedTitle);
+        softAssert.assertEquals(productInfoDescriptionText.getText(), expectedDescription, " productInfoDescriptionText.getText() to equal expectedDescription");
+        softAssert.assertAll();
+        return this;
+    }
+
+    public ProductCardPage checkElementsPresenceForPriceCase() {
         utils.log().info("Check elements presence on Product card page for case price");
         SoftAssert softAssert =new SoftAssert();
         softAssert.assertTrue(itemCasePrice.isDisplayed(), "itemCasePrice");
         softAssert.assertTrue(decreaseCaseQuantityButton.isDisplayed(), "decreaseCaseQuantityButton");
         softAssert.assertTrue(quantityCaseInputField.isDisplayed(), "quantityCaseInputField");
         softAssert.assertTrue(increaseCaseQuantityButton.isDisplayed(), "increaseCaseQuantityButton");
-        softAssert.assertEquals(itemCasePrice.getText().replace("\n", ""), expectedCasePrice);
         softAssert.assertAll();
         return this;
     }
 
-    public ProductCardPage checkElementsPresenceOnProductDetailsTab(String expectedStock, String expectedGtin,
-                                                                    String expectedManufacturerUpc, String expectedStorageLocation,
-                                                                    String expectedSplitDetails, String expectedAverageWeight) {
-        utils.log().info("Check elements presence on Product card page on Product Details tab");
+    public ProductCardPage checkElementsPresenceForPriceCase(String expectedCasePrice) {
+        checkElementsPresenceForPriceCase();
+        utils.log().info("Check elements data equality on Product card page for case price");
         SoftAssert softAssert =new SoftAssert();
-        softAssert.assertAll();
-        scrollDownByCoordinates();
-        softAssert.assertTrue(productDetailsTable.isDisplayed(), "productDetailsTable");
-        softAssert.assertTrue(stockStatus.isDisplayed(), "stockStatus");
-        softAssert.assertTrue(stockStatusValue.isDisplayed(), "stockStatusValue");
-        softAssert.assertTrue(gtin.isDisplayed(), "gtin");
-        softAssert.assertTrue(gtinValue.isDisplayed(), "gtinValue");
-        softAssert.assertTrue(manufacturerUpc.isDisplayed(), "manufacturerUpc");
-        softAssert.assertTrue(manufacturerUpcValue.isDisplayed(), "manufacturerUpcValue");
-        softAssert.assertTrue(storageLocation.isDisplayed(), "storageLocation");
-        softAssert.assertTrue(storageLocationValue.isDisplayed(), "storageLocationValue");
-        softAssert.assertTrue(splitDetails.isDisplayed(), "splitDetails");
-        softAssert.assertTrue(splitDetailsValue.isDisplayed(), "splitDetailsValue");
-        softAssert.assertTrue(averageWeight.isDisplayed(), "averageWeight");
-        softAssert.assertTrue(averageWeightValue.isDisplayed(), "averageWeightValue");
-        softAssert.assertEquals(stockStatusValue.getText(), expectedStock, stockStatusValue.getText() + " stockStatusValue.getText() to equal " +expectedStock);
-        softAssert.assertEquals(gtinValue.getText(), expectedGtin, gtinValue.getText() + " gtinValue.getText() to equal " + expectedGtin);
-        softAssert.assertEquals(manufacturerUpcValue.getText(), expectedManufacturerUpc, manufacturerUpcValue.getText() + " manufacturerUpcValue.getText() to equal " + expectedManufacturerUpc);
-        softAssert.assertEquals(storageLocationValue.getText(), expectedStorageLocation, storageLocationValue.getText() + " storageLocationValue.getText() to equal " + storageLocationValue.getText());
-        softAssert.assertEquals(splitDetailsValue.getText(), expectedSplitDetails, splitDetailsValue.getText() + " splitDetailsValue.getText() to equal " + expectedSplitDetails);
-        softAssert.assertEquals(averageWeightValue.getText(), expectedAverageWeight, averageWeightValue.getText() + " averageWeightValue.getText() to equal " + averageWeightValue.getText());
+        softAssert.assertEquals(itemCasePrice.getText().replace("\n", ""), expectedCasePrice);
         softAssert.assertAll();
         return this;
     }
@@ -243,20 +172,6 @@ public class ProductCardPage extends BaseTest {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(cartBadge.isDisplayed());
         softAssert.assertEquals(cartBadge.getText(), expectedCartCount);
-        softAssert.assertAll();
-        return this;
-    }
-
-    public ProductCardPage checkElementsPresenceOnNutritionTab() throws InterruptedException {
-        utils.log().info("Check elements presence on Nutrition tab");
-        SoftAssert softAssert =new SoftAssert();
-        softAssert.assertTrue(nutritionFactsTitle.isDisplayed(), "nutritionFactsTitle");
-        softAssert.assertAll();
-        scrollDownByCoordinates();
-        scrollDownByCoordinates();
-        softAssert.assertTrue(ingredientsListText.isDisplayed(), "ingredientsListText");
-        Thread.sleep(2000);
-        softAssert.assertTrue(disclaimerText.isDisplayed(), "disclaimerText");
         softAssert.assertAll();
         return this;
     }
@@ -298,14 +213,14 @@ public class ProductCardPage extends BaseTest {
         return new HandPricingPage();
     }
 
-    public ProductCardPage pressProductDetailsButton() {
-        click(productDetailsButton, "Press product details tab on Product card page");
-        return new ProductCardPage();
+    public ProductCardDetailsPage pressProductDetailsButton() {
+        click(detailsButton, "Press product details on Product card page");
+        return new ProductCardDetailsPage();
     }
 
-    public ProductCardPage pressNutritionButton() {
-        click(nutritionButton, "Press nutirtion tab on Product card page");
-        return new ProductCardPage();
+    public ProductCardNutritionPage pressNutritionButton() {
+        click(nutritionButton, "Press nutrition on Product card page");
+        return new ProductCardNutritionPage();
     }
 
 

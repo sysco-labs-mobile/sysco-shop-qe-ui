@@ -52,8 +52,11 @@ public class LoginPageTests extends BaseTest {
             getDriver().hideKeyboard();
         }
         loginPage.pressAssociateLoginButton()
-                .pressBackButton()
-                .checkElementsPresence();
+                .pressBackButton();
+        if (getPlatform().equalsIgnoreCase("iOS")){
+            getDriver().hideKeyboard();
+        }
+        loginPage.checkElementsPresence();
     }
 
 }
