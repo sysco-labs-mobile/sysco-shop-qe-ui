@@ -453,6 +453,23 @@ public class BaseTest {
                 .perform();
     }
 
+    public void scrollDownByCoordinatesOnTablet() {
+        utils.log().info("Swiping down by coordinates");
+        TouchAction t = new TouchAction(getDriver());
+        Dimension size = getDriver().manage().window().getSize();
+
+        int startX = (int) (size.width / 1.1);
+        int endX = startX;
+        int startY = (int) (size.height * 0.4);
+        int endY = (int) (size.height * 0.04);
+
+        t.press(PointOption.point(startX, startY))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
+                .moveTo(PointOption.point(endX, endY))
+                .release()
+                .perform();
+    }
+
     @AfterTest
     public void afterTest() {
         getDriver().quit();

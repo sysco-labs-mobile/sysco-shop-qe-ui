@@ -38,7 +38,12 @@ public class LogOutTests extends BaseTest {
             logOutPage = navDrawer.pressLogOutButtonForiOS();
             logOutPage.checkElementsPresence();
             loginPage = logOutPage.pressBackToLoginButton();
-            getDriver().hideKeyboard();
+            if (!getIosTablet().equals("true")){
+                getDriver().hideKeyboard();
+            }
+            if (getIosTablet().equals("true")){
+                scrollDownByCoordinatesOnTablet();
+            }
             loginPage.checkElementsPresence();
         }
         if(getPlatform().equalsIgnoreCase("Android")) {

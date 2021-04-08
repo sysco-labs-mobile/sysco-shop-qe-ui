@@ -59,8 +59,11 @@ public class GuestTests extends BaseTest {
 
         //test
         loginPage = zipSwitcherPage.pressSignInButton();
-        if(getPlatform().equalsIgnoreCase("iOS")){
+        if (!getIosTablet().equals("true")){
             getDriver().hideKeyboard();
+        }
+        if (getPlatform().equalsIgnoreCase("iOS") && getIosTablet().equals("true")){
+            scrollDownByCoordinatesOnTablet();
         }
         loginPage.checkElementsPresence();
     }

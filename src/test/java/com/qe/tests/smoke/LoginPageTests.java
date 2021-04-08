@@ -13,6 +13,7 @@ public class LoginPageTests extends BaseTest {
     LoginPage loginPage;
     DiscoverPage discoverPage;
     ForgotPasswordPage forgotPasswordPage;
+    IntercomPage intercomPage;
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
@@ -20,41 +21,59 @@ public class LoginPageTests extends BaseTest {
         utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
+        intercomPage = new IntercomPage();
     }
 
     @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
-    public void openAndCloseForgotPassword() {
+    public void openAndCloseForgotPassword() throws InterruptedException {
         loginPage.enterEmail(users.getJSONObject("customerInvalidPassword").getString("email"));
         loginPage = loginPage.pressNextButton();
-        if (getPlatform().equalsIgnoreCase("iOS")){
-            getDriver().hideKeyboard();
-        }
         forgotPasswordPage = loginPage.pressForgotPasswordButton();
-        LoginPage loginPage = forgotPasswordPage.pressBackArrowButton();
+        Thread.sleep(1000);
+        loginPage = forgotPasswordPage.pressBackArrowButton();
+        Thread.sleep(1000);
         if (getPlatform().equalsIgnoreCase("iOS")){
-            loginPage.enterEmail(users.getJSONObject("customerInvalidPassword").getString("email"));
-            getDriver().hideKeyboard();
+            if (!getIosTablet().equals("true")){
+                getDriver().hideKeyboard();
+            }
+            if (getIosTablet().equals("true")){
+                scrollDownByCoordinatesOnTablet();
+            }
         }
         loginPage.checkElementsPresence();
     }
 
+    @Ignore
     @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void openAndCloseIntercom() {
-        getDriver().hideKeyboard();
-        IntercomPage intercomPage = loginPage.pressHelpButton();
-        LoginPage loginPage = intercomPage.pressCloseButton();
+        if (!getIosTablet().equals("true")){
+            getDriver().hideKeyboard();
+        }
+        if (getIosTablet().equals("true")){
+            scrollDownByCoordinatesOnTablet();
+        }
+        intercomPage = loginPage.pressHelpButton();
+        loginPage = intercomPage.pressCloseButton();
         loginPage.checkElementsPresence();
     }
 
+    @Ignore
     @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
-    public void openAndCloseAssociateLogin() {
-        if (getPlatform().equalsIgnoreCase("iOS")){
+    public void openAndCloseAssociateLogin() throws InterruptedException {
+        if (getPlatform().equalsIgnoreCase("iOS") && !getIosTablet().equals("true")){
             getDriver().hideKeyboard();
+        }
+        if (getPlatform().equalsIgnoreCase("iOS") && getIosTablet().equals("true")){
+            scrollDownByCoordinatesOnTablet();
         }
         loginPage.pressAssociateLoginButton()
                 .pressBackButton();
-        if (getPlatform().equalsIgnoreCase("iOS")){
+        Thread.sleep(1000);
+        if (getPlatform().equalsIgnoreCase("iOS") && !getIosTablet().equals("true")){
             getDriver().hideKeyboard();
+        }
+        if (getPlatform().equalsIgnoreCase("iOS") && getIosTablet().equals("true")){
+            scrollDownByCoordinatesOnTablet();
         }
         loginPage.checkElementsPresence();
     }

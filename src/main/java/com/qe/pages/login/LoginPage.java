@@ -134,28 +134,40 @@ public class LoginPage extends BaseTest {
     }
 
     public LoginPage enterEmail(String email) {
-        if (getPlatform().equalsIgnoreCase("iOS")){
+        if (getPlatform().equalsIgnoreCase("iOS") && !getIosTablet().equals("true")){
             utils.log().info("hiding keyboard start");
             getDriver().hideKeyboard();
             utils.log().info("hiding keyboard finished");
         }
+        if (getPlatform().equalsIgnoreCase("iOS") && getIosTablet().equals("true")){
+            scrollDownByCoordinatesOnTablet();
+        }
         waitForVisibility(emailTxtField, "emailTxtField");
         sendKeys(emailTxtField, email, "Enter email " + email);
-        if (getPlatform().equalsIgnoreCase("iOS")){
+        if (getPlatform().equalsIgnoreCase("iOS") && !getIosTablet().equals("true")){
             utils.log().info("hiding keyboard start");
             getDriver().hideKeyboard();
             utils.log().info("hiding keyboard finished");
+        }
+        if (getPlatform().equalsIgnoreCase("iOS") && getIosTablet().equals("true")){
+            scrollDownByCoordinatesOnTablet();
         }
         return this;
     }
 
     public LoginPage enterPassword(String password) {
-        if (getPlatform().equalsIgnoreCase("iOS")){
+        if (getPlatform().equalsIgnoreCase("iOS") && !getIosTablet().equals("true")){
             getDriver().hideKeyboard();
         }
+        if (getPlatform().equalsIgnoreCase("iOS") && getIosTablet().equals("true")){
+            scrollDownByCoordinatesOnTablet();
+        }
         sendKeys(passwordTxtField, password);
-        if (getPlatform().equalsIgnoreCase("iOS")){
+        if (getPlatform().equalsIgnoreCase("iOS") && !getIosTablet().equals("true")){
             getDriver().hideKeyboard();
+        }
+        if (getPlatform().equalsIgnoreCase("iOS") && getIosTablet().equals("true")){
+            scrollDownByCoordinatesOnTablet();
         }
         return this;
     }

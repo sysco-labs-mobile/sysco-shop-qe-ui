@@ -65,8 +65,8 @@ public class SearchCatalogPage extends BaseTest {
 
     @AndroidFindBy(accessibility = "Filter")
     @HowToUseLocators(iOSXCUITAutomation = LocatorGroupStrategy.ALL_POSSIBLE)
-    @iOSXCUITFindBy(id = "search filter view - filter button")
     @iOSXCUITFindBy(xpath = "(//XCUIElementTypeButton[@name=\"search filter view - filter button\"])[1]")
+    @iOSXCUITFindBy(id = "search filter view - filter button")
     private MobileElement filterButton;
 
     /** Banner - Add to list */

@@ -27,9 +27,6 @@ public class LoginTests extends BaseTest {
     public void customerLogin() throws InterruptedException {
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
-        if (getPlatform().equalsIgnoreCase("iOS")){
-            getDriver().hideKeyboard();
-        }
         loginPage = loginPage.pressNextButton();
         loginPage.checkCustomerElementsPresence();
         loginPage.enterPassword(BaseTest.users.getJSONObject("customer").getString("password"));
@@ -41,9 +38,6 @@ public class LoginTests extends BaseTest {
     public void multibuyerLogin() throws InterruptedException {
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("multibuyer").getString("email"));
-        if (getPlatform().equalsIgnoreCase("iOS")){
-            getDriver().hideKeyboard();
-        }
         loginPage = loginPage.pressNextButton();
         loginPage.checkCustomerElementsPresence();
         loginPage.enterPassword(BaseTest.users.getJSONObject("multibuyer").getString("password"));
@@ -67,7 +61,12 @@ public class LoginTests extends BaseTest {
 
     @Test @Ignore
     public void openAndClosePrivacyPage() {
-        getDriver().hideKeyboard();
+        if (!getIosTablet().equals("true")){
+            getDriver().hideKeyboard();
+        }
+        if (getPlatform().equalsIgnoreCase("iOS") && getIosTablet().equals("true")){
+            scrollDownByCoordinatesOnTablet();
+        }
         PrivacyPage privacyPage = loginPage.pressPrivacyButton();
         LoginPage loginPage = privacyPage.pressBackButton();
         loginPage.checkElementsPresence();
