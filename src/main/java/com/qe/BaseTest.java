@@ -39,6 +39,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     protected static ThreadLocal<AppiumDriver> driver = new ThreadLocal<AppiumDriver>();
@@ -228,8 +229,8 @@ public class BaseTest {
 
     public AppiumDriverLocalService getAppiumService() {
         HashMap<String, String> environment = new HashMap<String, String>();
-        environment.put("PATH", "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:/Users/eugenezakiev/Library/Android/sdk/tools:/Users/eugenezakiev/Library/Android/sdk/platform-tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin" + System.getenv("PATH"));
-        environment.put("ANDROID_HOME", "/Users/eugenezakiev/Library/Android/sdk");
+        environment.put("PATH", "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:/Users/cristinaalanis/Library/Android/sdk/tools:/Users/cristinaalanis/Library/Android/sdk/platform-tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin" + System.getenv("PATH"));
+        environment.put("ANDROID_HOME", "/Users/cristinaalanis/Library/Android/sdk");
         return AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
                 .usingDriverExecutable(new File("/usr/local/bin/node"))
                 .withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
@@ -301,6 +302,8 @@ public class BaseTest {
                     desiredCapabilities.setCapability("app", androidAppUrl);
 
                     driver = new AndroidDriver(url, desiredCapabilities);
+                    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+
                     break;
                 case "iOS":
                     desiredCapabilities.setCapability("automationName", props.getProperty("iOSAutomationName"));
@@ -312,6 +315,8 @@ public class BaseTest {
                     desiredCapabilities.setCapability("app", iOSAppUrl);
 
                     driver = new IOSDriver(url, desiredCapabilities);
+                    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+
                     break;
                 default:
                     throw new Exception("Invalid platform! - " + platformName);

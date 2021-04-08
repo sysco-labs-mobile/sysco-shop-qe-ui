@@ -11,22 +11,20 @@ import org.testng.asserts.SoftAssert;
 public class AssociateLoginPage3 extends BaseTest {
     TestUtils utils = new TestUtils();
 
-    @iOSXCUITFindBy(id = "Back")
-    private MobileElement backArrowButton;
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeButton[@name=\"Back\"])[1]")
+    private MobileElement backButton;
 
-    @AndroidFindBy(id = "password", priority = 0)
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.view.View[2]/android.widget.EditText", priority = 1)
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"main\"`]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]")
+    @AndroidFindBy(xpath = ("//android.widget.EditText[@resource-id='password']"))
+    @iOSXCUITFindBy(xpath = ("//XCUIElementTypeOther[@name='main']/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeSecureTextField"))
     private MobileElement password;
 
-    @AndroidFindBy(id = "signIn", priority = 0)
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.view.View[4]/android.widget.Button", priority = 1)
-    @iOSXCUITFindBy(id = "Sign in")
+    @AndroidFindBy(xpath = ("//android.view.View[@resource-id='nextBtnField']"))
+    @iOSXCUITFindBy(xpath = ("//XCUIElementTypeButton[@name='Sign in']"))
     private MobileElement signInButton;
 
     public AssociateLoginPage3 checkElementsPresence() {
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(backArrowButton.isDisplayed());
+        softAssert.assertTrue(backButton.isDisplayed());
         softAssert.assertTrue(password.isDisplayed());
         softAssert.assertTrue(signInButton.isDisplayed());
         softAssert.assertAll();
@@ -34,7 +32,7 @@ public class AssociateLoginPage3 extends BaseTest {
     }
 
     public LoginPage pressBackArrowButton() {
-        click(backArrowButton);
+        click(backButton);
         return new LoginPage();
     }
 

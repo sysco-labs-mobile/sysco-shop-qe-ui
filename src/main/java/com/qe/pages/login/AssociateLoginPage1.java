@@ -15,37 +15,34 @@ public class AssociateLoginPage1 extends BaseTest {
     private MobileElement emailFieldInput;
 
     @AndroidFindBy(accessibility = "Navigate up")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Back\"`][1]")
-    private MobileElement backButton;
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeButton[@name=\"Back\"])[1]")
+    private MobileElement backArrowButton;
 
-    @AndroidFindBy(id = "i0116", priority = 0)
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View[3]/android.view.View/android.view.View[4]/android.view.View/android.widget.EditText", priority = 1)
-    @iOSXCUITFindBy(id = "Next")
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='Next']")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name='Next']")
     private MobileElement nextButton;
 
     public void checkElementsPresence() {
         SoftAssert softAssert = new SoftAssert();
-        //softAssert.assertTrue(backArrowButton.isDisplayed());
+        softAssert.assertTrue(backArrowButton.isDisplayed());
         softAssert.assertTrue(emailFieldInput.isDisplayed());
-        softAssert.assertTrue(backButton.isDisplayed());
         softAssert.assertTrue(nextButton.isDisplayed());
         softAssert.assertAll();
     }
 
-    public LoginPage pressBackButton() {
-        click(backButton);
-        return new LoginPage();
+    public void pressBackButton() {
+        click(backArrowButton);
     }
 
     public AssociateLoginPage1 inputEmail(String email) {
         click(emailFieldInput);
         sendKeys(emailFieldInput, email, "Input ma email " + email);
-        click(backButton);
+        click(nextButton);
         return new AssociateLoginPage1();
     }
 
-    public AssociateLoginPage2 pressNextButton() {
+    public void pressNextButton() {
         click(nextButton);
-        return new AssociateLoginPage2();
     }
 }

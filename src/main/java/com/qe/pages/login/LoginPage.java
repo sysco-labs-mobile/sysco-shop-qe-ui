@@ -195,6 +195,12 @@ public class LoginPage extends BaseTest {
         return new LoginPage();
     }
 
+        public LoginPage enterEmailAssociate(String email) {
+        sendKeys(emailTxtField, email, "Enter email " + email);
+        click(nextAndLoginButton);
+        return this;
+    }
+
     public DiscoverPage pressLoginButton() throws InterruptedException {
         click(nextAndLoginButton, "Press login button on Login page");
         return new DiscoverPage();

@@ -26,11 +26,13 @@
   },
   "associate":{
     "email":"cxmobile001@sysco.com",
-    "password":"vvUMfBr2"
+    "password":"vvUMfBr2",
+    "networkId":"cxmobile001"
   },
   "associate6":{
     "email":"cxmobile006@sysco.com",
-    "password":"TDVvmk4z"
+    "password":"TDVvmk4z",
+    "networkId":"cxmobile006"
   },
   "multiapprover": {
     "email": "bffautotest@grr.la",

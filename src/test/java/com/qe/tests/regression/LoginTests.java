@@ -14,6 +14,9 @@ import java.lang.reflect.Method;
 public class LoginTests extends BaseTest {
     LoginPage loginPage;
     DiscoverPage discoverPage;
+    AssociateLoginPage1 associateLoginPage1;
+    AssociateLoginPage2 associateLoginPage2;
+    AssociateLoginPage3 associateLoginPage3;
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
@@ -21,6 +24,9 @@ public class LoginTests extends BaseTest {
         utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
+        associateLoginPage1 = new AssociateLoginPage1();
+        associateLoginPage2 = new AssociateLoginPage2();
+        associateLoginPage3 = new AssociateLoginPage3();
     }
 
     @Test
@@ -72,17 +78,14 @@ public class LoginTests extends BaseTest {
         loginPage.checkElementsPresence();
     }
 
-    @Test(groups = { "WebView" }) @Ignore
+    @Test
     public void associateLogin() {
-        AssociateLoginPage1 associateLoginPage1 = loginPage.pressAssociateLoginButton();
-        associateLoginPage1.inputEmail(BaseTest.users.getJSONObject("associate").getString("email"));
-        AssociateLoginPage2 associateLoginPage2 = associateLoginPage1.pressNextButton();
-        associateLoginPage2.checkElementsPresence();
+        loginPage.enterEmailAssociate(BaseTest.users.getJSONObject("associate").getString("email"));
+        getDriver().getKeyboard();
         associateLoginPage2.inputSyscoNetworkId(BaseTest.users.getJSONObject("associate").getString("networkId"));
-        AssociateLoginPage3 associateLoginPage3 = associateLoginPage2.pressNextButton();
-        associateLoginPage3.checkElementsPresence();
+        associateLoginPage2.pressNextButton();
         associateLoginPage3.inputPassword(BaseTest.users.getJSONObject("associate").getString("password"));
-        DiscoverPage discoverPage = associateLoginPage3.pressSignInButton();
+        associateLoginPage3.pressSignInButton();
         discoverPage.checkElementsPresence();
     }
 }
