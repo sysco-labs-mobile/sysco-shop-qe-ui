@@ -6,6 +6,7 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.Keys;
 import org.testng.asserts.SoftAssert;
 
 public class AssociateLoginPage3 extends BaseTest {
@@ -37,12 +38,19 @@ public class AssociateLoginPage3 extends BaseTest {
     }
 
     public AssociateLoginPage3 inputPassword(String password) {
+        click(this.password, "Press on password input field");
         sendKeys(this.password, password, "Input password");
         return this;
     }
 
     public DiscoverPage pressSignInButton() {
-        click(signInButton);
+        if(!getIosTablet().equalsIgnoreCase("true")) {
+            click(signInButton, "Press next button xpath");
+        }
+        if(getIosTablet().equalsIgnoreCase("true")) {
+            utils.log().info("Sending enter key from passwordInputField");
+            password.sendKeys(Keys.ENTER);
+        }
         return new DiscoverPage();
     }
 }

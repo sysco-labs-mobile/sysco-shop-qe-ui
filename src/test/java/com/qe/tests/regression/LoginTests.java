@@ -76,14 +76,58 @@ public class LoginTests extends BaseTest {
         loginPage.checkElementsPresence();
     }
 
-    @Test
-    public void associateLogin() {
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
+    public void associateLoginCxmobile003() throws InterruptedException {
+        loginPage.enterEmailAssociate(BaseTest.users.getJSONObject("associate3").getString("email"));
+        getDriver().getKeyboard();
+
+        if(getPlatform().equalsIgnoreCase("Android")){
+            Thread.sleep(10000);
+            associateLoginPage2.inputSyscoNetworkId(BaseTest.users.getJSONObject("associate3").getString("networkId"));
+        }
+        if(getPlatform().equalsIgnoreCase("iOS")){
+            Thread.sleep(14000);
+            associateLoginPage2.inputSyscoNetworkId(BaseTest.users.getJSONObject("associate3").getString("networkId"));
+        }
+        associateLoginPage2.pressNextButton();
+        Thread.sleep(4000);
+        associateLoginPage3.inputPassword(BaseTest.users.getJSONObject("associate3").getString("password"));
+        associateLoginPage3.pressSignInButton();
+        if(getPlatform().equalsIgnoreCase("Android")){
+            Thread.sleep(115000);
+            utils.log().info("Waited 115 sec");
+        }
+        if(getPlatform().equalsIgnoreCase("iOS")){
+            Thread.sleep(30000);
+        }
+        discoverPage.checkElementsPresence();
+    }
+
+    @Ignore
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
+    public void associateLoginCxmobile001() throws InterruptedException {
         loginPage.enterEmailAssociate(BaseTest.users.getJSONObject("associate").getString("email"));
         getDriver().getKeyboard();
-        associateLoginPage2.inputSyscoNetworkId(BaseTest.users.getJSONObject("associate").getString("networkId"));
+
+        if(getPlatform().equalsIgnoreCase("Android")){
+            Thread.sleep(10000);
+            associateLoginPage2.inputSyscoNetworkId(BaseTest.users.getJSONObject("associate").getString("networkId"));
+        }
+        if(getPlatform().equalsIgnoreCase("iOS")){
+            Thread.sleep(14000);
+            associateLoginPage2.inputSyscoNetworkId(BaseTest.users.getJSONObject("associate").getString("networkId"));
+        }
         associateLoginPage2.pressNextButton();
+        Thread.sleep(4000);
         associateLoginPage3.inputPassword(BaseTest.users.getJSONObject("associate").getString("password"));
         associateLoginPage3.pressSignInButton();
+        if(getPlatform().equalsIgnoreCase("Android")){
+            Thread.sleep(210000);
+            utils.log().info("Waited 210 sec");
+        }
+        if(getPlatform().equalsIgnoreCase("iOS")){
+            Thread.sleep(30000);
+        }
         discoverPage.checkElementsPresence();
     }
 }

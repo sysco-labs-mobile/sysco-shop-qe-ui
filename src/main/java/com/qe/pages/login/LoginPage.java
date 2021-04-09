@@ -9,6 +9,7 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
@@ -197,7 +198,13 @@ public class LoginPage extends BaseTest {
 
         public LoginPage enterEmailAssociate(String email) {
         sendKeys(emailTxtField, email, "Enter email " + email);
-        click(nextAndLoginButton);
+        if(!getIosTablet().equalsIgnoreCase("true")) {
+            click(nextAndLoginButton);
+        }
+        if(getIosTablet().equalsIgnoreCase("true")) {
+            utils.log().info("Sending enter");
+            emailTxtField.sendKeys(Keys.ENTER);
+        }
         return this;
     }
 

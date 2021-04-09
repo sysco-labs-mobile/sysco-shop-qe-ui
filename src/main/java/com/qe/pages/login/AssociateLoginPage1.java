@@ -42,7 +42,8 @@ public class AssociateLoginPage1 extends BaseTest {
         return new AssociateLoginPage1();
     }
 
-    public void pressNextButton() {
+    public AssociateLoginPage2 pressNextButton() {
         click(nextButton);
+        return new AssociateLoginPage2();
     }
 }

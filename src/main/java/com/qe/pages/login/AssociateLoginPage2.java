@@ -5,6 +5,7 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.Keys;
 import org.testng.asserts.SoftAssert;
 
 public class AssociateLoginPage2 extends BaseTest {
@@ -16,7 +17,6 @@ public class AssociateLoginPage2 extends BaseTest {
 
     @AndroidFindBy(xpath = ("//android.widget.EditText[@resource-id='userInput']"))
     @iOSXCUITFindBy(xpath = ("//XCUIElementTypeStaticText[@name='Enter your Sysco Network ID:']"))
-    //@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`label == \"Enter your Sysco Network ID:\"`]")
     private MobileElement syscoNetworkIdTextInput;
 
     @AndroidFindBy(xpath = "//android.widget.Button[@text='Next']")
@@ -36,17 +36,22 @@ public class AssociateLoginPage2 extends BaseTest {
     }
 
     public AssociateLoginPage2 inputSyscoNetworkId(String syscoNetworkId) {
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         sendKeys(syscoNetworkIdTextInput, syscoNetworkId, "Input sysco network id " + syscoNetworkId);
         return this;
     }
 
-    public  void pressNextButton() {
-        click(nextButton);
+    public AssociateLoginPage3 pressNextButton() {
+        if(!getIosTablet().equalsIgnoreCase("true")) {
+            click(nextButton, "Press next button xpath");
+        }
+        if(getIosTablet().equalsIgnoreCase("true")) {
+            utils.log().info("Starting to hide keyboard");
+            getDriver().hideKeyboard();
+            utils.log().info("Done with hiding keyboard");
+            utils.log().info("Sending enter key from syscoNetworkIdTextInput");
+            syscoNetworkIdTextInput.sendKeys(Keys.ENTER);
+        }
+        return new AssociateLoginPage3();
     }
 
 }

@@ -39,7 +39,6 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     protected static ThreadLocal<AppiumDriver> driver = new ThreadLocal<AppiumDriver>();
@@ -297,13 +296,12 @@ public class BaseTest {
                     }
                     desiredCapabilities.setCapability("systemPort", systemPort);
                     desiredCapabilities.setCapability("chromeDriverPort", chromeDriverPort);
+                    desiredCapabilities.setCapability("newCommandTimeout", 210000);
                     String androidAppUrl = getClass().getResource(props.getProperty("androidAppLocation")).getFile();
                     utils.log().info("appUrl is" + androidAppUrl);
                     desiredCapabilities.setCapability("app", androidAppUrl);
 
                     driver = new AndroidDriver(url, desiredCapabilities);
-                    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
                     break;
                 case "iOS":
                     desiredCapabilities.setCapability("automationName", props.getProperty("iOSAutomationName"));
@@ -315,8 +313,6 @@ public class BaseTest {
                     desiredCapabilities.setCapability("app", iOSAppUrl);
 
                     driver = new IOSDriver(url, desiredCapabilities);
-                    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
                     break;
                 default:
                     throw new Exception("Invalid platform! - " + platformName);
