@@ -14,7 +14,6 @@ import java.lang.reflect.Method;
 public class LoginTests extends BaseTest {
     LoginPage loginPage;
     DiscoverPage discoverPage;
-    AssociateLoginPage1 associateLoginPage1;
     AssociateLoginPage2 associateLoginPage2;
     AssociateLoginPage3 associateLoginPage3;
     TestUtils utils = new TestUtils();
@@ -24,12 +23,11 @@ public class LoginTests extends BaseTest {
         utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
-        associateLoginPage1 = new AssociateLoginPage1();
         associateLoginPage2 = new AssociateLoginPage2();
         associateLoginPage3 = new AssociateLoginPage3();
     }
 
-    @Test
+    @Test @Ignore
     public void customerLogin() throws InterruptedException {
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
@@ -40,7 +38,7 @@ public class LoginTests extends BaseTest {
         discoverPage.checkElementsPresence();
     }
 
-    @Test
+    @Test @Ignore
     public void multibuyerLogin() throws InterruptedException {
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("multibuyer").getString("email"));
