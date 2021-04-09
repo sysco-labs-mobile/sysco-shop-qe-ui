@@ -6,7 +6,7 @@
         </listeners>
         <parameter name="emulator" value="true" preserve-order="true" />
         <parameter name="platformName" value="Android" />
-        <parameter name="udid" value="emulator-5554" />
+        <parameter name="udid" value="$BITRISE_EMULATOR_SERIAL" />
         <parameter name="deviceName" value="Pixel_4_XL_API_30" />
         <parameter name="systemPort" value="10000" />
         <parameter name="chromeDriverPort" value="11000" />
