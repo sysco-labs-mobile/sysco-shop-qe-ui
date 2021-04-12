@@ -14,6 +14,8 @@ import java.lang.reflect.Method;
 public class LoginTests extends BaseTest {
     LoginPage loginPage;
     DiscoverPage discoverPage;
+    AssociateLoginPage2 associateLoginPage2;
+    AssociateLoginPage3 associateLoginPage3;
     TestUtils utils = new TestUtils();
 
     @BeforeMethod
@@ -21,9 +23,11 @@ public class LoginTests extends BaseTest {
         utils.log().info("\n       Starting test:" + m.getName());
         loginPage = new LoginPage();
         discoverPage = new DiscoverPage();
+        associateLoginPage2 = new AssociateLoginPage2();
+        associateLoginPage3 = new AssociateLoginPage3();
     }
 
-    @Test
+    @Test @Ignore
     public void customerLogin() throws InterruptedException {
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("customer").getString("email"));
@@ -34,7 +38,7 @@ public class LoginTests extends BaseTest {
         discoverPage.checkElementsPresence();
     }
 
-    @Test
+    @Test @Ignore
     public void multibuyerLogin() throws InterruptedException {
         loginPage.checkElementsPresence();
         loginPage.enterEmail(BaseTest.users.getJSONObject("multibuyer").getString("email"));
@@ -72,17 +76,58 @@ public class LoginTests extends BaseTest {
         loginPage.checkElementsPresence();
     }
 
-    @Test(groups = { "WebView" }) @Ignore
-    public void associateLogin() {
-        AssociateLoginPage1 associateLoginPage1 = loginPage.pressAssociateLoginButton();
-        associateLoginPage1.inputEmail(BaseTest.users.getJSONObject("associate").getString("email"));
-        AssociateLoginPage2 associateLoginPage2 = associateLoginPage1.pressNextButton();
-        associateLoginPage2.checkElementsPresence();
-        associateLoginPage2.inputSyscoNetworkId(BaseTest.users.getJSONObject("associate").getString("networkId"));
-        AssociateLoginPage3 associateLoginPage3 = associateLoginPage2.pressNextButton();
-        associateLoginPage3.checkElementsPresence();
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
+    public void associateLoginCxmobile003() throws InterruptedException {
+        loginPage.enterEmailAssociate(BaseTest.users.getJSONObject("associate3").getString("email"));
+        getDriver().getKeyboard();
+
+        if(getPlatform().equalsIgnoreCase("Android")){
+            Thread.sleep(10000);
+            associateLoginPage2.inputSyscoNetworkId(BaseTest.users.getJSONObject("associate3").getString("networkId"));
+        }
+        if(getPlatform().equalsIgnoreCase("iOS")){
+            Thread.sleep(14000);
+            associateLoginPage2.inputSyscoNetworkId(BaseTest.users.getJSONObject("associate3").getString("networkId"));
+        }
+        associateLoginPage2.pressNextButton();
+        Thread.sleep(4000);
+        associateLoginPage3.inputPassword(BaseTest.users.getJSONObject("associate3").getString("password"));
+        associateLoginPage3.pressSignInButton();
+        if(getPlatform().equalsIgnoreCase("Android")){
+            Thread.sleep(115000);
+            utils.log().info("Waited 115 sec");
+        }
+        if(getPlatform().equalsIgnoreCase("iOS")){
+            Thread.sleep(30000);
+        }
+        discoverPage.checkElementsPresence();
+    }
+
+    @Ignore
+    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
+    public void associateLoginCxmobile001() throws InterruptedException {
+        loginPage.enterEmailAssociate(BaseTest.users.getJSONObject("associate").getString("email"));
+        getDriver().getKeyboard();
+
+        if(getPlatform().equalsIgnoreCase("Android")){
+            Thread.sleep(10000);
+            associateLoginPage2.inputSyscoNetworkId(BaseTest.users.getJSONObject("associate").getString("networkId"));
+        }
+        if(getPlatform().equalsIgnoreCase("iOS")){
+            Thread.sleep(14000);
+            associateLoginPage2.inputSyscoNetworkId(BaseTest.users.getJSONObject("associate").getString("networkId"));
+        }
+        associateLoginPage2.pressNextButton();
+        Thread.sleep(4000);
         associateLoginPage3.inputPassword(BaseTest.users.getJSONObject("associate").getString("password"));
-        DiscoverPage discoverPage = associateLoginPage3.pressSignInButton();
+        associateLoginPage3.pressSignInButton();
+        if(getPlatform().equalsIgnoreCase("Android")){
+            Thread.sleep(210000);
+            utils.log().info("Waited 210 sec");
+        }
+        if(getPlatform().equalsIgnoreCase("iOS")){
+            Thread.sleep(30000);
+        }
         discoverPage.checkElementsPresence();
     }
 }

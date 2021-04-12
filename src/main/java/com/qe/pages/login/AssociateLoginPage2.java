@@ -5,23 +5,22 @@ import com.qe.utils.TestUtils;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.Keys;
 import org.testng.asserts.SoftAssert;
 
 public class AssociateLoginPage2 extends BaseTest {
     TestUtils utils = new TestUtils();
 
     @AndroidFindBy(accessibility = "Navigate up")
-    @iOSXCUITFindBy(id = "back")
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeButton[@name=\"Back\"])[1]")
     private MobileElement backArrowButton;
 
-    @AndroidFindBy(id = "userInput", priority = 0)
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.view.View[1]/android.widget.EditText\n", priority = 1)
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`label == \"Enter your Sysco Network ID:\"`]")
+    @AndroidFindBy(xpath = ("//android.widget.EditText[@resource-id='userInput']"))
+    @iOSXCUITFindBy(xpath = ("//XCUIElementTypeStaticText[@name='Enter your Sysco Network ID:']"))
     private MobileElement syscoNetworkIdTextInput;
 
-    @AndroidFindBy(id = "userNameFormSubmit", priority = 0)
-    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.view.View[3]/android.widget.Button", priority = 1)
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Next\"`][1]")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='Next']")
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeButton[@name='Next'])[1]")
     private MobileElement nextButton;
 
     public void checkElementsPresence() {
@@ -37,17 +36,22 @@ public class AssociateLoginPage2 extends BaseTest {
     }
 
     public AssociateLoginPage2 inputSyscoNetworkId(String syscoNetworkId) {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         sendKeys(syscoNetworkIdTextInput, syscoNetworkId, "Input sysco network id " + syscoNetworkId);
         return this;
     }
 
     public AssociateLoginPage3 pressNextButton() {
-        click(nextButton);
+        if(!getIosTablet().equalsIgnoreCase("true")) {
+            click(nextButton, "Press next button xpath");
+        }
+        if(getIosTablet().equalsIgnoreCase("true")) {
+            utils.log().info("Starting to hide keyboard");
+            getDriver().hideKeyboard();
+            utils.log().info("Done with hiding keyboard");
+            utils.log().info("Sending enter key from syscoNetworkIdTextInput");
+            syscoNetworkIdTextInput.sendKeys(Keys.ENTER);
+        }
         return new AssociateLoginPage3();
     }
+
 }
