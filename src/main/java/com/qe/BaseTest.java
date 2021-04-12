@@ -47,6 +47,7 @@ public class BaseTest {
     protected static ThreadLocal<String> platform = new ThreadLocal<String>();
     protected static ThreadLocal<String> dateTime = new ThreadLocal<String>();
     protected static ThreadLocal<String> deviceName = new ThreadLocal<String>();
+    protected static ThreadLocal<String> androidBitrise = new ThreadLocal<String>();
     protected static ThreadLocal<String> isIosTablet = new ThreadLocal<String>();
     private static AppiumDriverLocalService server;
     public static JSONObject users;
@@ -109,6 +110,14 @@ public class BaseTest {
         deviceName.set(deviceName2);
     }
 
+    public void setAndroidBitrise(String androidBitrise2) {
+        androidBitrise.set(androidBitrise2);
+    }
+
+    public String getAndroidBitrise() {
+        return androidBitrise.get();
+    }
+
     public BaseTest() {
         PageFactory.initElements(new AppiumFieldDecorator(getDriver(), Duration.ofSeconds(15)), this);
     }
@@ -152,7 +161,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        ((CanRecordScreen) getDriver()).startRecordingScreen();
+//        ((CanRecordScreen) getDriver()).startRecordingScreen();
         closeApp();
         launchApp();
     }
@@ -160,42 +169,42 @@ public class BaseTest {
     //stop video capturing and create *.mp4 file
     @AfterMethod
     public synchronized void afterMethod(ITestResult result) throws Exception {
-        String media = ((CanRecordScreen) getDriver()).stopRecordingScreen();
-
-        Map <String, String> params = result.getTestContext().getCurrentXmlTest().getAllParameters();
-        String dirPath = "videos" + File.separator + params.get("platformName") + "_" + params.get("deviceName")
-                + File.separator + getDateTime() + File.separator + result.getTestClass().getRealClass().getSimpleName();
-
-        File videoDir = new File(dirPath);
-
-        synchronized(videoDir){
-            if(!videoDir.exists()) {
-                videoDir.mkdirs();
-            }
-        }
-        FileOutputStream stream = null;
-        try {
-            stream = new FileOutputStream(videoDir + File.separator + result.getName() + ".mp4");
-            stream.write(Base64.decodeBase64(media));
-            stream.close();
-            utils.log().info("video path: " + videoDir + File.separator + result.getName() + ".mp4");
-        } catch (Exception e) {
-            utils.log().error("error during video capture" + e.toString());
-        } finally {
-            if(stream != null) {
-                stream.close();
-            }
-        }
+//        String media = ((CanRecordScreen) getDriver()).stopRecordingScreen();
+//
+//        Map <String, String> params = result.getTestContext().getCurrentXmlTest().getAllParameters();
+//        String dirPath = "videos" + File.separator + params.get("platformName") + "_" + params.get("deviceName")
+//                + File.separator + getDateTime() + File.separator + result.getTestClass().getRealClass().getSimpleName();
+//
+//        File videoDir = new File(dirPath);
+//
+//        synchronized(videoDir){
+//            if(!videoDir.exists()) {
+//                videoDir.mkdirs();
+//            }
+//        }
+//        FileOutputStream stream = null;
+//        try {
+//            stream = new FileOutputStream(videoDir + File.separator + result.getName() + ".mp4");
+//            stream.write(Base64.decodeBase64(media));
+//            stream.close();
+//            utils.log().info("video path: " + videoDir + File.separator + result.getName() + ".mp4");
+//        } catch (Exception e) {
+//            utils.log().error("error during video capture" + e.toString());
+//        } finally {
+//            if(stream != null) {
+//                stream.close();
+//            }
+//        }
     }
 
     @BeforeSuite
     public void beforeSuite() throws Exception {
         ThreadContext.put("ROUTINGKEY", "ServerLogs");
-        server = getAppiumService();
+//        server = getAppiumService();
         if (!checkIfAppiumServerIsRunnning(4723)) {
-            server.start();
-            server.clearOutPutStreams();
-            utils.log().info("Appium server started");
+//            server.start();
+//            server.clearOutPutStreams();
+//            utils.log().info("Appium server started");
         } else {
             utils.log().info("Appium server already running");
         }
@@ -218,37 +227,45 @@ public class BaseTest {
 
     @AfterSuite
     public void afterSuite() {
-        server.stop();
-        utils.log().info("Appium server stopped");
+//        server.stop();
+//        utils.log().info("Appium server stopped");
     }
 
     public AppiumDriverLocalService getAppiumServerDefault() {
         return AppiumDriverLocalService.buildDefaultService();
     }
+//
+//    public AppiumDriverLocalService getAppiumService() {
+//        HashMap<String, String> environment = new HashMap<String, String>();
+//        environment.put("PATH", "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin" +
+//                ":/Users/eugenezakiev/Library/Android/sdk/tools" +
+//                ":/Users/eugenezakiev/Library/Android/sdk/platform-tools" +
+//                ":/usr/local/bin" +
+//                ":/usr/bin:/bin" +
+//                ":/usr/sbin" +
+//                ":/sbin" +
+//                ":/Library/Apple/usr/bin" + System.getenv("PATH"));
+//        environment.put("ANDROID_HOME", "/Users/eugenezakiev/Library/Android/sdk");
+//        return AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
+//                .usingDriverExecutable(new File("/usr/local/bin/node"))
+//                .withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
+//                .usingPort(4723)
+//                .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
+//                .withEnvironment(environment)
+//                .withLogFile(new File("ServerLogs/server.log")));
+//    }
 
-    public AppiumDriverLocalService getAppiumService() {
-        HashMap<String, String> environment = new HashMap<String, String>();
-        environment.put("PATH", "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:/Users/eugenezakiev/Library/Android/sdk/tools:/Users/eugenezakiev/Library/Android/sdk/platform-tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin" + System.getenv("PATH"));
-        environment.put("ANDROID_HOME", "/Users/eugenezakiev/Library/Android/sdk");
-        return AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-                .usingDriverExecutable(new File("/usr/local/bin/node"))
-                .withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
-                .usingPort(4723)
-                .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
-                .withEnvironment(environment)
-                .withLogFile(new File("ServerLogs/server.log")));
-    }
-
-    @Parameters({"emulator", "platformName", "udid", "deviceName", "systemPort",
+    @Parameters({"emulator", "platformName", "androidBitrise", "udid", "deviceName", "systemPort",
             "chromeDriverPort", "wdaLocalPort", "webkitDebugProxyPort", "isTablet"})
     @BeforeTest
-    public void beforeTest(@Optional("androidOnly") String emulator, String platformName, String udid, String deviceName,
+    public void beforeTest(@Optional("androidOnly") String emulator, String platformName,  @Optional("androidOnly") String androidBitrise, String udid, String deviceName,
                            @Optional("androidOnly") String systemPort, @Optional("androidOnly") String chromeDriverPort,
                            @Optional("iOSOnly") String wdaLocalPort, @Optional("iOSOnly") String webkitDebugProxyPort, @Optional("iOSOnly") String isTablet) throws Exception {
         setDateTime(utils.dateTime());
         setPlatform(platformName);
         setDeviceName(deviceName);
         setIosTablet(isTablet);
+        setAndroidBitrise(androidBitrise);
         URL url;
         InputStream inputStream = null;
         InputStream stringsis = null;
@@ -273,11 +290,17 @@ public class BaseTest {
             props.load(inputStream);
             setProps(props);
 
-
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setCapability("platformName", platformName);
-            desiredCapabilities.setCapability("deviceName", deviceName);
-            desiredCapabilities.setCapability("udid", udid);
+            if(getAndroidBitrise().equals("true")) {
+                String bitriseEmulatorSerial = System.getenv("BITRISE_EMULATOR_SERIAL");
+                utils.log().info("BITRISE_EMULATOR_SERIAL is" + bitriseEmulatorSerial);
+                desiredCapabilities.setCapability("udid", bitriseEmulatorSerial);
+            }
+            if(!getAndroidBitrise().equals("true")) {
+                desiredCapabilities.setCapability("deviceName", deviceName);
+                desiredCapabilities.setCapability("udid", udid);
+            }
             desiredCapabilities.setCapability("unicodeKeyboard", true);
             desiredCapabilities.setCapability("resetKeyboard", true);
             url = new URL(props.getProperty("appiumURL"));
@@ -287,7 +310,6 @@ public class BaseTest {
                     desiredCapabilities.setCapability("automationName", props.getProperty("androidAutomationName"));
                     desiredCapabilities.setCapability("appWaitPackage", props.getProperty("androidAppWaitPackage"));
                     desiredCapabilities.setCapability("appWaitActivity", props.getProperty("androidAppWaitActivity"));
-                    desiredCapabilities.setCapability("chromedriverExecutable", "/usr/local/bin/chromedriver");
                     desiredCapabilities.setCapability("unicodeKeyboard", "true");
                     desiredCapabilities.setCapability("resetKeyboard", "true");
                     if (emulator.equalsIgnoreCase("true")) {
@@ -296,9 +318,16 @@ public class BaseTest {
                     }
                     desiredCapabilities.setCapability("systemPort", systemPort);
                     desiredCapabilities.setCapability("chromeDriverPort", chromeDriverPort);
-                    String androidAppUrl = getClass().getResource(props.getProperty("androidAppLocation")).getFile();
-                    utils.log().info("appUrl is" + androidAppUrl);
-                    desiredCapabilities.setCapability("app", androidAppUrl);
+                    if(!getAndroidBitrise().equals("true")) {
+                        String androidAppUrl = getClass().getResource(props.getProperty("androidAppLocation")).getFile();
+                        utils.log().info("appUrl is" + androidAppUrl);
+                        desiredCapabilities.setCapability("app", androidAppUrl);
+                    }
+                    if(getAndroidBitrise().equals("true")) {
+                        String bitriseApkPath = System.getenv("BITRISE_APK_PATH");
+                        utils.log().info("BITRISE_APK_PATH is" + bitriseApkPath);
+                        desiredCapabilities.setCapability("app", bitriseApkPath);
+                    }
 
                     driver = new AndroidDriver(url, desiredCapabilities);
                     break;
