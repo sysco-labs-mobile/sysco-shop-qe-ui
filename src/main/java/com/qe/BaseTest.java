@@ -324,7 +324,7 @@ public class BaseTest {
                         desiredCapabilities.setCapability("app", androidAppUrl);
                     }
                     if(getAndroidBitrise().equals("true")) {
-                        String bitriseApkPath = "/bitrise/deploy/app-dev-debug.apk";
+                        String bitriseApkPath = "/bitrise/src/app/build/outputs/apk/dev/debug/app-dev-debug.apk";
                         utils.log().info("BITRISE_APK_PATH is" + bitriseApkPath);
                         desiredCapabilities.setCapability("app", bitriseApkPath);
                     }
