@@ -17,7 +17,7 @@ public class LogOutPage extends BaseTest {
     @iOSXCUITFindBy(id = "Login Signed Out")
     private MobileElement logoutHeader;
 
-    @iOSXCUITFindBy(id = "Login Successfully Signed Out")
+    @iOSXCUITFindBy(id = "You have been successfully logged out")
     private MobileElement logoutDescription;
 
     @iOSXCUITFindBy(id = "Back to Login Button")
