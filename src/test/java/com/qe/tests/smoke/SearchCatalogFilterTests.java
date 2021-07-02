@@ -58,7 +58,7 @@ public class SearchCatalogFilterTests extends BaseTest {
         filterCategoryPage.pressFirstCategorySelector();
         filterCategoryPage.pressBack();
         searchCatalogPage = filterPage.pressDoneButton();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         String numResultsText = searchCatalogPage.getSearchResultsText();
         Assert.assertNotEquals(beforeNumResultsText, numResultsText);
         searchCatalogPage.pressCatalogFilter();

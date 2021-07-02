@@ -54,7 +54,7 @@ public class MultibuyerTests extends BaseTest {
         discoverPage.checkElementsPresenceForAccountSelector(expectedFirstAccountInListTitle);
     }
 
-    @Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
+    //@Test(retryAnalyzer = com.qe.utils.RetryAnalyzer.class)
     public void multibuyerCannotSubmitOrder() throws InterruptedException {
         loginPage.enterEmail(BaseTest.users.getJSONObject("multibuyer").getString("email"));
         loginPage = loginPage.pressNextButton();

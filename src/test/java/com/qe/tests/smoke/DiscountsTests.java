@@ -10,6 +10,7 @@ import com.qe.pages.search.SearchCatalogPage;
 import com.qe.pages.search.TypeAheadPage;
 import com.qe.utils.TestUtils;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -51,6 +52,14 @@ public class DiscountsTests extends BaseTest {
         searchCatalogPage = discountOverlay.pressCloseButtonToReturnToSearchPage();
         searchCatalogPage.checkElementsPresence("2388746");
         discountBulkOverlay = searchCatalogPage.pressFirstItemBulkDiscountsAvailableButton();
+    }
+
+    private DiscountsTests checkElementsPresence() {
+        utils.log().info("Check elements presence");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(searchCatalogPage.iosNavBarDrawerButton.isDisplayed(), "navBarDrawerButton");
+        softAssert.assertAll();
+        return this;
     }
 
 }

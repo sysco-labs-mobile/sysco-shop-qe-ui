@@ -29,7 +29,7 @@ public class SearchCatalogPage extends BaseTest {
     private MobileElement androidNavBackButton;
 
     @iOSXCUITFindBy(id = "app bar left button")
-    private MobileElement iosNavBarDrawerButton;
+    public MobileElement iosNavBarDrawerButton;
 
     @AndroidFindBy(id = "searchField")
     @iOSXCUITFindBy(id = "app nav search bar text field")
@@ -344,7 +344,7 @@ public class SearchCatalogPage extends BaseTest {
     }
 
     public String getSearchResultsText() {
-        Assert.assertTrue(resultCountLabel.isDisplayed());
+        Assert.assertTrue(resultCountLabel.getText().length() > 0);
         return resultCountLabel.getText();
     }
 

@@ -24,26 +24,31 @@ public class OrdersPage extends BaseTest {
     private MobileElement cartButton;
 
     @AndroidFindBy(id = "title")
-    @iOSXCUITFindBy(id = "orders section header title")
+    @iOSXCUITFindBy(id = "orders section title button")
     private MobileElement ordersTitle;
 
     @AndroidFindBy(accessibility = "All orders")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"All Orders\"`][1]")
+    @iOSXCUITFindBy(id = "ALL ORDERS")
+    //@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"All Orders\"`][1]")
     private MobileElement allOrdersButton;
 
     @AndroidFindBy(accessibility = "Open")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Open\"`][1]")
+    @iOSXCUITFindBy(id = "OPEN")
+    //@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Open\"`][1]")
     private MobileElement openOrdersButton;
 
     @AndroidFindBy(accessibility = "Submitted")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Submitted\"`][1]")
+    @iOSXCUITFindBy(id = "SUBMITTED")
+    //@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Submitted\"`][1]")
     private MobileElement submittedOrdersButton;
 
     @AndroidFindBy(accessibility = "Historical")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Historical\"`][1]")
+    @iOSXCUITFindBy(id = "HISTORICAL")
+    //@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == \"Historical\"`][1]")
     private MobileElement cancelledOrdersButton;
 
     @AndroidFindBy(id = "addOrderButton")
+    @iOSXCUITFindBy(id = "floating action button")
     private MobileElement createOrderButton;
 
     @AndroidFindBy(id = "resultView")
@@ -123,7 +128,7 @@ public class OrdersPage extends BaseTest {
         softAssert.assertTrue(openOrdersButton.isDisplayed());
         softAssert.assertTrue(submittedOrdersButton.isDisplayed());
         softAssert.assertTrue(cancelledOrdersButton.isDisplayed());
-//        softAssert.assertTrue(createOrderButton.isDisplayed()); flacks out
+//        softAssert.assertTrue(createOrderButton.isDisplayed());
         softAssert.assertTrue(ordersList.isDisplayed());
         softAssert.assertTrue(firstOrderInList.isDisplayed());
         softAssert.assertAll();

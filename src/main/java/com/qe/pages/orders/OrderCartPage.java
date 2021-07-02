@@ -91,7 +91,7 @@ public class OrderCartPage extends BaseTest {
     private MobileElement orderLineItem1IncreaseQuantityButton;
 
     @AndroidFindBy(id = "snackbar_text")
-    @iOSXCUITFindBy(id = "cart error banner")
+    @iOSXCUITFindBy(id = "This order requires approval. Please modify, approve and submit in Shop Web.")
     public MobileElement errorMAApprovalLabel;
 
     /** Order item three dot menu */

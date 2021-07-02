@@ -33,7 +33,7 @@ public class ForgottenItemsPage extends BaseTest {
     private MobileElement forgottenItemsPageDescription;
 
     @AndroidFindBy(id = "next_button")
-    @iOSXCUITFindBy(id = "forgotten items next button")
+    @iOSXCUITFindBy(id = "checkout suggestions next button")
     private MobileElement nextButton;
 
     @AndroidFindBy(xpath = "//*[contains(@resource-id, 'resultView')]/android.view.ViewGroup")
